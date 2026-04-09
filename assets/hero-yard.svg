@@ -1,0 +1,84 @@
+<svg width="880" height="640" viewBox="0 0 880 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="440" y1="26" x2="440" y2="366" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DCEBDE"/>
+      <stop offset="1" stop-color="#F8F1E7"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="440" y1="400" x2="440" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6E9A63"/>
+      <stop offset="1" stop-color="#3A5B35"/>
+    </linearGradient>
+    <linearGradient id="cedar" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#C58A50"/>
+      <stop offset="1" stop-color="#8E5E32"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#D4CCBF"/>
+      <stop offset="1" stop-color="#9C9389"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="880" height="640" rx="42" fill="url(#sky)"/>
+  <circle cx="141" cy="103" r="81" fill="#FFFFFF" fill-opacity=".45"/>
+  <circle cx="712" cy="92" r="66" fill="#F2D2A3" fill-opacity=".28"/>
+
+  <path d="M0 386C154 316 292 319 440 344C589 368 713 378 880 334V640H0V386Z" fill="#7BA06E"/>
+  <path d="M0 430C129 378 302 394 439 419C593 448 736 442 880 389V640H0V430Z" fill="url(#grass)"/>
+
+  <g opacity=".85">
+    <path d="M176 160H325V308H176V160Z" fill="#AEA18F"/>
+    <path d="M152 189L250 114L349 189H152Z" fill="#6A6258"/>
+    <rect x="279" y="202" width="24" height="42" rx="3" fill="#DCD7CD"/>
+    <rect x="195" y="205" width="44" height="40" rx="4" fill="#E6E1D8"/>
+    <rect x="262" y="205" width="44" height="40" rx="4" fill="#E6E1D8"/>
+  </g>
+
+  <g opacity=".58">
+    <circle cx="628" cy="147" r="60" fill="#618A55"/>
+    <rect x="619" y="193" width="18" height="108" rx="8" fill="#5A6B45"/>
+    <circle cx="706" cy="132" r="69" fill="#719A62"/>
+    <rect x="695" y="194" width="22" height="112" rx="8" fill="#60714C"/>
+    <circle cx="544" cy="154" r="50" fill="#567A48"/>
+    <rect x="537" y="193" width="16" height="98" rx="8" fill="#576646"/>
+  </g>
+
+  <g>
+    <rect x="90" y="298" width="75" height="168" rx="10" fill="url(#stone)"/>
+    <rect x="714" y="286" width="76" height="180" rx="10" fill="url(#stone)"/>
+    <rect x="385" y="293" width="68" height="173" rx="10" fill="url(#stone)"/>
+    <rect x="113" y="275" width="30" height="34" rx="8" fill="#A69F97"/>
+    <rect x="408" y="270" width="24" height="30" rx="8" fill="#A69F97"/>
+    <rect x="737" y="263" width="30" height="34" rx="8" fill="#A69F97"/>
+  </g>
+
+  <g>
+    <rect x="164" y="312" width="224" height="126" rx="6" fill="url(#cedar)"/>
+    <rect x="453" y="304" width="262" height="132" rx="6" fill="url(#cedar)"/>
+    <g opacity=".28" stroke="#5C3419" stroke-width="4">
+      <path d="M184 318V434"/>
+      <path d="M210 318V434"/>
+      <path d="M236 318V434"/>
+      <path d="M262 318V434"/>
+      <path d="M288 318V434"/>
+      <path d="M314 318V434"/>
+      <path d="M340 318V434"/>
+      <path d="M478 310V434"/>
+      <path d="M505 310V434"/>
+      <path d="M532 310V434"/>
+      <path d="M559 310V434"/>
+      <path d="M586 310V434"/>
+      <path d="M613 310V434"/>
+      <path d="M640 310V434"/>
+      <path d="M667 310V434"/>
+    </g>
+  </g>
+
+  <g>
+    <circle cx="124" cy="470" r="46" fill="#416437"/>
+    <circle cx="157" cy="482" r="29" fill="#4C773C"/>
+    <circle cx="742" cy="470" r="47" fill="#3D6234"/>
+    <circle cx="776" cy="484" r="26" fill="#4D7A43"/>
+  </g>
+
+  <ellipse cx="486" cy="488" rx="174" ry="22" fill="#274026" fill-opacity=".26"/>
+</svg>

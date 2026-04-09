@@ -1,0 +1,46 @@
+<svg width="640" height="520" viewBox="0 0 640 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ironBg" x1="80" y1="56" x2="548" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBEEE8"/>
+      <stop offset="1" stop-color="#FFF8F2"/>
+    </linearGradient>
+    <linearGradient id="ironAccent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#D98659"/>
+      <stop offset="1" stop-color="#B65C39"/>
+    </linearGradient>
+    <linearGradient id="ironDark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#223A34"/>
+      <stop offset="1" stop-color="#0E241D"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="520" rx="42" fill="url(#ironBg)"/>
+  <circle cx="122" cy="118" r="68" fill="#F4C8B4" fill-opacity=".36"/>
+  <circle cx="496" cy="106" r="72" fill="#FFFFFF" fill-opacity=".76"/>
+  <ellipse cx="311" cy="430" rx="200" ry="32" fill="#46342B" fill-opacity=".12"/>
+
+  <path d="M138 372C138 299 197 240 270 240H370C443 240 502 299 502 372V386H138V372Z" fill="url(#ironDark)"/>
+  <rect x="148" y="248" width="20" height="138" rx="10" fill="url(#ironDark)"/>
+  <rect x="193" y="232" width="20" height="154" rx="10" fill="url(#ironDark)"/>
+  <rect x="238" y="220" width="20" height="166" rx="10" fill="url(#ironDark)"/>
+  <rect x="283" y="210" width="20" height="176" rx="10" fill="url(#ironDark)"/>
+  <rect x="328" y="210" width="20" height="176" rx="10" fill="url(#ironDark)"/>
+  <rect x="373" y="220" width="20" height="166" rx="10" fill="url(#ironDark)"/>
+  <rect x="418" y="232" width="20" height="154" rx="10" fill="url(#ironDark)"/>
+  <rect x="463" y="248" width="20" height="138" rx="10" fill="url(#ironDark)"/>
+
+  <path d="M154 250H478" stroke="#2A4A42" stroke-width="16" stroke-linecap="round"/>
+  <path d="M196 232L203 204" stroke="#D0784B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M368 220L374 196" stroke="#D0784B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M438 232L445 205" stroke="#D0784B" stroke-width="10" stroke-linecap="round"/>
+
+  <g transform="rotate(-20 512 304)">
+    <rect x="462" y="198" width="34" height="156" rx="16" fill="url(#ironAccent)"/>
+    <rect x="468" y="224" width="22" height="108" rx="11" fill="#FFF4EB"/>
+    <path d="M496 347L545 385L513 422L466 377L496 347Z" fill="#BE683D"/>
+    <path d="M512 421L548 390L566 412L530 445L512 421Z" fill="#F0D0A8"/>
+  </g>
+
+  <path d="M92 148C105 132 119 135 128 151" stroke="#D67C4F" stroke-width="8" stroke-linecap="round"/>
+  <path d="M524 150C537 134 551 137 560 153" stroke="#D67C4F" stroke-width="8" stroke-linecap="round"/>
+</svg>

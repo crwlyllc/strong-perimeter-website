@@ -339,7 +339,7 @@ h3,
 .hero-video-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 3.75;
   overflow: hidden;
   border-radius: calc(var(--radius-xl) - 8px);
   background:
@@ -1282,7 +1282,7 @@ h3,
 
   .hero-video-frame {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 3 / 3.75;
   }
 
   .hero-video-frame iframe {

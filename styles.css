@@ -1188,18 +1188,11 @@ h3,
   padding: clamp(3.5rem, 7vw, 6rem) clamp(1rem, 2.2vw, 2rem) 1.6rem;
 }
 
-.page-hero__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
-  gap: 1rem;
-  align-items: stretch;
-}
-
 .page-hero__copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 31rem;
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+  min-height: 27rem;
   padding: clamp(1.2rem, 3vw, 2.2rem);
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
@@ -1207,9 +1200,18 @@ h3,
   box-shadow: var(--shadow-lg);
 }
 
+.page-hero__content {
+  display: grid;
+  justify-items: center;
+  max-width: 54rem;
+  margin: auto;
+  text-align: center;
+}
+
 .breadcrumb {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 1.2rem;
   color: var(--ink-soft);
@@ -1230,14 +1232,38 @@ h3,
 
 .page-lead {
   max-width: 48rem;
-  margin: 1.2rem 0 0;
+  margin: 1.2rem auto 0;
   color: var(--ink-soft);
   font-size: 1.05rem;
   line-height: 1.72;
 }
 
 .page-hero__copy .hero-actions {
-  justify-content: flex-start;
+  justify-content: center;
+}
+
+.page-proof-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  width: 100%;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+
+.page-proof-row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.4rem;
+  padding: 0.58rem 0.82rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.76);
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .page-hero-card {
@@ -1425,7 +1451,6 @@ h3,
   .hero-stage,
   .promise-shell,
   .contact-shell,
-  .page-hero__grid,
   .split-block {
     grid-template-columns: 1fr;
   }
@@ -1560,6 +1585,15 @@ h3,
   }
 
   .page-hero__copy .button {
+    width: 100%;
+  }
+
+  .page-proof-row {
+    align-items: stretch;
+  }
+
+  .page-proof-row span {
+    justify-content: center;
     width: 100%;
   }
 

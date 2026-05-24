@@ -1196,35 +1196,28 @@ function renderPage(page) {
 ${renderHeader()}
   <main>
     <section class="page-hero">
-      <div class="section-shell page-hero__grid">
+      <div class="section-shell">
         <div class="page-hero__copy">
-          <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="${withBase("/")}">Home</a>
-            <span>/</span>
-            <span>${escapeHtml(page.h1)}</span>
-          </nav>
-          <p class="eyebrow">${escapeHtml(page.eyebrow)}</p>
-          <h1>${escapeHtml(page.h1)}</h1>
-          <p class="page-lead">${escapeHtml(page.lead)}</p>
-          <div class="hero-actions">
-            <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
-            <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
+          <div class="page-hero__content">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a href="${withBase("/")}">Home</a>
+              <span>/</span>
+              <span>${escapeHtml(page.h1)}</span>
+            </nav>
+            <p class="eyebrow">${escapeHtml(page.eyebrow)}</p>
+            <h1>${escapeHtml(page.h1)}</h1>
+            <p class="page-lead">${escapeHtml(page.lead)}</p>
+            <div class="hero-actions">
+              <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
+              <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
+            </div>
+          </div>
+          <div class="page-proof-row" aria-label="Strong Perimeter service details">
+            <span>Dallas-Fort Worth</span>
+            <span>Residential and commercial</span>
+            <span>Clear quote support</span>
           </div>
         </div>
-        <aside class="page-hero-card" aria-label="Strong Perimeter service summary">
-          <div class="page-hero-card__media">
-            <img src="${withBase(page.image)}" alt="${escapeHtml(page.imageAlt)}">
-          </div>
-          <div class="page-hero-card__body">
-            <p class="card-kicker">Strong Perimeter</p>
-            <h2>Clear scope, cleaner finish, residential and commercial service.</h2>
-            <ul class="service-list">
-              <li>Dallas-Fort Worth service area</li>
-              <li>Fence restoration, repair, painting, staining, installation, and replacement</li>
-              <li>Fast quote support and practical material guidance</li>
-            </ul>
-          </div>
-        </aside>
       </div>
     </section>
 

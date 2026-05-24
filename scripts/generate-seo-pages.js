@@ -1136,6 +1136,7 @@ function renderPage(page) {
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(page.title)}</title>
   <meta name="description" content="${escapeHtml(page.description)}">
@@ -1313,6 +1314,8 @@ ${urls.map((url) => `  <url>
 function writeRobots() {
   const robots = `User-agent: *
 Allow: /
+
+# Build mode: pages use meta robots noindex, nofollow until launch.
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `;

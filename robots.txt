@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+# Build mode: pages use meta robots noindex, nofollow until launch.
+
 Sitemap: https://www.strongperimeter.com/sitemap.xml

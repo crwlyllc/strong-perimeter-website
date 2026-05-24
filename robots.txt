@@ -3,4 +3,4 @@ Allow: /
 
 # Build mode: pages use meta robots noindex, nofollow until launch.
 
-Sitemap: https://www.strongperimeter.com/sitemap.xml
+Sitemap: https://crwlyllc.github.io/strong-perimeter-website/sitemap.xml

@@ -2,7 +2,9 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
-const SITE_URL = "https://www.strongperimeter.com";
+const SITE_ORIGIN = "https://crwlyllc.github.io";
+const BASE_PATH = "/strong-perimeter-website";
+const SITE_URL = `${SITE_ORIGIN}${BASE_PATH}`;
 const LASTMOD = "2026-05-24";
 
 const navLinks = [
@@ -940,21 +942,52 @@ function capitalizeWords(value) {
   return value.replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
+function withBase(href) {
+  if (
+    !href ||
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:") ||
+    href.startsWith("#")
+  ) {
+    return href;
+  }
+
+  if (href === "/") {
+    return `${BASE_PATH}/`;
+  }
+
+  if (href.startsWith("/")) {
+    return `${BASE_PATH}${href}`;
+  }
+
+  return href;
+}
+
+function absoluteUrl(href) {
+  if (href.startsWith("http://") || href.startsWith("https://")) {
+    return href;
+  }
+
+  return `${SITE_ORIGIN}${withBase(href)}`;
+}
+
 function pageUrl(slug) {
   return `${SITE_URL}/${slug.replace(/^\/|\/$/g, "")}/`;
 }
 
 function renderLinks(links, className = "link-grid") {
-  return `<div class="${className}">${links.map(([href, label]) => `<a href="${href}">${escapeHtml(label)}</a>`).join("")}</div>`;
+  return `<div class="${className}">${links.map(([href, label]) => `<a href="${withBase(href)}">${escapeHtml(label)}</a>`).join("")}</div>`;
 }
 
 function renderHeader() {
   return `
   <header class="site-header" id="top">
     <div class="site-header__inner">
-      <a class="brand" href="/" aria-label="Strong Perimeter home">
+      <a class="brand" href="${withBase("/")}" aria-label="Strong Perimeter home">
         <span class="brand-mark brand-mark--full">
-          <img src="${images.brandGreen}" alt="Strong Perimeter">
+          <img src="${withBase(images.brandGreen)}" alt="Strong Perimeter">
         </span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
@@ -963,8 +996,8 @@ function renderHeader() {
         <span></span>
       </button>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
-        ${navLinks.map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}
-        <a class="nav-cta" href="/contact/">Get a free quote</a>
+        ${navLinks.map(([label, href]) => `<a href="${withBase(href)}">${label}</a>`).join("")}
+        <a class="nav-cta" href="${withBase("/contact/")}">Get a free quote</a>
       </nav>
     </div>
   </header>`;
@@ -974,9 +1007,9 @@ function renderFooter() {
   return `
   <footer class="site-footer">
     <div class="site-footer__top">
-      <a class="brand brand--footer" href="/" aria-label="Strong Perimeter home">
+      <a class="brand brand--footer" href="${withBase("/")}" aria-label="Strong Perimeter home">
         <span class="brand-mark brand-mark--full">
-          <img src="${images.brandGreen}" alt="Strong Perimeter">
+          <img src="${withBase(images.brandGreen)}" alt="Strong Perimeter">
         </span>
       </a>
       <div class="footer-callout">
@@ -985,16 +1018,16 @@ function renderFooter() {
       </div>
     </div>
     <div class="footer-links">
-      <a href="/services/">Services</a>
-      <a href="/fence-restoration/">Restoration</a>
-      <a href="/fence-repair/">Repair</a>
-      <a href="/fence-types/">Fence types</a>
-      <a href="/residential-fencing/">Residential</a>
-      <a href="/commercial-fencing/">Commercial</a>
-      <a href="/service-areas/">Service areas</a>
-      <a href="/projects/">Projects</a>
-      <a href="/reviews/">Reviews</a>
-      <a href="/privacy-policy.html">Privacy policy</a>
+      <a href="${withBase("/services/")}">Services</a>
+      <a href="${withBase("/fence-restoration/")}">Restoration</a>
+      <a href="${withBase("/fence-repair/")}">Repair</a>
+      <a href="${withBase("/fence-types/")}">Fence types</a>
+      <a href="${withBase("/residential-fencing/")}">Residential</a>
+      <a href="${withBase("/commercial-fencing/")}">Commercial</a>
+      <a href="${withBase("/service-areas/")}">Service areas</a>
+      <a href="${withBase("/projects/")}">Projects</a>
+      <a href="${withBase("/reviews/")}">Reviews</a>
+      <a href="${withBase("/privacy-policy.html")}">Privacy policy</a>
     </div>
     <div class="footer-meta">
       <p><a href="mailto:sales@strongperimeter.com">sales@strongperimeter.com</a></p>
@@ -1070,7 +1103,7 @@ function renderSchema(page) {
       name: "Strong Perimeter",
       url: SITE_URL,
       telephone: "+1-214-247-6369",
-      image: `${SITE_URL}${images.wood}`,
+      image: absoluteUrl(images.wood),
       areaServed: "Dallas-Fort Worth",
       priceRange: "$$",
       address: {
@@ -1145,19 +1178,19 @@ function renderPage(page) {
   <meta property="og:description" content="${escapeHtml(page.description)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${SITE_URL}${page.image}">
+  <meta property="og:image" content="${absoluteUrl(page.image)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(page.title)}">
   <meta name="twitter:description" content="${escapeHtml(page.description)}">
-  <meta name="twitter:image" content="${SITE_URL}${page.image}">
+  <meta name="twitter:image" content="${absoluteUrl(page.image)}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;700&amp;family=Red+Hat+Display:wght@400;500;600;700&amp;family=Red+Hat+Text:wght@400;500;700&amp;display=swap" rel="stylesheet">
-  <link rel="icon" href="/images/favicon.jpg" type="image/jpeg">
-  <link rel="apple-touch-icon" href="/images/webclip.jpg">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="${withBase("/images/favicon.jpg")}" type="image/jpeg">
+  <link rel="apple-touch-icon" href="${withBase("/images/webclip.jpg")}">
+  <link rel="stylesheet" href="${withBase("/styles.css")}">
   <script type="application/ld+json">${renderSchema(page)}</script>
-  <script defer src="/script.js"></script>
+  <script defer src="${withBase("/script.js")}"></script>
 </head>
 <body>
 ${renderHeader()}
@@ -1166,7 +1199,7 @@ ${renderHeader()}
       <div class="section-shell page-hero__grid">
         <div class="page-hero__copy">
           <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="/">Home</a>
+            <a href="${withBase("/")}">Home</a>
             <span>/</span>
             <span>${escapeHtml(page.h1)}</span>
           </nav>
@@ -1174,13 +1207,13 @@ ${renderHeader()}
           <h1>${escapeHtml(page.h1)}</h1>
           <p class="page-lead">${escapeHtml(page.lead)}</p>
           <div class="hero-actions">
-            <a class="button button--solid" href="${page.ctaHref}">${escapeHtml(page.ctaLabel)}</a>
+            <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
             <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
           </div>
         </div>
         <aside class="page-hero-card" aria-label="Strong Perimeter service summary">
           <div class="page-hero-card__media">
-            <img src="${page.image}" alt="${escapeHtml(page.imageAlt)}">
+            <img src="${withBase(page.image)}" alt="${escapeHtml(page.imageAlt)}">
           </div>
           <div class="page-hero-card__body">
             <p class="card-kicker">Strong Perimeter</p>
@@ -1225,7 +1258,7 @@ ${renderHeader()}
         </div>
         <div class="feature-grid">
           ${page.highlights.map((card) => `
-          <a class="feature-card" href="${card.href}">
+          <a class="feature-card" href="${withBase(card.href)}">
             <span class="panel-tag">Strong Perimeter</span>
             <h3>${escapeHtml(card.title)}</h3>
             <p>${escapeHtml(card.text)}</p>

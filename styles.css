@@ -1185,27 +1185,12 @@ h3,
 }
 
 .page-hero {
-  padding: clamp(3.5rem, 7vw, 6rem) clamp(1rem, 2.2vw, 2rem) 1.6rem;
+  padding-top: clamp(2.7rem, 5vw, 4.2rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
 }
 
-.page-hero__copy {
-  display: grid;
-  gap: 1.5rem;
-  justify-items: center;
-  min-height: 27rem;
-  padding: clamp(1.2rem, 3vw, 2.2rem);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  background: linear-gradient(180deg, rgba(255, 253, 249, 0.94), rgba(247, 241, 233, 0.88));
-  box-shadow: var(--shadow-lg);
-}
-
-.page-hero__content {
-  display: grid;
-  justify-items: center;
-  max-width: 54rem;
-  margin: auto;
-  text-align: center;
+.page-hero-copy {
+  max-width: 56rem;
 }
 
 .breadcrumb {
@@ -1232,76 +1217,6 @@ h3,
 
 .page-lead {
   max-width: 48rem;
-  margin: 1.2rem auto 0;
-  color: var(--ink-soft);
-  font-size: 1.05rem;
-  line-height: 1.72;
-}
-
-.page-hero__copy .hero-actions {
-  justify-content: center;
-}
-
-.page-proof-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.7rem;
-  width: 100%;
-  padding-top: 1.2rem;
-  border-top: 1px solid var(--line);
-}
-
-.page-proof-row span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.4rem;
-  padding: 0.58rem 0.82rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 253, 249, 0.76);
-  color: var(--ink-soft);
-  font-family: var(--font-ui);
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-.page-hero-card {
-  display: grid;
-  grid-template-rows: minmax(14rem, 0.8fr) auto;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  background: linear-gradient(180deg, rgba(255, 253, 249, 0.96), rgba(247, 241, 233, 0.92));
-  box-shadow: var(--shadow-lg);
-}
-
-.page-hero-card__media {
-  display: grid;
-  place-items: center;
-  min-height: 18rem;
-  padding: 1.25rem;
-  background:
-    linear-gradient(180deg, rgba(0, 75, 61, 0.08), rgba(219, 115, 55, 0.08)),
-    rgba(255, 255, 255, 0.55);
-}
-
-.page-hero-card__media img {
-  width: 100%;
-  height: 100%;
-  max-height: 23rem;
-  object-fit: contain;
-  border-radius: 24px;
-}
-
-.page-hero-card__body {
-  padding: 1.35rem;
-}
-
-.page-hero-card__body h2 {
-  margin-top: 0.75rem;
-  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
-  line-height: 0.98;
 }
 
 .page-section {
@@ -1530,10 +1445,6 @@ h3,
     grid-template-columns: 1fr;
   }
 
-  .page-hero__copy {
-    min-height: auto;
-  }
-
   .leadership-photo img {
     min-height: 16rem;
   }
@@ -1580,20 +1491,11 @@ h3,
     align-items: flex-start;
   }
 
-  .page-hero__copy .hero-actions {
+  .page-hero .hero-actions {
     justify-content: stretch;
   }
 
-  .page-hero__copy .button {
-    width: 100%;
-  }
-
-  .page-proof-row {
-    align-items: stretch;
-  }
-
-  .page-proof-row span {
-    justify-content: center;
+  .page-hero .button {
     width: 100%;
   }
 

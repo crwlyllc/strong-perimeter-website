@@ -1195,27 +1195,20 @@ function renderPage(page) {
 <body>
 ${renderHeader()}
   <main>
-    <section class="page-hero">
-      <div class="section-shell">
-        <div class="page-hero__copy">
-          <div class="page-hero__content">
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-              <a href="${withBase("/")}">Home</a>
-              <span>/</span>
-              <span>${escapeHtml(page.h1)}</span>
-            </nav>
-            <p class="eyebrow">${escapeHtml(page.eyebrow)}</p>
-            <h1>${escapeHtml(page.h1)}</h1>
-            <p class="page-lead">${escapeHtml(page.lead)}</p>
-            <div class="hero-actions">
-              <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
-              <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
-            </div>
-          </div>
-          <div class="page-proof-row" aria-label="Strong Perimeter service details">
-            <span>Dallas-Fort Worth</span>
-            <span>Residential and commercial</span>
-            <span>Clear quote support</span>
+    <section class="hero page-hero">
+      <div class="hero-inner">
+        <div class="hero-copy page-hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="${withBase("/")}">Home</a>
+            <span>/</span>
+            <span>${escapeHtml(page.h1)}</span>
+          </nav>
+          <p class="eyebrow">${escapeHtml(page.eyebrow)}</p>
+          <h1>${escapeHtml(page.h1)}</h1>
+          <p class="hero-subhead page-lead">${escapeHtml(page.lead)}</p>
+          <div class="hero-actions">
+            <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
+            <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
           </div>
         </div>
       </div>

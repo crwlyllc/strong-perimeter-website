@@ -114,6 +114,12 @@ const serviceAreaCityLinks = serviceAreaCities.map((city) => [cityServiceAreaHre
 
 // Add a browser-restricted Google Maps JavaScript API key to enable custom city pins.
 const googleMapsApiKey = "";
+const googleMapView = {
+  center: { lat: 32.86, lng: -96.78 },
+  zoom: 9,
+  width: 1000,
+  height: 640
+};
 
 const serviceAreaCityCoordinates = {
   Addison: [32.9618, -96.8292],
@@ -197,6 +203,28 @@ function citySlug(city) {
 
 function cityServiceAreaHref(city) {
   return `/service-areas/${citySlug(city)}-tx/`;
+}
+
+function projectGoogleMapPoint([lat, lng]) {
+  const { center, zoom, width, height } = googleMapView;
+  const scale = 256 * (2 ** zoom);
+  const toWorldPoint = (pointLat, pointLng) => {
+    const safeLat = Math.max(Math.min(pointLat, 85), -85);
+    const sinLat = Math.sin((safeLat * Math.PI) / 180);
+
+    return {
+      x: ((pointLng + 180) / 360) * scale,
+      y: (0.5 - Math.log((1 + sinLat) / (1 - sinLat)) / (4 * Math.PI)) * scale
+    };
+  };
+
+  const point = toWorldPoint(lat, lng);
+  const mapCenter = toWorldPoint(center.lat, center.lng);
+
+  return [
+    Math.round((width / 2) + point.x - mapCenter.x),
+    Math.round((height / 2) + point.y - mapCenter.y)
+  ];
 }
 
 function addActionHubPages() {
@@ -1300,23 +1328,47 @@ function renderServiceAreaMap(page) {
     "North Richland Hills"
   ];
 
+  const coverage = coverageCities.map((city) => {
+    const [lat, lng] = serviceAreaCityCoordinates[city];
+    return { lat, lng };
+  });
+  const mapCities = serviceAreaCities.map((city) => {
+    const [lat, lng] = serviceAreaCityCoordinates[city];
+    return {
+      name: `${city}, TX`,
+      lat,
+      lng,
+      href: withBase(cityServiceAreaHref(city)),
+      featured: featuredServiceAreaCities.includes(city)
+    };
+  });
+  const coveragePath = coverageCities.map((city, index) => {
+    const [x, y] = projectGoogleMapPoint(serviceAreaCityCoordinates[city]);
+    return `${index === 0 ? "M" : "L"}${x} ${y}`;
+  }).join(" ");
+  const overlayDots = serviceAreaCities.map((city) => {
+    const [x, y] = projectGoogleMapPoint(serviceAreaCityCoordinates[city]);
+    const featured = featuredServiceAreaCities.includes(city);
+
+    return `
+                <circle class="service-map__overlay-dot${featured ? " service-map__overlay-dot--featured" : ""}" cx="${x}" cy="${y}" r="${featured ? 8 : 4.5}">
+                  <title>${escapeHtml(`${city}, TX`)}</title>
+                </circle>`;
+  }).join("");
+  const overlayLabels = featuredServiceAreaCities.map((city) => {
+    const [x, y] = projectGoogleMapPoint(serviceAreaCityCoordinates[city]);
+    const anchor = city === "Rockwall" ? "end" : "start";
+    const labelX = city === "Rockwall" ? x - 14 : x + 12;
+    const labelY = city === "Frisco" ? y - 16 : y - 10;
+
+    return `
+                <text class="service-map__overlay-label" x="${labelX}" y="${labelY}" text-anchor="${anchor}">${escapeHtml(city)}</text>`;
+  }).join("");
   const mapData = {
-    center: { lat: 32.86, lng: -96.78 },
-    zoom: 9,
-    coverage: coverageCities.map((city) => {
-      const [lat, lng] = serviceAreaCityCoordinates[city];
-      return { lat, lng };
-    }),
-    cities: serviceAreaCities.map((city) => {
-      const [lat, lng] = serviceAreaCityCoordinates[city];
-      return {
-        name: `${city}, TX`,
-        lat,
-        lng,
-        href: withBase(cityServiceAreaHref(city)),
-        featured: featuredServiceAreaCities.includes(city)
-      };
-    })
+    center: googleMapView.center,
+    zoom: googleMapView.zoom,
+    coverage,
+    cities: mapCities
   };
 
   const mapDataJson = JSON.stringify(mapData).replaceAll("<", "\\u003c");
@@ -1347,14 +1399,13 @@ function renderServiceAreaMap(page) {
               referrerpolicy="no-referrer-when-downgrade"
               src="https://maps.google.com/maps?q=32.86,-96.78&amp;z=9&amp;t=m&amp;output=embed">
             </iframe>
+            <svg class="service-map__overlay" viewBox="0 0 ${googleMapView.width} ${googleMapView.height}" aria-label="Strong Perimeter service area and city markers">
+              <path class="service-map__overlay-area" d="${coveragePath} Z"></path>
+              ${overlayDots}
+              ${overlayLabels}
+            </svg>
           </div>
           <script type="application/json" id="strong-service-area-map-data">${mapDataJson}</script>
-
-          <div class="service-map__legend" aria-label="Map legend">
-            <span><i class="service-map__key service-map__key--google"></i>Google Maps view</span>
-            <span>43 Texas service-area cities listed below</span>
-          </div>
-          <a class="service-map__open-link" href="https://www.google.com/maps/search/?api=1&amp;query=Dallas-Fort%20Worth%2C%20TX" target="_blank" rel="noopener">Open larger map</a>
         </div>
       </div>
     </section>`;

@@ -1613,7 +1613,6 @@ function renderQuoteWizard() {
         <form class="quote-wizard quote-form" id="quote-form" data-quote-stepper data-to="sales@strongperimeter.com">
           <div class="quote-wizard__top">
             <div>
-              <p class="eyebrow eyebrow--green">Step-by-step quote request</p>
               <h1>Get a Fence Quote</h1>
             </div>
             <div class="quote-progress" aria-label="Quote form progress">

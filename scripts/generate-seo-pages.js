@@ -199,7 +199,7 @@ function addPage(page) {
     imageAlt: "Finished fence project by Strong Perimeter",
     areaServed: "Dallas-Fort Worth",
     ctaLabel: "Get a free quote",
-    ctaHref: "/contact/",
+    ctaHref: "/quote/",
     secondaryCtaLabel: "Call (214) 247-6369",
     secondaryCtaHref: "tel:+12142476369",
     highlights: [],
@@ -211,6 +211,7 @@ function addPage(page) {
     summaryItems: [],
     hubHeading: "",
     hubLead: "",
+    isQuotePage: false,
     ...page
   });
 }
@@ -320,7 +321,7 @@ function addActionHubPages() {
         ]
       }
     ],
-    related: [["/contact/", "Request a fence quote"], ...coreServiceLinks, ...materialLinks]
+    related: [["/quote/", "Request a fence quote"], ...coreServiceLinks, ...materialLinks]
   });
 
   addPage({
@@ -820,6 +821,21 @@ function addSpecificServicePages() {
 
 function addSupportPages() {
   addPage({
+    slug: "quote",
+    title: "Get a Fence Quote in Dallas-Fort Worth | Strong Perimeter",
+    description: "Request a fence quote from Strong Perimeter with a simple step-by-step form for service type, fence type, project details, and contact information.",
+    eyebrow: "Quote request",
+    h1: "Get a Fence Quote",
+    lead: "Tell us what kind of fence help you need, what material you have or want, and where the project is located.",
+    image: images.brandGreen,
+    imageAlt: "Strong Perimeter logo",
+    ctaLabel: "Start quote request",
+    ctaHref: "#quote-wizard",
+    summaryItems: ["Service type", "Fence type", "Project address", "Contact info"],
+    isQuotePage: true
+  });
+
+  addPage({
     slug: "service-areas",
     title: "Texas Fence Service Areas | Strong Perimeter",
     description: `Strong Perimeter provides residential and commercial fence restoration, repair, painting, staining, installation, and replacement across ${serviceAreaCities.length} Texas cities.`,
@@ -972,7 +988,7 @@ function addSupportPages() {
       highlights: [
         serviceCard("Before condition", "See what the fence looked like before the work started.", "/projects/"),
         serviceCard("Work performed", "Compare the repairs, restoration, painting, staining, installation, or replacement scope.", "/services/"),
-        serviceCard("Finished result", "Look at the final fence line from more than one angle.", "/contact/")
+      serviceCard("Finished result", "Look at the final fence line from more than one angle.", "/quote/")
       ],
       sections: [
         {
@@ -1000,7 +1016,7 @@ function addSupportPages() {
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
     highlights: [
-      serviceCard("Communication", "Clear estimates, schedule expectations, and straightforward next steps.", "/contact/"),
+      serviceCard("Communication", "Clear estimates, schedule expectations, and straightforward next steps.", "/quote/"),
       serviceCard("Finish quality", "Repairs, restoration, painting, and staining need to look intentional when the crew leaves.", "/projects/"),
       serviceCard("Professional crews", "A better jobsite experience is part of the product.", "/about/")
     ],
@@ -1101,7 +1117,7 @@ function addSupportPages() {
     highlights: [
       serviceCard("Call", "Speak with Strong Perimeter at (214) 247-6369.", "tel:+12142476369"),
       serviceCard("Email", "Send project details to sales@strongperimeter.com.", "mailto:sales@strongperimeter.com"),
-      serviceCard("Quote form", "Use the form below to open a prefilled quote email.", "#quote")
+      serviceCard("Step-by-step quote", "Use the visual quote page to tell us what service and fence type you need.", "/quote/")
     ],
     sections: [
       {
@@ -1159,7 +1175,7 @@ function addCostAndGuidePages() {
       highlights: [
         serviceCard("Start with the goal", "Privacy, security, repair, restoration, finish, and replacement all point to different scopes.", "/services/"),
         serviceCard("Match the material", "Wrought iron, wood, chain link, pipe, and vinyl behave differently in the field.", "/fence-types/"),
-        serviceCard("Quote the real property", "Photos and address details help turn planning guidance into an actual estimate.", "/contact/")
+        serviceCard("Quote the real property", "Photos and address details help turn planning guidance into an actual estimate.", "/quote/")
       ],
       sections: [
         {
@@ -1554,6 +1570,141 @@ function renderFaqSection(page) {
     </section>`;
 }
 
+function renderQuoteOptionCards(name, options) {
+  return options.map((option, index) => {
+    const id = `${name}-${citySlug(option.value) || index}`;
+
+    return `
+              <label class="quote-option" for="${id}">
+                <input id="${id}" type="radio" name="${name}" value="${escapeHtml(option.value)}"${index === 0 ? " required" : ""}>
+                <span class="quote-option__icon">${escapeHtml(option.icon)}</span>
+                <span>
+                  <strong>${escapeHtml(option.label)}</strong>
+                  <small>${escapeHtml(option.text)}</small>
+                </span>
+              </label>`;
+  }).join("");
+}
+
+function renderQuoteWizard() {
+  const serviceOptions = [
+    { value: "Repair", label: "Repair", icon: "01", text: "Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage." },
+    { value: "Restoration", label: "Restoration", icon: "02", text: "Repair plus paint or stain to bring an existing fence back visually." },
+    { value: "Installation/replacement", label: "Installation or replacement", icon: "03", text: "A new fence line, replacement sections, or a full rebuild." },
+    { value: "Painting/staining", label: "Painting or staining", icon: "04", text: "Wrought iron, pipe fence painting, or wood fence staining." },
+    { value: "Not sure yet", label: "Not sure yet", icon: "05", text: "We can help compare repair, restoration, and replacement." }
+  ];
+  const fenceOptions = [
+    { value: "Wrought iron", label: "Wrought iron", icon: "WI", text: "Iron fence repair, restoration, painting, installation, or replacement." },
+    { value: "Wood", label: "Wood", icon: "WD", text: "Wood repair, restoration, staining, installation, or replacement." },
+    { value: "Chain link", label: "Chain link", icon: "CL", text: "Chain link repair, installation, or replacement." },
+    { value: "Pipe fence", label: "Pipe fence", icon: "PF", text: "Pipe fence restoration, repairs, or painting." },
+    { value: "Vinyl", label: "Vinyl", icon: "VY", text: "Vinyl fence repair, installation, or replacement." },
+    { value: "Not sure", label: "Not sure", icon: "?", text: "Choose this if you want us to identify it from photos or a visit." }
+  ];
+  const propertyOptions = [
+    { value: "Residential", label: "Residential", icon: "R", text: "Home, backyard, pool, pet, privacy, alley, or HOA project." },
+    { value: "Commercial", label: "Commercial", icon: "C", text: "Business, facility, lot, yard, storefront, or managed property." }
+  ];
+
+  return `
+    <section class="section section--quote-wizard page-section" id="quote-wizard">
+      <div class="section-shell">
+        <form class="quote-wizard quote-form" id="quote-form" data-quote-stepper data-to="sales@strongperimeter.com">
+          <div class="quote-wizard__top">
+            <div>
+              <p class="eyebrow eyebrow--green">Step-by-step quote request</p>
+              <h2>Build the scope visually, then send your contact details.</h2>
+            </div>
+            <div class="quote-progress" aria-label="Quote form progress">
+              <span class="is-active" data-quote-step-indicator>Service</span>
+              <span data-quote-step-indicator>Fence</span>
+              <span data-quote-step-indicator>Project</span>
+              <span data-quote-step-indicator>Contact</span>
+            </div>
+          </div>
+
+          <fieldset class="quote-step is-active" data-quote-step>
+            <legend>What are you looking for?</legend>
+            <div class="quote-options quote-options--service">
+              ${renderQuoteOptionCards("service", serviceOptions)}
+            </div>
+            <div class="quote-step__actions">
+              <button class="button button--solid" type="button" data-quote-next>Next</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="quote-step" data-quote-step hidden>
+            <legend>What type of fence is it?</legend>
+            <div class="quote-options">
+              ${renderQuoteOptionCards("fence_type", fenceOptions)}
+            </div>
+            <div class="quote-step__actions">
+              <button class="button button--ghost" type="button" data-quote-prev>Back</button>
+              <button class="button button--solid" type="button" data-quote-next>Next</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="quote-step" data-quote-step hidden>
+            <legend>Tell us about the property.</legend>
+            <div class="quote-options quote-options--property">
+              ${renderQuoteOptionCards("property_type", propertyOptions)}
+            </div>
+            <div class="quote-fields quote-fields--two">
+              <label>
+                <span>Timing</span>
+                <select id="quote-timeline" name="timeline">
+                  <option value="As soon as possible">As soon as possible</option>
+                  <option value="Within the next month">Within the next month</option>
+                  <option value="Just gathering quotes">Just gathering quotes</option>
+                </select>
+              </label>
+              <label>
+                <span>Project details</span>
+                <textarea id="quote-details" name="details" rows="4" placeholder="Leaning post, rust, broken pickets, staining, new install, gate issue, approximate length, photos available, etc."></textarea>
+              </label>
+            </div>
+            <div class="quote-step__actions">
+              <button class="button button--ghost" type="button" data-quote-prev>Back</button>
+              <button class="button button--solid" type="button" data-quote-next>Next</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="quote-step" data-quote-step hidden>
+            <legend>Where should we follow up?</legend>
+            <div class="quote-fields quote-fields--contact">
+              <label>
+                <span>First name</span>
+                <input type="text" id="quote-first-name" name="first_name" placeholder="First name" required>
+              </label>
+              <label>
+                <span>Last name</span>
+                <input type="text" id="quote-last-name" name="last_name" placeholder="Last name" required>
+              </label>
+              <label>
+                <span>Email</span>
+                <input type="email" id="quote-email" name="email" placeholder="you@example.com" required>
+              </label>
+              <label>
+                <span>Phone</span>
+                <input type="tel" id="quote-phone" name="phone" placeholder="(214) 555-0123" required>
+              </label>
+              <label class="full-width">
+                <span>Project address</span>
+                <input type="text" id="quote-address" name="address" placeholder="Street address, city, ZIP" required>
+              </label>
+            </div>
+            <div class="quote-step__actions">
+              <button class="button button--ghost" type="button" data-quote-prev>Back</button>
+              <button class="button button--solid" type="submit">Open quote email</button>
+            </div>
+            <p class="form-note">Submitting opens a prefilled email draft to sales@strongperimeter.com in your default mail app.</p>
+          </fieldset>
+        </form>
+      </div>
+    </section>`;
+}
+
 function renderHeader() {
   return `
   <header class="site-header" id="top">
@@ -1570,7 +1721,7 @@ function renderHeader() {
       </button>
       <nav class="site-nav" id="site-nav" aria-label="Primary">
         ${navLinks.map(([label, href]) => `<a href="${withBase(href)}">${label}</a>`).join("")}
-        <a class="nav-cta" href="${withBase("/contact/")}">Get a free quote</a>
+        <a class="nav-cta" href="${withBase("/quote/")}">Get a free quote</a>
       </nav>
     </div>
   </header>`;
@@ -1771,6 +1922,7 @@ ${renderHeader()}
 ${renderPageHero(page)}
 ${renderVisualOverview(page)}
 ${renderServiceAreaMap(page)}
+${page.isQuotePage ? renderQuoteWizard() : ""}
 ${renderHighlightSection(page)}
 ${renderHubGroups(page)}
 ${renderLinkSections(page)}
@@ -1778,7 +1930,7 @@ ${renderSections(page)}
 ${renderRelatedSection(page)}
 ${renderFaqSection(page)}
 
-${renderQuoteForm()}
+${page.isQuotePage ? "" : renderQuoteForm()}
   </main>
 ${renderFooter()}
 </body>

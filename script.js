@@ -5,6 +5,7 @@ const quoteForm = document.getElementById("quote-form");
 const youtubeEmbeds = document.querySelectorAll(".youtube-embed");
 const googleMapEl = document.querySelector("[data-google-map]");
 const googleMapDataEl = document.getElementById("strong-service-area-map-data");
+const quoteStepper = document.querySelector("[data-quote-stepper]");
 
 if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
@@ -171,16 +172,82 @@ if (googleMapEl && googleMapDataEl) {
   }
 }
 
+if (quoteStepper) {
+  const steps = Array.from(quoteStepper.querySelectorAll("[data-quote-step]"));
+  const indicators = Array.from(quoteStepper.querySelectorAll("[data-quote-step-indicator]"));
+  let activeStep = 0;
+
+  const showStep = (index) => {
+    activeStep = Math.max(0, Math.min(index, steps.length - 1));
+
+    steps.forEach((step, stepIndex) => {
+      const isActive = stepIndex === activeStep;
+      step.hidden = !isActive;
+      step.classList.toggle("is-active", isActive);
+    });
+
+    indicators.forEach((indicator, indicatorIndex) => {
+      indicator.classList.toggle("is-active", indicatorIndex === activeStep);
+      indicator.classList.toggle("is-complete", indicatorIndex < activeStep);
+    });
+  };
+
+  const validateStep = (step) => {
+    const requiredRadioGroups = new Set(
+      Array.from(step.querySelectorAll('input[type="radio"][required]')).map((input) => input.name)
+    );
+
+    for (const groupName of requiredRadioGroups) {
+      if (!quoteStepper.querySelector(`input[name="${groupName}"]:checked`)) {
+        step.querySelector(`input[name="${groupName}"]`)?.reportValidity();
+        return false;
+      }
+    }
+
+    const fields = Array.from(step.querySelectorAll("input:not([type='radio']), select, textarea"));
+    for (const field of fields) {
+      if (!field.checkValidity()) {
+        field.reportValidity();
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  quoteStepper.querySelectorAll("[data-quote-next]").forEach((button) => {
+    button.addEventListener("click", () => {
+      if (validateStep(steps[activeStep])) {
+        showStep(activeStep + 1);
+      }
+    });
+  });
+
+  quoteStepper.querySelectorAll("[data-quote-prev]").forEach((button) => {
+    button.addEventListener("click", () => {
+      showStep(activeStep - 1);
+    });
+  });
+
+  showStep(0);
+}
+
 if (quoteForm) {
   quoteForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const to = quoteForm.dataset.to || "sales@strongperimeter.com";
-    const name = document.getElementById("quote-name")?.value.trim() || "";
+    const firstName = document.getElementById("quote-first-name")?.value.trim() || "";
+    const lastName = document.getElementById("quote-last-name")?.value.trim() || "";
+    const name = document.getElementById("quote-name")?.value.trim() || `${firstName} ${lastName}`.trim();
     const email = document.getElementById("quote-email")?.value.trim() || "";
     const phone = document.getElementById("quote-phone")?.value.trim() || "";
     const address = document.getElementById("quote-address")?.value.trim() || "";
-    const service = document.getElementById("quote-service")?.value.trim() || "";
+    const service = document.getElementById("quote-service")?.value.trim()
+      || quoteForm.querySelector('input[name="service"]:checked')?.value
+      || "";
+    const fenceType = quoteForm.querySelector('input[name="fence_type"]:checked')?.value || "";
+    const propertyType = quoteForm.querySelector('input[name="property_type"]:checked')?.value || "";
     const timeline = document.getElementById("quote-timeline")?.value.trim() || "";
     const details = document.getElementById("quote-details")?.value.trim() || "";
 
@@ -192,7 +259,9 @@ if (quoteForm) {
       `Email: ${email}`,
       `Phone: ${phone}`,
       `Project address: ${address || "Not provided"}`,
-      `Fence type: ${service || "Not specified"}`,
+      `Service needed: ${service || "Not specified"}`,
+      `Fence type: ${fenceType || "Not specified"}`,
+      `Property type: ${propertyType || "Not specified"}`,
       `Timeline: ${timeline || "Not specified"}`,
       "",
       "Project details:",

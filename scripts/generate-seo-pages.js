@@ -1335,24 +1335,6 @@ function renderVisualOverview(page) {
 function renderServiceAreaMap(page) {
   if (page.slug !== "service-areas") return "";
 
-  const coverageCities = [
-    "Keller",
-    "Corinth",
-    "McKinney",
-    "Lavon",
-    "Royse City",
-    "Kaufman",
-    "Talty",
-    "Waxahachie",
-    "Ovilla",
-    "Arlington",
-    "North Richland Hills"
-  ];
-
-  const coverage = coverageCities.map((city) => {
-    const [lat, lng] = serviceAreaCityCoordinates[city];
-    return { lat, lng };
-  });
   const mapCities = serviceAreaCities.map((city) => {
     const [lat, lng] = serviceAreaCityCoordinates[city];
     return {
@@ -1363,16 +1345,11 @@ function renderServiceAreaMap(page) {
       featured: featuredServiceAreaCities.includes(city)
     };
   });
-  const coveragePath = coverageCities.map((city, index) => {
-    const [x, y] = projectGoogleMapPoint(serviceAreaCityCoordinates[city]);
-    return `${index === 0 ? "M" : "L"}${x} ${y}`;
-  }).join(" ");
   const overlayDots = serviceAreaCities.map((city) => {
     const [x, y] = projectGoogleMapPoint(serviceAreaCityCoordinates[city]);
-    const featured = featuredServiceAreaCities.includes(city);
 
     return `
-                <circle class="service-map__overlay-dot${featured ? " service-map__overlay-dot--featured" : ""}" cx="${x}" cy="${y}" r="${featured ? 8 : 4.5}">
+                <circle class="service-map__overlay-dot" cx="${x}" cy="${y}" r="6">
                   <title>${escapeHtml(`${city}, TX`)}</title>
                 </circle>`;
   }).join("");
@@ -1388,7 +1365,6 @@ function renderServiceAreaMap(page) {
   const mapData = {
     center: googleMapView.center,
     zoom: googleMapView.zoom,
-    coverage,
     cities: mapCities
   };
 
@@ -1422,7 +1398,6 @@ function renderServiceAreaMap(page) {
               src="https://maps.google.com/maps?q=${googleMapView.center.lat},${googleMapView.center.lng}&amp;z=${googleMapView.zoom}&amp;t=m&amp;output=embed">
             </iframe>
             <svg class="service-map__overlay" viewBox="0 0 ${googleMapView.width} ${googleMapView.height}" aria-label="Strong Perimeter service area and city markers">
-              <path class="service-map__overlay-area" d="${coveragePath} Z"></path>
               ${overlayDots}
               ${overlayLabels}
             </svg>

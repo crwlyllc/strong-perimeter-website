@@ -111,18 +111,6 @@ function initStrongPerimeterServiceMap(mapData, mapEl) {
   const bounds = new window.google.maps.LatLngBounds();
   const infoWindow = new window.google.maps.InfoWindow();
 
-  if (Array.isArray(mapData.coverage) && mapData.coverage.length) {
-    new window.google.maps.Polygon({
-      paths: mapData.coverage,
-      map,
-      strokeColor: "#004b3d",
-      strokeOpacity: 0.88,
-      strokeWeight: 3,
-      fillColor: "#004b3d",
-      fillOpacity: 0.12
-    });
-  }
-
   mapData.cities.forEach((city) => {
     const position = { lat: city.lat, lng: city.lng };
     const marker = new window.google.maps.Marker({
@@ -131,11 +119,11 @@ function initStrongPerimeterServiceMap(mapData, mapEl) {
       title: city.name,
       icon: {
         path: window.google.maps.SymbolPath.CIRCLE,
-        scale: city.featured ? 8 : 5,
-        fillColor: city.featured ? "#db7337" : "#004b3d",
+        scale: 6,
+        fillColor: "#db7337",
         fillOpacity: 1,
         strokeColor: "#fffdf9",
-        strokeWeight: city.featured ? 3 : 2
+        strokeWeight: 2
       }
     });
 

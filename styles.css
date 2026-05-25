@@ -1418,22 +1418,10 @@ h3,
   pointer-events: none;
 }
 
-.service-map__overlay-area {
-  fill: rgba(0, 75, 61, 0.16);
-  stroke: var(--green-900);
-  stroke-width: 4;
-  stroke-linejoin: round;
-}
-
 .service-map__overlay-dot {
-  fill: var(--green-800);
+  fill: var(--terracotta);
   stroke: #fffdf9;
   stroke-width: 3;
-}
-
-.service-map__overlay-dot--featured {
-  fill: var(--terracotta);
-  stroke-width: 4;
 }
 
 .service-map__overlay-label {

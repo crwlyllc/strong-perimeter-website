@@ -1382,7 +1382,7 @@ h3,
 
 .service-map__google-frame {
   position: relative;
-  min-height: clamp(26rem, 54vw, 39rem);
+  aspect-ratio: 5 / 4;
   overflow: hidden;
   border-radius: var(--radius-xl);
   background: #e9e5da;

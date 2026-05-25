@@ -80,33 +80,44 @@ const serviceAreaCities = [
   "Duncanville",
   "Euless",
   "Farmers Branch",
+  "Fate",
   "Flower Mound",
+  "Forney",
   "Frisco",
   "Garland",
   "Glenn Heights",
   "Grand Prairie",
   "Grapevine",
+  "Heath",
   "Highland Park",
   "Highland Village",
   "Hurst",
   "Irving",
+  "Kaufman",
   "Keller",
   "Lancaster",
+  "Lavon",
   "Lewisville",
   "Little Elm",
+  "Lucas",
+  "McKinney",
   "Mesquite",
   "North Richland Hills",
+  "Ovilla",
   "Plano",
   "Richardson",
   "Richland Hills",
   "Rockwall",
   "Rowlett",
+  "Royse City",
   "Sachse",
   "Seagoville",
   "Southlake",
+  "Talty",
   "Terrell",
   "The Colony",
   "University Park",
+  "Waxahachie",
   "Wylie"
 ];
 
@@ -115,10 +126,10 @@ const serviceAreaCityLinks = serviceAreaCities.map((city) => [cityServiceAreaHre
 // Add a browser-restricted Google Maps JavaScript API key to enable custom city pins.
 const googleMapsApiKey = "";
 const googleMapView = {
-  center: { lat: 32.86, lng: -96.78 },
+  center: { lat: 32.8, lng: -96.8 },
   zoom: 10,
   width: 1000,
-  height: 640
+  height: 800
 };
 
 const serviceAreaCityCoordinates = {
@@ -137,33 +148,44 @@ const serviceAreaCityCoordinates = {
   Duncanville: [32.6518, -96.9083],
   Euless: [32.8371, -97.0819],
   "Farmers Branch": [32.9265, -96.8961],
+  Fate: [32.9415, -96.3814],
   "Flower Mound": [33.0146, -97.0969],
+  Forney: [32.7482, -96.4719],
   Frisco: [33.1507, -96.8236],
   Garland: [32.9126, -96.6389],
   "Glenn Heights": [32.5487, -96.8567],
   "Grand Prairie": [32.7459, -96.9978],
   Grapevine: [32.9343, -97.0781],
+  Heath: [32.8365, -96.4744],
   "Highland Park": [32.8335, -96.7919],
   "Highland Village": [33.0918, -97.0467],
   Hurst: [32.8235, -97.1706],
   Irving: [32.814, -96.9489],
+  Kaufman: [32.589, -96.3089],
   Keller: [32.9346, -97.2517],
   Lancaster: [32.5921, -96.7561],
+  Lavon: [33.0276, -96.4344],
   Lewisville: [33.0462, -96.9942],
   "Little Elm": [33.1626, -96.9375],
+  Lucas: [33.0843, -96.5767],
+  McKinney: [33.1972, -96.6398],
   Mesquite: [32.7668, -96.5992],
   "North Richland Hills": [32.8343, -97.2289],
+  Ovilla: [32.5265, -96.8864],
   Plano: [33.0198, -96.6989],
   Richardson: [32.9483, -96.7299],
   "Richland Hills": [32.816, -97.2281],
   Rockwall: [32.9312, -96.4597],
   Rowlett: [32.9029, -96.5639],
+  "Royse City": [32.9751, -96.3325],
   Sachse: [32.9762, -96.5953],
   Seagoville: [32.6396, -96.5383],
   Southlake: [32.9412, -97.1342],
+  Talty: [32.6835, -96.3875],
   Terrell: [32.736, -96.2753],
   "The Colony": [33.0806, -96.8928],
   "University Park": [32.8501, -96.8003],
+  Waxahachie: [32.3865, -96.8483],
   Wylie: [33.0151, -96.5389]
 };
 
@@ -1316,14 +1338,13 @@ function renderServiceAreaMap(page) {
   const coverageCities = [
     "Keller",
     "Corinth",
-    "Little Elm",
-    "Frisco",
-    "Wylie",
-    "Rockwall",
-    "Terrell",
-    "Seagoville",
-    "Glenn Heights",
-    "Cedar Hill",
+    "McKinney",
+    "Lavon",
+    "Royse City",
+    "Kaufman",
+    "Talty",
+    "Waxahachie",
+    "Ovilla",
     "Arlington",
     "North Richland Hills"
   ];
@@ -1398,7 +1419,7 @@ function renderServiceAreaMap(page) {
               allowfullscreen
               tabindex="-1"
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=32.86,-96.78&amp;z=${googleMapView.zoom}&amp;t=m&amp;output=embed">
+              src="https://maps.google.com/maps?q=${googleMapView.center.lat},${googleMapView.center.lng}&amp;z=${googleMapView.zoom}&amp;t=m&amp;output=embed">
             </iframe>
             <svg class="service-map__overlay" viewBox="0 0 ${googleMapView.width} ${googleMapView.height}" aria-label="Strong Perimeter service area and city markers">
               <path class="service-map__overlay-area" d="${coveragePath} Z"></path>

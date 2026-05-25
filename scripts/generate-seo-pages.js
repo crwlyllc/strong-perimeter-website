@@ -1674,6 +1674,7 @@ function renderQuoteWizard() {
     "Pipe fence": [
       { value: "Repair", label: "Repair" },
       { value: "Painting", label: "Painting" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
       { value: "Not sure yet", label: "Not sure yet" }
     ],
     Vinyl: [

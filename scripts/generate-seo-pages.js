@@ -1614,7 +1614,7 @@ function renderQuoteWizard() {
           <div class="quote-wizard__top">
             <div>
               <p class="eyebrow eyebrow--green">Step-by-step quote request</p>
-              <h2>Build the scope visually, then send your contact details.</h2>
+              <h1>Get a Fence Quote</h1>
             </div>
             <div class="quote-progress" aria-label="Quote form progress">
               <span class="is-active" data-quote-step-indicator>Service</span>
@@ -1889,6 +1889,20 @@ function renderSchema(page) {
 
 function renderPage(page) {
   const canonical = pageUrl(page.slug);
+  const mainContent = page.isQuotePage ? `
+${renderQuoteWizard()}` : `
+${renderPageHero(page)}
+${renderVisualOverview(page)}
+${renderServiceAreaMap(page)}
+${renderHighlightSection(page)}
+${renderHubGroups(page)}
+${renderLinkSections(page)}
+${renderSections(page)}
+${renderRelatedSection(page)}
+${renderFaqSection(page)}
+
+${renderQuoteForm()}`;
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -1919,18 +1933,7 @@ function renderPage(page) {
 <body>
 ${renderHeader()}
   <main class="page-main">
-${renderPageHero(page)}
-${renderVisualOverview(page)}
-${renderServiceAreaMap(page)}
-${page.isQuotePage ? renderQuoteWizard() : ""}
-${renderHighlightSection(page)}
-${renderHubGroups(page)}
-${renderLinkSections(page)}
-${renderSections(page)}
-${renderRelatedSection(page)}
-${renderFaqSection(page)}
-
-${page.isQuotePage ? "" : renderQuoteForm()}
+${mainContent}
   </main>
 ${renderFooter()}
 </body>

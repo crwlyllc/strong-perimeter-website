@@ -1353,15 +1353,6 @@ function renderServiceAreaMap(page) {
                   <title>${escapeHtml(`${city}, TX`)}</title>
                 </circle>`;
   }).join("");
-  const overlayLabels = featuredServiceAreaCities.map((city) => {
-    const [x, y] = projectGoogleMapPoint(serviceAreaCityCoordinates[city]);
-    const anchor = city === "Rockwall" ? "end" : "start";
-    const labelX = city === "Rockwall" ? x - 14 : x + 12;
-    const labelY = city === "Frisco" ? y - 16 : y - 10;
-
-    return `
-                <text class="service-map__overlay-label" x="${labelX}" y="${labelY}" text-anchor="${anchor}">${escapeHtml(city)}</text>`;
-  }).join("");
   const mapData = {
     center: googleMapView.center,
     zoom: googleMapView.zoom,
@@ -1395,11 +1386,10 @@ function renderServiceAreaMap(page) {
               allowfullscreen
               tabindex="-1"
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=${googleMapView.center.lat},${googleMapView.center.lng}&amp;z=${googleMapView.zoom}&amp;t=m&amp;output=embed">
+              src="https://www.google.com/maps?ll=${googleMapView.center.lat},${googleMapView.center.lng}&amp;z=${googleMapView.zoom}&amp;t=m&amp;output=embed">
             </iframe>
             <svg class="service-map__overlay" viewBox="0 0 ${googleMapView.width} ${googleMapView.height}" aria-label="Strong Perimeter service area and city markers">
               ${overlayDots}
-              ${overlayLabels}
             </svg>
           </div>
           <script type="application/json" id="strong-service-area-map-data">${mapDataJson}</script>

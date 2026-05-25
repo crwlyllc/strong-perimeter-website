@@ -1424,17 +1424,6 @@ h3,
   stroke-width: 3;
 }
 
-.service-map__overlay-label {
-  fill: var(--ink);
-  font-family: var(--font-ui);
-  font-size: 20px;
-  font-weight: 800;
-  paint-order: stroke;
-  stroke: rgba(255, 253, 249, 0.95);
-  stroke-width: 6;
-  stroke-linejoin: round;
-}
-
 .service-map.is-google-map-loaded .service-map__google-canvas {
   opacity: 1;
   pointer-events: auto;

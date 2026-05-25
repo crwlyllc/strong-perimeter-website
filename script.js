@@ -175,60 +175,51 @@ if (googleMapEl && googleMapDataEl) {
 if (quoteStepper) {
   const steps = Array.from(quoteStepper.querySelectorAll("[data-quote-step]"));
   const indicators = Array.from(quoteStepper.querySelectorAll("[data-quote-step-indicator]"));
-  const quoteAreaList = quoteStepper.querySelector("[data-quote-area-list]");
-  const quoteAreaTemplate = quoteStepper.querySelector("[data-quote-area-template]");
-  const addQuoteAreaButton = quoteStepper.querySelector("[data-add-quote-area]");
-  let quoteAreaCount = quoteAreaList?.querySelectorAll("[data-quote-area]").length || 0;
+  const fenceTypeInputs = Array.from(quoteStepper.querySelectorAll("[data-fence-type-select]"));
+  const servicePanels = Array.from(quoteStepper.querySelectorAll("[data-service-panel]"));
+  const fenceTypeError = quoteStepper.querySelector("[data-fence-type-error]");
+  const serviceChoiceError = quoteStepper.querySelector("[data-service-choice-error]");
   let activeStep = 0;
 
-  const refreshQuoteAreaControls = () => {
-    if (!quoteAreaList) return;
+  const selectedFenceTypes = () => fenceTypeInputs
+    .filter((input) => input.checked)
+    .map((input) => input.value);
 
-    const areas = Array.from(quoteAreaList.querySelectorAll("[data-quote-area]"));
+  const setGroupValidity = (input, message) => {
+    if (!input) return;
+    input.setCustomValidity(message);
+    input.reportValidity();
+    input.setCustomValidity("");
+  };
 
-    areas.forEach((area, index) => {
-      const title = area.querySelector("[data-quote-area-title]");
-      const removeButton = area.querySelector("[data-remove-quote-area]");
+  const syncServicePanels = () => {
+    const selected = new Set(selectedFenceTypes());
 
-      if (title) title.textContent = `Fence area ${index + 1}`;
-      if (removeButton) {
-        removeButton.hidden = areas.length === 1;
-        removeButton.disabled = areas.length === 1;
-      }
+    servicePanels.forEach((panel) => {
+      const isSelected = selected.has(panel.dataset.fenceValue);
+      panel.hidden = !isSelected;
+
+      panel.querySelectorAll("input, textarea").forEach((field) => {
+        field.disabled = !isSelected;
+
+        if (!isSelected) {
+          if (field.type === "checkbox" || field.type === "radio") field.checked = false;
+          else field.value = "";
+        }
+      });
     });
   };
 
-  if (quoteAreaList && quoteAreaTemplate && addQuoteAreaButton) {
-    addQuoteAreaButton.addEventListener("click", () => {
-      quoteAreaCount += 1;
-
-      const wrapper = document.createElement("div");
-      wrapper.innerHTML = quoteAreaTemplate.innerHTML.replaceAll("__INDEX__", String(quoteAreaCount)).trim();
-      const area = wrapper.firstElementChild;
-
-      if (!area) return;
-
-      quoteAreaList.append(area);
-      refreshQuoteAreaControls();
-      area.scrollIntoView({ behavior: "smooth", block: "start" });
+  fenceTypeInputs.forEach((input) => {
+    input.addEventListener("change", () => {
+      if (fenceTypeError) fenceTypeError.hidden = selectedFenceTypes().length > 0;
+      syncServicePanels();
     });
-
-    quoteAreaList.addEventListener("click", (event) => {
-      const removeButton = event.target.closest("[data-remove-quote-area]");
-      if (!removeButton) return;
-
-      const area = removeButton.closest("[data-quote-area]");
-      if (!area || quoteAreaList.querySelectorAll("[data-quote-area]").length <= 1) return;
-
-      area.remove();
-      refreshQuoteAreaControls();
-    });
-
-    refreshQuoteAreaControls();
-  }
+  });
 
   const showStep = (index) => {
     activeStep = Math.max(0, Math.min(index, steps.length - 1));
+    syncServicePanels();
 
     steps.forEach((step, stepIndex) => {
       const isActive = stepIndex === activeStep;
@@ -243,6 +234,31 @@ if (quoteStepper) {
   };
 
   const validateStep = (step) => {
+    const fenceGroup = Array.from(step.querySelectorAll("[data-fence-type-select]"));
+    if (fenceGroup.length && !fenceGroup.some((input) => input.checked)) {
+      if (fenceTypeError) fenceTypeError.hidden = false;
+      setGroupValidity(fenceGroup[0], "Choose at least one fence type.");
+      return false;
+    }
+
+    if (fenceGroup.length && fenceTypeError) {
+      fenceTypeError.hidden = true;
+    }
+
+    const visibleServicePanels = Array.from(step.querySelectorAll("[data-service-panel]:not([hidden])"));
+    for (const panel of visibleServicePanels) {
+      const serviceChoices = Array.from(panel.querySelectorAll("[data-service-choice]"));
+      if (serviceChoices.length && !serviceChoices.some((input) => input.checked)) {
+        if (serviceChoiceError) serviceChoiceError.hidden = false;
+        setGroupValidity(serviceChoices[0], "Choose at least one service for this fence type.");
+        return false;
+      }
+    }
+
+    if (visibleServicePanels.length && serviceChoiceError) {
+      serviceChoiceError.hidden = true;
+    }
+
     const requiredRadioGroups = new Set(
       Array.from(step.querySelectorAll('input[type="radio"][required]')).map((input) => input.name)
     );
@@ -279,6 +295,7 @@ if (quoteStepper) {
     });
   });
 
+  syncServicePanels();
   showStep(0);
 }
 
@@ -293,20 +310,24 @@ if (quoteForm) {
     const email = document.getElementById("quote-email")?.value.trim() || "";
     const phone = document.getElementById("quote-phone")?.value.trim() || "";
     const address = document.getElementById("quote-address")?.value.trim() || "";
-    const quoteAreas = Array.from(quoteForm.querySelectorAll("[data-quote-area]")).map((area, index) => {
-      const location = area.querySelector("[data-scope-location]")?.value.trim() || "";
-      const serviceNeeded = area.querySelector("[data-scope-service]:checked")?.value || "";
-      const areaFenceType = area.querySelector("[data-scope-fence-type]:checked")?.value || "";
-      const notes = area.querySelector("[data-scope-notes]")?.value.trim() || "";
+    const quoteAreas = Array.from(quoteForm.querySelectorAll("[data-service-panel]"))
+      .filter((panel) => !panel.hidden)
+      .map((panel, index) => {
+        const location = panel.querySelector("[data-scope-location]")?.value.trim() || "";
+        const serviceNeeded = Array.from(panel.querySelectorAll("[data-service-choice]:checked"))
+          .map((input) => input.value)
+          .join(", ");
+        const areaFenceType = panel.dataset.fenceValue || "";
+        const notes = panel.querySelector("[data-scope-notes]")?.value.trim() || "";
 
-      return {
-        index: index + 1,
-        location,
-        serviceNeeded,
-        fenceType: areaFenceType,
-        notes
-      };
-    });
+        return {
+          index: index + 1,
+          location,
+          serviceNeeded,
+          fenceType: areaFenceType,
+          notes
+        };
+      });
     const service = document.getElementById("quote-service")?.value.trim()
       || quoteForm.querySelector('input[name="service"]:checked')?.value
       || quoteAreas[0]?.serviceNeeded
@@ -331,7 +352,7 @@ if (quoteForm) {
         "   Notes: No notes provided."
       ];
 
-    const subject = `Strong Perimeter Quote Request - ${quoteAreas.length > 1 ? "Multiple Fence Areas" : service || "New Project"}`;
+    const subject = `Strong Perimeter Quote Request - ${quoteAreas.length > 1 ? "Multiple Fence Types" : fenceType || service || "New Project"}`;
     const body = [
       "Strong Perimeter quote request",
       "",

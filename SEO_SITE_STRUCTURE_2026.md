@@ -448,6 +448,8 @@ Required sections:
 
 - New install and full replacement.
 - Privacy layouts.
+- Vertical side-by-side, vertical board-on-board, and vertical shadow box.
+- Horizontal side-by-side, horizontal board-on-board, and horizontal shadow box.
 - Post/material options.
 - Staining add-on.
 - Cost factors.

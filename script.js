@@ -193,6 +193,25 @@ if (quoteStepper) {
     input.setCustomValidity("");
   };
 
+  const syncStyleSections = () => {
+    quoteStepper.querySelectorAll("[data-style-section]").forEach((section) => {
+      const panel = section.closest("[data-service-panel]");
+      const triggerValue = section.dataset.styleTriggerValue || "Installation/replacement";
+      const triggerIsChecked = Array.from(panel?.querySelectorAll("[data-service-choice]") || [])
+        .some((input) => input.value === triggerValue && input.checked);
+      const isActive = Boolean(panel && !panel.hidden && triggerIsChecked);
+
+      section.hidden = !isActive;
+      section.querySelectorAll("input").forEach((field) => {
+        field.disabled = !isActive;
+
+        if (!isActive) {
+          field.checked = false;
+        }
+      });
+    });
+  };
+
   const syncServicePanels = () => {
     const selected = new Set(selectedFenceTypes());
 
@@ -209,6 +228,8 @@ if (quoteStepper) {
         }
       });
     });
+
+    syncStyleSections();
   };
 
   fenceTypeInputs.forEach((input) => {
@@ -295,6 +316,10 @@ if (quoteStepper) {
     });
   });
 
+  quoteStepper.querySelectorAll("[data-service-choice]").forEach((input) => {
+    input.addEventListener("change", syncStyleSections);
+  });
+
   syncServicePanels();
   showStep(0);
 }
@@ -317,12 +342,16 @@ if (quoteForm) {
           .map((input) => input.value)
           .join(", ");
         const areaFenceType = panel.dataset.fenceValue || "";
+        const styleSection = panel.querySelector("[data-style-section]:not([hidden])");
+        const hasStyleOptions = Boolean(styleSection);
+        const style = styleSection?.querySelector("[data-scope-style]:checked")?.value || "";
         const notes = panel.querySelector("[data-scope-notes]")?.value.trim() || "";
 
         return {
           index: index + 1,
           serviceNeeded,
           fenceType: areaFenceType,
+          style: style || (hasStyleOptions ? "Not specified" : ""),
           notes
         };
       });
@@ -340,6 +369,7 @@ if (quoteForm) {
       ? quoteAreas.flatMap((area) => [
         `${area.index}. ${area.fenceType || "Fence area"}`,
         `   Service needed: ${area.serviceNeeded || "Not specified"}`,
+        ...(area.style ? [`   Style: ${area.style}`] : []),
         `   Notes: ${area.notes || "No notes provided."}`
       ])
       : [

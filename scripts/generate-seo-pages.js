@@ -426,7 +426,7 @@ function addActionHubPages() {
     h1: "Fence Installation and Replacement",
     lead: "New fence installation and full fence replacement for residential and commercial properties.",
     highlights: [
-      serviceCard("Wood fencing", "Privacy, curb appeal, and backyard comfort with material and finish choices that fit the property.", "/wood-fence-installation-replacement/"),
+      serviceCard("Wood fencing", "Privacy, curb appeal, and backyard comfort with vertical or horizontal style choices.", "/wood-fence-installation-replacement/"),
       serviceCard("Wrought iron fencing", "Clean lines and long-term curb presence for front yards, pools, entries, and commercial frontage.", "/wrought-iron-fence-installation-replacement/"),
       serviceCard("Aluminum fencing", "Lightweight metal panels for clean lines, pools, entries, and low-maintenance boundaries.", "/aluminum-fence-installation-replacement/"),
       serviceCard("T-post fencing", "Practical post-and-wire layouts for acreage, temporary boundaries, utility areas, and perimeter needs.", "/t-post-fence-installation-replacement/"),
@@ -436,11 +436,11 @@ function addActionHubPages() {
       {
         eyebrow: "Process",
         title: "A good replacement starts with the old fence, the site, and the reason it failed.",
-        body: "We look at access, slope, existing posts, demolition needs, gates, material choice, height, finish, and how the fence will be used before building the quote.",
+        body: "We look at access, slope, existing posts, demolition needs, gates, material choice, wood style, height, finish, and how the fence will be used before building the quote.",
         items: [
           "Wrought iron fence installation and replacement.",
           "Aluminum fence installation and replacement.",
-          "Wood fence installation and replacement.",
+          "Wood fence installation and replacement, including vertical or horizontal side-by-side, board-on-board, and shadow box styles.",
           "Chain link fence installation and replacement.",
           "T-post fence installation and replacement.",
           "Vinyl fence installation and replacement.",
@@ -692,7 +692,7 @@ function addMaterialPages() {
         "Restoration with repair and staining when the fence can be saved.",
         "Repair for pickets, rails, posts, leaning sections, and storm damage.",
         "Staining for new, repaired, and restored wood fences.",
-        "Installation and replacement for privacy and property-line fencing."
+        "Installation and replacement for vertical or horizontal side-by-side, board-on-board, and shadow box fencing."
       ],
       related: [
         ["/wood-fence-restoration/", "Wood restoration"],
@@ -828,7 +828,7 @@ function addSpecificServicePages() {
     ["wood-fence-restoration", "Wood Fence Restoration", "Restoration includes repairs and staining for wood fences that can be saved.", images.wood, ["Picket, rail, and post repair", "Leaning section correction", "Prep for stain", "Stain finish", "Restore or replace guidance"]],
     ["wood-fence-repair", "Wood Fence Repair", "Repair for wood fences with broken boards, leaning posts, storm damage, rot, or sagging sections.", images.wood, ["Broken boards", "Leaning posts", "Rotten rails", "Storm damage", "Gate and alignment issues"]],
     ["wood-fence-staining", "Wood Fence Staining", "Staining for new, repaired, and restored wood fences across Dallas-Fort Worth.", images.wood, ["New fence stain timing", "Color guidance", "Prep expectations", "Restoration staining", "Maintenance planning"]],
-    ["wood-fence-installation-replacement", "Wood Fence Installation and Replacement", "Wood fence installation and replacement for privacy, backyard comfort, and property-line fencing.", images.wood, ["Privacy fence layout", "Replacement planning", "Post and material choices", "Staining add-on", "Residential and commercial wood fencing"]],
+    ["wood-fence-installation-replacement", "Wood Fence Installation and Replacement", "Wood fence installation and replacement for privacy, backyard comfort, property-line fencing, and vertical or horizontal style choices.", images.wood, ["Vertical side-by-side", "Vertical board-on-board", "Vertical shadow box", "Horizontal side-by-side", "Horizontal board-on-board", "Horizontal shadow box", "Staining add-on"]],
     ["chain-link-fence-repair", "Chain Link Fence Repair", "Repair for chain link fences with loose fabric, damaged posts, bent rails, and access issues.", images.chain, ["Loose fabric", "Bent rails", "Damaged posts", "Tension issues", "Residential and commercial chain link repair"]],
     ["chain-link-fence-installation-replacement", "Chain Link Fence Installation and Replacement", "Chain link fence installation and replacement for homes, commercial sites, pet areas, and practical boundaries.", images.chain, ["New chain link installation", "Full replacement", "Commercial perimeter needs", "Pet and utility areas", "Access and gate planning"]],
     ["t-post-fence-repair", "T-post Fence Repair", "Repair for T-post fences with leaning posts, loose wire, bracing issues, gate problems, or damaged sections.", images.chain, ["Leaning T-posts", "Loose or damaged wire", "Brace and corner issues", "Gate and access problems", "Repair vs replacement guidance"]],
@@ -1024,7 +1024,7 @@ function addSupportPages() {
     highlights: [
       serviceCard("Wrought iron restorations", "Before and after proof is especially valuable for rust, repair, and paint work.", "/projects/wrought-iron-fences/"),
       serviceCard("Aluminum fences", "Aluminum project photos show repair, painting, installation, and clean metal fence lines.", "/projects/aluminum-fences/"),
-      serviceCard("Wood fences", "Wood project photos show privacy layout, finish, posts, and staining detail.", "/projects/wood-fences/"),
+      serviceCard("Wood fences", "Wood project photos show vertical and horizontal layouts, privacy style, finish, posts, and staining detail.", "/projects/wood-fences/"),
       serviceCard("T-post fences", "T-post project photos show post-and-wire layouts, bracing, gates, repair, and replacement scopes.", "/projects/t-post-fences/"),
       serviceCard("Repair details", "Repair photos help buyers recognize similar problems on their own property.", "/projects/fence-repairs/")
     ],
@@ -1052,7 +1052,7 @@ function addSupportPages() {
   });
 
   [
-    ["projects/wood-fences", "Wood Fence Projects", "Wood fence projects show privacy layout, repair details, staining quality, and final curb presence.", images.wood],
+    ["projects/wood-fences", "Wood Fence Projects", "Wood fence projects show vertical and horizontal layouts, side-by-side, board-on-board, shadow box, repair details, staining quality, and final curb presence.", images.wood],
     ["projects/wrought-iron-fences", "Wrought Iron Fence Projects", "Wrought iron projects show rust, repair, painting, restoration, installation, and replacement examples.", images.iron],
     ["projects/aluminum-fences", "Aluminum Fence Projects", "Aluminum projects show repair, painting, installation, replacement, gates, and clean metal fence lines.", images.iron],
     ["projects/chain-link-fences", "Chain Link Fence Projects", "Chain link projects show practical repair, installation, replacement, access, and commercial perimeter work.", images.chain],
@@ -1231,17 +1231,17 @@ function addCostAndGuidePages() {
     ["fence-restoration-cost-dfw", "Fence Restoration Cost in DFW", "Restoration cost changes with repair scope, prep requirements, finish work, and how much of the fence line can be saved.", ["Condition of existing posts and sections", "Rust, rot, or storm damage", "Painting or staining prep", "Material type", "Access and property type"]],
     ["restore-or-replace-fence", "Restore or Replace a Fence", "The right call depends on structure, appearance goals, repair cost, finish needs, and how long the owner wants the fence to last.", ["Posts and structural stability", "Number of failed sections", "Rust or rot depth", "Finish expectations", "Budget and timeline"]],
     ["repair-or-replace-fence", "Repair or Replace a Fence", "Repair is smart when the damage is isolated. Replacement is usually smarter when the structure has failed across the line.", ["Isolated damage", "Repeated failures", "Post movement", "Material age", "Safety and security needs"]],
-    ["best-fence-for-privacy", "Best Fence for Privacy", "Privacy fence decisions usually come down to material, height, layout, visibility, maintenance, and HOA expectations.", ["Wood privacy fencing", "Vinyl privacy fencing", "Height and layout", "Stain or finish", "Neighbor and alley views"]],
+    ["best-fence-for-privacy", "Best Fence for Privacy", "Privacy fence decisions usually come down to material, height, layout, visibility, maintenance, and HOA expectations.", ["Wood privacy fencing", "Vertical or horizontal board-on-board", "Vertical or horizontal shadow box", "Vinyl privacy fencing", "Height and layout", "Neighbor and alley views"]],
     ["best-fence-for-dogs", "Best Fence for Dogs", "Dog fence decisions depend on size, digging, jumping, visibility, gate security, and whether privacy matters.", ["Fence height", "Bottom gaps", "Gate latches", "Visibility", "Wood, vinyl, or chain link fit"]],
     ["when-to-stain-a-new-fence", "When to Stain a New Wood Fence", "New wood fence staining depends on moisture, weather, wood condition, and the finish goal.", ["Wood moisture", "Sun exposure", "Weather window", "Color selection", "Maintenance timeline"]],
     ["do-i-need-a-permit-for-a-fence-in-dfw", "Do I Need a Permit for a Fence in DFW?", "Fence rules can vary by city, HOA, height, location, pool use, and property type. Confirm requirements before building.", ["City requirements", "HOA approval", "Height and front-yard limits", "Pool fencing rules", "Commercial property requirements"]],
-    ["wood-vs-vinyl-fence", "Wood vs Vinyl Fence", "Wood and vinyl both solve privacy needs, but they differ in look, maintenance, repair, replacement, and upfront planning.", ["Privacy", "Maintenance", "Repairability", "Style", "Cost factors"]],
+    ["wood-vs-vinyl-fence", "Wood vs Vinyl Fence", "Wood and vinyl both solve privacy needs, but they differ in look, maintenance, repair, replacement, and upfront planning.", ["Privacy", "Maintenance", "Repairability", "Wood style options", "Vertical or horizontal layouts", "Cost factors"]],
     ["wood-vs-chain-link-fence", "Wood vs Chain Link Fence", "Wood usually wins on privacy. Chain link usually wins on practical boundaries, visibility, utility, and commercial use.", ["Privacy", "Pets", "Visibility", "Security", "Maintenance"]],
     ["wrought-iron-fence-restoration-vs-replacement", "Wrought Iron Fence Restoration vs Replacement", "Wrought iron restoration is best when the structure is sound. Replacement is better when rust and failure are widespread.", ["Rust depth", "Panel condition", "Paint failure", "Gate alignment", "Desired final look"]],
     ["wood-fence-restoration-vs-replacement", "Wood Fence Restoration vs Replacement", "Wood fence restoration makes sense when posts and enough boards can be saved. Replacement is better when the line is broadly failing.", ["Post condition", "Rot", "Leaning sections", "Stain outcome", "Privacy goals"]],
     ["pipe-fence-painting-vs-replacement", "Pipe Fence Painting vs Replacement", "Pipe fence painting helps when the structure is usable. Replacement is better when rails, posts, or welds are too compromised.", ["Rust", "Bent rails", "Loose posts", "Paint prep", "Commercial use"]],
     ["vinyl-fence-repair-or-replace", "Vinyl Fence Repair or Replace", "Vinyl fence repair works when the damage is isolated and parts can be matched. Replacement makes sense when panels and posts are widely damaged.", ["Panel damage", "Post condition", "Parts match", "Wind damage", "Privacy expectations"]],
-    ["privacy-fence-installation", "Privacy Fence Installation", "Privacy fencing is usually about comfort, neighbors, pets, pools, alleys, and the look of the backyard.", ["Wood privacy fences", "Vinyl privacy fences", "Height and layout", "Stain and finish", "HOA expectations"]],
+    ["privacy-fence-installation", "Privacy Fence Installation", "Privacy fencing is usually about comfort, neighbors, pets, pools, alleys, and the look of the backyard.", ["Wood privacy fences", "Vertical or horizontal side-by-side", "Vertical or horizontal board-on-board", "Vertical or horizontal shadow box", "Vinyl privacy fences", "Height and layout"]],
     ["pool-fence-installation", "Pool Fence Installation", "Pool fence planning should prioritize visibility, access, safety expectations, and local requirements.", ["Wrought iron visibility", "Gate and latch planning", "Height and spacing", "Local requirements", "Appearance around the pool"]],
     ["dog-fence-installation", "Dog Fence Installation", "Dog fence planning should match the dog, the yard, and the owner's privacy expectations.", ["Height", "Gaps", "Digging", "Visibility", "Gate security"]],
     ["security-fencing", "Security Fencing", "Security fencing should match the property type, visibility needs, access points, and maintenance expectations.", ["Chain link", "Wrought iron", "Pipe fence", "Commercial access", "Perimeter control"]],
@@ -1689,6 +1689,22 @@ function renderQuoteServicePanel(fenceOption, serviceOptions) {
   const image = fenceOption.image || images.wood;
   const mediaClass = fenceOption.media === "symbol" ? "quote-service-panel__media--symbol" : "quote-service-panel__media--photo";
   const notesPlaceholder = fenceOption.notesPlaceholder || "Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc.";
+  const styleOptions = fenceOption.styleOptions || [];
+  const styleSection = styleOptions.length ? `
+
+                <div class="quote-service-panel__section quote-service-panel__section--styles" data-style-section data-style-trigger-value="Installation/replacement" hidden>
+                  <h3>Wood install/replacement style</h3>
+                  <div class="quote-service-choices">
+${styleOptions.map((option, index) => {
+                      const id = `${slug}-style-${citySlug(option.value) || index}`;
+                      return `
+                    <label class="quote-service-choice" for="${id}">
+                      <input id="${id}" type="radio" name="${slug}_style" value="${escapeHtml(option.value)}" data-scope-style disabled>
+                      <span>${escapeHtml(option.label || option.value)}</span>
+                    </label>`;
+                    }).join("")}
+                  </div>
+                </div>` : "";
 
   return `
               <article class="quote-service-panel" data-service-panel data-fence-value="${escapeHtml(fenceOption.value)}" hidden>
@@ -1715,6 +1731,7 @@ ${serviceOptions.map((option, index) => {
                     }).join("")}
                   </div>
                 </div>
+${styleSection}
 
                 <label class="quote-area-notes">
                   <span>Notes for this fence</span>
@@ -1734,7 +1751,21 @@ function renderQuoteWizard() {
   const fenceOptions = [
     { value: "Wrought iron", label: "Wrought iron", image: images.iron, text: "Iron or decorative metal fencing." },
     { value: "Aluminum", label: "Aluminum", image: images.iron, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
-    { value: "Wood", label: "Wood", image: images.wood, text: "Privacy, perimeter, or backyard wood fencing." },
+    {
+      value: "Wood",
+      label: "Wood",
+      image: images.wood,
+      text: "Privacy, perimeter, or backyard wood fencing.",
+      notesPlaceholder: "Approximate length, gates, height, wood style, staining, replacement section, photos available, etc.",
+      styleOptions: [
+        { value: "Vertical side by side" },
+        { value: "Vertical board on board" },
+        { value: "Vertical shadow box" },
+        { value: "Horizontal side by side" },
+        { value: "Horizontal board on board" },
+        { value: "Horizontal shadow box" }
+      ]
+    },
     { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link fabric, posts, rails, or gates." },
     { value: "T-post", label: "T-post", image: images.chain, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
     { value: "Pipe fence", label: "Pipe fence", image: images.fabric, text: "Pipe rail, ranch-style, or metal perimeter fencing." },

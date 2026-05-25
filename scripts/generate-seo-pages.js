@@ -21,6 +21,9 @@ const quoteServices = [
   "Wrought iron fence repair",
   "Wrought iron fence painting",
   "Wrought iron fence installation/replacement",
+  "Aluminum fence repair",
+  "Aluminum fence painting",
+  "Aluminum fence installation/replacement",
   "Wood fence restoration",
   "Wood fence repair",
   "Wood fence staining",
@@ -50,6 +53,7 @@ const images = {
 
 const materialLinks = [
   ["/wrought-iron-fence/", "Wrought iron fence"],
+  ["/aluminum-fence/", "Aluminum fence"],
   ["/wood-fence/", "Wood fence"],
   ["/chain-link-fence/", "Chain link fence"],
   ["/pipe-fence/", "Pipe fence"],
@@ -265,9 +269,9 @@ function addActionHubPages() {
     hubLead: "Choose the closest match. If you are unsure, the quote conversation can compare repair, restoration, and replacement.",
     highlights: [
       serviceCard("Fence repair", "Fix damaged posts, panels, rails, pickets, gates, chain link fabric, rust, storm damage, or leaning sections.", "/fence-repair/", "Repair", "View repair services"),
-      serviceCard("Fence restoration", "Save wrought iron, wood, or pipe fencing when repair plus a fresh finish makes sense.", "/fence-restoration/", "Restore", "View restoration services"),
+      serviceCard("Fence restoration", "Save wrought iron, aluminum, wood, or pipe fencing when repair plus a fresh finish makes sense.", "/fence-restoration/", "Restore", "View restoration services"),
       serviceCard("Installation & replacement", "Build new or replace a fence that has too much damage to repair cleanly.", "/fence-installation-replacement/", "Build", "View installation services"),
-      serviceCard("Fence painting", "Paint wrought iron or pipe fencing after prep, rust attention, and needed repairs.", "/fence-painting/", "Paint", "View painting services"),
+      serviceCard("Fence painting", "Paint wrought iron, aluminum, or pipe fencing after prep, rust attention, and needed repairs.", "/fence-painting/", "Paint", "View painting services"),
       serviceCard("Fence staining", "Stain new, repaired, or restored wood fencing for a finished look.", "/fence-staining/", "Stain", "View staining services")
     ],
     hubGroups: [
@@ -278,6 +282,7 @@ function addActionHubPages() {
         body: "The fence material tells you which services fit. Open the page that matches the fence on your property.",
         cards: [
           serviceCard("Wrought iron fence", "Restoration, repair, painting, installation, and replacement.", "/wrought-iron-fence/", "Iron", "View wrought iron services"),
+          serviceCard("Aluminum fence", "Repair, painting, installation, and replacement.", "/aluminum-fence/", "Aluminum", "View aluminum services"),
           serviceCard("Wood fence", "Restoration, repair, staining, installation, and replacement.", "/wood-fence/", "Wood", "View wood services"),
           serviceCard("Chain link fence", "Repair, installation, and replacement.", "/chain-link-fence/", "Chain link", "View chain link services"),
           serviceCard("Pipe fence", "Restoration, repair, and painting.", "/pipe-fence/", "Pipe", "View pipe fence services"),
@@ -304,7 +309,7 @@ function addActionHubPages() {
           "Restoration: repair plus finishing work for a fence that is still worth saving.",
           "Repair: fix failed parts without rebuilding the whole fence line.",
           "Installation/replacement: build new or replace a fence that has too much damage to repair cleanly.",
-          "Painting: finish work for wrought iron and pipe fencing after prep and needed repairs.",
+          "Painting: finish work for wrought iron, aluminum, and pipe fencing after prep and needed repairs.",
           "Staining: finish work for new, repaired, or restored wood fencing."
         ]
       },
@@ -314,6 +319,7 @@ function addActionHubPages() {
         body: "Not every fence material uses every service. This is the quick map.",
         items: [
           "Wrought iron: restoration, repair, painting, installation, and replacement.",
+          "Aluminum: repair, painting, installation, and replacement.",
           "Wood: restoration, repair, staining, installation, and replacement.",
           "Chain link: repair, installation, and replacement.",
           "Pipe: restoration, repair, and painting.",
@@ -327,10 +333,10 @@ function addActionHubPages() {
   addPage({
     slug: "fence-restoration",
     title: "Fence Restoration in Dallas-Fort Worth | Strong Perimeter",
-    description: "Strong Perimeter restores wrought iron, wood, and pipe fences across DFW with repair, prep, painting, and staining services.",
+    description: "Strong Perimeter restores wrought iron, aluminum, wood, and pipe fences across DFW with repair, prep, painting, and staining services.",
     eyebrow: "Restoration",
     h1: "Fence Restoration",
-    lead: "Repair and refinish wrought iron, wood, or pipe fencing when the structure is still worth saving.",
+    lead: "Repair and refinish wrought iron, aluminum, wood, or pipe fencing when the structure is still worth saving.",
     highlights: [
       serviceCard("Wrought iron restoration", "Rust, damaged sections, and tired paint can often be repaired and refinished into a cleaner, sharper fence line.", "/wrought-iron-fence-restoration/"),
       serviceCard("Wood fence restoration", "Aging boards, loose sections, and faded wood can be repaired and stained when the fence still has life left.", "/wood-fence-restoration/"),
@@ -342,7 +348,7 @@ function addActionHubPages() {
         title: "Restoration is right when the structure is still worth saving.",
         body: "A restoration visit looks at the whole fence line, not just the most obvious spot. The goal is to decide whether targeted repair and finish work will give the property the result it needs.",
         items: [
-          "Surface rust or faded paint on iron or pipe fencing.",
+          "Surface rust or faded paint on iron, aluminum, or pipe fencing.",
           "Weathered wood fencing that needs repair and stain.",
           "Sections that look rough but are not fully failed.",
           "Commercial or residential properties that need a cleaner appearance without a full rebuild."
@@ -350,12 +356,13 @@ function addActionHubPages() {
       }
     ],
     faqs: [
-      ["What does fence restoration include?", "It depends on the material. Wrought iron and pipe restoration includes repair and painting. Wood restoration includes repair and staining."],
+      ["What does fence restoration include?", "It depends on the material. Wrought iron, aluminum, and pipe restoration includes repair and painting. Wood restoration includes repair and staining."],
       ["Is restoration cheaper than replacement?", "It can be, when the posts and main structure are still sound. If the structure is too far gone, replacement may be the better long-term value."],
       ["Do you restore both residential and commercial fences?", "Yes. Strong Perimeter handles restoration for both residential and commercial properties across DFW."]
     ],
     related: [
       ["/wrought-iron-fence-restoration/", "Wrought iron restoration"],
+      ["/aluminum-fence-painting/", "Aluminum painting"],
       ["/wood-fence-restoration/", "Wood restoration"],
       ["/pipe-fence-restoration/", "Pipe restoration"],
       ["/restore-or-replace-fence/", "Restore or replace guide"]
@@ -365,10 +372,10 @@ function addActionHubPages() {
   addPage({
     slug: "fence-repair",
     title: "Fence Repair in Dallas-Fort Worth | Strong Perimeter",
-    description: "Fence repair for wood, wrought iron, chain link, pipe, and vinyl fences across Dallas-Fort Worth. Residential and commercial service.",
+    description: "Fence repair for wood, wrought iron, aluminum, chain link, pipe, and vinyl fences across Dallas-Fort Worth. Residential and commercial service.",
     eyebrow: "Repair",
     h1: "Fence Repair",
-    lead: "Repair for wrought iron, wood, chain link, pipe, and vinyl fences across Dallas-Fort Worth.",
+    lead: "Repair for wrought iron, aluminum, wood, chain link, pipe, and vinyl fences across Dallas-Fort Worth.",
     highlights: [
       serviceCard("Material-specific repairs", "Each material fails differently, so the repair plan should match the fence instead of using a generic patch.", "/fence-types/"),
       serviceCard("Storm and age damage", "Wind, soil movement, rust, rot, impact, and years of sun can all show up in different ways along the fence line.", "/storm-damaged-fence-repair/"),
@@ -381,6 +388,7 @@ function addActionHubPages() {
         body: "Repair work can be small and targeted or part of a larger restoration plan. The first step is understanding what failed and whether the rest of the line is stable.",
         items: [
           "Wrought iron rust, broken sections, bent pickets, and loose panels.",
+          "Aluminum fence bent pickets, loose panels, gate issues, and finish wear.",
           "Wood fence pickets, rails, posts, gates, leaning sections, and storm damage.",
           "Chain link fabric, rails, posts, tension, and access issues.",
           "Pipe fence rust, bent rails, broken sections, and loose posts.",
@@ -395,6 +403,7 @@ function addActionHubPages() {
     ],
     related: [
       ["/wrought-iron-fence-repair/", "Wrought iron fence repair"],
+      ["/aluminum-fence-repair/", "Aluminum fence repair"],
       ["/wood-fence-repair/", "Wood fence repair"],
       ["/chain-link-fence-repair/", "Chain link fence repair"],
       ["/pipe-fence-repair/", "Pipe fence repair"],
@@ -405,13 +414,14 @@ function addActionHubPages() {
   addPage({
     slug: "fence-installation-replacement",
     title: "Fence Installation and Replacement in DFW | Strong Perimeter",
-    description: "Strong Perimeter installs and replaces wrought iron, wood, chain link, and vinyl fences for homes and commercial properties across Dallas-Fort Worth.",
+    description: "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, and vinyl fences for homes and commercial properties across Dallas-Fort Worth.",
     eyebrow: "Installation and replacement",
     h1: "Fence Installation and Replacement",
     lead: "New fence installation and full fence replacement for residential and commercial properties.",
     highlights: [
       serviceCard("Wood fencing", "Privacy, curb appeal, and backyard comfort with material and finish choices that fit the property.", "/wood-fence-installation-replacement/"),
       serviceCard("Wrought iron fencing", "Clean lines and long-term curb presence for front yards, pools, entries, and commercial frontage.", "/wrought-iron-fence-installation-replacement/"),
+      serviceCard("Aluminum fencing", "Lightweight metal panels for clean lines, pools, entries, and low-maintenance boundaries.", "/aluminum-fence-installation-replacement/"),
       serviceCard("Chain link and vinyl", "Practical perimeter control, pet containment, low-maintenance options, and commercial utility.", "/fence-types/")
     ],
     sections: [
@@ -421,6 +431,7 @@ function addActionHubPages() {
         body: "We look at access, slope, existing posts, demolition needs, gates, material choice, height, finish, and how the fence will be used before building the quote.",
         items: [
           "Wrought iron fence installation and replacement.",
+          "Aluminum fence installation and replacement.",
           "Wood fence installation and replacement.",
           "Chain link fence installation and replacement.",
           "Vinyl fence installation and replacement.",
@@ -429,13 +440,14 @@ function addActionHubPages() {
       }
     ],
     faqs: [
-      ["Which fence materials do you install?", "Strong Perimeter installs and replaces wrought iron, wood, chain link, and vinyl fences."],
+      ["Which fence materials do you install?", "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, and vinyl fences."],
       ["Do you remove the old fence?", "Removal can be included in the project scope when needed."],
       ["Can you help choose the material?", "Yes. The right material depends on privacy, security, maintenance, budget, and the look of the property."]
     ],
     related: [
       ["/wood-fence-installation-replacement/", "Wood installation/replacement"],
       ["/wrought-iron-fence-installation-replacement/", "Wrought iron installation/replacement"],
+      ["/aluminum-fence-installation-replacement/", "Aluminum installation/replacement"],
       ["/chain-link-fence-installation-replacement/", "Chain link installation/replacement"],
       ["/vinyl-fence-installation-replacement/", "Vinyl installation/replacement"]
     ]
@@ -444,14 +456,15 @@ function addActionHubPages() {
   addPage({
     slug: "fence-painting",
     title: "Fence Painting in Dallas-Fort Worth | Strong Perimeter",
-    description: "Metal fence painting for wrought iron and pipe fences across DFW, including prep, rust-conscious repair, and finish work.",
+    description: "Metal fence painting for wrought iron, aluminum, and pipe fences across DFW, including prep, rust-conscious repair, and finish work.",
     eyebrow: "Painting",
     h1: "Fence Painting",
-    lead: "Metal fence painting for wrought iron and pipe fences, including prep, rust attention, and needed repairs.",
+    lead: "Metal fence painting for wrought iron, aluminum, and pipe fences, including prep, rust attention, and needed repairs.",
     image: images.iron,
     imageAlt: "Wrought iron fence icon",
     highlights: [
       serviceCard("Wrought iron painting", "Rust, faded paint, and tired iron sections can be prepped and repainted for a sharper look.", "/wrought-iron-fence-painting/"),
+      serviceCard("Aluminum painting", "Aluminum fence panels and gates can be refreshed when the surface and finish need attention.", "/aluminum-fence-painting/"),
       serviceCard("Pipe fence painting", "Pipe fencing often needs surface prep, rust attention, and consistent paint coverage.", "/pipe-fence-painting/"),
       serviceCard("Restoration-ready", "Painting works best when structural and rust issues are handled before finish work.", "/fence-restoration/")
     ],
@@ -462,6 +475,7 @@ function addActionHubPages() {
         body: "A clean final look starts before the first coat. We evaluate rust, loose sections, surface condition, access, and whether repair should happen before paint.",
         items: [
           "Wrought iron fence painting.",
+          "Aluminum fence painting.",
           "Pipe fence painting.",
           "Rust-conscious prep and repair recommendations.",
           "Residential and commercial metal fence painting."
@@ -470,6 +484,7 @@ function addActionHubPages() {
     ],
     related: [
       ["/wrought-iron-fence-painting/", "Wrought iron painting"],
+      ["/aluminum-fence-painting/", "Aluminum painting"],
       ["/pipe-fence-painting/", "Pipe fence painting"],
       ["/wrought-iron-fence-restoration/", "Wrought iron restoration"],
       ["/pipe-fence-restoration/", "Pipe restoration"]
@@ -516,24 +531,26 @@ function addFenceTypeAndBuyerPages() {
   addPage({
     slug: "fence-types",
     title: "Fence Types for DFW Homes and Businesses | Strong Perimeter",
-    description: "Compare wrought iron, wood, chain link, pipe, and vinyl fence options for residential and commercial properties across Dallas-Fort Worth.",
+    description: "Compare wrought iron, aluminum, wood, chain link, pipe, and vinyl fence options for residential and commercial properties across Dallas-Fort Worth.",
     eyebrow: "Fence types",
     h1: "Fence Types",
-    lead: "Compare wrought iron, wood, chain link, pipe, and vinyl fencing by use, maintenance, privacy, security, and appearance.",
+    lead: "Compare wrought iron, aluminum, wood, chain link, pipe, and vinyl fencing by use, maintenance, privacy, security, and appearance.",
     image: images.wood,
     imageAlt: "Wood privacy fence with stone columns",
     highlights: [
       serviceCard("Wood", "Best for privacy, backyard comfort, and a warm residential look.", "/wood-fence/"),
       serviceCard("Wrought iron", "Best for visibility, curb appeal, pools, entries, and ornamental security.", "/wrought-iron-fence/"),
+      serviceCard("Aluminum", "Best for clean metal lines, pools, entries, and low-maintenance decorative boundaries.", "/aluminum-fence/"),
       serviceCard("Chain link", "Best for practical boundaries, pets, utility areas, and commercial perimeter control.", "/chain-link-fence/")
     ],
     sections: [
       {
         eyebrow: "Materials",
         title: "Every material has a different job.",
-        body: "Strong Perimeter focuses on the fence types we actually service: wrought iron, wood, chain link, pipe, and vinyl.",
+        body: "Strong Perimeter focuses on the fence types we actually service: wrought iron, aluminum, wood, chain link, pipe, and vinyl.",
         items: [
           "Wrought iron: restoration, repair, painting, installation, and replacement.",
+          "Aluminum: repair, painting, installation, and replacement.",
           "Wood: restoration, repair, staining, installation, and replacement.",
           "Chain link: repair, installation, and replacement.",
           "Pipe: restoration, repair, and painting.",
@@ -562,7 +579,7 @@ function addFenceTypeAndBuyerPages() {
         title: "We match the scope to the property instead of forcing a one-size quote.",
         body: "Residential projects can be small repair visits, full backyard replacements, iron restoration, wood staining, or vinyl replacement.",
         items: [
-          "Wrought iron, wood, chain link, pipe, and vinyl services.",
+          "Wrought iron, aluminum, wood, chain link, pipe, and vinyl services.",
           "Privacy, pets, pools, alleys, gates, and curb appeal considerations.",
           "Clear quote communication before work starts."
         ]
@@ -580,7 +597,7 @@ function addFenceTypeAndBuyerPages() {
     lead: "Fence repair, restoration, painting, installation, and replacement for lots, yards, storefronts, facilities, and managed properties.",
     highlights: [
       serviceCard("Practical boundaries", "Chain link and pipe fencing often work well for utility, lots, yards, and property separation.", "/chain-link-fence/"),
-      serviceCard("Frontage and appearance", "Wrought iron restoration, painting, and replacement can improve the public-facing edge of a property.", "/wrought-iron-fence/"),
+      serviceCard("Frontage and appearance", "Wrought iron and aluminum repair, painting, and replacement can improve the public-facing edge of a property.", "/wrought-iron-fence/"),
       serviceCard("Managed property repairs", "Repair scopes can be planned around access, safety, timing, and tenant or customer impact.", "/fence-repair/")
     ],
     sections: [
@@ -590,7 +607,7 @@ function addFenceTypeAndBuyerPages() {
         body: "Commercial buyers usually need to know what can be repaired, what should be replaced, how access will work, and what the finished perimeter needs to do.",
         items: [
           "Commercial fence repair and replacement.",
-          "Wrought iron and pipe painting/restoration.",
+          "Wrought iron, aluminum, and pipe painting/restoration.",
           "Chain link installation and repair.",
           "Clear communication for owners, managers, and operators."
         ]
@@ -600,6 +617,7 @@ function addFenceTypeAndBuyerPages() {
       ["/chain-link-fence/", "Chain link fence"],
       ["/pipe-fence/", "Pipe fence"],
       ["/wrought-iron-fence/", "Wrought iron fence"],
+      ["/aluminum-fence/", "Aluminum fence"],
       ["/fence-repair/", "Fence repair"]
     ]
   });
@@ -626,6 +644,27 @@ function addMaterialPages() {
         ["/wrought-iron-fence-repair/", "Wrought iron repair"],
         ["/wrought-iron-fence-painting/", "Wrought iron painting"],
         ["/wrought-iron-fence-installation-replacement/", "Wrought iron installation/replacement"]
+      ]
+    },
+    {
+      slug: "aluminum-fence",
+      name: "Aluminum Fence",
+      image: images.iron,
+      title: "Aluminum Fence Services in DFW | Strong Perimeter",
+      description: "Aluminum fence repair, painting, installation, and replacement for residential and commercial properties in Dallas-Fort Worth.",
+      h1: "Aluminum Fence Services",
+      lead: "Aluminum fencing gives properties a clean metal look with lower-maintenance panels, posts, and gates when the installation and repair scope are handled well.",
+      items: [
+        "Repair for bent pickets, loose panels, damaged posts, and gate issues.",
+        "Painting for aluminum fencing that needs a refreshed, consistent finish.",
+        "Installation and replacement for pools, entries, yards, and decorative boundaries.",
+        "Residential and commercial aluminum fence service."
+      ],
+      related: [
+        ["/aluminum-fence-repair/", "Aluminum repair"],
+        ["/aluminum-fence-painting/", "Aluminum painting"],
+        ["/aluminum-fence-installation-replacement/", "Aluminum installation/replacement"],
+        ["/fence-types/", "Fence types"]
       ]
     },
     {
@@ -749,6 +788,9 @@ function addSpecificServicePages() {
     ["wrought-iron-fence-repair", "Wrought Iron Fence Repair", "Repair for bent, rusted, broken, or loose wrought iron fence sections across DFW.", images.iron, ["Bent pickets and panels", "Loose sections", "Rust-damaged areas", "Gate and alignment issues", "Repair vs restoration guidance"]],
     ["wrought-iron-fence-painting", "Wrought Iron Fence Painting", "Painting for wrought iron fences that need rust-conscious prep and a cleaner finish.", images.iron, ["Surface prep", "Rust attention", "Primer and paint expectations", "Finish consistency", "Residential and commercial painting"]],
     ["wrought-iron-fence-installation-replacement", "Wrought Iron Fence Installation and Replacement", "Installation and replacement for wrought iron fences on homes, pools, entries, and commercial frontage.", images.iron, ["New iron fence installation", "Full replacement", "Front yard and pool applications", "Commercial frontage", "Style and access planning"]],
+    ["aluminum-fence-repair", "Aluminum Fence Repair", "Repair for aluminum fences with bent pickets, loose panels, damaged posts, gate alignment issues, or finish wear.", images.iron, ["Bent pickets and panels", "Loose sections", "Damaged posts", "Gate and alignment issues", "Repair vs replacement guidance"]],
+    ["aluminum-fence-painting", "Aluminum Fence Painting", "Painting for aluminum fences that need surface prep and a cleaner, consistent finish.", images.iron, ["Surface prep", "Finish wear", "Primer and paint expectations", "Color consistency", "Residential and commercial painting"]],
+    ["aluminum-fence-installation-replacement", "Aluminum Fence Installation and Replacement", "Installation and replacement for aluminum fences on homes, pools, entries, and commercial frontage.", images.iron, ["New aluminum fence installation", "Full replacement", "Pool, entry, and yard applications", "Commercial frontage", "Style and access planning"]],
     ["wood-fence-restoration", "Wood Fence Restoration", "Restoration includes repairs and staining for wood fences that can be saved.", images.wood, ["Picket, rail, and post repair", "Leaning section correction", "Prep for stain", "Stain finish", "Restore or replace guidance"]],
     ["wood-fence-repair", "Wood Fence Repair", "Repair for wood fences with broken boards, leaning posts, storm damage, rot, or sagging sections.", images.wood, ["Broken boards", "Leaning posts", "Rotten rails", "Storm damage", "Gate and alignment issues"]],
     ["wood-fence-staining", "Wood Fence Staining", "Staining for new, repaired, and restored wood fences across Dallas-Fort Worth.", images.wood, ["New fence stain timing", "Color guidance", "Prep expectations", "Restoration staining", "Maintenance planning"]],
@@ -892,7 +934,7 @@ function addSupportPages() {
       hubLead: "Start with the service that best matches the fence problem or project scope.",
       highlights: [
         serviceCard("Fence repair", `Fix damaged posts, panels, rails, pickets, gates, chain link fabric, rust, storm damage, or leaning sections in ${city}.`, "/fence-repair/", "Repair", "View repair services"),
-        serviceCard("Fence restoration", `Repair and refinish wrought iron, wood, or pipe fencing in ${city} when the structure is still worth saving.`, "/fence-restoration/", "Restore", "View restoration services"),
+        serviceCard("Fence restoration", `Repair and refinish wrought iron, aluminum, wood, or pipe fencing in ${city} when the structure is still worth saving.`, "/fence-restoration/", "Restore", "View restoration services"),
         serviceCard("Installation & replacement", `Build new or replace a fence in ${city} when the existing fence has too much damage to repair cleanly.`, "/fence-installation-replacement/", "Build", "View installation services")
       ],
       sections: [
@@ -913,6 +955,7 @@ function addSupportPages() {
           body: "Start with the fence material when you already know what kind of fence is on the property.",
           items: [
             "Wrought iron: restoration, repair, painting, installation, and replacement.",
+            "Aluminum: repair, painting, installation, and replacement.",
             "Wood: restoration, repair, staining, installation, and replacement.",
             "Chain link: repair, installation, and replacement.",
             "Pipe: restoration, repair, and painting.",
@@ -922,7 +965,7 @@ function addSupportPages() {
       ],
       faqs: [
         [`Do you provide fence repair in ${city}, TX?`, `Yes. Strong Perimeter provides residential and commercial fence repair in ${city}.`],
-        [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, wood, chain link, and vinyl fences in ${city}.`],
+        [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, and vinyl fences in ${city}.`],
         ["What should I send for a quote?", "Send the project address, fence type if you know it, photos if available, and what you want fixed or changed."]
       ],
       related: [
@@ -936,12 +979,13 @@ function addSupportPages() {
   addPage({
     slug: "projects",
     title: "Fence Projects and Gallery | Strong Perimeter",
-    description: "View Strong Perimeter fence project categories for wood, wrought iron, chain link, pipe, vinyl, restorations, repairs, staining, and painting.",
+    description: "View Strong Perimeter fence project categories for wood, wrought iron, aluminum, chain link, pipe, vinyl, restorations, repairs, staining, and painting.",
     eyebrow: "Projects",
     h1: "Fence Projects and Gallery",
     lead: "Browse project categories by fence type and service so you can see examples that match the work you need.",
     highlights: [
       serviceCard("Wrought iron restorations", "Before and after proof is especially valuable for rust, repair, and paint work.", "/projects/wrought-iron-fences/"),
+      serviceCard("Aluminum fences", "Aluminum project photos show repair, painting, installation, and clean metal fence lines.", "/projects/aluminum-fences/"),
       serviceCard("Wood fences", "Wood project photos show privacy layout, finish, posts, and staining detail.", "/projects/wood-fences/"),
       serviceCard("Repair details", "Repair photos help buyers recognize similar problems on their own property.", "/projects/fence-repairs/")
     ],
@@ -960,6 +1004,7 @@ function addSupportPages() {
     related: [
       ["/projects/wood-fences/", "Wood fence projects"],
       ["/projects/wrought-iron-fences/", "Wrought iron projects"],
+      ["/projects/aluminum-fences/", "Aluminum projects"],
       ["/projects/chain-link-fences/", "Chain link projects"],
       ["/projects/pipe-fences/", "Pipe fence projects"],
       ["/projects/vinyl-fences/", "Vinyl fence projects"]
@@ -969,6 +1014,7 @@ function addSupportPages() {
   [
     ["projects/wood-fences", "Wood Fence Projects", "Wood fence projects show privacy layout, repair details, staining quality, and final curb presence.", images.wood],
     ["projects/wrought-iron-fences", "Wrought Iron Fence Projects", "Wrought iron projects show rust, repair, painting, restoration, installation, and replacement examples.", images.iron],
+    ["projects/aluminum-fences", "Aluminum Fence Projects", "Aluminum projects show repair, painting, installation, replacement, gates, and clean metal fence lines.", images.iron],
     ["projects/chain-link-fences", "Chain Link Fence Projects", "Chain link projects show practical repair, installation, replacement, access, and commercial perimeter work.", images.chain],
     ["projects/pipe-fences", "Pipe Fence Projects", "Pipe fence projects show restoration, repair, painting, rust prep, and finished perimeter lines.", images.brandMark],
     ["projects/vinyl-fences", "Vinyl Fence Projects", "Vinyl projects show repair, replacement, panel alignment, privacy layouts, and clean installs.", images.brandGreen],
@@ -1057,7 +1103,7 @@ function addSupportPages() {
         items: [
           "Clear service recommendations.",
           "Residential and commercial fence work.",
-          "Wrought iron, wood, chain link, pipe, and vinyl services.",
+          "Wrought iron, aluminum, wood, chain link, pipe, and vinyl services.",
           "A practical repair, restore, or replace conversation."
         ]
       }
@@ -1174,7 +1220,7 @@ function addCostAndGuidePages() {
       imageAlt: name,
       highlights: [
         serviceCard("Start with the goal", "Privacy, security, repair, restoration, finish, and replacement all point to different scopes.", "/services/"),
-        serviceCard("Match the material", "Wrought iron, wood, chain link, pipe, and vinyl behave differently in the field.", "/fence-types/"),
+        serviceCard("Match the material", "Wrought iron, aluminum, wood, chain link, pipe, and vinyl behave differently in the field.", "/fence-types/"),
         serviceCard("Quote the real property", "Photos and address details help turn planning guidance into an actual estimate.", "/quote/")
       ],
       sections: [
@@ -1268,7 +1314,7 @@ function renderLinks(links, className = "link-grid") {
 function iconForHref(href) {
   if (href.includes("fence-types")) return images.woodIcon;
   if (href.includes("chain-link")) return images.chain;
-  if (href.includes("wrought-iron") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
+  if (href.includes("wrought-iron") || href.includes("aluminum") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
   if (href.includes("wood") || href.includes("privacy") || href.includes("staining")) return images.woodIcon;
   if (href.includes("repair") || href.includes("installation-replacement")) return images.brandMark;
   return images.brandGreen;
@@ -1277,7 +1323,7 @@ function iconForHref(href) {
 function visualImageForHref(href) {
   if (href.includes("chain-link") || href.includes("commercial") || href.includes("security")) return images.chain;
   if (href.includes("wood") || href.includes("privacy") || href.includes("staining") || href.includes("dog") || href.includes("hoa") || href.includes("fence-types") || href.includes("residential") || href.includes("projects")) return images.wood;
-  if (href.includes("wrought-iron") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
+  if (href.includes("wrought-iron") || href.includes("aluminum") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
   if (href.includes("repair") || href.includes("installation-replacement")) return images.wood;
   return images.brandGreen;
 }
@@ -1286,7 +1332,7 @@ function visualImageForPage(page) {
   const slug = page.slug;
   if (slug.includes("chain-link") || slug.includes("commercial") || slug.includes("security")) return images.chain;
   if (slug.includes("wood") || slug.includes("privacy") || slug.includes("staining") || slug.includes("dog") || slug.includes("hoa")) return images.wood;
-  if (slug.includes("wrought-iron") || slug.includes("pipe") || slug.includes("painting") || slug.includes("restoration")) return images.iron;
+  if (slug.includes("wrought-iron") || slug.includes("aluminum") || slug.includes("pipe") || slug.includes("painting") || slug.includes("restoration")) return images.iron;
   if (slug.includes("team")) return "/images/daniel-wade-1200-min.jpg";
   if (slug.includes("repair") || slug.includes("installation") || slug.includes("services") || slug.includes("fence-types")) return images.wood;
   return page.image === images.brandGreen ? images.wood : page.image;
@@ -1598,6 +1644,7 @@ function renderQuoteServicePanel(fenceOption, serviceOptions) {
   const slug = citySlug(fenceOption.value);
   const image = fenceOption.image || images.wood;
   const mediaClass = fenceOption.media === "symbol" ? "quote-service-panel__media--symbol" : "quote-service-panel__media--photo";
+  const notesPlaceholder = fenceOption.notesPlaceholder || "Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc.";
 
   return `
               <article class="quote-service-panel" data-service-panel data-fence-value="${escapeHtml(fenceOption.value)}" hidden>
@@ -1611,15 +1658,10 @@ function renderQuoteServicePanel(fenceOption, serviceOptions) {
                   </div>
                 </div>
 
-                <label class="quote-area-location">
-                  <span>Where is this fence?</span>
-                  <input type="text" name="${slug}_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc." disabled>
-                </label>
-
                 <div class="quote-service-panel__section">
                   <h3>Services for this fence</h3>
                   <div class="quote-service-choices">
-                    ${serviceOptions.map((option, index) => {
+${serviceOptions.map((option, index) => {
                       const id = `${slug}-service-${citySlug(option.value) || index}`;
                       return `
                     <label class="quote-service-choice" for="${id}">
@@ -1632,21 +1674,22 @@ function renderQuoteServicePanel(fenceOption, serviceOptions) {
 
                 <label class="quote-area-notes">
                   <span>Notes for this fence</span>
-                  <textarea name="${slug}_notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc." disabled></textarea>
+                  <textarea name="${slug}_notes" data-scope-notes rows="3" placeholder="${escapeHtml(notesPlaceholder)}" disabled></textarea>
                 </label>
               </article>`;
 }
 
 function renderQuoteWizard() {
   const serviceOptions = [
-    { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage." },
+    { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, chain link fabric, aluminum or vinyl sections, or storm damage." },
     { value: "Installation/replacement", label: "Installation or replacement", image: images.wood, text: "A new fence line, replacement sections, or a full rebuild." },
-    { value: "Painting", label: "Painting", image: images.iron, text: "Wrought iron or pipe fence painting." },
+    { value: "Painting", label: "Painting", image: images.iron, text: "Wrought iron, aluminum, or pipe fence painting." },
     { value: "Staining", label: "Staining", image: images.wood, text: "Wood fence staining." },
     { value: "Not sure yet", label: "Not sure yet", image: images.brandMark, media: "symbol", text: "We can help decide the right repair, finish, or replacement scope." }
   ];
   const fenceOptions = [
     { value: "Wrought iron", label: "Wrought iron", image: images.iron, text: "Iron or decorative metal fencing." },
+    { value: "Aluminum", label: "Aluminum", image: images.iron, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
     { value: "Wood", label: "Wood", image: images.wood, text: "Privacy, perimeter, or backyard wood fencing." },
     { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link fabric, posts, rails, or gates." },
     { value: "Pipe fence", label: "Pipe fence", image: images.fabric, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
@@ -1654,6 +1697,12 @@ function renderQuoteWizard() {
   ];
   const serviceOptionsByFence = {
     "Wrought iron": [
+      { value: "Repair", label: "Repair" },
+      { value: "Painting", label: "Painting" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    Aluminum: [
       { value: "Repair", label: "Repair" },
       { value: "Painting", label: "Painting" },
       { value: "Installation/replacement", label: "Installation or replacement" },
@@ -1721,7 +1770,6 @@ function renderQuoteWizard() {
 
           <fieldset class="quote-step" data-quote-step hidden>
             <legend>What do you need for each fence?</legend>
-            <p class="quote-step__lead">We will only ask about the fence types you selected.</p>
             <div class="quote-service-panels" data-fence-service-panels>
               ${fenceOptions.map((fenceOption) => renderQuoteServicePanel(fenceOption, serviceOptionsByFence[fenceOption.value] || serviceOptions)).join("")}
             </div>
@@ -1742,7 +1790,7 @@ function renderQuoteWizard() {
                 <span>Timing</span>
                 <select id="quote-timeline" name="timeline">
                   <option value="As soon as possible">As soon as possible</option>
-                  <option value="Within the next month">Within the next month</option>
+                  <option value="Within 1-2 months">Within 1-2 months</option>
                   <option value="Just gathering quotes">Just gathering quotes</option>
                 </select>
               </label>
@@ -1890,7 +1938,7 @@ function renderQuoteForm() {
             <span>Timing</span>
             <select id="quote-timeline" name="timeline">
               <option value="As soon as possible">As soon as possible</option>
-              <option value="Within the next month">Within the next month</option>
+              <option value="Within 1-2 months">Within 1-2 months</option>
               <option value="Just gathering quotes">Just gathering quotes</option>
             </select>
           </label>

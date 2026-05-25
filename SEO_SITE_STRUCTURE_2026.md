@@ -7,7 +7,7 @@ Prepared for Strong Perimeter in May 2026.
 Strong Perimeter should move from a single brochure-style homepage to a local service library built around how fence buyers actually search:
 
 - Emergency and high-intent local searches: "fence company near me", "fence repair near me", "fence installation Dallas", "wood fence contractor near me".
-- Material-specific searches: "wood fence installation", "wrought iron fence repair", "chain link fence installation", "pipe fence painting", "vinyl fence repair".
+- Material-specific searches: "wood fence installation", "wrought iron fence repair", "aluminum fence installation", "chain link fence installation", "pipe fence painting", "vinyl fence repair".
 - Problem and use-case searches: "storm damaged fence repair", "rusty wrought iron fence restoration", "wood fence staining", "commercial fence repair", "pool fence installation".
 - Cost and comparison searches: "how much does a fence cost in Dallas", "wood vs vinyl fence", "repair or replace fence".
 - Visual searches: project photos, privacy fence ideas, front yard fence styles, wrought iron restoration before and after.
@@ -117,7 +117,7 @@ Primary intent:
 Required sections:
 
 - Restoration, repair, painting, staining, installation, and replacement service cards.
-- Material rows for wrought iron, wood, chain link, pipe, and vinyl.
+- Material rows for wrought iron, aluminum, wood, chain link, pipe, and vinyl.
 - Residential and commercial service callouts.
 - "Restore, repair, or replace?" decision guide.
 - Links to all material hubs and priority service pages.
@@ -207,11 +207,12 @@ Target intent:
 
 Page role:
 
-- Broad painting page that routes to wrought iron and pipe fence painting.
+- Broad painting page that routes to wrought iron, aluminum, and pipe fence painting.
 
 Child links:
 
 - `/wrought-iron-fence-painting/`
+- `/aluminum-fence-painting/`
 - `/pipe-fence-painting/`
 
 #### Fence Staining

@@ -7,7 +7,7 @@ Prepared for Strong Perimeter in May 2026.
 Strong Perimeter should move from a single brochure-style homepage to a local service library built around how fence buyers actually search:
 
 - Emergency and high-intent local searches: "fence company near me", "fence repair near me", "fence installation Dallas", "wood fence contractor near me".
-- Material-specific searches: "wood fence installation", "wrought iron fence repair", "aluminum fence installation", "chain link fence installation", "pipe fence painting", "vinyl fence repair".
+- Material-specific searches: "wood fence installation", "wrought iron fence repair", "aluminum fence installation", "chain link fence installation", "T-post fence repair", "pipe fence painting", "vinyl fence repair".
 - Problem and use-case searches: "storm damaged fence repair", "rusty wrought iron fence restoration", "wood fence staining", "commercial fence repair", "pool fence installation".
 - Cost and comparison searches: "how much does a fence cost in Dallas", "wood vs vinyl fence", "repair or replace fence".
 - Visual searches: project photos, privacy fence ideas, front yard fence styles, wrought iron restoration before and after.
@@ -90,8 +90,10 @@ Schema:
 Strong Perimeter's SEO structure should mirror the actual offer:
 
 - Wrought iron fence restoration, repair, painting, installation, and replacement.
+- Aluminum fence repair, painting, installation, and replacement.
 - Wood fence restoration, repair, staining, installation, and replacement.
 - Chain link fence repair, installation, and replacement.
+- T-post fence repair, installation, and replacement.
 - Pipe fence restoration, repair, and painting.
 - Vinyl fence repair, installation, and replacement.
 - All of the above for both residential and commercial customers.
@@ -117,7 +119,7 @@ Primary intent:
 Required sections:
 
 - Restoration, repair, painting, staining, installation, and replacement service cards.
-- Material rows for wrought iron, aluminum, wood, chain link, pipe, and vinyl.
+- Material rows for wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl.
 - Residential and commercial service callouts.
 - "Restore, repair, or replace?" decision guide.
 - Links to all material hubs and priority service pages.
@@ -164,13 +166,14 @@ Target intent:
 
 Page role:
 
-- Broad repair page for storm damage, broken sections, leaning posts, rust, sagging gates, loose chain link, vinyl damage, and pipe fence issues.
+- Broad repair page for storm damage, broken sections, leaning posts, rust, sagging gates, loose chain link, T-post issues, vinyl damage, and pipe fence issues.
 
 Child links:
 
 - `/wrought-iron-fence-repair/`
 - `/wood-fence-repair/`
 - `/chain-link-fence-repair/`
+- `/t-post-fence-repair/`
 - `/pipe-fence-repair/`
 - `/vinyl-fence-repair/`
 
@@ -193,6 +196,7 @@ Child links:
 - `/wrought-iron-fence-installation-replacement/`
 - `/wood-fence-installation-replacement/`
 - `/chain-link-fence-installation-replacement/`
+- `/t-post-fence-installation-replacement/`
 - `/vinyl-fence-installation-replacement/`
 
 #### Fence Painting
@@ -254,8 +258,10 @@ Required sections:
 Material hubs:
 
 - `/wrought-iron-fence/`
+- `/aluminum-fence/`
 - `/wood-fence/`
 - `/chain-link-fence/`
+- `/t-post-fence/`
 - `/pipe-fence/`
 - `/vinyl-fence/`
 

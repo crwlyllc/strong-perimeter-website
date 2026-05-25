@@ -108,6 +108,16 @@
                   <small>Chain link fabric, posts, rails, or gates.</small>
                 </span>
               </label>
+              <label class="quote-option" for="fence_types-t-post">
+                <input id="fence_types-t-post" type="checkbox" name="fence_types" value="T-post" data-fence-type-select >
+                <figure class="quote-option__media quote-option__media--photo">
+                  <img src="/strong-perimeter-website/images/chain-link-fabric-500.png" alt="">
+                </figure>
+                <span class="quote-option__body">
+                  <strong>T-post</strong>
+                  <small>T-posts, wire fencing, braces, gates, or perimeter sections.</small>
+                </span>
+              </label>
               <label class="quote-option" for="fence_types-pipe-fence">
                 <input id="fence_types-pipe-fence" type="checkbox" name="fence_types" value="Pipe fence" data-fence-type-select >
                 <figure class="quote-option__media quote-option__media--photo">
@@ -289,6 +299,41 @@
                 <label class="quote-area-notes">
                   <span>Notes for this fence</span>
                   <textarea name="chain-link_notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc." disabled></textarea>
+                </label>
+              </article>
+              <article class="quote-service-panel" data-service-panel data-fence-value="T-post" hidden>
+                <div class="quote-service-panel__top">
+                  <figure class="quote-service-panel__media quote-service-panel__media--photo">
+                    <img src="/strong-perimeter-website/images/chain-link-fabric-500.png" alt="">
+                  </figure>
+                  <div>
+                    <h2>T-post</h2>
+                    <p>Choose everything you need for this fence type.</p>
+                  </div>
+                </div>
+
+                <div class="quote-service-panel__section">
+                  <h3>Services for this fence</h3>
+                  <div class="quote-service-choices">
+
+                    <label class="quote-service-choice" for="t-post-service-repair">
+                      <input id="t-post-service-repair" type="checkbox" name="t-post_services" value="Repair" data-service-choice disabled>
+                      <span>Repair</span>
+                    </label>
+                    <label class="quote-service-choice" for="t-post-service-installation-replacement">
+                      <input id="t-post-service-installation-replacement" type="checkbox" name="t-post_services" value="Installation/replacement" data-service-choice disabled>
+                      <span>Installation or replacement</span>
+                    </label>
+                    <label class="quote-service-choice" for="t-post-service-not-sure-yet">
+                      <input id="t-post-service-not-sure-yet" type="checkbox" name="t-post_services" value="Not sure yet" data-service-choice disabled>
+                      <span>Not sure yet</span>
+                    </label>
+                  </div>
+                </div>
+
+                <label class="quote-area-notes">
+                  <span>Notes for this fence</span>
+                  <textarea name="t-post_notes" data-scope-notes rows="3" placeholder="Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." disabled></textarea>
                 </label>
               </article>
               <article class="quote-service-panel" data-service-panel data-fence-value="Pipe fence" hidden>

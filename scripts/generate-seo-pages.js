@@ -30,6 +30,8 @@ const quoteServices = [
   "Wood fence installation/replacement",
   "Chain link fence repair",
   "Chain link fence installation/replacement",
+  "T-post fence repair",
+  "T-post fence installation/replacement",
   "Pipe fence restoration",
   "Pipe fence repair",
   "Pipe fence painting",
@@ -56,6 +58,7 @@ const materialLinks = [
   ["/aluminum-fence/", "Aluminum fence"],
   ["/wood-fence/", "Wood fence"],
   ["/chain-link-fence/", "Chain link fence"],
+  ["/t-post-fence/", "T-post fence"],
   ["/pipe-fence/", "Pipe fence"],
   ["/vinyl-fence/", "Vinyl fence"]
 ];
@@ -285,6 +288,7 @@ function addActionHubPages() {
           serviceCard("Aluminum fence", "Repair, painting, installation, and replacement.", "/aluminum-fence/", "Aluminum", "View aluminum services"),
           serviceCard("Wood fence", "Restoration, repair, staining, installation, and replacement.", "/wood-fence/", "Wood", "View wood services"),
           serviceCard("Chain link fence", "Repair, installation, and replacement.", "/chain-link-fence/", "Chain link", "View chain link services"),
+          serviceCard("T-post fence", "Repair, installation, and replacement for practical post-and-wire boundaries.", "/t-post-fence/", "T-post", "View T-post services"),
           serviceCard("Pipe fence", "Restoration, repair, and painting.", "/pipe-fence/", "Pipe", "View pipe fence services"),
           serviceCard("Vinyl fence", "Repair, installation, and replacement.", "/vinyl-fence/", "Vinyl", "View vinyl services")
         ]
@@ -322,6 +326,7 @@ function addActionHubPages() {
           "Aluminum: repair, painting, installation, and replacement.",
           "Wood: restoration, repair, staining, installation, and replacement.",
           "Chain link: repair, installation, and replacement.",
+          "T-post: repair, installation, and replacement.",
           "Pipe: restoration, repair, and painting.",
           "Vinyl: repair, installation, and replacement."
         ]
@@ -372,10 +377,10 @@ function addActionHubPages() {
   addPage({
     slug: "fence-repair",
     title: "Fence Repair in Dallas-Fort Worth | Strong Perimeter",
-    description: "Fence repair for wood, wrought iron, aluminum, chain link, pipe, and vinyl fences across Dallas-Fort Worth. Residential and commercial service.",
+    description: "Fence repair for wood, wrought iron, aluminum, chain link, T-post, pipe, and vinyl fences across Dallas-Fort Worth. Residential and commercial service.",
     eyebrow: "Repair",
     h1: "Fence Repair",
-    lead: "Repair for wrought iron, aluminum, wood, chain link, pipe, and vinyl fences across Dallas-Fort Worth.",
+    lead: "Repair for wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl fences across Dallas-Fort Worth.",
     highlights: [
       serviceCard("Material-specific repairs", "Each material fails differently, so the repair plan should match the fence instead of using a generic patch.", "/fence-types/"),
       serviceCard("Storm and age damage", "Wind, soil movement, rust, rot, impact, and years of sun can all show up in different ways along the fence line.", "/storm-damaged-fence-repair/"),
@@ -391,6 +396,7 @@ function addActionHubPages() {
           "Aluminum fence bent pickets, loose panels, gate issues, and finish wear.",
           "Wood fence pickets, rails, posts, gates, leaning sections, and storm damage.",
           "Chain link fabric, rails, posts, tension, and access issues.",
+          "T-post fence leaning posts, loose wire, bracing issues, gates, and perimeter repairs.",
           "Pipe fence rust, bent rails, broken sections, and loose posts.",
           "Vinyl cracked panels, damaged posts, and alignment issues."
         ]
@@ -406,6 +412,7 @@ function addActionHubPages() {
       ["/aluminum-fence-repair/", "Aluminum fence repair"],
       ["/wood-fence-repair/", "Wood fence repair"],
       ["/chain-link-fence-repair/", "Chain link fence repair"],
+      ["/t-post-fence-repair/", "T-post fence repair"],
       ["/pipe-fence-repair/", "Pipe fence repair"],
       ["/vinyl-fence-repair/", "Vinyl fence repair"]
     ]
@@ -414,7 +421,7 @@ function addActionHubPages() {
   addPage({
     slug: "fence-installation-replacement",
     title: "Fence Installation and Replacement in DFW | Strong Perimeter",
-    description: "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, and vinyl fences for homes and commercial properties across Dallas-Fort Worth.",
+    description: "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, and vinyl fences for homes and commercial properties across Dallas-Fort Worth.",
     eyebrow: "Installation and replacement",
     h1: "Fence Installation and Replacement",
     lead: "New fence installation and full fence replacement for residential and commercial properties.",
@@ -422,6 +429,7 @@ function addActionHubPages() {
       serviceCard("Wood fencing", "Privacy, curb appeal, and backyard comfort with material and finish choices that fit the property.", "/wood-fence-installation-replacement/"),
       serviceCard("Wrought iron fencing", "Clean lines and long-term curb presence for front yards, pools, entries, and commercial frontage.", "/wrought-iron-fence-installation-replacement/"),
       serviceCard("Aluminum fencing", "Lightweight metal panels for clean lines, pools, entries, and low-maintenance boundaries.", "/aluminum-fence-installation-replacement/"),
+      serviceCard("T-post fencing", "Practical post-and-wire layouts for acreage, temporary boundaries, utility areas, and perimeter needs.", "/t-post-fence-installation-replacement/"),
       serviceCard("Chain link and vinyl", "Practical perimeter control, pet containment, low-maintenance options, and commercial utility.", "/fence-types/")
     ],
     sections: [
@@ -434,13 +442,14 @@ function addActionHubPages() {
           "Aluminum fence installation and replacement.",
           "Wood fence installation and replacement.",
           "Chain link fence installation and replacement.",
+          "T-post fence installation and replacement.",
           "Vinyl fence installation and replacement.",
           "Residential and commercial replacement scopes."
         ]
       }
     ],
     faqs: [
-      ["Which fence materials do you install?", "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, and vinyl fences."],
+      ["Which fence materials do you install?", "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, and vinyl fences."],
       ["Do you remove the old fence?", "Removal can be included in the project scope when needed."],
       ["Can you help choose the material?", "Yes. The right material depends on privacy, security, maintenance, budget, and the look of the property."]
     ],
@@ -449,6 +458,7 @@ function addActionHubPages() {
       ["/wrought-iron-fence-installation-replacement/", "Wrought iron installation/replacement"],
       ["/aluminum-fence-installation-replacement/", "Aluminum installation/replacement"],
       ["/chain-link-fence-installation-replacement/", "Chain link installation/replacement"],
+      ["/t-post-fence-installation-replacement/", "T-post installation/replacement"],
       ["/vinyl-fence-installation-replacement/", "Vinyl installation/replacement"]
     ]
   });
@@ -531,28 +541,30 @@ function addFenceTypeAndBuyerPages() {
   addPage({
     slug: "fence-types",
     title: "Fence Types for DFW Homes and Businesses | Strong Perimeter",
-    description: "Compare wrought iron, aluminum, wood, chain link, pipe, and vinyl fence options for residential and commercial properties across Dallas-Fort Worth.",
+    description: "Compare wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl fence options for residential and commercial properties across Dallas-Fort Worth.",
     eyebrow: "Fence types",
     h1: "Fence Types",
-    lead: "Compare wrought iron, aluminum, wood, chain link, pipe, and vinyl fencing by use, maintenance, privacy, security, and appearance.",
+    lead: "Compare wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl fencing by use, maintenance, privacy, security, and appearance.",
     image: images.wood,
     imageAlt: "Wood privacy fence with stone columns",
     highlights: [
       serviceCard("Wood", "Best for privacy, backyard comfort, and a warm residential look.", "/wood-fence/"),
       serviceCard("Wrought iron", "Best for visibility, curb appeal, pools, entries, and ornamental security.", "/wrought-iron-fence/"),
       serviceCard("Aluminum", "Best for clean metal lines, pools, entries, and low-maintenance decorative boundaries.", "/aluminum-fence/"),
-      serviceCard("Chain link", "Best for practical boundaries, pets, utility areas, and commercial perimeter control.", "/chain-link-fence/")
+      serviceCard("Chain link", "Best for practical boundaries, pets, utility areas, and commercial perimeter control.", "/chain-link-fence/"),
+      serviceCard("T-post", "Best for post-and-wire layouts, acreage edges, utility areas, and practical field boundaries.", "/t-post-fence/")
     ],
     sections: [
       {
         eyebrow: "Materials",
         title: "Every material has a different job.",
-        body: "Strong Perimeter focuses on the fence types we actually service: wrought iron, aluminum, wood, chain link, pipe, and vinyl.",
+        body: "Strong Perimeter focuses on the fence types we actually service: wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl.",
         items: [
           "Wrought iron: restoration, repair, painting, installation, and replacement.",
           "Aluminum: repair, painting, installation, and replacement.",
           "Wood: restoration, repair, staining, installation, and replacement.",
           "Chain link: repair, installation, and replacement.",
+          "T-post: repair, installation, and replacement.",
           "Pipe: restoration, repair, and painting.",
           "Vinyl: repair, installation, and replacement."
         ]
@@ -579,7 +591,7 @@ function addFenceTypeAndBuyerPages() {
         title: "We match the scope to the property instead of forcing a one-size quote.",
         body: "Residential projects can be small repair visits, full backyard replacements, iron restoration, wood staining, or vinyl replacement.",
         items: [
-          "Wrought iron, aluminum, wood, chain link, pipe, and vinyl services.",
+          "Wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl services.",
           "Privacy, pets, pools, alleys, gates, and curb appeal considerations.",
           "Clear quote communication before work starts."
         ]
@@ -596,7 +608,7 @@ function addFenceTypeAndBuyerPages() {
     h1: "Commercial Fence Services",
     lead: "Fence repair, restoration, painting, installation, and replacement for lots, yards, storefronts, facilities, and managed properties.",
     highlights: [
-      serviceCard("Practical boundaries", "Chain link and pipe fencing often work well for utility, lots, yards, and property separation.", "/chain-link-fence/"),
+      serviceCard("Practical boundaries", "Chain link, T-post, and pipe fencing often work well for utility, lots, yards, and property separation.", "/chain-link-fence/"),
       serviceCard("Frontage and appearance", "Wrought iron and aluminum repair, painting, and replacement can improve the public-facing edge of a property.", "/wrought-iron-fence/"),
       serviceCard("Managed property repairs", "Repair scopes can be planned around access, safety, timing, and tenant or customer impact.", "/fence-repair/")
     ],
@@ -608,13 +620,14 @@ function addFenceTypeAndBuyerPages() {
         items: [
           "Commercial fence repair and replacement.",
           "Wrought iron, aluminum, and pipe painting/restoration.",
-          "Chain link installation and repair.",
+          "Chain link and T-post installation and repair.",
           "Clear communication for owners, managers, and operators."
         ]
       }
     ],
     related: [
       ["/chain-link-fence/", "Chain link fence"],
+      ["/t-post-fence/", "T-post fence"],
       ["/pipe-fence/", "Pipe fence"],
       ["/wrought-iron-fence/", "Wrought iron fence"],
       ["/aluminum-fence/", "Aluminum fence"],
@@ -710,6 +723,27 @@ function addMaterialPages() {
       ]
     },
     {
+      slug: "t-post-fence",
+      name: "T-post Fence",
+      image: images.chain,
+      title: "T-post Fence Services in DFW | Strong Perimeter",
+      description: "T-post fence repair, installation, and replacement for residential, commercial, acreage, and utility boundaries across Dallas-Fort Worth.",
+      h1: "T-post Fence Services",
+      lead: "T-post fencing is a practical choice for post-and-wire boundaries, acreage edges, utility areas, and straightforward perimeter control.",
+      items: [
+        "Repair for leaning T-posts, loose wire, bracing issues, gates, and damaged sections.",
+        "Installation for practical post-and-wire boundary needs.",
+        "Replacement when existing posts, wire, or bracing are too damaged to repair cleanly.",
+        "Residential, commercial, acreage, and utility fence service."
+      ],
+      related: [
+        ["/t-post-fence-repair/", "T-post repair"],
+        ["/t-post-fence-installation-replacement/", "T-post installation/replacement"],
+        ["/chain-link-fence/", "Chain link fence"],
+        ["/commercial-fencing/", "Commercial fencing"]
+      ]
+    },
+    {
       slug: "pipe-fence",
       name: "Pipe Fence",
       image: images.brandMark,
@@ -797,6 +831,8 @@ function addSpecificServicePages() {
     ["wood-fence-installation-replacement", "Wood Fence Installation and Replacement", "Wood fence installation and replacement for privacy, backyard comfort, and property-line fencing.", images.wood, ["Privacy fence layout", "Replacement planning", "Post and material choices", "Staining add-on", "Residential and commercial wood fencing"]],
     ["chain-link-fence-repair", "Chain Link Fence Repair", "Repair for chain link fences with loose fabric, damaged posts, bent rails, and access issues.", images.chain, ["Loose fabric", "Bent rails", "Damaged posts", "Tension issues", "Residential and commercial chain link repair"]],
     ["chain-link-fence-installation-replacement", "Chain Link Fence Installation and Replacement", "Chain link fence installation and replacement for homes, commercial sites, pet areas, and practical boundaries.", images.chain, ["New chain link installation", "Full replacement", "Commercial perimeter needs", "Pet and utility areas", "Access and gate planning"]],
+    ["t-post-fence-repair", "T-post Fence Repair", "Repair for T-post fences with leaning posts, loose wire, bracing issues, gate problems, or damaged sections.", images.chain, ["Leaning T-posts", "Loose or damaged wire", "Brace and corner issues", "Gate and access problems", "Repair vs replacement guidance"]],
+    ["t-post-fence-installation-replacement", "T-post Fence Installation and Replacement", "T-post fence installation and replacement for acreage edges, utility areas, field boundaries, and practical perimeters.", images.chain, ["New T-post fence installation", "Full replacement", "Post-and-wire layout", "Acreage and utility boundaries", "Access and gate planning"]],
     ["pipe-fence-restoration", "Pipe Fence Restoration", "Restoration includes repairs and painting for pipe fences that need structural and finish work.", images.brandMark, ["Rust assessment", "Bent or broken section repair", "Post and rail attention", "Paint prep", "Final paint finish"]],
     ["pipe-fence-repair", "Pipe Fence Repair", "Repair for pipe fencing with rust, bent rails, broken sections, loose posts, or gate issues.", images.brandMark, ["Bent rails", "Loose posts", "Rust damage", "Broken sections", "Repair before painting"]],
     ["pipe-fence-painting", "Pipe Fence Painting", "Painting for pipe fences that need a cleaner, more consistent finish.", images.brandMark, ["Surface prep", "Rust attention", "Paint coverage", "Commercial and residential pipe fences", "Maintenance expectations"]],
@@ -812,6 +848,7 @@ function addSpecificServicePages() {
       .replace("-painting", "")
       .replace("-staining", "")
       .replace("-installation-replacement", "");
+    const materialLabel = material === "t-post" ? "T-post" : capitalizeWords(material);
 
     addPage({
       slug,
@@ -852,7 +889,7 @@ function addSpecificServicePages() {
         ["How do I get started?", "Send the project address, fence type, photos if available, and what you want fixed or changed."]
       ],
       related: [
-        [`/${baseSlug}/`, `${capitalizeWords(material)} fence services`],
+        [`/${baseSlug}/`, `${materialLabel} fence services`],
         ["/fence-repair/", "Fence repair"],
         ["/fence-restoration/", "Fence restoration"],
         ["/fence-installation-replacement/", "Installation/replacement"]
@@ -958,6 +995,7 @@ function addSupportPages() {
             "Aluminum: repair, painting, installation, and replacement.",
             "Wood: restoration, repair, staining, installation, and replacement.",
             "Chain link: repair, installation, and replacement.",
+            "T-post: repair, installation, and replacement.",
             "Pipe: restoration, repair, and painting.",
             "Vinyl: repair, installation, and replacement."
           ]
@@ -965,7 +1003,7 @@ function addSupportPages() {
       ],
       faqs: [
         [`Do you provide fence repair in ${city}, TX?`, `Yes. Strong Perimeter provides residential and commercial fence repair in ${city}.`],
-        [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, and vinyl fences in ${city}.`],
+        [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, and vinyl fences in ${city}.`],
         ["What should I send for a quote?", "Send the project address, fence type if you know it, photos if available, and what you want fixed or changed."]
       ],
       related: [
@@ -979,7 +1017,7 @@ function addSupportPages() {
   addPage({
     slug: "projects",
     title: "Fence Projects and Gallery | Strong Perimeter",
-    description: "View Strong Perimeter fence project categories for wood, wrought iron, aluminum, chain link, pipe, vinyl, restorations, repairs, staining, and painting.",
+    description: "View Strong Perimeter fence project categories for wood, wrought iron, aluminum, chain link, T-post, pipe, vinyl, restorations, repairs, staining, and painting.",
     eyebrow: "Projects",
     h1: "Fence Projects and Gallery",
     lead: "Browse project categories by fence type and service so you can see examples that match the work you need.",
@@ -987,6 +1025,7 @@ function addSupportPages() {
       serviceCard("Wrought iron restorations", "Before and after proof is especially valuable for rust, repair, and paint work.", "/projects/wrought-iron-fences/"),
       serviceCard("Aluminum fences", "Aluminum project photos show repair, painting, installation, and clean metal fence lines.", "/projects/aluminum-fences/"),
       serviceCard("Wood fences", "Wood project photos show privacy layout, finish, posts, and staining detail.", "/projects/wood-fences/"),
+      serviceCard("T-post fences", "T-post project photos show post-and-wire layouts, bracing, gates, repair, and replacement scopes.", "/projects/t-post-fences/"),
       serviceCard("Repair details", "Repair photos help buyers recognize similar problems on their own property.", "/projects/fence-repairs/")
     ],
     sections: [
@@ -1006,6 +1045,7 @@ function addSupportPages() {
       ["/projects/wrought-iron-fences/", "Wrought iron projects"],
       ["/projects/aluminum-fences/", "Aluminum projects"],
       ["/projects/chain-link-fences/", "Chain link projects"],
+      ["/projects/t-post-fences/", "T-post projects"],
       ["/projects/pipe-fences/", "Pipe fence projects"],
       ["/projects/vinyl-fences/", "Vinyl fence projects"]
     ]
@@ -1016,6 +1056,7 @@ function addSupportPages() {
     ["projects/wrought-iron-fences", "Wrought Iron Fence Projects", "Wrought iron projects show rust, repair, painting, restoration, installation, and replacement examples.", images.iron],
     ["projects/aluminum-fences", "Aluminum Fence Projects", "Aluminum projects show repair, painting, installation, replacement, gates, and clean metal fence lines.", images.iron],
     ["projects/chain-link-fences", "Chain Link Fence Projects", "Chain link projects show practical repair, installation, replacement, access, and commercial perimeter work.", images.chain],
+    ["projects/t-post-fences", "T-post Fence Projects", "T-post projects show post-and-wire layouts, bracing, gates, repairs, and practical perimeter work.", images.chain],
     ["projects/pipe-fences", "Pipe Fence Projects", "Pipe fence projects show restoration, repair, painting, rust prep, and finished perimeter lines.", images.brandMark],
     ["projects/vinyl-fences", "Vinyl Fence Projects", "Vinyl projects show repair, replacement, panel alignment, privacy layouts, and clean installs.", images.brandGreen],
     ["projects/fence-restorations", "Fence Restoration Projects", "Restoration projects document the before condition, repair scope, finish work, and final result.", images.wood],
@@ -1103,7 +1144,7 @@ function addSupportPages() {
         items: [
           "Clear service recommendations.",
           "Residential and commercial fence work.",
-          "Wrought iron, aluminum, wood, chain link, pipe, and vinyl services.",
+          "Wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl services.",
           "A practical repair, restore, or replace conversation."
         ]
       }
@@ -1220,7 +1261,7 @@ function addCostAndGuidePages() {
       imageAlt: name,
       highlights: [
         serviceCard("Start with the goal", "Privacy, security, repair, restoration, finish, and replacement all point to different scopes.", "/services/"),
-        serviceCard("Match the material", "Wrought iron, aluminum, wood, chain link, pipe, and vinyl behave differently in the field.", "/fence-types/"),
+        serviceCard("Match the material", "Wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl behave differently in the field.", "/fence-types/"),
         serviceCard("Quote the real property", "Photos and address details help turn planning guidance into an actual estimate.", "/quote/")
       ],
       sections: [
@@ -1313,6 +1354,7 @@ function renderLinks(links, className = "link-grid") {
 
 function iconForHref(href) {
   if (href.includes("fence-types")) return images.woodIcon;
+  if (href.includes("t-post")) return images.chain;
   if (href.includes("chain-link")) return images.chain;
   if (href.includes("wrought-iron") || href.includes("aluminum") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
   if (href.includes("wood") || href.includes("privacy") || href.includes("staining")) return images.woodIcon;
@@ -1321,6 +1363,7 @@ function iconForHref(href) {
 }
 
 function visualImageForHref(href) {
+  if (href.includes("t-post")) return images.chain;
   if (href.includes("chain-link") || href.includes("commercial") || href.includes("security")) return images.chain;
   if (href.includes("wood") || href.includes("privacy") || href.includes("staining") || href.includes("dog") || href.includes("hoa") || href.includes("fence-types") || href.includes("residential") || href.includes("projects")) return images.wood;
   if (href.includes("wrought-iron") || href.includes("aluminum") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
@@ -1330,6 +1373,7 @@ function visualImageForHref(href) {
 
 function visualImageForPage(page) {
   const slug = page.slug;
+  if (slug.includes("t-post")) return images.chain;
   if (slug.includes("chain-link") || slug.includes("commercial") || slug.includes("security")) return images.chain;
   if (slug.includes("wood") || slug.includes("privacy") || slug.includes("staining") || slug.includes("dog") || slug.includes("hoa")) return images.wood;
   if (slug.includes("wrought-iron") || slug.includes("aluminum") || slug.includes("pipe") || slug.includes("painting") || slug.includes("restoration")) return images.iron;
@@ -1681,7 +1725,7 @@ ${serviceOptions.map((option, index) => {
 
 function renderQuoteWizard() {
   const serviceOptions = [
-    { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, chain link fabric, aluminum or vinyl sections, or storm damage." },
+    { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, chain link fabric, T-posts, aluminum or vinyl sections, or storm damage." },
     { value: "Installation/replacement", label: "Installation or replacement", image: images.wood, text: "A new fence line, replacement sections, or a full rebuild." },
     { value: "Painting", label: "Painting", image: images.iron, text: "Wrought iron, aluminum, or pipe fence painting." },
     { value: "Staining", label: "Staining", image: images.wood, text: "Wood fence staining." },
@@ -1692,6 +1736,7 @@ function renderQuoteWizard() {
     { value: "Aluminum", label: "Aluminum", image: images.iron, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
     { value: "Wood", label: "Wood", image: images.wood, text: "Privacy, perimeter, or backyard wood fencing." },
     { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link fabric, posts, rails, or gates." },
+    { value: "T-post", label: "T-post", image: images.chain, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
     { value: "Pipe fence", label: "Pipe fence", image: images.fabric, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
     { value: "Vinyl", label: "Vinyl", image: images.brandGreen, media: "symbol", text: "Vinyl panels, posts, gates, or sections." }
   ];
@@ -1715,6 +1760,11 @@ function renderQuoteWizard() {
       { value: "Not sure yet", label: "Not sure yet" }
     ],
     "Chain link": [
+      { value: "Repair", label: "Repair" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    "T-post": [
       { value: "Repair", label: "Repair" },
       { value: "Installation/replacement", label: "Installation or replacement" },
       { value: "Not sure yet", label: "Not sure yet" }

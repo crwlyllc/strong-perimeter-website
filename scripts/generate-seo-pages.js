@@ -1573,12 +1573,16 @@ function renderFaqSection(page) {
 function renderQuoteOptionCards(name, options) {
   return options.map((option, index) => {
     const id = `${name}-${citySlug(option.value) || index}`;
+    const image = option.image || images.wood;
+    const mediaClass = option.media === "symbol" ? "quote-option__media--symbol" : "quote-option__media--photo";
 
     return `
               <label class="quote-option" for="${id}">
                 <input id="${id}" type="radio" name="${name}" value="${escapeHtml(option.value)}"${index === 0 ? " required" : ""}>
-                <span class="quote-option__icon">${escapeHtml(option.icon)}</span>
-                <span>
+                <figure class="quote-option__media ${mediaClass}">
+                  <img src="${withBase(image)}" alt="">
+                </figure>
+                <span class="quote-option__body">
                   <strong>${escapeHtml(option.label)}</strong>
                   <small>${escapeHtml(option.text)}</small>
                 </span>
@@ -1588,23 +1592,23 @@ function renderQuoteOptionCards(name, options) {
 
 function renderQuoteWizard() {
   const serviceOptions = [
-    { value: "Repair", label: "Repair", icon: "01", text: "Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage." },
-    { value: "Restoration", label: "Restoration", icon: "02", text: "Repair plus paint or stain to bring an existing fence back visually." },
-    { value: "Installation/replacement", label: "Installation or replacement", icon: "03", text: "A new fence line, replacement sections, or a full rebuild." },
-    { value: "Painting/staining", label: "Painting or staining", icon: "04", text: "Wrought iron, pipe fence painting, or wood fence staining." },
-    { value: "Not sure yet", label: "Not sure yet", icon: "05", text: "We can help compare repair, restoration, and replacement." }
+    { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage." },
+    { value: "Restoration", label: "Restoration", image: images.iron, text: "Repair plus paint or stain to bring an existing fence back visually." },
+    { value: "Installation/replacement", label: "Installation or replacement", image: images.wood, text: "A new fence line, replacement sections, or a full rebuild." },
+    { value: "Painting/staining", label: "Painting or staining", image: images.iron, text: "Wrought iron, pipe fence painting, or wood fence staining." },
+    { value: "Not sure yet", label: "Not sure yet", image: images.brandMark, media: "symbol", text: "We can help compare repair, restoration, and replacement." }
   ];
   const fenceOptions = [
-    { value: "Wrought iron", label: "Wrought iron", icon: "WI", text: "Iron fence repair, restoration, painting, installation, or replacement." },
-    { value: "Wood", label: "Wood", icon: "WD", text: "Wood repair, restoration, staining, installation, or replacement." },
-    { value: "Chain link", label: "Chain link", icon: "CL", text: "Chain link repair, installation, or replacement." },
-    { value: "Pipe fence", label: "Pipe fence", icon: "PF", text: "Pipe fence restoration, repairs, or painting." },
-    { value: "Vinyl", label: "Vinyl", icon: "VY", text: "Vinyl fence repair, installation, or replacement." },
-    { value: "Not sure", label: "Not sure", icon: "?", text: "Choose this if you want us to identify it from photos or a visit." }
+    { value: "Wrought iron", label: "Wrought iron", image: images.iron, text: "Iron fence repair, restoration, painting, installation, or replacement." },
+    { value: "Wood", label: "Wood", image: images.wood, text: "Wood repair, restoration, staining, installation, or replacement." },
+    { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link repair, installation, or replacement." },
+    { value: "Pipe fence", label: "Pipe fence", image: images.fabric, text: "Pipe fence restoration, repairs, or painting." },
+    { value: "Vinyl", label: "Vinyl", image: images.brandGreen, media: "symbol", text: "Vinyl fence repair, installation, or replacement." },
+    { value: "Not sure", label: "Not sure", image: images.brandMark, media: "symbol", text: "Choose this if you want us to identify it from photos or a visit." }
   ];
   const propertyOptions = [
-    { value: "Residential", label: "Residential", icon: "R", text: "Home, backyard, pool, pet, privacy, alley, or HOA project." },
-    { value: "Commercial", label: "Commercial", icon: "C", text: "Business, facility, lot, yard, storefront, or managed property." }
+    { value: "Residential", label: "Residential", image: images.wood, text: "Home, backyard, pool, pet, privacy, alley, or HOA project." },
+    { value: "Commercial", label: "Commercial", image: images.chain, text: "Business, facility, lot, yard, storefront, or managed property." }
   ];
 
   return `

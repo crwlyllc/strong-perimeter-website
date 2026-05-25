@@ -112,6 +112,54 @@ const serviceAreaCities = [
 
 const serviceAreaCityLinks = serviceAreaCities.map((city) => [cityServiceAreaHref(city), `${city}, TX`]);
 
+const serviceAreaMapPoints = {
+  Addison: [560, 280],
+  Allen: [700, 185],
+  Arlington: [360, 420],
+  "Balch Springs": [690, 470],
+  Bedford: [285, 310],
+  Carrollton: [510, 260],
+  "Cedar Hill": [450, 520],
+  Colleyville: [280, 250],
+  Coppell: [405, 250],
+  Corinth: [470, 120],
+  Dallas: [580, 395],
+  DeSoto: [530, 550],
+  Duncanville: [500, 500],
+  Euless: [360, 320],
+  "Farmers Branch": [505, 315],
+  "Flower Mound": [360, 150],
+  Frisco: [610, 140],
+  Garland: [700, 330],
+  "Glenn Heights": [565, 570],
+  "Grand Prairie": [450, 430],
+  Grapevine: [300, 210],
+  "Highland Park": [585, 345],
+  "Highland Village": [410, 120],
+  Hurst: [310, 320],
+  Irving: [455, 335],
+  Keller: [230, 160],
+  Lancaster: [610, 535],
+  Lewisville: [430, 180],
+  "Little Elm": [535, 130],
+  Mesquite: [720, 430],
+  "North Richland Hills": [300, 285],
+  Plano: [650, 230],
+  Richardson: [625, 300],
+  "Richland Hills": [325, 335],
+  Rockwall: [850, 350],
+  Rowlett: [770, 355],
+  Sachse: [745, 280],
+  Seagoville: [745, 540],
+  Southlake: [260, 185],
+  Terrell: [920, 500],
+  "The Colony": [505, 190],
+  "University Park": [575, 335],
+  Wylie: [800, 245]
+};
+
+const featuredServiceAreaCities = ["Rockwall", "Garland", "Plano", "Frisco"];
+
 const pages = [];
 
 function addPage(page) {
@@ -1231,6 +1279,65 @@ function renderVisualOverview(page) {
     </section>`;
 }
 
+function renderServiceAreaMap(page) {
+  if (page.slug !== "service-areas") return "";
+
+  const cityDots = serviceAreaCities.map((city) => {
+    const [x, y] = serviceAreaMapPoints[city];
+    const featured = featuredServiceAreaCities.includes(city);
+
+    return `
+              <a href="${withBase(cityServiceAreaHref(city))}" aria-label="${escapeHtml(`${city}, Texas service area`)}">
+                <circle class="service-map__dot ${featured ? "service-map__dot--featured" : ""}" cx="${x}" cy="${y}" r="${featured ? 9 : 5}"></circle>
+              </a>`;
+  }).join("");
+
+  const featuredLabels = featuredServiceAreaCities.map((city) => {
+    const [x, y] = serviceAreaMapPoints[city];
+    const labelX = city === "Rockwall" ? x - 16 : x + 14;
+    const labelY = city === "Frisco" ? y - 18 : y - 12;
+    const anchor = city === "Rockwall" ? "end" : "start";
+
+    return `
+              <text class="service-map__label" x="${labelX}" y="${labelY}" text-anchor="${anchor}">${escapeHtml(city)}</text>`;
+  }).join("");
+
+  return `
+    <section class="section section--map page-section" id="service-area-map">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="eyebrow eyebrow--green">Map</p>
+          <h2>Service area outline</h2>
+          <p>A simple visual of the Texas cities Strong Perimeter serves for residential and commercial fence work.</p>
+        </div>
+
+        <div class="service-map">
+          <svg class="service-map__svg" viewBox="0 0 1000 640" role="img" aria-labelledby="service-map-title service-map-desc">
+            <title id="service-map-title">Strong Perimeter Texas service area map</title>
+            <desc id="service-map-desc">A stylized service-area outline with city markers for 43 Texas cities, including Rockwall, Garland, Plano, and Frisco as featured cities.</desc>
+            <defs>
+              <pattern id="map-grid" width="46" height="46" patternUnits="userSpaceOnUse">
+                <path d="M 46 0 L 0 0 0 46" fill="none"></path>
+              </pattern>
+            </defs>
+            <rect class="service-map__grid" width="1000" height="640"></rect>
+            <path class="service-map__outline" d="M230 145 L470 80 L650 100 L780 250 L935 335 L945 515 L755 590 L560 610 L425 555 L330 470 L245 370 Z"></path>
+            <path class="service-map__corridor" d="M260 190 C410 210 475 285 575 365 C665 435 760 455 915 500"></path>
+            <path class="service-map__corridor service-map__corridor--north" d="M360 150 C480 115 610 130 800 245"></path>
+            ${cityDots}
+            ${featuredLabels}
+          </svg>
+
+          <div class="service-map__legend" aria-label="Map legend">
+            <span><i class="service-map__key service-map__key--featured"></i>Featured cities</span>
+            <span><i class="service-map__key"></i>Service-area cities</span>
+            <span>43 Texas cities</span>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
 function renderPageHero(page) {
   return `
     <section class="hero page-hero">
@@ -1603,6 +1710,7 @@ ${renderHeader()}
   <main class="page-main">
 ${renderPageHero(page)}
 ${renderVisualOverview(page)}
+${renderServiceAreaMap(page)}
 ${renderHighlightSection(page)}
 ${renderHubGroups(page)}
 ${renderLinkSections(page)}

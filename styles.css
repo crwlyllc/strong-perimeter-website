@@ -1359,6 +1359,117 @@ h3,
   line-height: 1.02;
 }
 
+.service-map {
+  padding: clamp(0.85rem, 1.8vw, 1.2rem);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius-xl) + 4px);
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.95), rgba(247, 241, 233, 0.9)),
+    var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.service-map__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 23rem;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 85% 22%, rgba(219, 115, 55, 0.12), transparent 13rem),
+    linear-gradient(135deg, #f8f4ec, #fffdf9);
+}
+
+.service-map__grid {
+  fill: url("#map-grid");
+  opacity: 0.34;
+}
+
+.service-map__grid + path,
+#map-grid path {
+  stroke: rgba(36, 34, 32, 0.08);
+  stroke-width: 1;
+}
+
+.service-map__outline {
+  fill: rgba(0, 75, 61, 0.1);
+  stroke: var(--green-800);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.service-map__corridor {
+  fill: none;
+  stroke: rgba(219, 115, 55, 0.42);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-dasharray: 2 22;
+}
+
+.service-map__corridor--north {
+  stroke: rgba(0, 75, 61, 0.26);
+  stroke-width: 8;
+}
+
+.service-map__dot {
+  fill: var(--green-800);
+  stroke: #fffdf9;
+  stroke-width: 3;
+  transition: r 0.2s ease, fill 0.2s ease;
+}
+
+.service-map__dot--featured {
+  fill: var(--terracotta);
+  stroke-width: 4;
+}
+
+.service-map a:hover .service-map__dot,
+.service-map a:focus-visible .service-map__dot {
+  fill: var(--terracotta-deep);
+  r: 10;
+}
+
+.service-map__label {
+  fill: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: rgba(255, 253, 249, 0.9);
+  stroke-width: 6;
+  stroke-linejoin: round;
+}
+
+.service-map__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+  margin-top: 0.9rem;
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.service-map__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.service-map__key {
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--green-800);
+}
+
+.service-map__key--featured {
+  background: var(--terracotta);
+}
+
 .service-grid--hub {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }

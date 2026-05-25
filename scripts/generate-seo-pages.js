@@ -112,51 +112,65 @@ const serviceAreaCities = [
 
 const serviceAreaCityLinks = serviceAreaCities.map((city) => [cityServiceAreaHref(city), `${city}, TX`]);
 
-const serviceAreaMapPoints = {
-  Addison: [560, 280],
-  Allen: [700, 185],
-  Arlington: [360, 420],
-  "Balch Springs": [690, 470],
-  Bedford: [285, 310],
-  Carrollton: [510, 260],
-  "Cedar Hill": [450, 520],
-  Colleyville: [280, 250],
-  Coppell: [405, 250],
-  Corinth: [470, 120],
-  Dallas: [580, 395],
-  DeSoto: [530, 550],
-  Duncanville: [500, 500],
-  Euless: [360, 320],
-  "Farmers Branch": [505, 315],
-  "Flower Mound": [360, 150],
-  Frisco: [610, 140],
-  Garland: [700, 330],
-  "Glenn Heights": [565, 570],
-  "Grand Prairie": [450, 430],
-  Grapevine: [300, 210],
-  "Highland Park": [585, 345],
-  "Highland Village": [410, 120],
-  Hurst: [310, 320],
-  Irving: [455, 335],
-  Keller: [230, 160],
-  Lancaster: [610, 535],
-  Lewisville: [430, 180],
-  "Little Elm": [535, 130],
-  Mesquite: [720, 430],
-  "North Richland Hills": [300, 285],
-  Plano: [650, 230],
-  Richardson: [625, 300],
-  "Richland Hills": [325, 335],
-  Rockwall: [850, 350],
-  Rowlett: [770, 355],
-  Sachse: [745, 280],
-  Seagoville: [745, 540],
-  Southlake: [260, 185],
-  Terrell: [920, 500],
-  "The Colony": [505, 190],
-  "University Park": [575, 335],
-  Wylie: [800, 245]
+const serviceAreaMapBounds = {
+  latMin: 32.5,
+  latMax: 33.22,
+  lonMin: -97.32,
+  lonMax: -96.2,
+  width: 1000,
+  height: 640,
+  pad: 66
 };
+
+const serviceAreaCityCoordinates = {
+  Addison: [32.9618, -96.8292],
+  Allen: [33.1032, -96.6706],
+  Arlington: [32.7357, -97.1081],
+  "Balch Springs": [32.7287, -96.6228],
+  Bedford: [32.844, -97.1431],
+  Carrollton: [32.9756, -96.8899],
+  "Cedar Hill": [32.5885, -96.9561],
+  Colleyville: [32.8809, -97.155],
+  Coppell: [32.9546, -97.015],
+  Corinth: [33.154, -97.0647],
+  Dallas: [32.7767, -96.797],
+  DeSoto: [32.5899, -96.8571],
+  Duncanville: [32.6518, -96.9083],
+  Euless: [32.8371, -97.0819],
+  "Farmers Branch": [32.9265, -96.8961],
+  "Flower Mound": [33.0146, -97.0969],
+  Frisco: [33.1507, -96.8236],
+  Garland: [32.9126, -96.6389],
+  "Glenn Heights": [32.5487, -96.8567],
+  "Grand Prairie": [32.7459, -96.9978],
+  Grapevine: [32.9343, -97.0781],
+  "Highland Park": [32.8335, -96.7919],
+  "Highland Village": [33.0918, -97.0467],
+  Hurst: [32.8235, -97.1706],
+  Irving: [32.814, -96.9489],
+  Keller: [32.9346, -97.2517],
+  Lancaster: [32.5921, -96.7561],
+  Lewisville: [33.0462, -96.9942],
+  "Little Elm": [33.1626, -96.9375],
+  Mesquite: [32.7668, -96.5992],
+  "North Richland Hills": [32.8343, -97.2289],
+  Plano: [33.0198, -96.6989],
+  Richardson: [32.9483, -96.7299],
+  "Richland Hills": [32.816, -97.2281],
+  Rockwall: [32.9312, -96.4597],
+  Rowlett: [32.9029, -96.5639],
+  Sachse: [32.9762, -96.5953],
+  Seagoville: [32.6396, -96.5383],
+  Southlake: [32.9412, -97.1342],
+  Terrell: [32.736, -96.2753],
+  "The Colony": [33.0806, -96.8928],
+  "University Park": [32.8501, -96.8003],
+  Wylie: [33.0151, -96.5389]
+};
+
+const serviceAreaMapPoints = Object.fromEntries(
+  Object.entries(serviceAreaCityCoordinates).map(([city, coords]) => [city, projectServiceAreaPoint(coords)])
+);
 
 const featuredServiceAreaCities = ["Rockwall", "Garland", "Plano", "Frisco"];
 
@@ -194,6 +208,14 @@ function citySlug(city) {
 
 function cityServiceAreaHref(city) {
   return `/service-areas/${citySlug(city)}-tx/`;
+}
+
+function projectServiceAreaPoint([lat, lon]) {
+  const { latMin, latMax, lonMin, lonMax, width, height, pad } = serviceAreaMapBounds;
+  const x = pad + ((lon - lonMin) / (lonMax - lonMin)) * (width - pad * 2);
+  const y = pad + ((latMax - lat) / (latMax - latMin)) * (height - pad * 2);
+
+  return [Math.round(x), Math.round(y)];
 }
 
 function addActionHubPages() {
@@ -1279,8 +1301,46 @@ function renderVisualOverview(page) {
     </section>`;
 }
 
+function pathFromCities(cities) {
+  return cities.map((city, index) => {
+    const [x, y] = serviceAreaMapPoints[city];
+    return `${index === 0 ? "M" : "L"}${x} ${y}`;
+  }).join(" ");
+}
+
+function renderRoadPath(cities, label, labelCity, className = "") {
+  const [labelX, labelY] = serviceAreaMapPoints[labelCity];
+
+  return `
+            <path class="service-map__road ${className}" d="${pathFromCities(cities)}"></path>
+            <text class="service-map__road-label" x="${labelX + 12}" y="${labelY - 10}">${escapeHtml(label)}</text>`;
+}
+
 function renderServiceAreaMap(page) {
   if (page.slug !== "service-areas") return "";
+
+  const serviceBoundary = [
+    "M112 264",
+    "C150 190 199 132 266 101",
+    "C322 76 404 79 472 102",
+    "C556 131 617 170 679 214",
+    "C750 264 830 318 888 388",
+    "C850 442 770 489 676 512",
+    "C594 532 504 548 424 545",
+    "C346 542 273 511 222 460",
+    "C166 405 124 342 112 264",
+    "Z"
+  ].join(" ");
+
+  const roads = [
+    renderRoadPath(["Corinth", "Lewisville", "Carrollton", "Dallas", "DeSoto", "Glenn Heights"], "I-35E", "Carrollton"),
+    renderRoadPath(["Keller", "North Richland Hills", "Hurst", "Arlington"], "I-35W", "North Richland Hills"),
+    renderRoadPath(["Arlington", "Grand Prairie", "Dallas", "Mesquite", "Rockwall", "Terrell"], "I-30", "Mesquite"),
+    renderRoadPath(["Arlington", "Duncanville", "DeSoto", "Lancaster", "Seagoville", "Terrell"], "I-20", "Lancaster"),
+    renderRoadPath(["Allen", "Plano", "Richardson", "Dallas"], "US-75", "Plano", "service-map__road--secondary"),
+    renderRoadPath(["Grapevine", "Flower Mound", "Lewisville", "The Colony", "Frisco"], "121", "The Colony", "service-map__road--secondary"),
+    renderRoadPath(["Coppell", "Carrollton", "Addison", "Richardson", "Garland", "Rowlett"], "PGBT", "Addison", "service-map__road--secondary")
+  ].join("");
 
   const cityDots = serviceAreaCities.map((city) => {
     const [x, y] = serviceAreaMapPoints[city];
@@ -1288,7 +1348,7 @@ function renderServiceAreaMap(page) {
 
     return `
               <a href="${withBase(cityServiceAreaHref(city))}" aria-label="${escapeHtml(`${city}, Texas service area`)}">
-                <circle class="service-map__dot ${featured ? "service-map__dot--featured" : ""}" cx="${x}" cy="${y}" r="${featured ? 9 : 5}"></circle>
+                <circle class="service-map__dot ${featured ? "service-map__dot--featured" : ""}" cx="${x}" cy="${y}" r="${featured ? 8 : 4.5}"></circle>
               </a>`;
   }).join("");
 
@@ -1307,31 +1367,58 @@ function renderServiceAreaMap(page) {
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow eyebrow--green">Map</p>
-          <h2>Service area outline</h2>
-          <p>A simple visual of the Texas cities Strong Perimeter serves for residential and commercial fence work.</p>
+          <h2>DFW service area map</h2>
+          <p>A stylized Texas map showing the cities Strong Perimeter serves, with nearby county context, lakes, highway corridors, and featured service hubs.</p>
         </div>
 
         <div class="service-map">
           <svg class="service-map__svg" viewBox="0 0 1000 640" role="img" aria-labelledby="service-map-title service-map-desc">
             <title id="service-map-title">Strong Perimeter Texas service area map</title>
-            <desc id="service-map-desc">A stylized service-area outline with city markers for 43 Texas cities, including Rockwall, Garland, Plano, and Frisco as featured cities.</desc>
+            <desc id="service-map-desc">A stylized Texas service-area map with county context, lake shapes, highway corridors, and city markers for 43 Texas cities, including Rockwall, Garland, Plano, and Frisco as featured cities.</desc>
             <defs>
               <pattern id="map-grid" width="46" height="46" patternUnits="userSpaceOnUse">
                 <path d="M 46 0 L 0 0 0 46" fill="none"></path>
               </pattern>
             </defs>
             <rect class="service-map__grid" width="1000" height="640"></rect>
-            <path class="service-map__outline" d="M230 145 L470 80 L650 100 L780 250 L935 335 L945 515 L755 590 L560 610 L425 555 L330 470 L245 370 Z"></path>
-            <path class="service-map__corridor" d="M260 190 C410 210 475 285 575 365 C665 435 760 455 915 500"></path>
-            <path class="service-map__corridor service-map__corridor--north" d="M360 150 C480 115 610 130 800 245"></path>
+            <g class="service-map__counties" aria-hidden="true">
+              <path class="service-map__county" d="M130 70 H535 V250 H130 Z"></path>
+              <text x="318" y="162">Denton</text>
+              <path class="service-map__county" d="M535 70 H872 V305 H535 Z"></path>
+              <text x="684" y="190">Collin</text>
+              <path class="service-map__county" d="M95 250 H455 V520 H95 Z"></path>
+              <text x="250" y="388">Tarrant</text>
+              <path class="service-map__county" d="M455 305 H710 V555 H455 Z"></path>
+              <text x="560" y="430">Dallas</text>
+              <path class="service-map__county" d="M710 310 H818 V432 H710 Z"></path>
+              <text x="730" y="378">Rockwall</text>
+              <path class="service-map__county" d="M710 432 H950 V590 H710 Z"></path>
+              <text x="810" y="516">Kaufman</text>
+              <path class="service-map__county" d="M455 555 H710 V610 H455 Z"></path>
+              <text x="552" y="588">Ellis</text>
+            </g>
+            <g class="service-map__lakes" aria-hidden="true">
+              <path class="service-map__lake" d="M356 105 C408 78 464 102 466 140 C468 174 426 188 382 168 C350 154 326 126 356 105 Z"></path>
+              <path class="service-map__lake" d="M206 192 C246 154 318 160 324 202 C330 238 274 250 230 232 C196 218 184 210 206 192 Z"></path>
+              <path class="service-map__lake" d="M780 310 C838 312 875 360 848 405 C824 445 748 427 732 372 C724 338 746 314 780 310 Z"></path>
+            </g>
+            <path class="service-map__service-area" d="${serviceBoundary}"></path>
+            <g class="service-map__north" aria-hidden="true">
+              <text x="920" y="78">N</text>
+              <path d="M920 92 L934 128 L920 119 L906 128 Z"></path>
+            </g>
+            <g class="service-map__roads" aria-hidden="true">
+              ${roads}
+            </g>
             ${cityDots}
             ${featuredLabels}
           </svg>
 
           <div class="service-map__legend" aria-label="Map legend">
+            <span><i class="service-map__key service-map__key--area"></i>Approximate coverage outline</span>
             <span><i class="service-map__key service-map__key--featured"></i>Featured cities</span>
             <span><i class="service-map__key"></i>Service-area cities</span>
-            <span>43 Texas cities</span>
+            <span>43 Texas cities, not to scale</span>
           </div>
         </div>
       </div>

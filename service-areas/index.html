@@ -96,164 +96,205 @@
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow eyebrow--green">Map</p>
-          <h2>Service area outline</h2>
-          <p>A simple visual of the Texas cities Strong Perimeter serves for residential and commercial fence work.</p>
+          <h2>DFW service area map</h2>
+          <p>A stylized Texas map showing the cities Strong Perimeter serves, with nearby county context, lakes, highway corridors, and featured service hubs.</p>
         </div>
 
         <div class="service-map">
           <svg class="service-map__svg" viewBox="0 0 1000 640" role="img" aria-labelledby="service-map-title service-map-desc">
             <title id="service-map-title">Strong Perimeter Texas service area map</title>
-            <desc id="service-map-desc">A stylized service-area outline with city markers for 43 Texas cities, including Rockwall, Garland, Plano, and Frisco as featured cities.</desc>
+            <desc id="service-map-desc">A stylized Texas service-area map with county context, lake shapes, highway corridors, and city markers for 43 Texas cities, including Rockwall, Garland, Plano, and Frisco as featured cities.</desc>
             <defs>
               <pattern id="map-grid" width="46" height="46" patternUnits="userSpaceOnUse">
                 <path d="M 46 0 L 0 0 0 46" fill="none"></path>
               </pattern>
             </defs>
             <rect class="service-map__grid" width="1000" height="640"></rect>
-            <path class="service-map__outline" d="M230 145 L470 80 L650 100 L780 250 L935 335 L945 515 L755 590 L560 610 L425 555 L330 470 L245 370 Z"></path>
-            <path class="service-map__corridor" d="M260 190 C410 210 475 285 575 365 C665 435 760 455 915 500"></path>
-            <path class="service-map__corridor service-map__corridor--north" d="M360 150 C480 115 610 130 800 245"></path>
+            <g class="service-map__counties" aria-hidden="true">
+              <path class="service-map__county" d="M130 70 H535 V250 H130 Z"></path>
+              <text x="318" y="162">Denton</text>
+              <path class="service-map__county" d="M535 70 H872 V305 H535 Z"></path>
+              <text x="684" y="190">Collin</text>
+              <path class="service-map__county" d="M95 250 H455 V520 H95 Z"></path>
+              <text x="250" y="388">Tarrant</text>
+              <path class="service-map__county" d="M455 305 H710 V555 H455 Z"></path>
+              <text x="560" y="430">Dallas</text>
+              <path class="service-map__county" d="M710 310 H818 V432 H710 Z"></path>
+              <text x="730" y="378">Rockwall</text>
+              <path class="service-map__county" d="M710 432 H950 V590 H710 Z"></path>
+              <text x="810" y="516">Kaufman</text>
+              <path class="service-map__county" d="M455 555 H710 V610 H455 Z"></path>
+              <text x="552" y="588">Ellis</text>
+            </g>
+            <g class="service-map__lakes" aria-hidden="true">
+              <path class="service-map__lake" d="M356 105 C408 78 464 102 466 140 C468 174 426 188 382 168 C350 154 326 126 356 105 Z"></path>
+              <path class="service-map__lake" d="M206 192 C246 154 318 160 324 202 C330 238 274 250 230 232 C196 218 184 210 206 192 Z"></path>
+              <path class="service-map__lake" d="M780 310 C838 312 875 360 848 405 C824 445 748 427 732 372 C724 338 746 314 780 310 Z"></path>
+            </g>
+            <path class="service-map__service-area" d="M112 264 C150 190 199 132 266 101 C322 76 404 79 472 102 C556 131 617 170 679 214 C750 264 830 318 888 388 C850 442 770 489 676 512 C594 532 504 548 424 545 C346 542 273 511 222 460 C166 405 124 342 112 264 Z"></path>
+            <g class="service-map__north" aria-hidden="true">
+              <text x="920" y="78">N</text>
+              <path d="M920 92 L934 128 L920 119 L906 128 Z"></path>
+            </g>
+            <g class="service-map__roads" aria-hidden="true">
+              
+            <path class="service-map__road " d="M264 113 L318 189 L399 238 L471 379 L425 511 L425 540"></path>
+            <text class="service-map__road-label" x="411" y="228">I-35E</text>
+            <path class="service-map__road " d="M119 267 L137 338 L182 346 L230 408"></path>
+            <text class="service-map__road-label" x="149" y="328">I-35W</text>
+            <path class="service-map__road " d="M230 408 L316 401 L471 379 L625 386 L733 270 L876 407"></path>
+            <text class="service-map__road-label" x="637" y="376">I-30</text>
+            <path class="service-map__road " d="M230 408 L385 467 L425 511 L503 509 L672 476 L876 407"></path>
+            <text class="service-map__road-label" x="515" y="499">I-20</text>
+            <path class="service-map__road service-map__road--secondary" d="M569 148 L547 207 L523 258 L471 379"></path>
+            <text class="service-map__road-label" x="559" y="197">US-75</text>
+            <path class="service-map__road service-map__road--secondary" d="M253 268 L239 211 L318 189 L397 164 L451 115"></path>
+            <text class="service-map__road-label" x="409" y="154">121</text>
+            <path class="service-map__road service-map__road--secondary" d="M302 253 L399 238 L446 248 L523 258 L594 283 L652 290"></path>
+            <text class="service-map__road-label" x="458" y="238">PGBT</text>
+            </g>
             
               <a href="/strong-perimeter-website/service-areas/addison-tx/" aria-label="Addison, Texas service area">
-                <circle class="service-map__dot " cx="560" cy="280" r="5"></circle>
+                <circle class="service-map__dot " cx="446" cy="248" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/allen-tx/" aria-label="Allen, Texas service area">
-                <circle class="service-map__dot " cx="700" cy="185" r="5"></circle>
+                <circle class="service-map__dot " cx="569" cy="148" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/arlington-tx/" aria-label="Arlington, Texas service area">
-                <circle class="service-map__dot " cx="360" cy="420" r="5"></circle>
+                <circle class="service-map__dot " cx="230" cy="408" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/balch-springs-tx/" aria-label="Balch Springs, Texas service area">
-                <circle class="service-map__dot " cx="690" cy="470" r="5"></circle>
+                <circle class="service-map__dot " cx="606" cy="413" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/bedford-tx/" aria-label="Bedford, Texas service area">
-                <circle class="service-map__dot " cx="285" cy="310" r="5"></circle>
+                <circle class="service-map__dot " cx="203" cy="331" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/carrollton-tx/" aria-label="Carrollton, Texas service area">
-                <circle class="service-map__dot " cx="510" cy="260" r="5"></circle>
+                <circle class="service-map__dot " cx="399" cy="238" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/cedar-hill-tx/" aria-label="Cedar Hill, Texas service area">
-                <circle class="service-map__dot " cx="450" cy="520" r="5"></circle>
+                <circle class="service-map__dot " cx="348" cy="512" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/colleyville-tx/" aria-label="Colleyville, Texas service area">
-                <circle class="service-map__dot " cx="280" cy="250" r="5"></circle>
+                <circle class="service-map__dot " cx="194" cy="305" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/coppell-tx/" aria-label="Coppell, Texas service area">
-                <circle class="service-map__dot " cx="405" cy="250" r="5"></circle>
+                <circle class="service-map__dot " cx="302" cy="253" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/corinth-tx/" aria-label="Corinth, Texas service area">
-                <circle class="service-map__dot " cx="470" cy="120" r="5"></circle>
+                <circle class="service-map__dot " cx="264" cy="113" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/dallas-tx/" aria-label="Dallas, Texas service area">
-                <circle class="service-map__dot " cx="580" cy="395" r="5"></circle>
+                <circle class="service-map__dot " cx="471" cy="379" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/desoto-tx/" aria-label="DeSoto, Texas service area">
-                <circle class="service-map__dot " cx="530" cy="550" r="5"></circle>
+                <circle class="service-map__dot " cx="425" cy="511" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/duncanville-tx/" aria-label="Duncanville, Texas service area">
-                <circle class="service-map__dot " cx="500" cy="500" r="5"></circle>
+                <circle class="service-map__dot " cx="385" cy="467" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/euless-tx/" aria-label="Euless, Texas service area">
-                <circle class="service-map__dot " cx="360" cy="320" r="5"></circle>
+                <circle class="service-map__dot " cx="251" cy="336" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/farmers-branch-tx/" aria-label="Farmers Branch, Texas service area">
-                <circle class="service-map__dot " cx="505" cy="315" r="5"></circle>
+                <circle class="service-map__dot " cx="395" cy="273" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/flower-mound-tx/" aria-label="Flower Mound, Texas service area">
-                <circle class="service-map__dot " cx="360" cy="150" r="5"></circle>
+                <circle class="service-map__dot " cx="239" cy="211" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/frisco-tx/" aria-label="Frisco, Texas service area">
-                <circle class="service-map__dot service-map__dot--featured" cx="610" cy="140" r="9"></circle>
+                <circle class="service-map__dot service-map__dot--featured" cx="451" cy="115" r="8"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/garland-tx/" aria-label="Garland, Texas service area">
-                <circle class="service-map__dot service-map__dot--featured" cx="700" cy="330" r="9"></circle>
+                <circle class="service-map__dot service-map__dot--featured" cx="594" cy="283" r="8"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/glenn-heights-tx/" aria-label="Glenn Heights, Texas service area">
-                <circle class="service-map__dot " cx="565" cy="570" r="5"></circle>
+                <circle class="service-map__dot " cx="425" cy="540" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/grand-prairie-tx/" aria-label="Grand Prairie, Texas service area">
-                <circle class="service-map__dot " cx="450" cy="430" r="5"></circle>
+                <circle class="service-map__dot " cx="316" cy="401" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/grapevine-tx/" aria-label="Grapevine, Texas service area">
-                <circle class="service-map__dot " cx="300" cy="210" r="5"></circle>
+                <circle class="service-map__dot " cx="253" cy="268" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/highland-park-tx/" aria-label="Highland Park, Texas service area">
-                <circle class="service-map__dot " cx="585" cy="345" r="5"></circle>
+                <circle class="service-map__dot " cx="475" cy="339" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/highland-village-tx/" aria-label="Highland Village, Texas service area">
-                <circle class="service-map__dot " cx="410" cy="120" r="5"></circle>
+                <circle class="service-map__dot " cx="278" cy="156" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/hurst-tx/" aria-label="Hurst, Texas service area">
-                <circle class="service-map__dot " cx="310" cy="320" r="5"></circle>
+                <circle class="service-map__dot " cx="182" cy="346" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/irving-tx/" aria-label="Irving, Texas service area">
-                <circle class="service-map__dot " cx="455" cy="335" r="5"></circle>
+                <circle class="service-map__dot " cx="354" cy="352" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/keller-tx/" aria-label="Keller, Texas service area">
-                <circle class="service-map__dot " cx="230" cy="160" r="5"></circle>
+                <circle class="service-map__dot " cx="119" cy="267" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/lancaster-tx/" aria-label="Lancaster, Texas service area">
-                <circle class="service-map__dot " cx="610" cy="535" r="5"></circle>
+                <circle class="service-map__dot " cx="503" cy="509" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/lewisville-tx/" aria-label="Lewisville, Texas service area">
-                <circle class="service-map__dot " cx="430" cy="180" r="5"></circle>
+                <circle class="service-map__dot " cx="318" cy="189" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/little-elm-tx/" aria-label="Little Elm, Texas service area">
-                <circle class="service-map__dot " cx="535" cy="130" r="5"></circle>
+                <circle class="service-map__dot " cx="362" cy="106" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/mesquite-tx/" aria-label="Mesquite, Texas service area">
-                <circle class="service-map__dot " cx="720" cy="430" r="5"></circle>
+                <circle class="service-map__dot " cx="625" cy="386" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/north-richland-hills-tx/" aria-label="North Richland Hills, Texas service area">
-                <circle class="service-map__dot " cx="300" cy="285" r="5"></circle>
+                <circle class="service-map__dot " cx="137" cy="338" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/plano-tx/" aria-label="Plano, Texas service area">
-                <circle class="service-map__dot service-map__dot--featured" cx="650" cy="230" r="9"></circle>
+                <circle class="service-map__dot service-map__dot--featured" cx="547" cy="207" r="8"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/richardson-tx/" aria-label="Richardson, Texas service area">
-                <circle class="service-map__dot " cx="625" cy="300" r="5"></circle>
+                <circle class="service-map__dot " cx="523" cy="258" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/richland-hills-tx/" aria-label="Richland Hills, Texas service area">
-                <circle class="service-map__dot " cx="325" cy="335" r="5"></circle>
+                <circle class="service-map__dot " cx="137" cy="351" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/rockwall-tx/" aria-label="Rockwall, Texas service area">
-                <circle class="service-map__dot service-map__dot--featured" cx="850" cy="350" r="9"></circle>
+                <circle class="service-map__dot service-map__dot--featured" cx="733" cy="270" r="8"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/rowlett-tx/" aria-label="Rowlett, Texas service area">
-                <circle class="service-map__dot " cx="770" cy="355" r="5"></circle>
+                <circle class="service-map__dot " cx="652" cy="290" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/sachse-tx/" aria-label="Sachse, Texas service area">
-                <circle class="service-map__dot " cx="745" cy="280" r="5"></circle>
+                <circle class="service-map__dot " cx="628" cy="238" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/seagoville-tx/" aria-label="Seagoville, Texas service area">
-                <circle class="service-map__dot " cx="745" cy="540" r="5"></circle>
+                <circle class="service-map__dot " cx="672" cy="476" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/southlake-tx/" aria-label="Southlake, Texas service area">
-                <circle class="service-map__dot " cx="260" cy="185" r="5"></circle>
+                <circle class="service-map__dot " cx="210" cy="263" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/terrell-tx/" aria-label="Terrell, Texas service area">
-                <circle class="service-map__dot " cx="920" cy="500" r="5"></circle>
+                <circle class="service-map__dot " cx="876" cy="407" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/the-colony-tx/" aria-label="The Colony, Texas service area">
-                <circle class="service-map__dot " cx="505" cy="190" r="5"></circle>
+                <circle class="service-map__dot " cx="397" cy="164" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/university-park-tx/" aria-label="University Park, Texas service area">
-                <circle class="service-map__dot " cx="575" cy="335" r="5"></circle>
+                <circle class="service-map__dot " cx="469" cy="327" r="4.5"></circle>
               </a>
               <a href="/strong-perimeter-website/service-areas/wylie-tx/" aria-label="Wylie, Texas service area">
-                <circle class="service-map__dot " cx="800" cy="245" r="5"></circle>
+                <circle class="service-map__dot " cx="671" cy="211" r="4.5"></circle>
               </a>
             
-              <text class="service-map__label" x="834" y="338" text-anchor="end">Rockwall</text>
-              <text class="service-map__label" x="714" y="318" text-anchor="start">Garland</text>
-              <text class="service-map__label" x="664" y="218" text-anchor="start">Plano</text>
-              <text class="service-map__label" x="624" y="122" text-anchor="start">Frisco</text>
+              <text class="service-map__label" x="717" y="258" text-anchor="end">Rockwall</text>
+              <text class="service-map__label" x="608" y="271" text-anchor="start">Garland</text>
+              <text class="service-map__label" x="561" y="195" text-anchor="start">Plano</text>
+              <text class="service-map__label" x="465" y="97" text-anchor="start">Frisco</text>
           </svg>
 
           <div class="service-map__legend" aria-label="Map legend">
+            <span><i class="service-map__key service-map__key--area"></i>Approximate coverage outline</span>
             <span><i class="service-map__key service-map__key--featured"></i>Featured cities</span>
             <span><i class="service-map__key"></i>Service-area cities</span>
-            <span>43 Texas cities</span>
+            <span>43 Texas cities, not to scale</span>
           </div>
         </div>
       </div>

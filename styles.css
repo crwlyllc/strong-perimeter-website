@@ -1369,121 +1369,42 @@ h3,
   box-shadow: var(--shadow-lg);
 }
 
-.service-map__svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  min-height: 23rem;
+.service-map__google-frame {
+  position: relative;
+  min-height: clamp(26rem, 54vw, 39rem);
+  overflow: hidden;
   border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at 85% 22%, rgba(219, 115, 55, 0.12), transparent 13rem),
-    linear-gradient(135deg, #f8f4ec, #fffdf9);
+  background: #e9e5da;
 }
 
-.service-map__grid {
-  fill: url("#map-grid");
-  opacity: 0.34;
+.service-map__google-canvas,
+.service-map__google-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
-#map-grid path {
-  stroke: rgba(36, 34, 32, 0.08);
-  stroke-width: 1;
+.service-map__google-canvas {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
 
-.service-map__county {
-  fill: rgba(255, 253, 249, 0.58);
-  stroke: rgba(36, 34, 32, 0.12);
-  stroke-width: 1.4;
-  stroke-linejoin: round;
+.service-map__google-iframe {
+  z-index: 0;
 }
 
-.service-map__counties text {
-  fill: rgba(36, 34, 32, 0.32);
-  font-family: var(--font-ui);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
+.service-map.is-google-map-loaded .service-map__google-canvas {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.service-map__lake {
-  fill: rgba(108, 137, 157, 0.34);
-  stroke: rgba(108, 137, 157, 0.46);
-  stroke-width: 1.5;
-}
-
-.service-map__service-area {
-  fill: rgba(0, 75, 61, 0.12);
-  stroke: var(--green-800);
-  stroke-width: 4;
-  stroke-linejoin: round;
-}
-
-.service-map__north text {
-  fill: var(--ink);
-  font-family: var(--font-ui);
-  font-size: 20px;
-  font-weight: 800;
-  text-anchor: middle;
-}
-
-.service-map__north path {
-  fill: var(--terracotta);
-  stroke: #fffdf9;
-  stroke-width: 3;
-  stroke-linejoin: round;
-}
-
-.service-map__road {
-  fill: none;
-  stroke: rgba(219, 115, 55, 0.58);
-  stroke-width: 6;
-  stroke-linecap: round;
-}
-
-.service-map__road--secondary {
-  stroke: rgba(0, 75, 61, 0.44);
-  stroke-width: 4;
-}
-
-.service-map__road-label {
-  fill: #fffdf9;
-  font-family: var(--font-ui);
-  font-size: 17px;
-  font-weight: 700;
-  paint-order: stroke;
-  stroke: rgba(36, 34, 32, 0.58);
-  stroke-width: 8;
-  stroke-linejoin: round;
-}
-
-.service-map__dot {
-  fill: var(--green-800);
-  stroke: #fffdf9;
-  stroke-width: 3;
-  transition: r 0.2s ease, fill 0.2s ease;
-}
-
-.service-map__dot--featured {
-  fill: var(--terracotta);
-  stroke-width: 4;
-}
-
-.service-map a:hover .service-map__dot,
-.service-map a:focus-visible .service-map__dot {
-  fill: var(--terracotta-deep);
-  r: 10;
-}
-
-.service-map__label {
-  fill: var(--ink);
-  font-family: var(--font-ui);
-  font-size: 22px;
-  font-weight: 700;
-  paint-order: stroke;
-  stroke: rgba(255, 253, 249, 0.9);
-  stroke-width: 6;
-  stroke-linejoin: round;
+.service-map.is-google-map-loaded .service-map__google-iframe {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .service-map__legend {
@@ -1519,8 +1440,23 @@ h3,
   border: 1px solid var(--green-800);
 }
 
+.service-map__key--google {
+  border-radius: 0.2rem;
+  background: linear-gradient(135deg, #4285f4 0 50%, #34a853 50%);
+}
+
 .service-map__key--featured {
   background: var(--terracotta);
+}
+
+.service-map__open-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1rem;
+  color: var(--green-900);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 800;
 }
 
 .service-grid--hub {

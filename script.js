@@ -3,6 +3,8 @@ const siteNav = document.querySelector(".site-nav");
 const yearEl = document.getElementById("year");
 const quoteForm = document.getElementById("quote-form");
 const youtubeEmbeds = document.querySelectorAll(".youtube-embed");
+const googleMapEl = document.querySelector("[data-google-map]");
+const googleMapDataEl = document.getElementById("strong-service-area-map-data");
 
 if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
@@ -81,6 +83,105 @@ if (youtubeEmbeds.length) {
 
     embed.replaceChildren(iframe);
   });
+}
+
+function escapeMapHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function initStrongPerimeterServiceMap(mapData, mapEl) {
+  if (!window.google?.maps || !mapData?.cities?.length) {
+    return;
+  }
+
+  const map = new window.google.maps.Map(mapEl, {
+    center: mapData.center,
+    zoom: mapData.zoom || 9,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true
+  });
+
+  const bounds = new window.google.maps.LatLngBounds();
+  const infoWindow = new window.google.maps.InfoWindow();
+
+  if (Array.isArray(mapData.coverage) && mapData.coverage.length) {
+    new window.google.maps.Polygon({
+      paths: mapData.coverage,
+      map,
+      strokeColor: "#004b3d",
+      strokeOpacity: 0.88,
+      strokeWeight: 3,
+      fillColor: "#004b3d",
+      fillOpacity: 0.12
+    });
+  }
+
+  mapData.cities.forEach((city) => {
+    const position = { lat: city.lat, lng: city.lng };
+    const marker = new window.google.maps.Marker({
+      position,
+      map,
+      title: city.name,
+      icon: {
+        path: window.google.maps.SymbolPath.CIRCLE,
+        scale: city.featured ? 8 : 5,
+        fillColor: city.featured ? "#db7337" : "#004b3d",
+        fillOpacity: 1,
+        strokeColor: "#fffdf9",
+        strokeWeight: city.featured ? 3 : 2
+      }
+    });
+
+    marker.addListener("click", () => {
+      infoWindow.setContent(`
+        <strong>${escapeMapHtml(city.name)}</strong><br>
+        <a href="${escapeMapHtml(city.href)}">View service area page</a>
+      `);
+      infoWindow.open(map, marker);
+    });
+
+    bounds.extend(position);
+  });
+
+  map.fitBounds(bounds, 44);
+
+  window.google.maps.event.addListenerOnce(map, "bounds_changed", () => {
+    if (map.getZoom() > 10) {
+      map.setZoom(10);
+    }
+  });
+
+  mapEl.closest(".service-map")?.classList.add("is-google-map-loaded");
+}
+
+if (googleMapEl && googleMapDataEl) {
+  let mapData;
+
+  try {
+    mapData = JSON.parse(googleMapDataEl.textContent);
+  } catch {
+    mapData = null;
+  }
+
+  const googleMapsApiKey = googleMapEl.dataset.apiKey || window.STRONG_PERIMETER_GOOGLE_MAPS_API_KEY || "";
+
+  if (mapData && googleMapsApiKey) {
+    window.initStrongPerimeterGoogleMap = () => {
+      initStrongPerimeterServiceMap(mapData, googleMapEl);
+    };
+
+    const googleMapsScript = document.createElement("script");
+    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(googleMapsApiKey)}&callback=initStrongPerimeterGoogleMap&loading=async`;
+    googleMapsScript.async = true;
+    googleMapsScript.defer = true;
+    document.head.appendChild(googleMapsScript);
+  }
 }
 
 if (quoteForm) {

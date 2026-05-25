@@ -112,15 +112,8 @@ const serviceAreaCities = [
 
 const serviceAreaCityLinks = serviceAreaCities.map((city) => [cityServiceAreaHref(city), `${city}, TX`]);
 
-const serviceAreaMapBounds = {
-  latMin: 32.5,
-  latMax: 33.22,
-  lonMin: -97.32,
-  lonMax: -96.2,
-  width: 1000,
-  height: 640,
-  pad: 66
-};
+// Add a browser-restricted Google Maps JavaScript API key to enable custom city pins.
+const googleMapsApiKey = "";
 
 const serviceAreaCityCoordinates = {
   Addison: [32.9618, -96.8292],
@@ -168,10 +161,6 @@ const serviceAreaCityCoordinates = {
   Wylie: [33.0151, -96.5389]
 };
 
-const serviceAreaMapPoints = Object.fromEntries(
-  Object.entries(serviceAreaCityCoordinates).map(([city, coords]) => [city, projectServiceAreaPoint(coords)])
-);
-
 const featuredServiceAreaCities = ["Rockwall", "Garland", "Plano", "Frisco"];
 
 const pages = [];
@@ -208,14 +197,6 @@ function citySlug(city) {
 
 function cityServiceAreaHref(city) {
   return `/service-areas/${citySlug(city)}-tx/`;
-}
-
-function projectServiceAreaPoint([lat, lon]) {
-  const { latMin, latMax, lonMin, lonMax, width, height, pad } = serviceAreaMapBounds;
-  const x = pad + ((lon - lonMin) / (lonMax - lonMin)) * (width - pad * 2);
-  const y = pad + ((latMax - lat) / (latMax - latMin)) * (height - pad * 2);
-
-  return [Math.round(x), Math.round(y)];
 }
 
 function addActionHubPages() {
@@ -1301,125 +1282,79 @@ function renderVisualOverview(page) {
     </section>`;
 }
 
-function pathFromCities(cities) {
-  return cities.map((city, index) => {
-    const [x, y] = serviceAreaMapPoints[city];
-    return `${index === 0 ? "M" : "L"}${x} ${y}`;
-  }).join(" ");
-}
-
-function renderRoadPath(cities, label, labelCity, className = "") {
-  const [labelX, labelY] = serviceAreaMapPoints[labelCity];
-
-  return `
-            <path class="service-map__road ${className}" d="${pathFromCities(cities)}"></path>
-            <text class="service-map__road-label" x="${labelX + 12}" y="${labelY - 10}">${escapeHtml(label)}</text>`;
-}
-
 function renderServiceAreaMap(page) {
   if (page.slug !== "service-areas") return "";
 
-  const serviceBoundary = [
-    "M112 264",
-    "C150 190 199 132 266 101",
-    "C322 76 404 79 472 102",
-    "C556 131 617 170 679 214",
-    "C750 264 830 318 888 388",
-    "C850 442 770 489 676 512",
-    "C594 532 504 548 424 545",
-    "C346 542 273 511 222 460",
-    "C166 405 124 342 112 264",
-    "Z"
-  ].join(" ");
+  const coverageCities = [
+    "Keller",
+    "Corinth",
+    "Little Elm",
+    "Frisco",
+    "Wylie",
+    "Rockwall",
+    "Terrell",
+    "Seagoville",
+    "Glenn Heights",
+    "Cedar Hill",
+    "Arlington",
+    "North Richland Hills"
+  ];
 
-  const roads = [
-    renderRoadPath(["Corinth", "Lewisville", "Carrollton", "Dallas", "DeSoto", "Glenn Heights"], "I-35E", "Carrollton"),
-    renderRoadPath(["Keller", "North Richland Hills", "Hurst", "Arlington"], "I-35W", "North Richland Hills"),
-    renderRoadPath(["Arlington", "Grand Prairie", "Dallas", "Mesquite", "Rockwall", "Terrell"], "I-30", "Mesquite"),
-    renderRoadPath(["Arlington", "Duncanville", "DeSoto", "Lancaster", "Seagoville", "Terrell"], "I-20", "Lancaster"),
-    renderRoadPath(["Allen", "Plano", "Richardson", "Dallas"], "US-75", "Plano", "service-map__road--secondary"),
-    renderRoadPath(["Grapevine", "Flower Mound", "Lewisville", "The Colony", "Frisco"], "121", "The Colony", "service-map__road--secondary"),
-    renderRoadPath(["Coppell", "Carrollton", "Addison", "Richardson", "Garland", "Rowlett"], "PGBT", "Addison", "service-map__road--secondary")
-  ].join("");
+  const mapData = {
+    center: { lat: 32.86, lng: -96.78 },
+    zoom: 9,
+    coverage: coverageCities.map((city) => {
+      const [lat, lng] = serviceAreaCityCoordinates[city];
+      return { lat, lng };
+    }),
+    cities: serviceAreaCities.map((city) => {
+      const [lat, lng] = serviceAreaCityCoordinates[city];
+      return {
+        name: `${city}, TX`,
+        lat,
+        lng,
+        href: withBase(cityServiceAreaHref(city)),
+        featured: featuredServiceAreaCities.includes(city)
+      };
+    })
+  };
 
-  const cityDots = serviceAreaCities.map((city) => {
-    const [x, y] = serviceAreaMapPoints[city];
-    const featured = featuredServiceAreaCities.includes(city);
-
-    return `
-              <a href="${withBase(cityServiceAreaHref(city))}" aria-label="${escapeHtml(`${city}, Texas service area`)}">
-                <circle class="service-map__dot ${featured ? "service-map__dot--featured" : ""}" cx="${x}" cy="${y}" r="${featured ? 8 : 4.5}"></circle>
-              </a>`;
-  }).join("");
-
-  const featuredLabels = featuredServiceAreaCities.map((city) => {
-    const [x, y] = serviceAreaMapPoints[city];
-    const labelX = city === "Rockwall" ? x - 16 : x + 14;
-    const labelY = city === "Frisco" ? y - 18 : y - 12;
-    const anchor = city === "Rockwall" ? "end" : "start";
-
-    return `
-              <text class="service-map__label" x="${labelX}" y="${labelY}" text-anchor="${anchor}">${escapeHtml(city)}</text>`;
-  }).join("");
+  const mapDataJson = JSON.stringify(mapData).replaceAll("<", "\\u003c");
 
   return `
     <section class="section section--map page-section" id="service-area-map">
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow eyebrow--green">Map</p>
-          <h2>DFW service area map</h2>
-          <p>A stylized Texas map showing the cities Strong Perimeter serves, with nearby county context, lakes, highway corridors, and featured service hubs.</p>
+          <h2>Google Map of our service area</h2>
+          <p>Use the map to see the Dallas-Fort Worth cities Strong Perimeter serves for residential and commercial fence work.</p>
         </div>
 
-        <div class="service-map">
-          <svg class="service-map__svg" viewBox="0 0 1000 640" role="img" aria-labelledby="service-map-title service-map-desc">
-            <title id="service-map-title">Strong Perimeter Texas service area map</title>
-            <desc id="service-map-desc">A stylized Texas service-area map with county context, lake shapes, highway corridors, and city markers for 43 Texas cities, including Rockwall, Garland, Plano, and Frisco as featured cities.</desc>
-            <defs>
-              <pattern id="map-grid" width="46" height="46" patternUnits="userSpaceOnUse">
-                <path d="M 46 0 L 0 0 0 46" fill="none"></path>
-              </pattern>
-            </defs>
-            <rect class="service-map__grid" width="1000" height="640"></rect>
-            <g class="service-map__counties" aria-hidden="true">
-              <path class="service-map__county" d="M130 70 H535 V250 H130 Z"></path>
-              <text x="318" y="162">Denton</text>
-              <path class="service-map__county" d="M535 70 H872 V305 H535 Z"></path>
-              <text x="684" y="190">Collin</text>
-              <path class="service-map__county" d="M95 250 H455 V520 H95 Z"></path>
-              <text x="250" y="388">Tarrant</text>
-              <path class="service-map__county" d="M455 305 H710 V555 H455 Z"></path>
-              <text x="560" y="430">Dallas</text>
-              <path class="service-map__county" d="M710 310 H818 V432 H710 Z"></path>
-              <text x="730" y="378">Rockwall</text>
-              <path class="service-map__county" d="M710 432 H950 V590 H710 Z"></path>
-              <text x="810" y="516">Kaufman</text>
-              <path class="service-map__county" d="M455 555 H710 V610 H455 Z"></path>
-              <text x="552" y="588">Ellis</text>
-            </g>
-            <g class="service-map__lakes" aria-hidden="true">
-              <path class="service-map__lake" d="M356 105 C408 78 464 102 466 140 C468 174 426 188 382 168 C350 154 326 126 356 105 Z"></path>
-              <path class="service-map__lake" d="M206 192 C246 154 318 160 324 202 C330 238 274 250 230 232 C196 218 184 210 206 192 Z"></path>
-              <path class="service-map__lake" d="M780 310 C838 312 875 360 848 405 C824 445 748 427 732 372 C724 338 746 314 780 310 Z"></path>
-            </g>
-            <path class="service-map__service-area" d="${serviceBoundary}"></path>
-            <g class="service-map__north" aria-hidden="true">
-              <text x="920" y="78">N</text>
-              <path d="M920 92 L934 128 L920 119 L906 128 Z"></path>
-            </g>
-            <g class="service-map__roads" aria-hidden="true">
-              ${roads}
-            </g>
-            ${cityDots}
-            ${featuredLabels}
-          </svg>
+        <div class="service-map service-map--google">
+          <div class="service-map__google-frame">
+            <div
+              id="strong-service-area-google-map"
+              class="service-map__google-canvas"
+              data-google-map
+              data-api-key="${escapeHtml(googleMapsApiKey)}"
+              aria-label="Interactive Google Map of the Strong Perimeter service area">
+            </div>
+            <iframe
+              class="service-map__google-iframe"
+              title="Google Map of Strong Perimeter's Dallas-Fort Worth service area"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=32.86,-96.78&amp;z=9&amp;t=m&amp;output=embed">
+            </iframe>
+          </div>
+          <script type="application/json" id="strong-service-area-map-data">${mapDataJson}</script>
 
           <div class="service-map__legend" aria-label="Map legend">
-            <span><i class="service-map__key service-map__key--area"></i>Approximate coverage outline</span>
-            <span><i class="service-map__key service-map__key--featured"></i>Featured cities</span>
-            <span><i class="service-map__key"></i>Service-area cities</span>
-            <span>43 Texas cities, not to scale</span>
+            <span><i class="service-map__key service-map__key--google"></i>Google Maps view</span>
+            <span>43 Texas service-area cities listed below</span>
           </div>
+          <a class="service-map__open-link" href="https://www.google.com/maps/search/?api=1&amp;query=Dallas-Fort%20Worth%2C%20TX" target="_blank" rel="noopener">Open larger map</a>
         </div>
       </div>
     </section>`;

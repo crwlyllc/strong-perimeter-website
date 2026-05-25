@@ -1273,7 +1273,7 @@ h3,
 }
 
 .quote-options--fence-types {
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .quote-service-panels {
@@ -2054,6 +2054,10 @@ h3,
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .quote-options--fence-types {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .leadership-grid,
   .gallery-grid {
     grid-template-columns: 1fr;
@@ -2185,6 +2189,7 @@ h3,
   .link-grid,
   .feature-grid,
   .quote-options,
+  .quote-options--fence-types,
   .quote-fields,
   .quote-fields--two,
   .quote-wizard__top {

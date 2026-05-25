@@ -78,6 +78,16 @@
                   <small>Iron or decorative metal fencing.</small>
                 </span>
               </label>
+              <label class="quote-option" for="fence_types-aluminum">
+                <input id="fence_types-aluminum" type="checkbox" name="fence_types" value="Aluminum" data-fence-type-select >
+                <figure class="quote-option__media quote-option__media--photo">
+                  <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
+                </figure>
+                <span class="quote-option__body">
+                  <strong>Aluminum</strong>
+                  <small>Aluminum panels, posts, gates, or sections.</small>
+                </span>
+              </label>
               <label class="quote-option" for="fence_types-wood">
                 <input id="fence_types-wood" type="checkbox" name="fence_types" value="Wood" data-fence-type-select >
                 <figure class="quote-option__media quote-option__media--photo">
@@ -141,11 +151,6 @@
                   </div>
                 </div>
 
-                <label class="quote-area-location">
-                  <span>Where is this fence?</span>
-                  <input type="text" name="wrought-iron_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc." disabled>
-                </label>
-
                 <div class="quote-service-panel__section">
                   <h3>Services for this fence</h3>
                   <div class="quote-service-choices">
@@ -174,6 +179,45 @@
                   <textarea name="wrought-iron_notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc." disabled></textarea>
                 </label>
               </article>
+              <article class="quote-service-panel" data-service-panel data-fence-value="Aluminum" hidden>
+                <div class="quote-service-panel__top">
+                  <figure class="quote-service-panel__media quote-service-panel__media--photo">
+                    <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
+                  </figure>
+                  <div>
+                    <h2>Aluminum</h2>
+                    <p>Choose everything you need for this fence type.</p>
+                  </div>
+                </div>
+
+                <div class="quote-service-panel__section">
+                  <h3>Services for this fence</h3>
+                  <div class="quote-service-choices">
+
+                    <label class="quote-service-choice" for="aluminum-service-repair">
+                      <input id="aluminum-service-repair" type="checkbox" name="aluminum_services" value="Repair" data-service-choice disabled>
+                      <span>Repair</span>
+                    </label>
+                    <label class="quote-service-choice" for="aluminum-service-painting">
+                      <input id="aluminum-service-painting" type="checkbox" name="aluminum_services" value="Painting" data-service-choice disabled>
+                      <span>Painting</span>
+                    </label>
+                    <label class="quote-service-choice" for="aluminum-service-installation-replacement">
+                      <input id="aluminum-service-installation-replacement" type="checkbox" name="aluminum_services" value="Installation/replacement" data-service-choice disabled>
+                      <span>Installation or replacement</span>
+                    </label>
+                    <label class="quote-service-choice" for="aluminum-service-not-sure-yet">
+                      <input id="aluminum-service-not-sure-yet" type="checkbox" name="aluminum_services" value="Not sure yet" data-service-choice disabled>
+                      <span>Not sure yet</span>
+                    </label>
+                  </div>
+                </div>
+
+                <label class="quote-area-notes">
+                  <span>Notes for this fence</span>
+                  <textarea name="aluminum_notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." disabled></textarea>
+                </label>
+              </article>
               <article class="quote-service-panel" data-service-panel data-fence-value="Wood" hidden>
                 <div class="quote-service-panel__top">
                   <figure class="quote-service-panel__media quote-service-panel__media--photo">
@@ -184,11 +228,6 @@
                     <p>Choose everything you need for this fence type.</p>
                   </div>
                 </div>
-
-                <label class="quote-area-location">
-                  <span>Where is this fence?</span>
-                  <input type="text" name="wood_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc." disabled>
-                </label>
 
                 <div class="quote-service-panel__section">
                   <h3>Services for this fence</h3>
@@ -229,11 +268,6 @@
                   </div>
                 </div>
 
-                <label class="quote-area-location">
-                  <span>Where is this fence?</span>
-                  <input type="text" name="chain-link_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc." disabled>
-                </label>
-
                 <div class="quote-service-panel__section">
                   <h3>Services for this fence</h3>
                   <div class="quote-service-choices">
@@ -268,11 +302,6 @@
                     <p>Choose everything you need for this fence type.</p>
                   </div>
                 </div>
-
-                <label class="quote-area-location">
-                  <span>Where is this fence?</span>
-                  <input type="text" name="pipe-fence_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc." disabled>
-                </label>
 
                 <div class="quote-service-panel__section">
                   <h3>Services for this fence</h3>
@@ -312,11 +341,6 @@
                     <p>Choose everything you need for this fence type.</p>
                   </div>
                 </div>
-
-                <label class="quote-area-location">
-                  <span>Where is this fence?</span>
-                  <input type="text" name="vinyl_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc." disabled>
-                </label>
 
                 <div class="quote-service-panel__section">
                   <h3>Services for this fence</h3>
@@ -380,7 +404,7 @@
                 <span>Timing</span>
                 <select id="quote-timeline" name="timeline">
                   <option value="As soon as possible">As soon as possible</option>
-                  <option value="Within the next month">Within the next month</option>
+                  <option value="Within 1-2 months">Within 1-2 months</option>
                   <option value="Just gathering quotes">Just gathering quotes</option>
                 </select>
               </label>

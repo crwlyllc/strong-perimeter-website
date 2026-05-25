@@ -313,7 +313,6 @@ if (quoteForm) {
     const quoteAreas = Array.from(quoteForm.querySelectorAll("[data-service-panel]"))
       .filter((panel) => !panel.hidden)
       .map((panel, index) => {
-        const location = panel.querySelector("[data-scope-location]")?.value.trim() || "";
         const serviceNeeded = Array.from(panel.querySelectorAll("[data-service-choice]:checked"))
           .map((input) => input.value)
           .join(", ");
@@ -322,7 +321,6 @@ if (quoteForm) {
 
         return {
           index: index + 1,
-          location,
           serviceNeeded,
           fenceType: areaFenceType,
           notes
@@ -340,8 +338,7 @@ if (quoteForm) {
     const details = document.getElementById("quote-details")?.value.trim() || "";
     const areaLines = quoteAreas.length
       ? quoteAreas.flatMap((area) => [
-        `${area.index}. ${area.location || "Fence area"}`,
-        `   Fence type: ${area.fenceType || "Not specified"}`,
+        `${area.index}. ${area.fenceType || "Fence area"}`,
         `   Service needed: ${area.serviceNeeded || "Not specified"}`,
         `   Notes: ${area.notes || "No notes provided."}`
       ])

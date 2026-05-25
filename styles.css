@@ -1432,13 +1432,11 @@ h3,
   color: var(--green-900);
 }
 
-.quote-area-location,
 .quote-area-notes,
 .quote-area-card__section {
   margin-top: 1rem;
 }
 
-.quote-area-location,
 .quote-area-notes {
   display: grid;
   gap: 0.45rem;

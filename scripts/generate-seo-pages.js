@@ -116,7 +116,7 @@ const serviceAreaCityLinks = serviceAreaCities.map((city) => [cityServiceAreaHre
 const googleMapsApiKey = "";
 const googleMapView = {
   center: { lat: 32.86, lng: -96.78 },
-  zoom: 9,
+  zoom: 10,
   width: 1000,
   height: 640
 };
@@ -1396,8 +1396,9 @@ function renderServiceAreaMap(page) {
               title="Google Map of Strong Perimeter's Dallas-Fort Worth service area"
               loading="lazy"
               allowfullscreen
+              tabindex="-1"
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=32.86,-96.78&amp;z=9&amp;t=m&amp;output=embed">
+              src="https://maps.google.com/maps?q=32.86,-96.78&amp;z=${googleMapView.zoom}&amp;t=m&amp;output=embed">
             </iframe>
             <svg class="service-map__overlay" viewBox="0 0 ${googleMapView.width} ${googleMapView.height}" aria-label="Strong Perimeter service area and city markers">
               <path class="service-map__overlay-area" d="${coveragePath} Z"></path>

@@ -489,6 +489,17 @@ h3,
   object-fit: cover;
 }
 
+.person-chip__photo--initial {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: linear-gradient(180deg, var(--green-900), var(--green-800));
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
 .person-chip__name {
   margin: 0;
   font-family: var(--font-ui);
@@ -1395,6 +1406,7 @@ h3,
 
 .service-map__google-iframe {
   z-index: 0;
+  pointer-events: none;
 }
 
 .service-map__overlay {

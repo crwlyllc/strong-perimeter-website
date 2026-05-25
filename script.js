@@ -99,9 +99,10 @@ function initStrongPerimeterServiceMap(mapData, mapEl) {
     return;
   }
 
+  const preferredZoom = mapData.zoom || 10;
   const map = new window.google.maps.Map(mapEl, {
     center: mapData.center,
-    zoom: mapData.zoom || 9,
+    zoom: preferredZoom,
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: true
@@ -152,9 +153,7 @@ function initStrongPerimeterServiceMap(mapData, mapEl) {
   map.fitBounds(bounds, 44);
 
   window.google.maps.event.addListenerOnce(map, "bounds_changed", () => {
-    if (map.getZoom() > 10) {
-      map.setZoom(10);
-    }
+    map.setZoom(preferredZoom);
   });
 
   mapEl.closest(".service-map")?.classList.add("is-google-map-loaded");

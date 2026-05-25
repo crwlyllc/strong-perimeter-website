@@ -77,12 +77,16 @@ function addPage(page) {
     sections: [],
     faqs: [],
     related: [],
+    hubGroups: [],
+    summaryItems: [],
+    hubHeading: "",
+    hubLead: "",
     ...page
   });
 }
 
-function serviceCard(title, text, href) {
-  return { title, text, href };
+function serviceCard(title, text, href, tag = "", cta = "") {
+  return { title, text, href, tag, cta };
 }
 
 function addActionHubPages() {
@@ -91,40 +95,72 @@ function addActionHubPages() {
     title: "Fence Services in Dallas-Fort Worth | Strong Perimeter",
     description: "Explore Strong Perimeter fence restoration, repair, painting, staining, installation, and replacement services for residential and commercial properties in DFW.",
     eyebrow: "Fence services",
-    h1: "Residential and commercial fence services across Dallas-Fort Worth",
-    lead: "Strong Perimeter restores, repairs, paints, stains, installs, and replaces fences for homeowners, property managers, and commercial sites across DFW.",
+    h1: "Fence Services",
+    lead: "Restore, repair, paint, stain, install, or replace residential and commercial fences across Dallas-Fort Worth. Start with what you need done, or choose your fence type.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
+    summaryItems: ["Repair", "Restoration", "Installation and replacement", "Fence painting", "Wood fence staining"],
+    hubHeading: "What do you need done?",
+    hubLead: "Choose the closest match. If you are unsure, the quote conversation can compare repair, restoration, and replacement.",
     highlights: [
-      serviceCard("Restore what can be saved", "Wrought iron, wood, and pipe fences often need targeted repair and a fresh finish before they need full replacement.", "/fence-restoration/"),
-      serviceCard("Repair the weak points", "Posts, panels, pickets, rails, fabric, rust, storm damage, and alignment issues get scoped clearly before work starts.", "/fence-repair/"),
-      serviceCard("Replace when it is time", "When the old fence has passed the point of smart repair, we help choose the right material and replacement plan.", "/fence-installation-replacement/")
+      serviceCard("Fence repair", "Fix damaged posts, panels, rails, pickets, gates, chain link fabric, rust, storm damage, or leaning sections.", "/fence-repair/", "Repair", "View repair services"),
+      serviceCard("Fence restoration", "Save wrought iron, wood, or pipe fencing when repair plus a fresh finish makes sense.", "/fence-restoration/", "Restore", "View restoration services"),
+      serviceCard("Installation & replacement", "Build new or replace a fence that has too much damage to repair cleanly.", "/fence-installation-replacement/", "Build", "View installation services"),
+      serviceCard("Fence painting", "Paint wrought iron or pipe fencing after prep, rust attention, and needed repairs.", "/fence-painting/", "Paint", "View painting services"),
+      serviceCard("Fence staining", "Stain new, repaired, or restored wood fencing for a finished look.", "/fence-staining/", "Stain", "View staining services")
     ],
-    sections: [
+    hubGroups: [
       {
-        eyebrow: "Service categories",
-        title: "Start with the problem, then choose the right material.",
-        body: "Most fence searches begin with a symptom: rust, leaning sections, broken boards, faded stain, loose chain link, or a full replacement need. The service path starts with what needs to be fixed, restored, painted, stained, installed, or replaced.",
-        items: [
-          "Restoration for wrought iron, wood, and pipe fencing.",
-          "Repair for wrought iron, wood, chain link, pipe, and vinyl fencing.",
-          "Painting for wrought iron and pipe fencing.",
-          "Staining for wood fencing.",
-          "Installation and replacement for wrought iron, wood, chain link, and vinyl fencing."
+        id: "fence-types",
+        eyebrow: "Choose by fence type",
+        title: "What kind of fence do you have?",
+        body: "The fence material tells you which services fit. Open the page that matches the fence on your property.",
+        cards: [
+          serviceCard("Wrought iron fence", "Restoration, repair, painting, installation, and replacement.", "/wrought-iron-fence/", "Iron", "View wrought iron services"),
+          serviceCard("Wood fence", "Restoration, repair, staining, installation, and replacement.", "/wood-fence/", "Wood", "View wood services"),
+          serviceCard("Chain link fence", "Repair, installation, and replacement.", "/chain-link-fence/", "Chain link", "View chain link services"),
+          serviceCard("Pipe fence", "Restoration, repair, and painting.", "/pipe-fence/", "Pipe", "View pipe fence services"),
+          serviceCard("Vinyl fence", "Repair, installation, and replacement.", "/vinyl-fence/", "Vinyl", "View vinyl services")
         ]
       },
       {
-        eyebrow: "Property types",
-        title: "The same field standards apply to homes and commercial sites.",
-        body: "Residential customers usually care most about privacy, curb appeal, pets, pools, and HOA expectations. Commercial customers usually need perimeter control, clean access, durability, and fast communication.",
-        items: [
-          "Residential fence service for backyards, front yards, alleys, pools, and privacy needs.",
-          "Commercial fence service for storefronts, lots, yards, facilities, and managed properties.",
-          "Clear quote conversations before work starts."
+        id: "property-types",
+        eyebrow: "Property type",
+        title: "Residential or commercial?",
+        body: "The work changes when the property changes. Pick the path that matches who owns or manages the fence.",
+        cards: [
+          serviceCard("Residential fencing", "Homes, backyards, alleys, pools, pets, privacy, curb appeal, and HOA expectations.", "/residential-fencing/", "Homes", "View residential services"),
+          serviceCard("Commercial fencing", "Lots, yards, storefronts, managed properties, facilities, access points, and practical perimeter control.", "/commercial-fencing/", "Commercial", "View commercial services")
         ]
       }
     ],
-    related: [...coreServiceLinks, ...materialLinks]
+    sections: [
+      {
+        eyebrow: "Service breakdown",
+        title: "What each service means",
+        body: "Here is the plain-language version before you open the individual service page.",
+        items: [
+          "Restoration: repair plus finishing work for a fence that is still worth saving.",
+          "Repair: fix failed parts without rebuilding the whole fence line.",
+          "Installation/replacement: build new or replace a fence that has too much damage to repair cleanly.",
+          "Painting: finish work for wrought iron and pipe fencing after prep and needed repairs.",
+          "Staining: finish work for new, repaired, or restored wood fencing."
+        ]
+      },
+      {
+        eyebrow: "Fence types",
+        title: "Services by material",
+        body: "Not every fence material uses every service. This is the quick map.",
+        items: [
+          "Wrought iron: restoration, repair, painting, installation, and replacement.",
+          "Wood: restoration, repair, staining, installation, and replacement.",
+          "Chain link: repair, installation, and replacement.",
+          "Pipe: restoration, repair, and painting.",
+          "Vinyl: repair, installation, and replacement."
+        ]
+      }
+    ],
+    related: [["/contact/", "Request a fence quote"], ...coreServiceLinks, ...materialLinks]
   });
 
   addPage({
@@ -132,8 +168,8 @@ function addActionHubPages() {
     title: "Fence Restoration in Dallas-Fort Worth | Strong Perimeter",
     description: "Strong Perimeter restores wrought iron, wood, and pipe fences across DFW with repair, prep, painting, and staining services.",
     eyebrow: "Restoration",
-    h1: "Fence restoration that brings the line back without rushing into replacement",
-    lead: "Restoration is for fences with enough structure left to save. Strong Perimeter combines the right repairs with the right finish so the fence looks cared for again.",
+    h1: "Fence Restoration",
+    lead: "Repair and refinish wrought iron, wood, or pipe fencing when the structure is still worth saving.",
     highlights: [
       serviceCard("Wrought iron restoration", "Rust, damaged sections, and tired paint can often be repaired and refinished into a cleaner, sharper fence line.", "/wrought-iron-fence-restoration/"),
       serviceCard("Wood fence restoration", "Aging boards, loose sections, and faded wood can be repaired and stained when the fence still has life left.", "/wood-fence-restoration/"),
@@ -170,8 +206,8 @@ function addActionHubPages() {
     title: "Fence Repair in Dallas-Fort Worth | Strong Perimeter",
     description: "Fence repair for wood, wrought iron, chain link, pipe, and vinyl fences across Dallas-Fort Worth. Residential and commercial service.",
     eyebrow: "Repair",
-    h1: "Fence repair for the sections, posts, rails, panels, and finish issues that need attention",
-    lead: "Strong Perimeter repairs the fence types DFW properties actually use: wrought iron, wood, chain link, pipe, and vinyl.",
+    h1: "Fence Repair",
+    lead: "Repair for wrought iron, wood, chain link, pipe, and vinyl fences across Dallas-Fort Worth.",
     highlights: [
       serviceCard("Material-specific repairs", "Each material fails differently, so the repair plan should match the fence instead of using a generic patch.", "/fence-types/"),
       serviceCard("Storm and age damage", "Wind, soil movement, rust, rot, impact, and years of sun can all show up in different ways along the fence line.", "/storm-damaged-fence-repair/"),
@@ -210,8 +246,8 @@ function addActionHubPages() {
     title: "Fence Installation and Replacement in DFW | Strong Perimeter",
     description: "Strong Perimeter installs and replaces wrought iron, wood, chain link, and vinyl fences for homes and commercial properties across Dallas-Fort Worth.",
     eyebrow: "Installation and replacement",
-    h1: "Fence installation and replacement for stronger, cleaner property lines",
-    lead: "When repair or restoration is not enough, Strong Perimeter helps homeowners and commercial property owners choose the right material and replacement plan.",
+    h1: "Fence Installation and Replacement",
+    lead: "New fence installation and full fence replacement for residential and commercial properties.",
     highlights: [
       serviceCard("Wood fencing", "Privacy, curb appeal, and backyard comfort with material and finish choices that fit the property.", "/wood-fence-installation-replacement/"),
       serviceCard("Wrought iron fencing", "Clean lines and long-term curb presence for front yards, pools, entries, and commercial frontage.", "/wrought-iron-fence-installation-replacement/"),
@@ -249,8 +285,8 @@ function addActionHubPages() {
     title: "Fence Painting in Dallas-Fort Worth | Strong Perimeter",
     description: "Metal fence painting for wrought iron and pipe fences across DFW, including prep, rust-conscious repair, and finish work.",
     eyebrow: "Painting",
-    h1: "Fence painting for wrought iron and pipe fences that need a cleaner finish",
-    lead: "Strong Perimeter paints wrought iron and pipe fencing as part of standalone finish work or a larger restoration plan.",
+    h1: "Fence Painting",
+    lead: "Metal fence painting for wrought iron and pipe fences, including prep, rust attention, and needed repairs.",
     image: images.iron,
     imageAlt: "Wrought iron fence icon",
     highlights: [
@@ -284,8 +320,8 @@ function addActionHubPages() {
     title: "Fence Staining in Dallas-Fort Worth | Strong Perimeter",
     description: "Wood fence staining in Dallas-Fort Worth for new, repaired, and restored wood fences. Residential and commercial service.",
     eyebrow: "Staining",
-    h1: "Wood fence staining that helps the fence look finished and cared for",
-    lead: "Strong Perimeter stains wood fences as a standalone service or as part of wood fence restoration after needed repairs.",
+    h1: "Fence Staining",
+    lead: "Wood fence staining for new, repaired, and restored fences across Dallas-Fort Worth.",
     image: images.wood,
     imageAlt: "Finished wood privacy fence",
     highlights: [
@@ -321,8 +357,8 @@ function addFenceTypeAndBuyerPages() {
     title: "Fence Types for DFW Homes and Businesses | Strong Perimeter",
     description: "Compare wrought iron, wood, chain link, pipe, and vinyl fence options for residential and commercial properties across Dallas-Fort Worth.",
     eyebrow: "Fence types",
-    h1: "Choose the fence type that fits the property, the use, and the maintenance reality",
-    lead: "The best fence is not always the most expensive one. It is the material that matches the property, the exposure, the security need, the privacy goal, and the owner preference.",
+    h1: "Fence Types",
+    lead: "Compare wrought iron, wood, chain link, pipe, and vinyl fencing by use, maintenance, privacy, security, and appearance.",
     image: images.wood,
     imageAlt: "Wood privacy fence with stone columns",
     highlights: [
@@ -352,8 +388,8 @@ function addFenceTypeAndBuyerPages() {
     title: "Residential Fence Services in DFW | Strong Perimeter",
     description: "Residential fence restoration, repair, staining, painting, installation, and replacement for homeowners across Dallas-Fort Worth.",
     eyebrow: "Residential fencing",
-    h1: "Residential fencing for privacy, pets, pools, repairs, and curb appeal",
-    lead: "Homeowners usually need a fence to solve more than one thing: privacy, safety, appearance, pets, neighbors, alleys, HOA expectations, and long-term maintenance.",
+    h1: "Residential Fence Services",
+    lead: "Fence repair, restoration, staining, painting, installation, and replacement for homes, backyards, pets, pools, privacy, and curb appeal.",
     highlights: [
       serviceCard("Privacy and backyard comfort", "Wood and vinyl are common choices when privacy is the priority.", "/privacy-fence-installation/"),
       serviceCard("Repair before replacement", "A damaged fence does not always need a full rebuild.", "/fence-repair/"),
@@ -379,8 +415,8 @@ function addFenceTypeAndBuyerPages() {
     title: "Commercial Fence Services in DFW | Strong Perimeter",
     description: "Commercial fence repair, restoration, painting, installation, and replacement for properties across Dallas-Fort Worth.",
     eyebrow: "Commercial fencing",
-    h1: "Commercial fencing for properties that need clear scope, access, and durable perimeter work",
-    lead: "Commercial sites need dependable communication, practical materials, and clean execution. Strong Perimeter services wrought iron, wood, chain link, pipe, and vinyl fences for commercial properties.",
+    h1: "Commercial Fence Services",
+    lead: "Fence repair, restoration, painting, installation, and replacement for lots, yards, storefronts, facilities, and managed properties.",
     highlights: [
       serviceCard("Practical boundaries", "Chain link and pipe fencing often work well for utility, lots, yards, and property separation.", "/chain-link-fence/"),
       serviceCard("Frontage and appearance", "Wrought iron restoration, painting, and replacement can improve the public-facing edge of a property.", "/wrought-iron-fence/"),
@@ -389,8 +425,8 @@ function addFenceTypeAndBuyerPages() {
     sections: [
       {
         eyebrow: "Commercial scope",
-        title: "The best commercial fence page is not flashy. It is clear.",
-        body: "Commercial buyers usually need to understand what can be repaired, what should be replaced, how access will work, and how quickly they can get a quote.",
+        title: "Commercial fence work should be clear before work starts.",
+        body: "Commercial buyers usually need to know what can be repaired, what should be replaced, how access will work, and what the finished perimeter needs to do.",
         items: [
           "Commercial fence repair and replacement.",
           "Wrought iron and pipe painting/restoration.",
@@ -416,7 +452,7 @@ function addMaterialPages() {
       image: images.iron,
       title: "Wrought Iron Fence Services in DFW | Strong Perimeter",
       description: "Wrought iron fence restoration, repair, painting, installation, and replacement for residential and commercial properties in Dallas-Fort Worth.",
-      h1: "Wrought iron fence restoration, repair, painting, installation, and replacement",
+      h1: "Wrought Iron Fence Services",
       lead: "Wrought iron works best when the lines are clean, the sections are solid, and rust is handled before it takes over the finish.",
       items: [
         "Restoration for rusty, tired, or partially damaged iron fences.",
@@ -437,7 +473,7 @@ function addMaterialPages() {
       image: images.wood,
       title: "Wood Fence Services in DFW | Strong Perimeter",
       description: "Wood fence restoration, repair, staining, installation, and replacement for homes and commercial properties across Dallas-Fort Worth.",
-      h1: "Wood fence restoration, repair, staining, installation, and replacement",
+      h1: "Wood Fence Services",
       lead: "Wood fencing is the workhorse for DFW privacy and backyard comfort, but sun, storms, age, and soil movement can change the scope quickly.",
       items: [
         "Restoration with repair and staining when the fence can be saved.",
@@ -458,7 +494,7 @@ function addMaterialPages() {
       image: images.chain,
       title: "Chain Link Fence Services in DFW | Strong Perimeter",
       description: "Chain link fence repair, installation, and replacement for residential and commercial properties in Dallas-Fort Worth.",
-      h1: "Chain link fence repair, installation, and replacement",
+      h1: "Chain Link Fence Services",
       lead: "Chain link is practical, durable, and useful for homes, yards, commercial spaces, pet containment, and perimeter control.",
       items: [
         "Repair for loose fabric, damaged posts, bent rails, and tension issues.",
@@ -479,7 +515,7 @@ function addMaterialPages() {
       image: images.brandMark,
       title: "Pipe Fence Services in DFW | Strong Perimeter",
       description: "Pipe fence restoration, repair, and painting for residential and commercial properties across Dallas-Fort Worth.",
-      h1: "Pipe fence restoration, repair, and painting",
+      h1: "Pipe Fence Services",
       lead: "Pipe fencing needs a practical eye: structural issues first, rust and prep next, then a finish that makes the line look intentional again.",
       items: [
         "Restoration with repair and painting.",
@@ -500,7 +536,7 @@ function addMaterialPages() {
       image: images.brandGreen,
       title: "Vinyl Fence Services in DFW | Strong Perimeter",
       description: "Vinyl fence repair, installation, and replacement for residential and commercial properties across Dallas-Fort Worth.",
-      h1: "Vinyl fence repair, installation, and replacement",
+      h1: "Vinyl Fence Services",
       lead: "Vinyl fencing is a low-maintenance option when it is installed well and repaired with the right parts and alignment.",
       items: [
         "Repair for cracked panels, damaged posts, alignment issues, and storm damage.",
@@ -527,11 +563,11 @@ function addMaterialPages() {
       lead: material.lead,
       image: material.image,
       imageAlt: `${material.name} service page`,
-      highlights: material.related.slice(0, 3).map(([href, label]) => serviceCard(label, `Learn more about ${label.toLowerCase()} with Strong Perimeter.`, href)),
+      highlights: material.related.slice(0, 3).map(([href, label]) => serviceCard(label, `Open this page if you need ${label.toLowerCase()}.`, href)),
       sections: [
         {
           eyebrow: material.name,
-          title: "What Strong Perimeter does for this fence type",
+          title: "What we do for this fence type",
           body: "Start here when you know the fence material and need to choose the right next action: restoration, repair, painting, staining, installation, or replacement.",
           items: material.items
         }
@@ -586,7 +622,7 @@ function addSpecificServicePages() {
       highlights: [
         serviceCard("Residential", "Clear guidance for homes, backyards, alleys, privacy needs, and curb appeal.", "/residential-fencing/"),
         serviceCard("Commercial", "Practical scope, access planning, and clean communication for commercial properties.", "/commercial-fencing/"),
-        serviceCard("Project proof", "Photos, videos, and case studies help show what this service looks like in the field.", "/projects/")
+        serviceCard("Project examples", "Photos, videos, and case studies help show what this service looks like in the field.", "/projects/")
       ],
       sections: [
         {
@@ -628,7 +664,7 @@ function addSupportPages() {
     title: "Dallas-Fort Worth Fence Service Areas | Strong Perimeter",
     description: "Strong Perimeter provides residential and commercial fence services across Dallas-Fort Worth and nearby communities.",
     eyebrow: "Service areas",
-    h1: "Fence service across Dallas-Fort Worth",
+    h1: "Fence Service Areas",
     lead: "Strong Perimeter serves homes and commercial properties across DFW with restoration, repair, painting, staining, installation, and replacement services.",
     highlights: [
       serviceCard("Dallas", "Fence repair, restoration, staining, painting, installation, and replacement in and around Dallas.", "/contact/"),
@@ -638,12 +674,12 @@ function addSupportPages() {
     sections: [
       {
         eyebrow: "Coverage",
-        title: "Service-area pages get stronger with real project proof.",
-        body: "The best local pages include real project photos, reviews, and local details. Strong Perimeter can expand city pages as each city gains proof from completed work.",
+        title: "Where we work around DFW",
+        body: "Use this page to check service coverage and get to the right fence service before requesting a quote.",
         items: [
-          "Dallas, Fort Worth, Plano, Frisco, Arlington, McKinney, Allen, and Richardson are first candidates.",
-          "Each city page needs photos, project notes, reviews, and service-specific internal links.",
-          "This hub can rank now while the proof library grows."
+          "Dallas-Fort Worth and nearby communities based on project scope and scheduling.",
+          "Residential fence service for homes, backyards, alleys, pools, pets, and privacy needs.",
+          "Commercial fence service for lots, yards, storefronts, facilities, and managed properties."
         ]
       }
     ],
@@ -655,8 +691,8 @@ function addSupportPages() {
     title: "Fence Projects and Gallery | Strong Perimeter",
     description: "View Strong Perimeter fence project categories for wood, wrought iron, chain link, pipe, vinyl, restorations, repairs, staining, and painting.",
     eyebrow: "Projects",
-    h1: "Project proof for the fence work people want to inspect",
-    lead: "Photos and videos matter in fencing. This gallery hub organizes projects by material and service so buyers can see the kind of work they are requesting.",
+    h1: "Fence Projects and Gallery",
+    lead: "Browse project categories by fence type and service so you can see examples that match the work you need.",
     highlights: [
       serviceCard("Wrought iron restorations", "Before and after proof is especially valuable for rust, repair, and paint work.", "/projects/wrought-iron-fences/"),
       serviceCard("Wood fences", "Wood project photos show privacy layout, finish, posts, and staining detail.", "/projects/wood-fences/"),
@@ -665,12 +701,12 @@ function addSupportPages() {
     sections: [
       {
         eyebrow: "Gallery plan",
-        title: "Every project can help future customers compare the work.",
-        body: "The strongest gallery pages use real filenames, real captions, and plain descriptions of the material, city, problem, and result.",
+        title: "What to look for in project photos",
+        body: "Good project photos make it easier to compare the fence type, the starting condition, the work performed, and the finished result.",
         items: [
-          "Capture before, during, and after photos.",
-          "Label each project by material, service, city, and property type.",
-          "Link every project back to the matching service and material page."
+          "Before photos show the condition that started the project.",
+          "During photos show repair, prep, installation, painting, or staining details.",
+          "After photos show the finished fence line, gates, posts, and overall appearance."
         ]
       }
     ],
@@ -703,19 +739,19 @@ function addSupportPages() {
       image,
       imageAlt: name,
       highlights: [
-        serviceCard("Before photos", "Capture the real condition before work starts.", "/projects/"),
-        serviceCard("Scope notes", "Explain what was repaired, restored, painted, stained, installed, or replaced.", "/services/"),
-        serviceCard("After photos", "Show the finished line from multiple angles.", "/contact/")
+        serviceCard("Before condition", "See what the fence looked like before the work started.", "/projects/"),
+        serviceCard("Work performed", "Compare the repairs, restoration, painting, staining, installation, or replacement scope.", "/services/"),
+        serviceCard("Finished result", "Look at the final fence line from more than one angle.", "/contact/")
       ],
       sections: [
         {
           eyebrow: "Project library",
-          title: "This category gets stronger as real field photos are added.",
-          body: "Individual case studies make each category more useful for buyers comparing similar work.",
+          title: "What belongs in this project category",
+          body: "This gallery category should help customers compare similar fence work before they request a quote.",
           items: [
-            "Use descriptive filenames.",
-            "Add city, material, and service in captions.",
-            "Link each case study to the related service page."
+            "Fence type and material.",
+            "Service performed.",
+            "Starting condition and finished result."
           ]
         }
       ],
@@ -728,8 +764,8 @@ function addSupportPages() {
     title: "Strong Perimeter Reviews | DFW Fence Company",
     description: "Read what Strong Perimeter customers notice about communication, professionalism, repairs, restoration, installation, painting, and staining.",
     eyebrow: "Reviews",
-    h1: "Customers remember the communication as much as the finished fence",
-    lead: "Reviews help future customers connect real customer language to the work performed: repair, restoration, staining, painting, installation, and replacement.",
+    h1: "Strong Perimeter Reviews",
+    lead: "Customer feedback about communication, professionalism, repairs, restoration, installation, painting, and staining.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
     highlights: [
@@ -740,12 +776,12 @@ function addSupportPages() {
     sections: [
       {
         eyebrow: "Review details",
-        title: "Ask for reviews that mention the service and city naturally.",
-        body: "The best reviews help future customers and search engines understand what happened without sounding scripted.",
+        title: "What to look for in reviews",
+        body: "The most helpful reviews explain how the estimate, communication, crew, and finished fence felt from the customer side.",
         items: [
-          "Ask happy customers to mention the fence type if it feels natural.",
-          "Ask them to mention the service: repair, restoration, staining, painting, installation, or replacement.",
-          "Ask them to mention the city or neighborhood only when they are comfortable doing so."
+          "The fence type or service the customer needed.",
+          "How clearly the scope and schedule were communicated.",
+          "What the finished repair, restoration, installation, painting, or staining looked like."
         ]
       }
     ],
@@ -757,8 +793,8 @@ function addSupportPages() {
     title: "About Strong Perimeter | DFW Fence Company",
     description: "Learn about Strong Perimeter, a Dallas-Fort Worth fence company focused on clear communication, quality work, and practical fence guidance.",
     eyebrow: "About",
-    h1: "A fence company built around quality, communication, and field judgment",
-    lead: "Strong Perimeter helps homeowners and commercial property owners understand the right scope before work starts, then follows through with clean restoration, repair, finish, installation, and replacement work.",
+    h1: "About Strong Perimeter",
+    lead: "A Dallas-Fort Worth fence company focused on clear scope, clean work, and practical guidance before the project starts.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
     highlights: [
@@ -792,8 +828,8 @@ function addSupportPages() {
     title: "Strong Perimeter Team | DFW Fence Company",
     description: "Meet the Strong Perimeter team behind residential and commercial fence restoration, repair, painting, staining, installation, and replacement in DFW.",
     eyebrow: "Team",
-    h1: "The people behind the fence work",
-    lead: "Strong Perimeter is led by a team focused on clear estimates, clean execution, and a better experience from first call to final walkthrough.",
+    h1: "Strong Perimeter Team",
+    lead: "Meet the people behind residential and commercial fence restoration, repair, painting, staining, installation, and replacement in DFW.",
     image: "/images/daniel-wade-1200-min.jpg",
     imageAlt: "Daniel Wade of Strong Perimeter",
     highlights: [
@@ -827,7 +863,7 @@ function addSupportPages() {
     title: "Request a Fence Quote | Strong Perimeter",
     description: "Request a free quote for fence restoration, repair, painting, staining, installation, or replacement in Dallas-Fort Worth.",
     eyebrow: "Request a quote",
-    h1: "Tell us what the fence needs and we will help map the next step",
+    h1: "Request a Fence Quote",
     lead: "Send the address, fence type, photos if you have them, and whether you need restoration, repair, painting, staining, installation, or replacement.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
@@ -982,9 +1018,10 @@ function renderLinks(links, className = "link-grid") {
 }
 
 function iconForHref(href) {
-  if (href.includes("wrought-iron") || href.includes("pipe")) return images.iron;
-  if (href.includes("wood") || href.includes("privacy")) return images.woodIcon;
   if (href.includes("chain-link")) return images.chain;
+  if (href.includes("wrought-iron") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
+  if (href.includes("wood") || href.includes("privacy") || href.includes("staining")) return images.woodIcon;
+  if (href.includes("repair") || href.includes("installation-replacement")) return images.brandMark;
   return images.brandGreen;
 }
 
@@ -992,9 +1029,41 @@ function cardTone(index) {
   return ["service-card--iron", "service-card--wood", "service-card--chain", "service-card--repair"][index % 4];
 }
 
-function renderHomeHero(page) {
-  const categoryLinks = (page.related.length ? page.related : materialLinks).slice(0, 3);
+function defaultHubHeading(page) {
+  const eyebrow = page.eyebrow.toLowerCase();
+  if (eyebrow.includes("repair")) return "Choose the repair topic you need.";
+  if (eyebrow.includes("restoration")) return "Choose the restoration path that fits your fence.";
+  if (eyebrow.includes("installation")) return "Choose the material you want installed or replaced.";
+  if (eyebrow.includes("painting")) return "Choose the metal fence painting page you need.";
+  if (eyebrow.includes("staining")) return "Choose the wood fence staining page you need.";
+  if (eyebrow.includes("fence service")) return "Choose residential, commercial, or project examples.";
+  if (eyebrow.includes("fence type")) return "Choose the service you need for this fence.";
+  if (eyebrow.includes("projects")) return "Browse project categories.";
+  if (eyebrow.includes("service areas")) return "Check coverage and service options.";
+  if (eyebrow.includes("guide")) return "Start with the planning topic.";
+  return "Choose the next page that fits your project.";
+}
 
+function summaryItemsFor(page) {
+  if (page.summaryItems.length) return page.summaryItems;
+  if (page.highlights.length) return page.highlights.map((card) => card.title).slice(0, 5);
+  return page.sections.flatMap((section) => section.items).slice(0, 5);
+}
+
+function renderPageSummary(page) {
+  const items = summaryItemsFor(page).filter(Boolean).slice(0, 5);
+  if (!items.length) return "";
+
+  return `
+          <div class="page-summary" aria-label="Page summary">
+            <span>On this page</span>
+            <ul>
+              ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+          </div>`;
+}
+
+function renderPageHero(page) {
   return `
     <section class="hero page-hero">
       <div class="hero-inner">
@@ -1007,131 +1076,90 @@ function renderHomeHero(page) {
           <p class="eyebrow">${escapeHtml(page.eyebrow)}</p>
           <h1>${escapeHtml(page.h1)}</h1>
           <p class="hero-subhead page-lead">${escapeHtml(page.lead)}</p>
+          ${renderPageSummary(page)}
           <div class="hero-actions">
             <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
             <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
           </div>
         </div>
-
-        <div class="hero-stage">
-          <figure class="hero-visual">
-            <div class="hero-video-frame youtube-embed" data-video-id="yLhTChxJFNg" data-youtube-mode="background" data-title="Wrought iron restoration by Strong Perimeter" aria-hidden="true">
-            </div>
-            <figcaption class="hero-note">
-              Clear scope, cleaner finish, and field-aware recommendations before work starts.
-            </figcaption>
-          </figure>
-
-          <div class="hero-stack">
-            <article class="info-card info-card--people">
-              <div class="person-chip">
-                <img class="person-chip__photo" src="${withBase("/images/daniel-wade-1200-min.jpg")}" alt="Daniel Wade">
-                <div>
-                  <p class="person-chip__name">Daniel Wade</p>
-                  <p class="person-chip__role">Founder &amp; CEO</p>
-                </div>
-              </div>
-              <div class="person-chip">
-                <img class="person-chip__photo" src="${withBase("/images/robert-hill-1200.jpg")}" alt="Robert Hill">
-                <div>
-                  <p class="person-chip__name">Robert Hill</p>
-                  <p class="person-chip__role">Sales Manager</p>
-                </div>
-              </div>
-            </article>
-
-            <article class="info-card info-card--quote">
-              <p class="card-kicker">What clients notice first</p>
-              <p class="card-quote">“They did what they said in a timely manner, custom iron work looked beautiful, and the crew stayed professional throughout.”</p>
-              <div class="stars" aria-label="Five star review">★★★★★</div>
-            </article>
-
-            <article class="info-card info-card--badges">
-              <p class="card-kicker">Trusted by homeowners who care about the finish</p>
-              <div class="badge-row">
-                <img src="${withBase(images.google)}" alt="Google Customer Reviews">
-                <img src="${withBase(images.afa)}" alt="American Fence Association">
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <div class="category-strip" aria-label="Related fence pages">
-          ${categoryLinks.map(([href, label]) => `
-          <a class="category-card" href="${withBase(href)}">
-            <img src="${withBase(iconForHref(href))}" alt="">
-            <span>
-              <strong>${escapeHtml(label)}</strong>
-              <span>Explore the next useful step</span>
-            </span>
-          </a>`).join("")}
-          <a class="category-card" href="${withBase("/contact/")}">
-            <img class="category-card__brand" src="${withBase(images.brandGreen)}" alt="Strong Perimeter">
-            <span>
-              <strong>Quote support</strong>
-              <span>Fast replies and straightforward next steps</span>
-            </span>
-          </a>
-        </div>
       </div>
     </section>`;
+}
+
+function renderCardGrid(cards, page) {
+  return `
+        <div class="service-grid service-grid--hub">
+          ${cards.map((card, index) => `
+          <article class="service-card ${cardTone(index)}">
+            <div class="service-card__top">
+              <span class="service-icon">
+                <img src="${withBase(iconForHref(card.href))}" alt="">
+              </span>
+              <span class="service-tag">${escapeHtml(card.tag || page.eyebrow || "Service")}</span>
+            </div>
+            <h3>${escapeHtml(card.title)}</h3>
+            <p>${escapeHtml(card.text)}</p>
+            <a class="service-card__link" href="${withBase(card.href)}">${escapeHtml(card.cta || "View details")}</a>
+          </article>`).join("")}
+        </div>`;
 }
 
 function renderHighlightSection(page) {
   if (!page.highlights.length) return "";
 
   return `
-    <section class="section section--services">
+    <section class="section section--services page-section" id="start">
       <div class="section-shell">
-        <div class="section-heading section-heading--center">
-          <p class="eyebrow eyebrow--green">Where to start</p>
-          <h2>Choose the path that matches what you need next.</h2>
+        <div class="section-heading">
+          <p class="eyebrow eyebrow--green">${page.slug === "services" ? "Start here" : "Best next step"}</p>
+          <h2>${escapeHtml(page.hubHeading || defaultHubHeading(page))}</h2>
+          ${page.hubLead ? `<p>${escapeHtml(page.hubLead)}</p>` : ""}
         </div>
-        <div class="service-grid">
-          ${page.highlights.map((card, index) => `
-          <article class="service-card ${cardTone(index)}">
-            <div class="service-card__top">
-              <span class="service-icon">
-                <img src="${withBase(iconForHref(card.href))}" alt="">
-              </span>
-              <span class="service-tag">Strong Perimeter</span>
-            </div>
-            <h3>${escapeHtml(card.title)}</h3>
-            <p>${escapeHtml(card.text)}</p>
-            <a class="service-card__link" href="${withBase(card.href)}">Explore this page</a>
-          </article>`).join("")}
-        </div>
+        ${renderCardGrid(page.highlights, page)}
       </div>
     </section>`;
 }
 
+function renderHubGroups(page) {
+  if (!page.hubGroups.length) return "";
+
+  return page.hubGroups.map((group) => `
+    <section class="section section--services page-section" id="${escapeHtml(group.id)}">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="eyebrow eyebrow--green">${escapeHtml(group.eyebrow)}</p>
+          <h2>${escapeHtml(group.title)}</h2>
+          <p>${escapeHtml(group.body)}</p>
+        </div>
+        ${renderCardGrid(group.cards, page)}
+      </div>
+    </section>`).join("");
+}
+
+function renderDetailItem(item) {
+  const [label, ...rest] = item.split(": ");
+  if (rest.length && label.length <= 34) {
+    return `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(rest.join(": "))}</p>`;
+  }
+
+  return `<p>${escapeHtml(item)}</p>`;
+}
+
 function renderSections(page) {
   return page.sections.map((section, sectionIndex) => `
-    <section class="section section--promise">
+    <section class="section section--details page-section" id="${sectionIndex === 0 ? "details" : `details-${sectionIndex + 1}`}">
       <div class="section-shell">
-        <div class="promise-shell">
-          <article class="promise-card promise-card--lead">
-            <p class="eyebrow eyebrow--green">${escapeHtml(section.eyebrow)}</p>
-            <h2>${escapeHtml(section.title)}</h2>
-            <p>${escapeHtml(section.body)}</p>
-          </article>
-
-          <article class="promise-card promise-card--trust">
-            <p class="card-kicker">What this usually includes</p>
-            <ul class="service-list">
-              ${section.items.slice(0, 4).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-            </ul>
-          </article>
+        <div class="section-heading">
+          <p class="eyebrow eyebrow--green">${escapeHtml(section.eyebrow)}</p>
+          <h2>${escapeHtml(section.title)}</h2>
+          <p>${escapeHtml(section.body)}</p>
         </div>
-
-        ${section.items.length > 4 ? `
-        <div class="promise-points">
-          ${section.items.slice(4).map((item, index) => `
-          <article class="promise-point">
-            <h3>${escapeHtml(sectionIndex === 0 ? "Project detail" : "Scope note")}</h3>
-            <p>${escapeHtml(item)}</p>
+        <div class="detail-grid">
+          ${section.items.map((item) => `
+          <article class="detail-card">
+            ${renderDetailItem(item)}
           </article>`).join("")}
-        </div>` : ""}
+        </div>
       </div>
     </section>`).join("");
 }
@@ -1140,22 +1168,14 @@ function renderRelatedSection(page) {
   if (!page.related.length) return "";
 
   return `
-    <section class="section section--gallery">
+    <section class="section section--related page-section" id="related">
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow eyebrow--green">Related pages</p>
-          <h2>Keep moving through the right fence path.</h2>
+          <h2>More useful pages</h2>
+          <p>Go straight to the service, fence type, or next step that fits better.</p>
         </div>
-
-        <div class="gallery-grid">
-          ${page.related.slice(0, 4).map(([href, label], index) => `
-          <article class="gallery-panel">
-            <span class="panel-tag">Related</span>
-            <h3>${escapeHtml(label)}</h3>
-            <p>Use this page when it better matches the fence type, property need, or project scope.</p>
-            <a class="service-card__link" href="${withBase(href)}">Open page</a>
-          </article>`).join("")}
-        </div>
+        ${renderLinks(page.related.slice(0, 8), "link-grid link-grid--simple")}
       </div>
     </section>`;
 }
@@ -1164,19 +1184,19 @@ function renderFaqSection(page) {
   if (!page.faqs.length) return "";
 
   return `
-    <section class="section section--reviews">
+    <section class="section section--questions page-section" id="questions">
       <div class="section-shell">
-        <div class="section-heading section-heading--center">
+        <div class="section-heading">
           <p class="eyebrow eyebrow--green">Questions</p>
-          <h2>Common questions before requesting a quote.</h2>
+          <h2>Common questions</h2>
         </div>
 
-        <div class="review-grid">
+        <div class="faq-list">
           ${page.faqs.map(([question, answer], index) => `
-          <article class="review-card ${index % 2 === 1 ? "review-card--warm" : ""}">
-            <p class="reviewer">${escapeHtml(question)}</p>
+          <details ${index === 0 ? "open" : ""}>
+            <summary>${escapeHtml(question)}</summary>
             <p>${escapeHtml(answer)}</p>
-          </article>`).join("")}
+          </details>`).join("")}
         </div>
       </div>
     </section>`;
@@ -1395,9 +1415,10 @@ function renderPage(page) {
 </head>
 <body>
 ${renderHeader()}
-  <main>
-${renderHomeHero(page)}
+  <main class="page-main">
+${renderPageHero(page)}
 ${renderHighlightSection(page)}
+${renderHubGroups(page)}
 ${renderSections(page)}
 ${renderRelatedSection(page)}
 ${renderFaqSection(page)}

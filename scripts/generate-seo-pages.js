@@ -5,7 +5,7 @@ const ROOT = path.resolve(__dirname, "..");
 const SITE_ORIGIN = "https://crwlyllc.github.io";
 const BASE_PATH = "/strong-perimeter-website";
 const SITE_URL = `${SITE_ORIGIN}${BASE_PATH}`;
-const LASTMOD = "2026-05-24";
+const LASTMOD = "2026-05-25";
 
 const navLinks = [
   ["Services", "/services/"],
@@ -43,6 +43,7 @@ const images = {
   woodIcon: "/images/wood-fence-icon.svg",
   iron: "/images/wrought-iron-icon-1-min.png",
   chain: "/images/chain-link-fabric-500.png",
+  fabric: "/images/fabric-1-dark.png",
   google: "/images/images.png",
   afa: "/images/afa-p-500.png"
 };
@@ -1014,15 +1015,39 @@ function pageUrl(slug) {
 }
 
 function renderLinks(links, className = "link-grid") {
-  return `<div class="${className}">${links.map(([href, label]) => `<a href="${withBase(href)}">${escapeHtml(label)}</a>`).join("")}</div>`;
+  const visual = className.includes("link-grid--visual");
+  return `<div class="${className}">${links.map(([href, label]) => `<a href="${withBase(href)}">${visual ? `<img src="${withBase(iconForHref(href))}" alt="">` : ""}<span>${escapeHtml(label)}</span></a>`).join("")}</div>`;
 }
 
 function iconForHref(href) {
+  if (href.includes("fence-types")) return images.woodIcon;
   if (href.includes("chain-link")) return images.chain;
   if (href.includes("wrought-iron") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
   if (href.includes("wood") || href.includes("privacy") || href.includes("staining")) return images.woodIcon;
   if (href.includes("repair") || href.includes("installation-replacement")) return images.brandMark;
   return images.brandGreen;
+}
+
+function visualImageForHref(href) {
+  if (href.includes("chain-link") || href.includes("commercial") || href.includes("security")) return images.chain;
+  if (href.includes("wood") || href.includes("privacy") || href.includes("staining") || href.includes("dog") || href.includes("hoa") || href.includes("fence-types") || href.includes("residential") || href.includes("projects")) return images.wood;
+  if (href.includes("wrought-iron") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
+  if (href.includes("repair") || href.includes("installation-replacement")) return images.wood;
+  return images.brandGreen;
+}
+
+function visualImageForPage(page) {
+  const slug = page.slug;
+  if (slug.includes("chain-link") || slug.includes("commercial") || slug.includes("security")) return images.chain;
+  if (slug.includes("wood") || slug.includes("privacy") || slug.includes("staining") || slug.includes("dog") || slug.includes("hoa")) return images.wood;
+  if (slug.includes("wrought-iron") || slug.includes("pipe") || slug.includes("painting") || slug.includes("restoration")) return images.iron;
+  if (slug.includes("team")) return "/images/daniel-wade-1200-min.jpg";
+  if (slug.includes("repair") || slug.includes("installation") || slug.includes("services") || slug.includes("fence-types")) return images.wood;
+  return page.image === images.brandGreen ? images.wood : page.image;
+}
+
+function mediaKind(src) {
+  return [images.wood, "/images/daniel-wade-1200-min.jpg"].includes(src) ? "photo" : "symbol";
 }
 
 function cardTone(index) {
@@ -1050,17 +1075,31 @@ function summaryItemsFor(page) {
   return page.sections.flatMap((section) => section.items).slice(0, 5);
 }
 
-function renderPageSummary(page) {
-  const items = summaryItemsFor(page).filter(Boolean).slice(0, 5);
+function renderVisualOverview(page) {
+  const items = summaryItemsFor(page).filter(Boolean).slice(0, 3);
+  const visual = visualImageForPage(page);
+  const kind = mediaKind(visual);
+
   if (!items.length) return "";
 
   return `
-          <div class="page-summary" aria-label="Page summary">
-            <span>On this page</span>
-            <ul>
-              ${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-            </ul>
-          </div>`;
+    <section class="section section--visual page-section" aria-label="Page visual summary">
+      <div class="section-shell">
+        <div class="visual-overview">
+          <figure class="visual-overview__media visual-overview__media--${kind}">
+            <img src="${withBase(visual)}" alt="${escapeHtml(`${page.h1} visual summary`)}">
+            <figcaption>${escapeHtml(page.eyebrow)}</figcaption>
+          </figure>
+          <div class="visual-overview__cards">
+            ${items.map((item, index) => `
+            <article class="visual-stat">
+              <span>${String(index + 1).padStart(2, "0")}</span>
+              <p>${escapeHtml(item)}</p>
+            </article>`).join("")}
+          </div>
+        </div>
+      </div>
+    </section>`;
 }
 
 function renderPageHero(page) {
@@ -1076,7 +1115,6 @@ function renderPageHero(page) {
           <p class="eyebrow">${escapeHtml(page.eyebrow)}</p>
           <h1>${escapeHtml(page.h1)}</h1>
           <p class="hero-subhead page-lead">${escapeHtml(page.lead)}</p>
-          ${renderPageSummary(page)}
           <div class="hero-actions">
             <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
             <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
@@ -1089,18 +1127,19 @@ function renderPageHero(page) {
 function renderCardGrid(cards, page) {
   return `
         <div class="service-grid service-grid--hub">
-          ${cards.map((card, index) => `
+          ${cards.map((card, index) => {
+            const visual = visualImageForHref(card.href);
+            return `
           <article class="service-card ${cardTone(index)}">
-            <div class="service-card__top">
-              <span class="service-icon">
-                <img src="${withBase(iconForHref(card.href))}" alt="">
-              </span>
-              <span class="service-tag">${escapeHtml(card.tag || page.eyebrow || "Service")}</span>
-            </div>
+            <figure class="service-card__media service-card__media--${mediaKind(visual)}">
+              <img src="${withBase(visual)}" alt="">
+              <figcaption>${escapeHtml(card.tag || page.eyebrow || "Service")}</figcaption>
+            </figure>
             <h3>${escapeHtml(card.title)}</h3>
             <p>${escapeHtml(card.text)}</p>
             <a class="service-card__link" href="${withBase(card.href)}">${escapeHtml(card.cta || "View details")}</a>
-          </article>`).join("")}
+          </article>`;
+          }).join("")}
         </div>`;
 }
 
@@ -1155,8 +1194,9 @@ function renderSections(page) {
           <p>${escapeHtml(section.body)}</p>
         </div>
         <div class="detail-grid">
-          ${section.items.map((item) => `
+          ${section.items.map((item, index) => `
           <article class="detail-card">
+            <span class="detail-card__mark">${String(index + 1).padStart(2, "0")}</span>
             ${renderDetailItem(item)}
           </article>`).join("")}
         </div>
@@ -1175,7 +1215,7 @@ function renderRelatedSection(page) {
           <h2>More useful pages</h2>
           <p>Go straight to the service, fence type, or next step that fits better.</p>
         </div>
-        ${renderLinks(page.related.slice(0, 8), "link-grid link-grid--simple")}
+        ${renderLinks(page.related.slice(0, 8), "link-grid link-grid--simple link-grid--visual")}
       </div>
     </section>`;
 }
@@ -1417,6 +1457,7 @@ function renderPage(page) {
 ${renderHeader()}
   <main class="page-main">
 ${renderPageHero(page)}
+${renderVisualOverview(page)}
 ${renderHighlightSection(page)}
 ${renderHubGroups(page)}
 ${renderSections(page)}

@@ -981,6 +981,231 @@ function renderLinks(links, className = "link-grid") {
   return `<div class="${className}">${links.map(([href, label]) => `<a href="${withBase(href)}">${escapeHtml(label)}</a>`).join("")}</div>`;
 }
 
+function iconForHref(href) {
+  if (href.includes("wrought-iron") || href.includes("pipe")) return images.iron;
+  if (href.includes("wood") || href.includes("privacy")) return images.woodIcon;
+  if (href.includes("chain-link")) return images.chain;
+  return images.brandGreen;
+}
+
+function cardTone(index) {
+  return ["service-card--iron", "service-card--wood", "service-card--chain", "service-card--repair"][index % 4];
+}
+
+function renderHomeHero(page) {
+  const categoryLinks = (page.related.length ? page.related : materialLinks).slice(0, 3);
+
+  return `
+    <section class="hero page-hero">
+      <div class="hero-inner">
+        <div class="hero-copy page-hero-copy">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="${withBase("/")}">Home</a>
+            <span>/</span>
+            <span>${escapeHtml(page.h1)}</span>
+          </nav>
+          <p class="eyebrow">${escapeHtml(page.eyebrow)}</p>
+          <h1>${escapeHtml(page.h1)}</h1>
+          <p class="hero-subhead page-lead">${escapeHtml(page.lead)}</p>
+          <div class="hero-actions">
+            <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
+            <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
+          </div>
+        </div>
+
+        <div class="hero-stage">
+          <figure class="hero-visual">
+            <div class="hero-video-frame youtube-embed" data-video-id="yLhTChxJFNg" data-youtube-mode="background" data-title="Wrought iron restoration by Strong Perimeter" aria-hidden="true">
+            </div>
+            <figcaption class="hero-note">
+              Clear scope, cleaner finish, and field-aware recommendations before work starts.
+            </figcaption>
+          </figure>
+
+          <div class="hero-stack">
+            <article class="info-card info-card--people">
+              <div class="person-chip">
+                <img class="person-chip__photo" src="${withBase("/images/daniel-wade-1200-min.jpg")}" alt="Daniel Wade">
+                <div>
+                  <p class="person-chip__name">Daniel Wade</p>
+                  <p class="person-chip__role">Founder &amp; CEO</p>
+                </div>
+              </div>
+              <div class="person-chip">
+                <img class="person-chip__photo" src="${withBase("/images/robert-hill-1200.jpg")}" alt="Robert Hill">
+                <div>
+                  <p class="person-chip__name">Robert Hill</p>
+                  <p class="person-chip__role">Sales Manager</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="info-card info-card--quote">
+              <p class="card-kicker">What clients notice first</p>
+              <p class="card-quote">“They did what they said in a timely manner, custom iron work looked beautiful, and the crew stayed professional throughout.”</p>
+              <div class="stars" aria-label="Five star review">★★★★★</div>
+            </article>
+
+            <article class="info-card info-card--badges">
+              <p class="card-kicker">Trusted by homeowners who care about the finish</p>
+              <div class="badge-row">
+                <img src="${withBase(images.google)}" alt="Google Customer Reviews">
+                <img src="${withBase(images.afa)}" alt="American Fence Association">
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="category-strip" aria-label="Related fence pages">
+          ${categoryLinks.map(([href, label]) => `
+          <a class="category-card" href="${withBase(href)}">
+            <img src="${withBase(iconForHref(href))}" alt="">
+            <span>
+              <strong>${escapeHtml(label)}</strong>
+              <span>Explore the next useful step</span>
+            </span>
+          </a>`).join("")}
+          <a class="category-card" href="${withBase("/contact/")}">
+            <img class="category-card__brand" src="${withBase(images.brandGreen)}" alt="Strong Perimeter">
+            <span>
+              <strong>Quote support</strong>
+              <span>Fast replies and straightforward next steps</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>`;
+}
+
+function renderTicker() {
+  return `
+    <section class="ticker" aria-label="Fence services">
+      <div class="ticker-track">
+        <span>Wrought iron restoration</span>
+        <span>Wood fence staining</span>
+        <span>Chain link repair</span>
+        <span>Pipe fence painting</span>
+        <span>Vinyl fence replacement</span>
+        <span>Residential fencing</span>
+        <span>Commercial fencing</span>
+        <span>Dallas-Fort Worth</span>
+        <span>Wrought iron restoration</span>
+        <span>Wood fence staining</span>
+        <span>Chain link repair</span>
+        <span>Pipe fence painting</span>
+        <span>Vinyl fence replacement</span>
+        <span>Residential fencing</span>
+        <span>Commercial fencing</span>
+        <span>Dallas-Fort Worth</span>
+      </div>
+    </section>`;
+}
+
+function renderHighlightSection(page) {
+  if (!page.highlights.length) return "";
+
+  return `
+    <section class="section section--services">
+      <div class="section-shell">
+        <div class="section-heading section-heading--center">
+          <p class="eyebrow eyebrow--green">Where to start</p>
+          <h2>Choose the path that matches what you need next.</h2>
+        </div>
+        <div class="service-grid">
+          ${page.highlights.map((card, index) => `
+          <article class="service-card ${cardTone(index)}">
+            <div class="service-card__top">
+              <span class="service-icon">
+                <img src="${withBase(iconForHref(card.href))}" alt="">
+              </span>
+              <span class="service-tag">Strong Perimeter</span>
+            </div>
+            <h3>${escapeHtml(card.title)}</h3>
+            <p>${escapeHtml(card.text)}</p>
+            <a class="service-card__link" href="${withBase(card.href)}">Explore this page</a>
+          </article>`).join("")}
+        </div>
+      </div>
+    </section>`;
+}
+
+function renderSections(page) {
+  return page.sections.map((section, sectionIndex) => `
+    <section class="section section--promise">
+      <div class="section-shell">
+        <div class="promise-shell">
+          <article class="promise-card promise-card--lead">
+            <p class="eyebrow eyebrow--green">${escapeHtml(section.eyebrow)}</p>
+            <h2>${escapeHtml(section.title)}</h2>
+            <p>${escapeHtml(section.body)}</p>
+          </article>
+
+          <article class="promise-card promise-card--trust">
+            <p class="card-kicker">What this usually includes</p>
+            <ul class="service-list">
+              ${section.items.slice(0, 4).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+          </article>
+        </div>
+
+        ${section.items.length > 4 ? `
+        <div class="promise-points">
+          ${section.items.slice(4).map((item, index) => `
+          <article class="promise-point">
+            <h3>${escapeHtml(sectionIndex === 0 ? "Project detail" : "Scope note")}</h3>
+            <p>${escapeHtml(item)}</p>
+          </article>`).join("")}
+        </div>` : ""}
+      </div>
+    </section>`).join("");
+}
+
+function renderRelatedSection(page) {
+  if (!page.related.length) return "";
+
+  return `
+    <section class="section section--gallery">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="eyebrow eyebrow--green">Related pages</p>
+          <h2>Keep moving through the right fence path.</h2>
+        </div>
+
+        <div class="gallery-grid">
+          ${page.related.slice(0, 4).map(([href, label], index) => `
+          <article class="gallery-panel">
+            <span class="panel-tag">Related</span>
+            <h3>${escapeHtml(label)}</h3>
+            <p>Use this page when it better matches the fence type, property need, or project scope.</p>
+            <a class="service-card__link" href="${withBase(href)}">Open page</a>
+          </article>`).join("")}
+        </div>
+      </div>
+    </section>`;
+}
+
+function renderFaqSection(page) {
+  if (!page.faqs.length) return "";
+
+  return `
+    <section class="section section--reviews">
+      <div class="section-shell">
+        <div class="section-heading section-heading--center">
+          <p class="eyebrow eyebrow--green">Questions</p>
+          <h2>Common questions before requesting a quote.</h2>
+        </div>
+
+        <div class="review-grid">
+          ${page.faqs.map(([question, answer], index) => `
+          <article class="review-card ${index % 2 === 1 ? "review-card--warm" : ""}">
+            <p class="reviewer">${escapeHtml(question)}</p>
+            <p>${escapeHtml(answer)}</p>
+          </article>`).join("")}
+        </div>
+      </div>
+    </section>`;
+}
+
 function renderHeader() {
   return `
   <header class="site-header" id="top">
@@ -1195,107 +1420,12 @@ function renderPage(page) {
 <body>
 ${renderHeader()}
   <main>
-    <section class="hero page-hero">
-      <div class="hero-inner">
-        <div class="hero-copy page-hero-copy">
-          <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="${withBase("/")}">Home</a>
-            <span>/</span>
-            <span>${escapeHtml(page.h1)}</span>
-          </nav>
-          <p class="eyebrow">${escapeHtml(page.eyebrow)}</p>
-          <h1>${escapeHtml(page.h1)}</h1>
-          <p class="hero-subhead page-lead">${escapeHtml(page.lead)}</p>
-          <div class="hero-actions">
-            <a class="button button--solid" href="${withBase(page.ctaHref)}">${escapeHtml(page.ctaLabel)}</a>
-            <a class="button button--ghost" href="${page.secondaryCtaHref}">${escapeHtml(page.secondaryCtaLabel)}</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ticker" aria-label="Fence services">
-      <div class="ticker-track">
-        <span>Wrought iron restoration</span>
-        <span>Wood fence staining</span>
-        <span>Chain link repair</span>
-        <span>Pipe fence painting</span>
-        <span>Vinyl fence replacement</span>
-        <span>Residential fencing</span>
-        <span>Commercial fencing</span>
-        <span>Dallas-Fort Worth</span>
-        <span>Wrought iron restoration</span>
-        <span>Wood fence staining</span>
-        <span>Chain link repair</span>
-        <span>Pipe fence painting</span>
-        <span>Vinyl fence replacement</span>
-        <span>Residential fencing</span>
-        <span>Commercial fencing</span>
-        <span>Dallas-Fort Worth</span>
-      </div>
-    </section>
-
-    ${page.highlights.length ? `
-    <section class="section page-section">
-      <div class="section-shell">
-        <div class="section-heading">
-          <p class="eyebrow eyebrow--green">Where to start</p>
-          <h2>Choose the page that matches what you need next.</h2>
-        </div>
-        <div class="feature-grid">
-          ${page.highlights.map((card) => `
-          <a class="feature-card" href="${withBase(card.href)}">
-            <span class="panel-tag">Strong Perimeter</span>
-            <h3>${escapeHtml(card.title)}</h3>
-            <p>${escapeHtml(card.text)}</p>
-          </a>`).join("")}
-        </div>
-      </div>
-    </section>` : ""}
-
-    ${page.sections.map((section) => `
-    <section class="section page-section">
-      <div class="section-shell split-block">
-        <div class="section-heading">
-          <p class="eyebrow eyebrow--green">${escapeHtml(section.eyebrow)}</p>
-          <h2>${escapeHtml(section.title)}</h2>
-          <p>${escapeHtml(section.body)}</p>
-        </div>
-        <div class="content-panel">
-          <ul class="service-list">
-            ${section.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-          </ul>
-        </div>
-      </div>
-    </section>`).join("")}
-
-    ${page.related.length ? `
-    <section class="section page-section">
-      <div class="section-shell">
-        <div class="section-heading section-heading--center">
-          <p class="eyebrow eyebrow--green">Related pages</p>
-          <h2>Keep moving through the right fence path.</h2>
-        </div>
-        ${renderLinks(page.related)}
-      </div>
-    </section>` : ""}
-
-    ${page.faqs.length ? `
-    <section class="section page-section">
-      <div class="section-shell split-block">
-        <div class="section-heading">
-          <p class="eyebrow eyebrow--green">Questions</p>
-          <h2>Common questions before requesting a quote.</h2>
-        </div>
-        <div class="faq-list">
-          ${page.faqs.map(([question, answer]) => `
-          <details>
-            <summary>${escapeHtml(question)}</summary>
-            <p>${escapeHtml(answer)}</p>
-          </details>`).join("")}
-        </div>
-      </div>
-    </section>` : ""}
+${renderHomeHero(page)}
+${renderTicker()}
+${renderHighlightSection(page)}
+${renderSections(page)}
+${renderRelatedSection(page)}
+${renderFaqSection(page)}
 
 ${renderQuoteForm()}
   </main>

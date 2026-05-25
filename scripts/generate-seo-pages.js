@@ -64,12 +64,61 @@ const coreServiceLinks = [
   ["/fence-staining/", "Fence staining"]
 ];
 
+const serviceAreaCities = [
+  "Addison",
+  "Allen",
+  "Arlington",
+  "Balch Springs",
+  "Bedford",
+  "Carrollton",
+  "Cedar Hill",
+  "Colleyville",
+  "Coppell",
+  "Corinth",
+  "Dallas",
+  "DeSoto",
+  "Duncanville",
+  "Euless",
+  "Farmers Branch",
+  "Flower Mound",
+  "Frisco",
+  "Garland",
+  "Glenn Heights",
+  "Grand Prairie",
+  "Grapevine",
+  "Highland Park",
+  "Highland Village",
+  "Hurst",
+  "Irving",
+  "Keller",
+  "Lancaster",
+  "Lewisville",
+  "Little Elm",
+  "Mesquite",
+  "North Richland Hills",
+  "Plano",
+  "Richardson",
+  "Richland Hills",
+  "Rockwall",
+  "Rowlett",
+  "Sachse",
+  "Seagoville",
+  "Southlake",
+  "Terrell",
+  "The Colony",
+  "University Park",
+  "Wylie"
+];
+
+const serviceAreaCityLinks = serviceAreaCities.map((city) => [cityServiceAreaHref(city), `${city}, TX`]);
+
 const pages = [];
 
 function addPage(page) {
   pages.push({
     image: images.wood,
     imageAlt: "Finished fence project by Strong Perimeter",
+    areaServed: "Dallas-Fort Worth",
     ctaLabel: "Get a free quote",
     ctaHref: "/contact/",
     secondaryCtaLabel: "Call (214) 247-6369",
@@ -79,6 +128,7 @@ function addPage(page) {
     faqs: [],
     related: [],
     hubGroups: [],
+    linkSections: [],
     summaryItems: [],
     hubHeading: "",
     hubLead: "",
@@ -88,6 +138,14 @@ function addPage(page) {
 
 function serviceCard(title, text, href, tag = "", cta = "") {
   return { title, text, href, tag, cta };
+}
+
+function citySlug(city) {
+  return city.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function cityServiceAreaHref(city) {
+  return `/service-areas/${citySlug(city)}-tx/`;
 }
 
 function addActionHubPages() {
@@ -662,29 +720,99 @@ function addSpecificServicePages() {
 function addSupportPages() {
   addPage({
     slug: "service-areas",
-    title: "Dallas-Fort Worth Fence Service Areas | Strong Perimeter",
-    description: "Strong Perimeter provides residential and commercial fence services across Dallas-Fort Worth and nearby communities.",
+    title: "Texas Fence Service Areas | Strong Perimeter",
+    description: `Strong Perimeter provides residential and commercial fence restoration, repair, painting, staining, installation, and replacement across ${serviceAreaCities.length} Texas cities.`,
     eyebrow: "Service areas",
-    h1: "Fence Service Areas",
-    lead: "Strong Perimeter serves homes and commercial properties across DFW with restoration, repair, painting, staining, installation, and replacement services.",
+    h1: "Fence Service Areas in Texas",
+    lead: "Strong Perimeter serves these Texas cities with residential and commercial fence restoration, repair, painting, staining, installation, and replacement.",
+    areaServed: serviceAreaCities.map((city) => `${city}, TX`).join(", "),
+    summaryItems: [`${serviceAreaCities.length} Texas cities`, "Residential fencing", "Commercial fencing"],
+    hubHeading: "Start with your city.",
+    hubLead: "Open the city page that matches the project address, then choose the fence service you need.",
     highlights: [
-      serviceCard("Dallas", "Fence repair, restoration, staining, painting, installation, and replacement in and around Dallas.", "/contact/"),
-      serviceCard("Fort Worth", "Residential and commercial fence services for properties across the Fort Worth side of the metroplex.", "/contact/"),
-      serviceCard("DFW suburbs", "Service coverage extends across nearby communities based on project scope and scheduling.", "/contact/")
+      serviceCard("Dallas, TX", "Fence restoration, repair, painting, staining, installation, and replacement in Dallas.", cityServiceAreaHref("Dallas"), "City", "View Dallas services"),
+      serviceCard("Plano, TX", "Residential and commercial fence service in Plano for repair, restoration, and replacement projects.", cityServiceAreaHref("Plano"), "City", "View Plano services"),
+      serviceCard("Frisco, TX", "Fence repair, restoration, installation, and replacement for homes and commercial properties in Frisco.", cityServiceAreaHref("Frisco"), "City", "View Frisco services")
+    ],
+    linkSections: [
+      {
+        id: "cities",
+        eyebrow: "Cities",
+        title: "Cities we serve",
+        body: "Select the city where the fence project is located.",
+        links: serviceAreaCityLinks,
+        className: "link-grid link-grid--simple link-grid--cities"
+      }
     ],
     sections: [
       {
         eyebrow: "Coverage",
-        title: "Where we work around DFW",
-        body: "Use this page to check service coverage and get to the right fence service before requesting a quote.",
+        title: "Fence work across these Texas communities",
+        body: "Use this hub to confirm service coverage and get to the right city page before requesting a quote.",
         items: [
-          "Dallas-Fort Worth and nearby communities based on project scope and scheduling.",
+          `${serviceAreaCities.length} Texas service-area cities are listed on this page.`,
           "Residential fence service for homes, backyards, alleys, pools, pets, and privacy needs.",
-          "Commercial fence service for lots, yards, storefronts, facilities, and managed properties."
+          "Commercial fence service for lots, yards, storefronts, facilities, and managed properties.",
+          "Project photos, reviews, and job notes can help customers compare similar fence work by city."
         ]
       }
     ],
     related: [...coreServiceLinks, ...materialLinks]
+  });
+
+  serviceAreaCities.forEach((city) => {
+    addPage({
+      slug: `service-areas/${citySlug(city)}-tx`,
+      title: `Fence Services in ${city}, TX | Strong Perimeter`,
+      description: `Fence restoration, repair, painting, staining, installation, and replacement in ${city}, TX for residential and commercial properties.`,
+      eyebrow: "Texas service area",
+      h1: `Fence Services in ${city}, TX`,
+      lead: `Strong Perimeter serves ${city} with residential and commercial fence restoration, repair, painting, staining, installation, and replacement.`,
+      areaServed: `${city}, TX`,
+      summaryItems: ["Fence repair", "Fence restoration", "Installation and replacement"],
+      hubHeading: `What do you need in ${city}?`,
+      hubLead: "Start with the service that best matches the fence problem or project scope.",
+      highlights: [
+        serviceCard("Fence repair", `Fix damaged posts, panels, rails, pickets, gates, chain link fabric, rust, storm damage, or leaning sections in ${city}.`, "/fence-repair/", "Repair", "View repair services"),
+        serviceCard("Fence restoration", `Repair and refinish wrought iron, wood, or pipe fencing in ${city} when the structure is still worth saving.`, "/fence-restoration/", "Restore", "View restoration services"),
+        serviceCard("Installation & replacement", `Build new or replace a fence in ${city} when the existing fence has too much damage to repair cleanly.`, "/fence-installation-replacement/", "Build", "View installation services")
+      ],
+      sections: [
+        {
+          eyebrow: city,
+          title: `Fence work in ${city}`,
+          body: `Use this page if the project address is in ${city} and you need help choosing between repair, restoration, painting, staining, installation, or replacement.`,
+          items: [
+            `Residential fence service in ${city} for homes, backyards, alleys, pools, pets, and privacy needs.`,
+            `Commercial fence service in ${city} for lots, yards, storefronts, facilities, and managed properties.`,
+            "Clear quote conversation before work starts.",
+            "Photos of the fence line or damaged sections help speed up the estimate."
+          ]
+        },
+        {
+          eyebrow: "Fence types",
+          title: `Fence types we service in ${city}`,
+          body: "Start with the fence material when you already know what kind of fence is on the property.",
+          items: [
+            "Wrought iron: restoration, repair, painting, installation, and replacement.",
+            "Wood: restoration, repair, staining, installation, and replacement.",
+            "Chain link: repair, installation, and replacement.",
+            "Pipe: restoration, repair, and painting.",
+            "Vinyl: repair, installation, and replacement."
+          ]
+        }
+      ],
+      faqs: [
+        [`Do you provide fence repair in ${city}, TX?`, `Yes. Strong Perimeter provides residential and commercial fence repair in ${city}.`],
+        [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, wood, chain link, and vinyl fences in ${city}.`],
+        ["What should I send for a quote?", "Send the project address, fence type if you know it, photos if available, and what you want fixed or changed."]
+      ],
+      related: [
+        ["/service-areas/", "All service areas"],
+        ...coreServiceLinks,
+        ...materialLinks
+      ]
+    });
   });
 
   addPage({
@@ -1175,6 +1303,22 @@ function renderHubGroups(page) {
     </section>`).join("");
 }
 
+function renderLinkSections(page) {
+  if (!page.linkSections.length) return "";
+
+  return page.linkSections.map((section) => `
+    <section class="section section--links page-section" id="${escapeHtml(section.id)}">
+      <div class="section-shell">
+        <div class="section-heading">
+          <p class="eyebrow eyebrow--green">${escapeHtml(section.eyebrow)}</p>
+          <h2>${escapeHtml(section.title)}</h2>
+          <p>${escapeHtml(section.body)}</p>
+        </div>
+        ${renderLinks(section.links, section.className || "link-grid link-grid--simple")}
+      </div>
+    </section>`).join("");
+}
+
 function renderDetailItem(item) {
   const [label, ...rest] = item.split(": ");
   if (rest.length && label.length <= 34) {
@@ -1365,7 +1509,7 @@ function renderSchema(page) {
       url: SITE_URL,
       telephone: "+1-214-247-6369",
       image: absoluteUrl(images.wood),
-      areaServed: "Dallas-Fort Worth",
+      areaServed: serviceAreaCities.map((city) => `${city}, TX`),
       priceRange: "$$",
       address: {
         "@type": "PostalAddress",
@@ -1383,7 +1527,7 @@ function renderSchema(page) {
         "@type": "LocalBusiness",
         name: "Strong Perimeter"
       },
-      areaServed: "Dallas-Fort Worth",
+      areaServed: page.areaServed,
       url: pageUrl(page.slug)
     },
     {
@@ -1460,6 +1604,7 @@ ${renderPageHero(page)}
 ${renderVisualOverview(page)}
 ${renderHighlightSection(page)}
 ${renderHubGroups(page)}
+${renderLinkSections(page)}
 ${renderSections(page)}
 ${renderRelatedSection(page)}
 ${renderFaqSection(page)}

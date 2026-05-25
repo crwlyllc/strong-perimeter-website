@@ -1394,6 +1394,14 @@ h3,
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
 }
 
+.link-grid--cities {
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+}
+
+.link-grid--cities a {
+  min-height: 3.7rem;
+}
+
 .link-grid--visual a {
   gap: 0.75rem;
 }

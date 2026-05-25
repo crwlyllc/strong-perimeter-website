@@ -1077,30 +1077,6 @@ function renderHomeHero(page) {
     </section>`;
 }
 
-function renderTicker() {
-  return `
-    <section class="ticker" aria-label="Fence services">
-      <div class="ticker-track">
-        <span>Wrought iron restoration</span>
-        <span>Wood fence staining</span>
-        <span>Chain link repair</span>
-        <span>Pipe fence painting</span>
-        <span>Vinyl fence replacement</span>
-        <span>Residential fencing</span>
-        <span>Commercial fencing</span>
-        <span>Dallas-Fort Worth</span>
-        <span>Wrought iron restoration</span>
-        <span>Wood fence staining</span>
-        <span>Chain link repair</span>
-        <span>Pipe fence painting</span>
-        <span>Vinyl fence replacement</span>
-        <span>Residential fencing</span>
-        <span>Commercial fencing</span>
-        <span>Dallas-Fort Worth</span>
-      </div>
-    </section>`;
-}
-
 function renderHighlightSection(page) {
   if (!page.highlights.length) return "";
 
@@ -1421,7 +1397,6 @@ function renderPage(page) {
 ${renderHeader()}
   <main>
 ${renderHomeHero(page)}
-${renderTicker()}
 ${renderHighlightSection(page)}
 ${renderSections(page)}
 ${renderRelatedSection(page)}

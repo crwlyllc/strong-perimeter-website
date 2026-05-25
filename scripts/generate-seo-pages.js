@@ -1640,10 +1640,10 @@ function renderQuoteServicePanel(fenceOption, serviceOptions) {
 function renderQuoteWizard() {
   const serviceOptions = [
     { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage." },
-    { value: "Restoration", label: "Restoration", image: images.iron, text: "Repair plus paint or stain to bring an existing fence back visually." },
     { value: "Installation/replacement", label: "Installation or replacement", image: images.wood, text: "A new fence line, replacement sections, or a full rebuild." },
-    { value: "Painting/staining", label: "Painting or staining", image: images.iron, text: "Wrought iron, pipe fence painting, or wood fence staining." },
-    { value: "Not sure yet", label: "Not sure yet", image: images.brandMark, media: "symbol", text: "We can help compare repair, restoration, and replacement." }
+    { value: "Painting", label: "Painting", image: images.iron, text: "Wrought iron or pipe fence painting." },
+    { value: "Staining", label: "Staining", image: images.wood, text: "Wood fence staining." },
+    { value: "Not sure yet", label: "Not sure yet", image: images.brandMark, media: "symbol", text: "We can help decide the right repair, finish, or replacement scope." }
   ];
   const fenceOptions = [
     { value: "Wrought iron", label: "Wrought iron", image: images.iron, text: "Iron or decorative metal fencing." },
@@ -1655,14 +1655,12 @@ function renderQuoteWizard() {
   ];
   const serviceOptionsByFence = {
     "Wrought iron": [
-      { value: "Restoration", label: "Restoration" },
       { value: "Repair", label: "Repair" },
       { value: "Painting", label: "Painting" },
       { value: "Installation/replacement", label: "Installation or replacement" },
       { value: "Not sure yet", label: "Not sure yet" }
     ],
     Wood: [
-      { value: "Restoration", label: "Restoration" },
       { value: "Repair", label: "Repair" },
       { value: "Staining", label: "Staining" },
       { value: "Installation/replacement", label: "Installation or replacement" },
@@ -1674,7 +1672,6 @@ function renderQuoteWizard() {
       { value: "Not sure yet", label: "Not sure yet" }
     ],
     "Pipe fence": [
-      { value: "Restoration", label: "Restoration" },
       { value: "Repair", label: "Repair" },
       { value: "Painting", label: "Painting" },
       { value: "Not sure yet", label: "Not sure yet" }

@@ -1190,8 +1190,8 @@ h3,
   margin: 0.55rem 0 0;
   max-width: none;
   color: var(--ink);
-  font-size: clamp(2.1rem, 4.8vw, 4.4rem);
-  line-height: 0.92;
+  font-size: clamp(1.85rem, 3.2vw, 3rem);
+  line-height: 1;
 }
 
 .quote-progress {

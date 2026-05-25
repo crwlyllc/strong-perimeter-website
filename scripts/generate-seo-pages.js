@@ -730,7 +730,8 @@ function addSupportPages() {
     hubHeading: "Start with your city.",
     hubLead: "Open the city page that matches the project address, then choose the fence service you need.",
     highlights: [
-      serviceCard("Dallas, TX", "Fence restoration, repair, painting, staining, installation, and replacement in Dallas.", cityServiceAreaHref("Dallas"), "City", "View Dallas services"),
+      serviceCard("Rockwall, TX", "Fence restoration, repair, painting, staining, installation, and replacement in Rockwall.", cityServiceAreaHref("Rockwall"), "City", "View Rockwall services"),
+      serviceCard("Garland, TX", "Residential and commercial fence service in Garland for repair, restoration, and replacement projects.", cityServiceAreaHref("Garland"), "City", "View Garland services"),
       serviceCard("Plano, TX", "Residential and commercial fence service in Plano for repair, restoration, and replacement projects.", cityServiceAreaHref("Plano"), "City", "View Plano services"),
       serviceCard("Frisco, TX", "Fence repair, restoration, installation, and replacement for homes and commercial properties in Frisco.", cityServiceAreaHref("Frisco"), "City", "View Frisco services")
     ],

@@ -1196,24 +1196,36 @@ h3,
 
 .quote-progress {
   display: grid;
-  gap: 0.45rem;
-  min-width: 11rem;
+  justify-items: end;
+  gap: 0.5rem;
+  width: min(18rem, 30vw);
+  min-width: 13rem;
 }
 
-.quote-progress span {
+.quote-progress__value {
   display: block;
-  padding: 0.48rem 0.65rem;
-  border: 1px solid rgba(29, 49, 39, 0.12);
-  border-radius: 999px;
-  color: var(--ink-soft);
-  font-size: 0.78rem;
+  color: var(--green-900);
+  font-family: var(--font-ui);
+  font-size: 0.86rem;
+  font-weight: 800;
   line-height: 1;
 }
 
-.quote-progress span.is-active,
-.quote-progress span.is-complete {
-  background: rgba(32, 91, 68, 0.1);
-  color: var(--green-900);
+.quote-progress__track {
+  display: block;
+  width: 100%;
+  height: 0.62rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(29, 49, 39, 0.1);
+}
+
+.quote-progress__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--terracotta);
+  transition: width 180ms ease;
 }
 
 .quote-step {
@@ -2175,7 +2187,13 @@ h3,
   }
 
   .quote-progress {
+    justify-items: stretch;
+    width: 100%;
     min-width: 0;
+  }
+
+  .quote-progress__value {
+    justify-self: end;
   }
 
   .quote-options--compact .quote-option {

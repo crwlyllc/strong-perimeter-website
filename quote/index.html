@@ -55,11 +55,11 @@
             <div>
               <h1>Get a Fence Quote</h1>
             </div>
-            <div class="quote-progress" aria-label="Quote form progress">
-              <span class="is-active" data-quote-step-indicator>Fence types</span>
-              <span data-quote-step-indicator>Services</span>
-              <span data-quote-step-indicator>Project</span>
-              <span data-quote-step-indicator>Contact</span>
+            <div class="quote-progress" aria-label="Quote form progress" aria-live="polite">
+              <span class="quote-progress__value" data-quote-progress-value>25%</span>
+              <span class="quote-progress__track">
+                <span class="quote-progress__fill" data-quote-progress-fill style="width: 25%;"></span>
+              </span>
             </div>
           </div>
 
@@ -116,16 +116,6 @@
                 <span class="quote-option__body">
                   <strong>Vinyl</strong>
                   <small>Vinyl panels, posts, gates, or sections.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="fence_types-not-sure">
-                <input id="fence_types-not-sure" type="checkbox" name="fence_types" value="Not sure" data-fence-type-select >
-                <figure class="quote-option__media quote-option__media--symbol">
-                  <img src="/strong-perimeter-website/images/Strong-Perimeter-Logo-No-Text.svg" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Not sure</strong>
-                  <small>We can help identify it.</small>
                 </span>
               </label>
             </div>
@@ -350,54 +340,6 @@
                 <label class="quote-area-notes">
                   <span>Notes for this fence</span>
                   <textarea name="vinyl_notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc." disabled></textarea>
-                </label>
-              </article>
-              <article class="quote-service-panel" data-service-panel data-fence-value="Not sure" hidden>
-                <div class="quote-service-panel__top">
-                  <figure class="quote-service-panel__media quote-service-panel__media--symbol">
-                    <img src="/strong-perimeter-website/images/Strong-Perimeter-Logo-No-Text.svg" alt="">
-                  </figure>
-                  <div>
-                    <h2>Not sure</h2>
-                    <p>Choose everything you need for this fence type.</p>
-                  </div>
-                </div>
-
-                <label class="quote-area-location">
-                  <span>Where is this fence?</span>
-                  <input type="text" name="not-sure_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc." disabled>
-                </label>
-
-                <div class="quote-service-panel__section">
-                  <h3>Services for this fence</h3>
-                  <div class="quote-service-choices">
-                    
-                    <label class="quote-service-choice" for="not-sure-service-repair">
-                      <input id="not-sure-service-repair" type="checkbox" name="not-sure_services" value="Repair" data-service-choice disabled>
-                      <span>Repair</span>
-                    </label>
-                    <label class="quote-service-choice" for="not-sure-service-installation-replacement">
-                      <input id="not-sure-service-installation-replacement" type="checkbox" name="not-sure_services" value="Installation/replacement" data-service-choice disabled>
-                      <span>Installation or replacement</span>
-                    </label>
-                    <label class="quote-service-choice" for="not-sure-service-painting">
-                      <input id="not-sure-service-painting" type="checkbox" name="not-sure_services" value="Painting" data-service-choice disabled>
-                      <span>Painting</span>
-                    </label>
-                    <label class="quote-service-choice" for="not-sure-service-staining">
-                      <input id="not-sure-service-staining" type="checkbox" name="not-sure_services" value="Staining" data-service-choice disabled>
-                      <span>Staining</span>
-                    </label>
-                    <label class="quote-service-choice" for="not-sure-service-not-sure-yet">
-                      <input id="not-sure-service-not-sure-yet" type="checkbox" name="not-sure_services" value="Not sure yet" data-service-choice disabled>
-                      <span>Not sure yet</span>
-                    </label>
-                  </div>
-                </div>
-
-                <label class="quote-area-notes">
-                  <span>Notes for this fence</span>
-                  <textarea name="not-sure_notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc." disabled></textarea>
                 </label>
               </article>
             </div>

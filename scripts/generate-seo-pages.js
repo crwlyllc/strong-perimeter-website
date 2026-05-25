@@ -1650,8 +1650,7 @@ function renderQuoteWizard() {
     { value: "Wood", label: "Wood", image: images.wood, text: "Privacy, perimeter, or backyard wood fencing." },
     { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link fabric, posts, rails, or gates." },
     { value: "Pipe fence", label: "Pipe fence", image: images.fabric, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
-    { value: "Vinyl", label: "Vinyl", image: images.brandGreen, media: "symbol", text: "Vinyl panels, posts, gates, or sections." },
-    { value: "Not sure", label: "Not sure", image: images.brandMark, media: "symbol", text: "We can help identify it." }
+    { value: "Vinyl", label: "Vinyl", image: images.brandGreen, media: "symbol", text: "Vinyl panels, posts, gates, or sections." }
   ];
   const serviceOptionsByFence = {
     "Wrought iron": [
@@ -1681,8 +1680,7 @@ function renderQuoteWizard() {
       { value: "Repair", label: "Repair" },
       { value: "Installation/replacement", label: "Installation or replacement" },
       { value: "Not sure yet", label: "Not sure yet" }
-    ],
-    "Not sure": serviceOptions
+    ]
   };
   const propertyOptions = [
     { value: "Residential", label: "Residential", image: images.wood, text: "Home, backyard, pool, pet, privacy, alley, or HOA project." },
@@ -1697,11 +1695,11 @@ function renderQuoteWizard() {
             <div>
               <h1>Get a Fence Quote</h1>
             </div>
-            <div class="quote-progress" aria-label="Quote form progress">
-              <span class="is-active" data-quote-step-indicator>Fence types</span>
-              <span data-quote-step-indicator>Services</span>
-              <span data-quote-step-indicator>Project</span>
-              <span data-quote-step-indicator>Contact</span>
+            <div class="quote-progress" aria-label="Quote form progress" aria-live="polite">
+              <span class="quote-progress__value" data-quote-progress-value>25%</span>
+              <span class="quote-progress__track">
+                <span class="quote-progress__fill" data-quote-progress-fill style="width: 25%;"></span>
+              </span>
             </div>
           </div>
 

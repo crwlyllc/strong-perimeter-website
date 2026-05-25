@@ -174,7 +174,8 @@ if (googleMapEl && googleMapDataEl) {
 
 if (quoteStepper) {
   const steps = Array.from(quoteStepper.querySelectorAll("[data-quote-step]"));
-  const indicators = Array.from(quoteStepper.querySelectorAll("[data-quote-step-indicator]"));
+  const progressFill = quoteStepper.querySelector("[data-quote-progress-fill]");
+  const progressValue = quoteStepper.querySelector("[data-quote-progress-value]");
   const fenceTypeInputs = Array.from(quoteStepper.querySelectorAll("[data-fence-type-select]"));
   const servicePanels = Array.from(quoteStepper.querySelectorAll("[data-service-panel]"));
   const fenceTypeError = quoteStepper.querySelector("[data-fence-type-error]");
@@ -227,10 +228,9 @@ if (quoteStepper) {
       step.classList.toggle("is-active", isActive);
     });
 
-    indicators.forEach((indicator, indicatorIndex) => {
-      indicator.classList.toggle("is-active", indicatorIndex === activeStep);
-      indicator.classList.toggle("is-complete", indicatorIndex < activeStep);
-    });
+    const percent = Math.round(((activeStep + 1) / steps.length) * 100);
+    if (progressFill) progressFill.style.width = `${percent}%`;
+    if (progressValue) progressValue.textContent = `${percent}%`;
   };
 
   const validateStep = (step) => {

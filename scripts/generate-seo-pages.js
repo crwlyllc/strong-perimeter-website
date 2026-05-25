@@ -823,10 +823,10 @@ function addSupportPages() {
   addPage({
     slug: "quote",
     title: "Get a Fence Quote in Dallas-Fort Worth | Strong Perimeter",
-    description: "Request a fence quote from Strong Perimeter with a simple step-by-step form for service type, fence type, project details, and contact information.",
+    description: "Request a fence quote from Strong Perimeter with a simple form that supports multiple fence areas, fence types, services, project details, and contact information.",
     eyebrow: "Quote request",
     h1: "Get a Fence Quote",
-    lead: "Tell us what kind of fence help you need, what material you have or want, and where the project is located.",
+    lead: "Tell us what kind of fence help you need, what materials are involved, and where the project is located.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
     ctaLabel: "Start quote request",
@@ -1590,6 +1590,63 @@ function renderQuoteOptionCards(name, options) {
   }).join("");
 }
 
+function renderQuoteAreaOptionCards(group, options, areaIndex, dataAttribute) {
+  return options.map((option, index) => {
+    const id = `quote-area-${areaIndex}-${group}-${citySlug(option.value) || index}`;
+    const name = `quote_area_${areaIndex}_${group}`;
+    const image = option.image || images.wood;
+    const mediaClass = option.media === "symbol" ? "quote-option__media--symbol" : "quote-option__media--photo";
+
+    return `
+                    <label class="quote-option" for="${id}">
+                      <input id="${id}" type="radio" name="${name}" value="${escapeHtml(option.value)}" ${dataAttribute}${index === 0 ? " required" : ""}>
+                      <figure class="quote-option__media ${mediaClass}">
+                        <img src="${withBase(image)}" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>${escapeHtml(option.label)}</strong>
+                        <small>${escapeHtml(option.text)}</small>
+                      </span>
+                    </label>`;
+  }).join("");
+}
+
+function renderQuoteAreaCard(areaIndex, fenceOptions, serviceOptions) {
+  const removeState = areaIndex === 1 ? " hidden disabled" : "";
+
+  return `
+              <article class="quote-area-card" data-quote-area>
+                <div class="quote-area-card__top">
+                  <h2 data-quote-area-title>Fence area ${areaIndex}</h2>
+                  <button class="quote-area-card__remove" type="button" data-remove-quote-area${removeState}>Remove</button>
+                </div>
+
+                <label class="quote-area-location">
+                  <span>Where is this fence?</span>
+                  <input type="text" name="quote_area_${areaIndex}_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc.">
+                </label>
+
+                <div class="quote-area-card__section">
+                  <h3>Fence type</h3>
+                  <div class="quote-options quote-options--compact">
+                    ${renderQuoteAreaOptionCards("fence_type", fenceOptions, areaIndex, "data-scope-fence-type ")}
+                  </div>
+                </div>
+
+                <div class="quote-area-card__section">
+                  <h3>Service needed for this fence</h3>
+                  <div class="quote-options quote-options--compact">
+                    ${renderQuoteAreaOptionCards("service", serviceOptions, areaIndex, "data-scope-service ")}
+                  </div>
+                </div>
+
+                <label class="quote-area-notes">
+                  <span>Notes for this fence</span>
+                  <textarea name="quote_area_${areaIndex}_notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc."></textarea>
+                </label>
+              </article>`;
+}
+
 function renderQuoteWizard() {
   const serviceOptions = [
     { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage." },
@@ -1610,6 +1667,8 @@ function renderQuoteWizard() {
     { value: "Residential", label: "Residential", image: images.wood, text: "Home, backyard, pool, pet, privacy, alley, or HOA project." },
     { value: "Commercial", label: "Commercial", image: images.chain, text: "Business, facility, lot, yard, storefront, or managed property." }
   ];
+  const initialAreaCard = renderQuoteAreaCard(1, fenceOptions, serviceOptions);
+  const templateAreaCard = renderQuoteAreaCard("__INDEX__", fenceOptions, serviceOptions);
 
   return `
     <section class="section section--quote-wizard page-section" id="quote-wizard">
@@ -1620,30 +1679,20 @@ function renderQuoteWizard() {
               <h1>Get a Fence Quote</h1>
             </div>
             <div class="quote-progress" aria-label="Quote form progress">
-              <span class="is-active" data-quote-step-indicator>Service</span>
-              <span data-quote-step-indicator>Fence</span>
-              <span data-quote-step-indicator>Project</span>
+              <span class="is-active" data-quote-step-indicator>Fence areas</span>
+              <span data-quote-step-indicator>Property</span>
               <span data-quote-step-indicator>Contact</span>
             </div>
           </div>
 
           <fieldset class="quote-step is-active" data-quote-step>
-            <legend>What are you looking for?</legend>
-            <div class="quote-options quote-options--service">
-              ${renderQuoteOptionCards("service", serviceOptions)}
+            <legend>What fence work do you need?</legend>
+            <div class="quote-area-list" data-quote-area-list>
+              ${initialAreaCard}
             </div>
+            <template data-quote-area-template>${templateAreaCard}</template>
+            <button class="button button--ghost quote-add-area" type="button" data-add-quote-area>Add another fence area</button>
             <div class="quote-step__actions">
-              <button class="button button--solid" type="button" data-quote-next>Next</button>
-            </div>
-          </fieldset>
-
-          <fieldset class="quote-step" data-quote-step hidden>
-            <legend>What type of fence is it?</legend>
-            <div class="quote-options">
-              ${renderQuoteOptionCards("fence_type", fenceOptions)}
-            </div>
-            <div class="quote-step__actions">
-              <button class="button button--ghost" type="button" data-quote-prev>Back</button>
               <button class="button button--solid" type="button" data-quote-next>Next</button>
             </div>
           </fieldset>

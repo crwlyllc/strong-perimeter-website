@@ -1244,6 +1244,111 @@ h3,
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.quote-area-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.quote-area-card {
+  padding: clamp(0.9rem, 2vw, 1.2rem);
+  border: 1px solid rgba(29, 49, 39, 0.12);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 253, 249, 0.88);
+}
+
+.quote-area-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.quote-area-card h2,
+.quote-area-card h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  line-height: 1;
+}
+
+.quote-area-card h2 {
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+}
+
+.quote-area-card h3 {
+  font-size: 0.98rem;
+}
+
+.quote-area-card__remove {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(29, 49, 39, 0.16);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.quote-area-card__remove:hover {
+  border-color: rgba(210, 105, 50, 0.5);
+  color: var(--green-900);
+}
+
+.quote-area-location,
+.quote-area-notes,
+.quote-area-card__section {
+  margin-top: 1rem;
+}
+
+.quote-area-location,
+.quote-area-notes {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.quote-add-area {
+  margin-top: 1rem;
+}
+
+.quote-options--compact {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.7rem;
+}
+
+.quote-options--compact .quote-option {
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  grid-template-rows: none;
+  min-height: 7rem;
+}
+
+.quote-options--compact .quote-option__media {
+  height: 100%;
+  min-height: 7rem;
+  border-right: 1px solid rgba(29, 49, 39, 0.1);
+  border-bottom: 0;
+}
+
+.quote-options--compact .quote-option__media--symbol {
+  padding: 0.8rem;
+}
+
+.quote-options--compact .quote-option__body {
+  padding: 0.7rem 0.75rem;
+}
+
+.quote-options--compact .quote-option strong {
+  font-size: clamp(1rem, 1.15vw, 1.12rem);
+}
+
+.quote-options--compact .quote-option small {
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
 .quote-option {
   position: relative;
   display: grid;
@@ -1948,6 +2053,18 @@ h3,
 
   .quote-progress {
     min-width: 0;
+  }
+
+  .quote-options--compact .quote-option {
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+  }
+
+  .quote-options--compact .quote-option__media {
+    min-height: 6.6rem;
+  }
+
+  .quote-area-card__top {
+    align-items: flex-start;
   }
 
   .footer-callout {

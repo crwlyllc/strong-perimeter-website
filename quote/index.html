@@ -5,16 +5,16 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Get a Fence Quote in Dallas-Fort Worth | Strong Perimeter</title>
-  <meta name="description" content="Request a fence quote from Strong Perimeter with a simple step-by-step form for service type, fence type, project details, and contact information.">
+  <meta name="description" content="Request a fence quote from Strong Perimeter with a simple form that supports multiple fence areas, fence types, services, project details, and contact information.">
   <link rel="canonical" href="https://crwlyllc.github.io/strong-perimeter-website/quote/">
   <meta property="og:title" content="Get a Fence Quote in Dallas-Fort Worth | Strong Perimeter">
-  <meta property="og:description" content="Request a fence quote from Strong Perimeter with a simple step-by-step form for service type, fence type, project details, and contact information.">
+  <meta property="og:description" content="Request a fence quote from Strong Perimeter with a simple form that supports multiple fence areas, fence types, services, project details, and contact information.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://crwlyllc.github.io/strong-perimeter-website/quote/">
   <meta property="og:image" content="https://crwlyllc.github.io/strong-perimeter-website/images/2026-Strong-Perimeter-Long-Logo-Green.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Get a Fence Quote in Dallas-Fort Worth | Strong Perimeter">
-  <meta name="twitter:description" content="Request a fence quote from Strong Perimeter with a simple step-by-step form for service type, fence type, project details, and contact information.">
+  <meta name="twitter:description" content="Request a fence quote from Strong Perimeter with a simple form that supports multiple fence areas, fence types, services, project details, and contact information.">
   <meta name="twitter:image" content="https://crwlyllc.github.io/strong-perimeter-website/images/2026-Strong-Perimeter-Long-Logo-Green.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,140 +56,300 @@
               <h1>Get a Fence Quote</h1>
             </div>
             <div class="quote-progress" aria-label="Quote form progress">
-              <span class="is-active" data-quote-step-indicator>Service</span>
-              <span data-quote-step-indicator>Fence</span>
-              <span data-quote-step-indicator>Project</span>
+              <span class="is-active" data-quote-step-indicator>Fence areas</span>
+              <span data-quote-step-indicator>Property</span>
               <span data-quote-step-indicator>Contact</span>
             </div>
           </div>
 
           <fieldset class="quote-step is-active" data-quote-step>
-            <legend>What are you looking for?</legend>
-            <div class="quote-options quote-options--service">
+            <legend>What fence work do you need?</legend>
+            <div class="quote-area-list" data-quote-area-list>
               
-              <label class="quote-option" for="service-repair">
-                <input id="service-repair" type="radio" name="service" value="Repair" required>
-                <figure class="quote-option__media quote-option__media--photo">
-                  <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Repair</strong>
-                  <small>Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="service-restoration">
-                <input id="service-restoration" type="radio" name="service" value="Restoration">
-                <figure class="quote-option__media quote-option__media--photo">
-                  <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Restoration</strong>
-                  <small>Repair plus paint or stain to bring an existing fence back visually.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="service-installation-replacement">
-                <input id="service-installation-replacement" type="radio" name="service" value="Installation/replacement">
-                <figure class="quote-option__media quote-option__media--photo">
-                  <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Installation or replacement</strong>
-                  <small>A new fence line, replacement sections, or a full rebuild.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="service-painting-staining">
-                <input id="service-painting-staining" type="radio" name="service" value="Painting/staining">
-                <figure class="quote-option__media quote-option__media--photo">
-                  <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Painting or staining</strong>
-                  <small>Wrought iron, pipe fence painting, or wood fence staining.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="service-not-sure-yet">
-                <input id="service-not-sure-yet" type="radio" name="service" value="Not sure yet">
-                <figure class="quote-option__media quote-option__media--symbol">
-                  <img src="/strong-perimeter-website/images/Strong-Perimeter-Logo-No-Text.svg" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Not sure yet</strong>
-                  <small>We can help compare repair, restoration, and replacement.</small>
-                </span>
-              </label>
-            </div>
-            <div class="quote-step__actions">
-              <button class="button button--solid" type="button" data-quote-next>Next</button>
-            </div>
-          </fieldset>
+              <article class="quote-area-card" data-quote-area>
+                <div class="quote-area-card__top">
+                  <h2 data-quote-area-title>Fence area 1</h2>
+                  <button class="quote-area-card__remove" type="button" data-remove-quote-area hidden disabled>Remove</button>
+                </div>
 
-          <fieldset class="quote-step" data-quote-step hidden>
-            <legend>What type of fence is it?</legend>
-            <div class="quote-options">
-              
-              <label class="quote-option" for="fence_type-wrought-iron">
-                <input id="fence_type-wrought-iron" type="radio" name="fence_type" value="Wrought iron" required>
-                <figure class="quote-option__media quote-option__media--photo">
-                  <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Wrought iron</strong>
-                  <small>Iron fence repair, restoration, painting, installation, or replacement.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="fence_type-wood">
-                <input id="fence_type-wood" type="radio" name="fence_type" value="Wood">
-                <figure class="quote-option__media quote-option__media--photo">
-                  <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Wood</strong>
-                  <small>Wood repair, restoration, staining, installation, or replacement.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="fence_type-chain-link">
-                <input id="fence_type-chain-link" type="radio" name="fence_type" value="Chain link">
-                <figure class="quote-option__media quote-option__media--photo">
-                  <img src="/strong-perimeter-website/images/chain-link-fabric-500.png" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Chain link</strong>
-                  <small>Chain link repair, installation, or replacement.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="fence_type-pipe-fence">
-                <input id="fence_type-pipe-fence" type="radio" name="fence_type" value="Pipe fence">
-                <figure class="quote-option__media quote-option__media--photo">
-                  <img src="/strong-perimeter-website/images/fabric-1-dark.png" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Pipe fence</strong>
-                  <small>Pipe fence restoration, repairs, or painting.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="fence_type-vinyl">
-                <input id="fence_type-vinyl" type="radio" name="fence_type" value="Vinyl">
-                <figure class="quote-option__media quote-option__media--symbol">
-                  <img src="/strong-perimeter-website/images/2026-Strong-Perimeter-Long-Logo-Green.svg" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Vinyl</strong>
-                  <small>Vinyl fence repair, installation, or replacement.</small>
-                </span>
-              </label>
-              <label class="quote-option" for="fence_type-not-sure">
-                <input id="fence_type-not-sure" type="radio" name="fence_type" value="Not sure">
-                <figure class="quote-option__media quote-option__media--symbol">
-                  <img src="/strong-perimeter-website/images/Strong-Perimeter-Logo-No-Text.svg" alt="">
-                </figure>
-                <span class="quote-option__body">
-                  <strong>Not sure</strong>
-                  <small>Choose this if you want us to identify it from photos or a visit.</small>
-                </span>
-              </label>
+                <label class="quote-area-location">
+                  <span>Where is this fence?</span>
+                  <input type="text" name="quote_area_1_location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc.">
+                </label>
+
+                <div class="quote-area-card__section">
+                  <h3>Fence type</h3>
+                  <div class="quote-options quote-options--compact">
+                    
+                    <label class="quote-option" for="quote-area-1-fence_type-wrought-iron">
+                      <input id="quote-area-1-fence_type-wrought-iron" type="radio" name="quote_area_1_fence_type" value="Wrought iron" data-scope-fence-type  required>
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Wrought iron</strong>
+                        <small>Iron fence repair, restoration, painting, installation, or replacement.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-fence_type-wood">
+                      <input id="quote-area-1-fence_type-wood" type="radio" name="quote_area_1_fence_type" value="Wood" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Wood</strong>
+                        <small>Wood repair, restoration, staining, installation, or replacement.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-fence_type-chain-link">
+                      <input id="quote-area-1-fence_type-chain-link" type="radio" name="quote_area_1_fence_type" value="Chain link" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/chain-link-fabric-500.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Chain link</strong>
+                        <small>Chain link repair, installation, or replacement.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-fence_type-pipe-fence">
+                      <input id="quote-area-1-fence_type-pipe-fence" type="radio" name="quote_area_1_fence_type" value="Pipe fence" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/fabric-1-dark.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Pipe fence</strong>
+                        <small>Pipe fence restoration, repairs, or painting.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-fence_type-vinyl">
+                      <input id="quote-area-1-fence_type-vinyl" type="radio" name="quote_area_1_fence_type" value="Vinyl" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--symbol">
+                        <img src="/strong-perimeter-website/images/2026-Strong-Perimeter-Long-Logo-Green.svg" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Vinyl</strong>
+                        <small>Vinyl fence repair, installation, or replacement.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-fence_type-not-sure">
+                      <input id="quote-area-1-fence_type-not-sure" type="radio" name="quote_area_1_fence_type" value="Not sure" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--symbol">
+                        <img src="/strong-perimeter-website/images/Strong-Perimeter-Logo-No-Text.svg" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Not sure</strong>
+                        <small>Choose this if you want us to identify it from photos or a visit.</small>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="quote-area-card__section">
+                  <h3>Service needed for this fence</h3>
+                  <div class="quote-options quote-options--compact">
+                    
+                    <label class="quote-option" for="quote-area-1-service-repair">
+                      <input id="quote-area-1-service-repair" type="radio" name="quote_area_1_service" value="Repair" data-scope-service  required>
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Repair</strong>
+                        <small>Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-service-restoration">
+                      <input id="quote-area-1-service-restoration" type="radio" name="quote_area_1_service" value="Restoration" data-scope-service >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Restoration</strong>
+                        <small>Repair plus paint or stain to bring an existing fence back visually.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-service-installation-replacement">
+                      <input id="quote-area-1-service-installation-replacement" type="radio" name="quote_area_1_service" value="Installation/replacement" data-scope-service >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Installation or replacement</strong>
+                        <small>A new fence line, replacement sections, or a full rebuild.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-service-painting-staining">
+                      <input id="quote-area-1-service-painting-staining" type="radio" name="quote_area_1_service" value="Painting/staining" data-scope-service >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Painting or staining</strong>
+                        <small>Wrought iron, pipe fence painting, or wood fence staining.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-1-service-not-sure-yet">
+                      <input id="quote-area-1-service-not-sure-yet" type="radio" name="quote_area_1_service" value="Not sure yet" data-scope-service >
+                      <figure class="quote-option__media quote-option__media--symbol">
+                        <img src="/strong-perimeter-website/images/Strong-Perimeter-Logo-No-Text.svg" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Not sure yet</strong>
+                        <small>We can help compare repair, restoration, and replacement.</small>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <label class="quote-area-notes">
+                  <span>Notes for this fence</span>
+                  <textarea name="quote_area_1_notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc."></textarea>
+                </label>
+              </article>
             </div>
+            <template data-quote-area-template>
+              <article class="quote-area-card" data-quote-area>
+                <div class="quote-area-card__top">
+                  <h2 data-quote-area-title>Fence area __INDEX__</h2>
+                  <button class="quote-area-card__remove" type="button" data-remove-quote-area>Remove</button>
+                </div>
+
+                <label class="quote-area-location">
+                  <span>Where is this fence?</span>
+                  <input type="text" name="quote_area___INDEX___location" data-scope-location placeholder="Backyard perimeter, pool fence, side yard, entry gate, etc.">
+                </label>
+
+                <div class="quote-area-card__section">
+                  <h3>Fence type</h3>
+                  <div class="quote-options quote-options--compact">
+                    
+                    <label class="quote-option" for="quote-area-__INDEX__-fence_type-wrought-iron">
+                      <input id="quote-area-__INDEX__-fence_type-wrought-iron" type="radio" name="quote_area___INDEX___fence_type" value="Wrought iron" data-scope-fence-type  required>
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Wrought iron</strong>
+                        <small>Iron fence repair, restoration, painting, installation, or replacement.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-fence_type-wood">
+                      <input id="quote-area-__INDEX__-fence_type-wood" type="radio" name="quote_area___INDEX___fence_type" value="Wood" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Wood</strong>
+                        <small>Wood repair, restoration, staining, installation, or replacement.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-fence_type-chain-link">
+                      <input id="quote-area-__INDEX__-fence_type-chain-link" type="radio" name="quote_area___INDEX___fence_type" value="Chain link" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/chain-link-fabric-500.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Chain link</strong>
+                        <small>Chain link repair, installation, or replacement.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-fence_type-pipe-fence">
+                      <input id="quote-area-__INDEX__-fence_type-pipe-fence" type="radio" name="quote_area___INDEX___fence_type" value="Pipe fence" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/fabric-1-dark.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Pipe fence</strong>
+                        <small>Pipe fence restoration, repairs, or painting.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-fence_type-vinyl">
+                      <input id="quote-area-__INDEX__-fence_type-vinyl" type="radio" name="quote_area___INDEX___fence_type" value="Vinyl" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--symbol">
+                        <img src="/strong-perimeter-website/images/2026-Strong-Perimeter-Long-Logo-Green.svg" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Vinyl</strong>
+                        <small>Vinyl fence repair, installation, or replacement.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-fence_type-not-sure">
+                      <input id="quote-area-__INDEX__-fence_type-not-sure" type="radio" name="quote_area___INDEX___fence_type" value="Not sure" data-scope-fence-type >
+                      <figure class="quote-option__media quote-option__media--symbol">
+                        <img src="/strong-perimeter-website/images/Strong-Perimeter-Logo-No-Text.svg" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Not sure</strong>
+                        <small>Choose this if you want us to identify it from photos or a visit.</small>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="quote-area-card__section">
+                  <h3>Service needed for this fence</h3>
+                  <div class="quote-options quote-options--compact">
+                    
+                    <label class="quote-option" for="quote-area-__INDEX__-service-repair">
+                      <input id="quote-area-__INDEX__-service-repair" type="radio" name="quote_area___INDEX___service" value="Repair" data-scope-service  required>
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Repair</strong>
+                        <small>Posts, panels, rails, gates, chain link fabric, vinyl sections, or storm damage.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-service-restoration">
+                      <input id="quote-area-__INDEX__-service-restoration" type="radio" name="quote_area___INDEX___service" value="Restoration" data-scope-service >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Restoration</strong>
+                        <small>Repair plus paint or stain to bring an existing fence back visually.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-service-installation-replacement">
+                      <input id="quote-area-__INDEX__-service-installation-replacement" type="radio" name="quote_area___INDEX___service" value="Installation/replacement" data-scope-service >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wood-fence-with-stone-posts-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Installation or replacement</strong>
+                        <small>A new fence line, replacement sections, or a full rebuild.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-service-painting-staining">
+                      <input id="quote-area-__INDEX__-service-painting-staining" type="radio" name="quote_area___INDEX___service" value="Painting/staining" data-scope-service >
+                      <figure class="quote-option__media quote-option__media--photo">
+                        <img src="/strong-perimeter-website/images/wrought-iron-icon-1-min.png" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Painting or staining</strong>
+                        <small>Wrought iron, pipe fence painting, or wood fence staining.</small>
+                      </span>
+                    </label>
+                    <label class="quote-option" for="quote-area-__INDEX__-service-not-sure-yet">
+                      <input id="quote-area-__INDEX__-service-not-sure-yet" type="radio" name="quote_area___INDEX___service" value="Not sure yet" data-scope-service >
+                      <figure class="quote-option__media quote-option__media--symbol">
+                        <img src="/strong-perimeter-website/images/Strong-Perimeter-Logo-No-Text.svg" alt="">
+                      </figure>
+                      <span class="quote-option__body">
+                        <strong>Not sure yet</strong>
+                        <small>We can help compare repair, restoration, and replacement.</small>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <label class="quote-area-notes">
+                  <span>Notes for this fence</span>
+                  <textarea name="quote_area___INDEX___notes" data-scope-notes rows="3" placeholder="Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc."></textarea>
+                </label>
+              </article></template>
+            <button class="button button--ghost quote-add-area" type="button" data-add-quote-area>Add another fence area</button>
             <div class="quote-step__actions">
-              <button class="button button--ghost" type="button" data-quote-prev>Back</button>
               <button class="button button--solid" type="button" data-quote-next>Next</button>
             </div>
           </fieldset>

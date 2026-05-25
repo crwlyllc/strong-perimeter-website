@@ -175,7 +175,57 @@ if (googleMapEl && googleMapDataEl) {
 if (quoteStepper) {
   const steps = Array.from(quoteStepper.querySelectorAll("[data-quote-step]"));
   const indicators = Array.from(quoteStepper.querySelectorAll("[data-quote-step-indicator]"));
+  const quoteAreaList = quoteStepper.querySelector("[data-quote-area-list]");
+  const quoteAreaTemplate = quoteStepper.querySelector("[data-quote-area-template]");
+  const addQuoteAreaButton = quoteStepper.querySelector("[data-add-quote-area]");
+  let quoteAreaCount = quoteAreaList?.querySelectorAll("[data-quote-area]").length || 0;
   let activeStep = 0;
+
+  const refreshQuoteAreaControls = () => {
+    if (!quoteAreaList) return;
+
+    const areas = Array.from(quoteAreaList.querySelectorAll("[data-quote-area]"));
+
+    areas.forEach((area, index) => {
+      const title = area.querySelector("[data-quote-area-title]");
+      const removeButton = area.querySelector("[data-remove-quote-area]");
+
+      if (title) title.textContent = `Fence area ${index + 1}`;
+      if (removeButton) {
+        removeButton.hidden = areas.length === 1;
+        removeButton.disabled = areas.length === 1;
+      }
+    });
+  };
+
+  if (quoteAreaList && quoteAreaTemplate && addQuoteAreaButton) {
+    addQuoteAreaButton.addEventListener("click", () => {
+      quoteAreaCount += 1;
+
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = quoteAreaTemplate.innerHTML.replaceAll("__INDEX__", String(quoteAreaCount)).trim();
+      const area = wrapper.firstElementChild;
+
+      if (!area) return;
+
+      quoteAreaList.append(area);
+      refreshQuoteAreaControls();
+      area.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    quoteAreaList.addEventListener("click", (event) => {
+      const removeButton = event.target.closest("[data-remove-quote-area]");
+      if (!removeButton) return;
+
+      const area = removeButton.closest("[data-quote-area]");
+      if (!area || quoteAreaList.querySelectorAll("[data-quote-area]").length <= 1) return;
+
+      area.remove();
+      refreshQuoteAreaControls();
+    });
+
+    refreshQuoteAreaControls();
+  }
 
   const showStep = (index) => {
     activeStep = Math.max(0, Math.min(index, steps.length - 1));
@@ -243,15 +293,45 @@ if (quoteForm) {
     const email = document.getElementById("quote-email")?.value.trim() || "";
     const phone = document.getElementById("quote-phone")?.value.trim() || "";
     const address = document.getElementById("quote-address")?.value.trim() || "";
+    const quoteAreas = Array.from(quoteForm.querySelectorAll("[data-quote-area]")).map((area, index) => {
+      const location = area.querySelector("[data-scope-location]")?.value.trim() || "";
+      const serviceNeeded = area.querySelector("[data-scope-service]:checked")?.value || "";
+      const areaFenceType = area.querySelector("[data-scope-fence-type]:checked")?.value || "";
+      const notes = area.querySelector("[data-scope-notes]")?.value.trim() || "";
+
+      return {
+        index: index + 1,
+        location,
+        serviceNeeded,
+        fenceType: areaFenceType,
+        notes
+      };
+    });
     const service = document.getElementById("quote-service")?.value.trim()
       || quoteForm.querySelector('input[name="service"]:checked')?.value
+      || quoteAreas[0]?.serviceNeeded
       || "";
-    const fenceType = quoteForm.querySelector('input[name="fence_type"]:checked')?.value || "";
+    const fenceType = quoteForm.querySelector('input[name="fence_type"]:checked')?.value
+      || quoteAreas[0]?.fenceType
+      || "";
     const propertyType = quoteForm.querySelector('input[name="property_type"]:checked')?.value || "";
     const timeline = document.getElementById("quote-timeline")?.value.trim() || "";
     const details = document.getElementById("quote-details")?.value.trim() || "";
+    const areaLines = quoteAreas.length
+      ? quoteAreas.flatMap((area) => [
+        `${area.index}. ${area.location || "Fence area"}`,
+        `   Fence type: ${area.fenceType || "Not specified"}`,
+        `   Service needed: ${area.serviceNeeded || "Not specified"}`,
+        `   Notes: ${area.notes || "No notes provided."}`
+      ])
+      : [
+        `1. ${fenceType || "Fence area"}`,
+        `   Fence type: ${fenceType || "Not specified"}`,
+        `   Service needed: ${service || "Not specified"}`,
+        "   Notes: No notes provided."
+      ];
 
-    const subject = `Strong Perimeter Quote Request - ${service || "New Project"}`;
+    const subject = `Strong Perimeter Quote Request - ${quoteAreas.length > 1 ? "Multiple Fence Areas" : service || "New Project"}`;
     const body = [
       "Strong Perimeter quote request",
       "",
@@ -259,10 +339,11 @@ if (quoteForm) {
       `Email: ${email}`,
       `Phone: ${phone}`,
       `Project address: ${address || "Not provided"}`,
-      `Service needed: ${service || "Not specified"}`,
-      `Fence type: ${fenceType || "Not specified"}`,
       `Property type: ${propertyType || "Not specified"}`,
       `Timeline: ${timeline || "Not specified"}`,
+      "",
+      "Fence areas:",
+      ...areaLines,
       "",
       "Project details:",
       details || "No project details provided yet."

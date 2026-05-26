@@ -176,6 +176,8 @@ if (quoteStepper) {
   const steps = Array.from(quoteStepper.querySelectorAll("[data-quote-step]"));
   const progressFill = quoteStepper.querySelector("[data-quote-progress-fill]");
   const progressValue = quoteStepper.querySelector("[data-quote-progress-value]");
+  const navPrevButtons = Array.from(quoteStepper.querySelectorAll("[data-quote-prev]"));
+  const navNextButtons = Array.from(quoteStepper.querySelectorAll("[data-quote-next]"));
   const fenceTypeInputs = Array.from(quoteStepper.querySelectorAll("[data-fence-type-select]"));
   const servicePanels = Array.from(quoteStepper.querySelectorAll("[data-service-panel]"));
   const fenceTypeError = quoteStepper.querySelector("[data-fence-type-error]");
@@ -252,6 +254,14 @@ if (quoteStepper) {
     const percent = Math.round(((activeStep + 1) / steps.length) * 100);
     if (progressFill) progressFill.style.width = `${percent}%`;
     if (progressValue) progressValue.textContent = `${percent}%`;
+
+    navPrevButtons.forEach((button) => {
+      button.disabled = activeStep === 0;
+    });
+
+    navNextButtons.forEach((button) => {
+      button.disabled = activeStep === steps.length - 1;
+    });
   };
 
   const validateStep = (step) => {
@@ -302,7 +312,7 @@ if (quoteStepper) {
     return true;
   };
 
-  quoteStepper.querySelectorAll("[data-quote-next]").forEach((button) => {
+  navNextButtons.forEach((button) => {
     button.addEventListener("click", () => {
       if (validateStep(steps[activeStep])) {
         showStep(activeStep + 1);
@@ -310,7 +320,7 @@ if (quoteStepper) {
     });
   });
 
-  quoteStepper.querySelectorAll("[data-quote-prev]").forEach((button) => {
+  navPrevButtons.forEach((button) => {
     button.addEventListener("click", () => {
       showStep(activeStep - 1);
     });

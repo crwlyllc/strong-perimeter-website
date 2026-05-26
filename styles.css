@@ -295,6 +295,15 @@ h3,
   box-shadow: 0 16px 28px rgba(24, 21, 19, 0.12);
 }
 
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:focus-visible {
+  cursor: not-allowed;
+  opacity: 0.48;
+  transform: none;
+  box-shadow: none;
+}
+
 .button--solid {
   background: linear-gradient(180deg, var(--terracotta), var(--terracotta-deep));
   color: #fff;
@@ -1197,6 +1206,24 @@ h3,
   color: var(--ink);
   font-size: clamp(1.85rem, 3.2vw, 3rem);
   line-height: 1;
+}
+
+.quote-wizard__tools {
+  display: grid;
+  justify-items: end;
+  gap: 0.65rem;
+}
+
+.quote-top-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.quote-top-actions .button {
+  min-height: 2.7rem;
+  padding: 0.68rem 1.05rem;
+  font-size: 0.92rem;
 }
 
 .quote-progress {
@@ -2347,6 +2374,18 @@ h3,
     justify-items: stretch;
     width: 100%;
     min-width: 0;
+  }
+
+  .quote-wizard__tools {
+    justify-items: stretch;
+  }
+
+  .quote-top-actions {
+    justify-content: flex-end;
+  }
+
+  .quote-top-actions .button {
+    min-width: 5.75rem;
   }
 
   .quote-progress__value {

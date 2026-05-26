@@ -1694,13 +1694,23 @@ function renderQuoteServicePanel(fenceOption, serviceOptions) {
 
                 <div class="quote-service-panel__section quote-service-panel__section--styles" data-style-section data-style-trigger-value="Installation/replacement" hidden>
                   <h3>Wood install/replacement style</h3>
-                  <div class="quote-service-choices">
+                  <div class="quote-style-grid">
 ${styleOptions.map((option, index) => {
                       const id = `${slug}-style-${citySlug(option.value) || index}`;
+                      const styleClass = citySlug(option.visual || option.value);
+                      const [direction, ...patternParts] = (option.label || option.value).split(" ");
+                      const pattern = patternParts.join(" ").replace(/^\w/, (letter) => letter.toUpperCase());
                       return `
-                    <label class="quote-service-choice" for="${id}">
+                    <label class="quote-style-choice quote-style-choice--${styleClass}" for="${id}">
                       <input id="${id}" type="radio" name="${slug}_style" value="${escapeHtml(option.value)}" data-scope-style disabled>
-                      <span>${escapeHtml(option.label || option.value)}</span>
+                      <span class="quote-style-choice__visual" aria-hidden="true">
+                        <span class="quote-style-choice__layer"></span>
+                        <span class="quote-style-choice__overlay"></span>
+                      </span>
+                      <span class="quote-style-choice__copy">
+                        <strong>${escapeHtml(direction)}</strong>
+                        <small>${escapeHtml(pattern)}</small>
+                      </span>
                     </label>`;
                     }).join("")}
                   </div>

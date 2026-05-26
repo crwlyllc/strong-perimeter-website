@@ -1189,6 +1189,11 @@ h3,
 .quote-wizard.quote-form {
   display: block;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-inline-size: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
   padding: clamp(1rem, 2.5vw, 1.5rem);
 }
 
@@ -1261,6 +1266,11 @@ h3,
 }
 
 .quote-step {
+  min-width: 0;
+  min-inline-size: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
   margin: 0;
   padding: 1rem;
   border: 1px solid rgba(29, 49, 39, 0.1);
@@ -1269,6 +1279,8 @@ h3,
 }
 
 .quote-step legend {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   padding: 0 0.35rem;
   color: var(--ink);
   font-family: var(--font-ui);
@@ -1305,11 +1317,17 @@ h3,
 
 .quote-service-panels {
   display: grid;
+  min-width: 0;
+  min-inline-size: 0;
+  max-width: 100%;
   gap: 1rem;
   margin-top: 1rem;
 }
 
 .quote-service-panel {
+  min-width: 0;
+  min-inline-size: 0;
+  max-width: 100%;
   padding: clamp(0.9rem, 2vw, 1.2rem);
   border: 1px solid rgba(29, 49, 39, 0.12);
   border-radius: var(--radius-lg);
@@ -1319,6 +1337,7 @@ h3,
 .quote-service-panel__top {
   display: grid;
   grid-template-columns: 5rem minmax(0, 1fr);
+  min-width: 0;
   gap: 0.9rem;
   align-items: center;
 }
@@ -1363,6 +1382,7 @@ h3,
 }
 
 .quote-service-panel p {
+  overflow-wrap: anywhere;
   margin: 0.35rem 0 0;
   color: var(--ink-soft);
 }
@@ -1378,11 +1398,14 @@ h3,
 .quote-service-choices {
   display: flex;
   flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
   gap: 0.55rem;
   margin-top: 0.7rem;
 }
 
 .quote-service-choice {
+  min-width: 0;
   cursor: pointer;
 }
 
@@ -1394,6 +1417,8 @@ h3,
 
 .quote-service-choice span {
   display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   padding: 0.72rem 0.9rem;
   border: 1px solid rgba(29, 49, 39, 0.14);
   border-radius: 999px;

@@ -59,6 +59,19 @@ const images = {
   afa: "/images/afa-p-500.png"
 };
 
+const quoteFenceImages = {
+  wroughtIron: "/images/quote-fence-types/wrought-iron-fence.jpg",
+  wood: "/images/quote-fence-types/wood-fence.jpg",
+  pipe: "/images/quote-fence-types/pipe-fence.jpg",
+  chainLink: "/images/quote-fence-types/chain-link-fence.jpg",
+  poolSafety: "/images/quote-fence-types/pool-safety-fence.jpg",
+  temporary: "/images/quote-fence-types/temporary-fencing.jpg",
+  tPost: "/images/quote-fence-types/t-post-fence.jpg",
+  vinyl: "/images/quote-fence-types/vinyl-fence.jpg",
+  aluminum: "/images/quote-fence-types/aluminum-fence.jpg",
+  composite: "/images/quote-fence-types/composite-fence.jpg"
+};
+
 const materialLinks = [
   ["/wrought-iron-fence/", "Wrought iron fence"],
   ["/aluminum-fence/", "Aluminum fence"],
@@ -1890,11 +1903,11 @@ function renderQuoteWizard() {
     { value: "Not sure yet", label: "Not sure yet", image: images.brandMark, media: "symbol", text: "We can help decide the right repair, finish, or replacement scope." }
   ];
   const fenceOptions = [
-    { value: "Wrought iron", label: "Wrought iron", image: images.iron, text: "Iron or decorative metal fencing." },
+    { value: "Wrought iron", label: "Wrought iron", image: quoteFenceImages.wroughtIron, text: "Iron or decorative metal fencing." },
     {
       value: "Wood",
       label: "Wood",
-      image: images.wood,
+      image: quoteFenceImages.wood,
       text: "Privacy, perimeter, or backyard wood fencing.",
       notesPlaceholder: "Approximate length, gates, height, wood style, staining, replacement section, photos available, etc.",
       styleOptions: [
@@ -1906,14 +1919,14 @@ function renderQuoteWizard() {
         { value: "Horizontal shadow box" }
       ]
     },
-    { value: "Pipe fence", label: "Pipe fence", image: images.fabric, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
-    { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link fabric, posts, rails, or gates." },
-    { value: "Pool safety fences", label: "Pool safety fences", image: images.iron, text: "Pool barriers, gates, latches, panels, or safety sections.", notesPlaceholder: "Approximate length, pool access, gate or latch issue, panel spacing, replacement section, photos available, etc." },
-    { value: "Temporary fencing", label: "Temporary fencing", image: images.chain, text: "Temporary panels, stands, gates, bases, or site perimeter.", notesPlaceholder: "Approximate length, site access, panel issue, damaged stands, repositioning, install/removal timing, photos available, etc." },
-    { value: "T-post", label: "T-post", image: images.chain, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
-    { value: "Vinyl", label: "Vinyl", image: images.brandGreen, media: "symbol", text: "Vinyl panels, posts, gates, or sections." },
-    { value: "Aluminum", label: "Aluminum", image: images.iron, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
-    { value: "Composite", label: "Composite", image: images.wood, text: "Composite panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, damaged panels, loose posts, replacement section, photos available, etc." }
+    { value: "Pipe fence", label: "Pipe fence", image: quoteFenceImages.pipe, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
+    { value: "Chain link", label: "Chain link", image: quoteFenceImages.chainLink, text: "Chain link fabric, posts, rails, or gates." },
+    { value: "Pool safety fences", label: "Pool safety fences", image: quoteFenceImages.poolSafety, text: "Pool barriers, gates, latches, panels, or safety sections.", notesPlaceholder: "Approximate length, pool access, gate or latch issue, panel spacing, replacement section, photos available, etc." },
+    { value: "Temporary fencing", label: "Temporary fencing", image: quoteFenceImages.temporary, text: "Temporary panels, stands, gates, bases, or site perimeter.", notesPlaceholder: "Approximate length, site access, panel issue, damaged stands, repositioning, install/removal timing, photos available, etc." },
+    { value: "T-post", label: "T-post", image: quoteFenceImages.tPost, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
+    { value: "Vinyl", label: "Vinyl", image: quoteFenceImages.vinyl, text: "Vinyl panels, posts, gates, or sections." },
+    { value: "Aluminum", label: "Aluminum", image: quoteFenceImages.aluminum, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
+    { value: "Composite", label: "Composite", image: quoteFenceImages.composite, text: "Composite panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, damaged panels, loose posts, replacement section, photos available, etc." }
   ];
   const serviceOptionsByFence = {
     "Wrought iron": [

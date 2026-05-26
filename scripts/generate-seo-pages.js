@@ -1891,7 +1891,6 @@ function renderQuoteWizard() {
   ];
   const fenceOptions = [
     { value: "Wrought iron", label: "Wrought iron", image: images.iron, text: "Iron or decorative metal fencing." },
-    { value: "Aluminum", label: "Aluminum", image: images.iron, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
     {
       value: "Wood",
       label: "Wood",
@@ -1907,13 +1906,14 @@ function renderQuoteWizard() {
         { value: "Horizontal shadow box" }
       ]
     },
-    { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link fabric, posts, rails, or gates." },
-    { value: "T-post", label: "T-post", image: images.chain, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
-    { value: "Composite", label: "Composite", image: images.wood, text: "Composite panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, damaged panels, loose posts, replacement section, photos available, etc." },
-    { value: "Temporary fencing", label: "Temporary fencing", image: images.chain, text: "Temporary panels, stands, gates, bases, or site perimeter.", notesPlaceholder: "Approximate length, site access, panel issue, damaged stands, repositioning, install/removal timing, photos available, etc." },
-    { value: "Pool safety fences", label: "Pool safety fences", image: images.iron, text: "Pool barriers, gates, latches, panels, or safety sections.", notesPlaceholder: "Approximate length, pool access, gate or latch issue, panel spacing, replacement section, photos available, etc." },
     { value: "Pipe fence", label: "Pipe fence", image: images.fabric, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
-    { value: "Vinyl", label: "Vinyl", image: images.brandGreen, media: "symbol", text: "Vinyl panels, posts, gates, or sections." }
+    { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link fabric, posts, rails, or gates." },
+    { value: "Pool safety fences", label: "Pool safety fences", image: images.iron, text: "Pool barriers, gates, latches, panels, or safety sections.", notesPlaceholder: "Approximate length, pool access, gate or latch issue, panel spacing, replacement section, photos available, etc." },
+    { value: "Temporary fencing", label: "Temporary fencing", image: images.chain, text: "Temporary panels, stands, gates, bases, or site perimeter.", notesPlaceholder: "Approximate length, site access, panel issue, damaged stands, repositioning, install/removal timing, photos available, etc." },
+    { value: "T-post", label: "T-post", image: images.chain, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
+    { value: "Vinyl", label: "Vinyl", image: images.brandGreen, media: "symbol", text: "Vinyl panels, posts, gates, or sections." },
+    { value: "Aluminum", label: "Aluminum", image: images.iron, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
+    { value: "Composite", label: "Composite", image: images.wood, text: "Composite panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, damaged panels, loose posts, replacement section, photos available, etc." }
   ];
   const serviceOptionsByFence = {
     "Wrought iron": [
@@ -1985,15 +1985,15 @@ function renderQuoteWizard() {
               <h1>Get a Fence Quote</h1>
             </div>
             <div class="quote-wizard__tools">
-              <div class="quote-top-actions" aria-label="Quote navigation">
-                <button class="button button--ghost" type="button" data-quote-prev data-quote-top-prev>Back</button>
-                <button class="button button--solid" type="button" data-quote-next data-quote-top-next>Next</button>
-              </div>
               <div class="quote-progress" aria-label="Quote form progress" aria-live="polite">
                 <span class="quote-progress__value" data-quote-progress-value>25%</span>
                 <span class="quote-progress__track">
                   <span class="quote-progress__fill" data-quote-progress-fill style="width: 25%;"></span>
                 </span>
+              </div>
+              <div class="quote-top-actions" aria-label="Quote navigation">
+                <button class="button button--ghost" type="button" data-quote-prev data-quote-top-prev>Back</button>
+                <button class="button button--solid" type="button" data-quote-next data-quote-top-next>Next</button>
               </div>
             </div>
           </div>

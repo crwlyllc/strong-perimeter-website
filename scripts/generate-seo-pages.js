@@ -5,7 +5,7 @@ const ROOT = path.resolve(__dirname, "..");
 const SITE_ORIGIN = "https://crwlyllc.github.io";
 const BASE_PATH = "/strong-perimeter-website";
 const SITE_URL = `${SITE_ORIGIN}${BASE_PATH}`;
-const LASTMOD = "2026-05-25";
+const LASTMOD = "2026-05-26";
 
 const navLinks = [
   ["Services", "/services/"],
@@ -32,6 +32,12 @@ const quoteServices = [
   "Chain link fence installation/replacement",
   "T-post fence repair",
   "T-post fence installation/replacement",
+  "Composite fence repair",
+  "Composite fence installation/replacement",
+  "Temporary fence repair/repositioning",
+  "Temporary fence installation/removal",
+  "Pool safety fence repair",
+  "Pool safety fence installation/replacement",
   "Pipe fence restoration",
   "Pipe fence repair",
   "Pipe fence painting",
@@ -59,6 +65,9 @@ const materialLinks = [
   ["/wood-fence/", "Wood fence"],
   ["/chain-link-fence/", "Chain link fence"],
   ["/t-post-fence/", "T-post fence"],
+  ["/composite-fence/", "Composite fence"],
+  ["/temporary-fencing/", "Temporary fencing"],
+  ["/pool-safety-fences/", "Pool safety fences"],
   ["/pipe-fence/", "Pipe fence"],
   ["/vinyl-fence/", "Vinyl fence"]
 ];
@@ -289,6 +298,9 @@ function addActionHubPages() {
           serviceCard("Wood fence", "Restoration, repair, staining, installation, and replacement.", "/wood-fence/", "Wood", "View wood services"),
           serviceCard("Chain link fence", "Repair, installation, and replacement.", "/chain-link-fence/", "Chain link", "View chain link services"),
           serviceCard("T-post fence", "Repair, installation, and replacement for practical post-and-wire boundaries.", "/t-post-fence/", "T-post", "View T-post services"),
+          serviceCard("Composite fence", "Repair, installation, and replacement for low-maintenance privacy and decorative boundaries.", "/composite-fence/", "Composite", "View composite services"),
+          serviceCard("Temporary fencing", "Installation, removal, repair, and repositioning for short-term perimeter needs.", "/temporary-fencing/", "Temporary", "View temporary fencing"),
+          serviceCard("Pool safety fences", "Repair, installation, and replacement for pool barriers, gates, and safety-focused fence lines.", "/pool-safety-fences/", "Pool safety", "View pool safety fences"),
           serviceCard("Pipe fence", "Restoration, repair, and painting.", "/pipe-fence/", "Pipe", "View pipe fence services"),
           serviceCard("Vinyl fence", "Repair, installation, and replacement.", "/vinyl-fence/", "Vinyl", "View vinyl services")
         ]
@@ -327,6 +339,9 @@ function addActionHubPages() {
           "Wood: restoration, repair, staining, installation, and replacement.",
           "Chain link: repair, installation, and replacement.",
           "T-post: repair, installation, and replacement.",
+          "Composite: repair, installation, and replacement.",
+          "Temporary fencing: installation, removal, repair, and repositioning.",
+          "Pool safety fences: repair, installation, and replacement.",
           "Pipe: restoration, repair, and painting.",
           "Vinyl: repair, installation, and replacement."
         ]
@@ -377,10 +392,10 @@ function addActionHubPages() {
   addPage({
     slug: "fence-repair",
     title: "Fence Repair in Dallas-Fort Worth | Strong Perimeter",
-    description: "Fence repair for wood, wrought iron, aluminum, chain link, T-post, pipe, and vinyl fences across Dallas-Fort Worth. Residential and commercial service.",
+    description: "Fence repair for wood, wrought iron, aluminum, chain link, T-post, composite, temporary, pool safety, pipe, and vinyl fences across Dallas-Fort Worth. Residential and commercial service.",
     eyebrow: "Repair",
     h1: "Fence Repair",
-    lead: "Repair for wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl fences across Dallas-Fort Worth.",
+    lead: "Repair for wrought iron, aluminum, wood, chain link, T-post, composite, temporary, pool safety, pipe, and vinyl fences across Dallas-Fort Worth.",
     highlights: [
       serviceCard("Material-specific repairs", "Each material fails differently, so the repair plan should match the fence instead of using a generic patch.", "/fence-types/"),
       serviceCard("Storm and age damage", "Wind, soil movement, rust, rot, impact, and years of sun can all show up in different ways along the fence line.", "/storm-damaged-fence-repair/"),
@@ -397,6 +412,9 @@ function addActionHubPages() {
           "Wood fence pickets, rails, posts, gates, leaning sections, and storm damage.",
           "Chain link fabric, rails, posts, tension, and access issues.",
           "T-post fence leaning posts, loose wire, bracing issues, gates, and perimeter repairs.",
+          "Composite fence panels, posts, gates, alignment issues, and damaged sections.",
+          "Temporary fencing panels, stands, bracing, gates, and repositioning issues.",
+          "Pool safety fence gates, latches, panels, posts, alignment, and damaged sections.",
           "Pipe fence rust, bent rails, broken sections, and loose posts.",
           "Vinyl cracked panels, damaged posts, and alignment issues."
         ]
@@ -413,6 +431,9 @@ function addActionHubPages() {
       ["/wood-fence-repair/", "Wood fence repair"],
       ["/chain-link-fence-repair/", "Chain link fence repair"],
       ["/t-post-fence-repair/", "T-post fence repair"],
+      ["/composite-fence-repair/", "Composite fence repair"],
+      ["/temporary-fencing-repair/", "Temporary fence repair"],
+      ["/pool-safety-fence-repair/", "Pool safety fence repair"],
       ["/pipe-fence-repair/", "Pipe fence repair"],
       ["/vinyl-fence-repair/", "Vinyl fence repair"]
     ]
@@ -421,7 +442,7 @@ function addActionHubPages() {
   addPage({
     slug: "fence-installation-replacement",
     title: "Fence Installation and Replacement in DFW | Strong Perimeter",
-    description: "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, and vinyl fences for homes and commercial properties across Dallas-Fort Worth.",
+    description: "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, composite, pool safety, and vinyl fences, and installs temporary fencing across Dallas-Fort Worth.",
     eyebrow: "Installation and replacement",
     h1: "Fence Installation and Replacement",
     lead: "New fence installation and full fence replacement for residential and commercial properties.",
@@ -430,6 +451,9 @@ function addActionHubPages() {
       serviceCard("Wrought iron fencing", "Clean lines and long-term curb presence for front yards, pools, entries, and commercial frontage.", "/wrought-iron-fence-installation-replacement/"),
       serviceCard("Aluminum fencing", "Lightweight metal panels for clean lines, pools, entries, and low-maintenance boundaries.", "/aluminum-fence-installation-replacement/"),
       serviceCard("T-post fencing", "Practical post-and-wire layouts for acreage, temporary boundaries, utility areas, and perimeter needs.", "/t-post-fence-installation-replacement/"),
+      serviceCard("Composite fencing", "Low-maintenance privacy and decorative fence lines with clean replacement planning.", "/composite-fence-installation-replacement/"),
+      serviceCard("Temporary fencing", "Short-term panels, gates, and perimeter control for sites, events, and work areas.", "/temporary-fencing-installation-removal/"),
+      serviceCard("Pool safety fences", "Pool barriers, gates, spacing, access, and safety-focused installation planning.", "/pool-safety-fence-installation-replacement/"),
       serviceCard("Chain link and vinyl", "Practical perimeter control, pet containment, low-maintenance options, and commercial utility.", "/fence-types/")
     ],
     sections: [
@@ -443,13 +467,16 @@ function addActionHubPages() {
           "Wood fence installation and replacement, including vertical or horizontal side-by-side, board-on-board, and shadow box styles.",
           "Chain link fence installation and replacement.",
           "T-post fence installation and replacement.",
+          "Composite fence installation and replacement.",
+          "Temporary fencing installation and removal.",
+          "Pool safety fence installation and replacement.",
           "Vinyl fence installation and replacement.",
           "Residential and commercial replacement scopes."
         ]
       }
     ],
     faqs: [
-      ["Which fence materials do you install?", "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, and vinyl fences."],
+      ["Which fence materials do you install?", "Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, composite, pool safety, and vinyl fences, and installs temporary fencing."],
       ["Do you remove the old fence?", "Removal can be included in the project scope when needed."],
       ["Can you help choose the material?", "Yes. The right material depends on privacy, security, maintenance, budget, and the look of the property."]
     ],
@@ -459,6 +486,9 @@ function addActionHubPages() {
       ["/aluminum-fence-installation-replacement/", "Aluminum installation/replacement"],
       ["/chain-link-fence-installation-replacement/", "Chain link installation/replacement"],
       ["/t-post-fence-installation-replacement/", "T-post installation/replacement"],
+      ["/composite-fence-installation-replacement/", "Composite installation/replacement"],
+      ["/temporary-fencing-installation-removal/", "Temporary fencing installation/removal"],
+      ["/pool-safety-fence-installation-replacement/", "Pool safety installation/replacement"],
       ["/vinyl-fence-installation-replacement/", "Vinyl installation/replacement"]
     ]
   });
@@ -541,10 +571,10 @@ function addFenceTypeAndBuyerPages() {
   addPage({
     slug: "fence-types",
     title: "Fence Types for DFW Homes and Businesses | Strong Perimeter",
-    description: "Compare wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl fence options for residential and commercial properties across Dallas-Fort Worth.",
+    description: "Compare wrought iron, aluminum, wood, chain link, T-post, composite, temporary, pool safety, pipe, and vinyl fence options for residential and commercial properties across Dallas-Fort Worth.",
     eyebrow: "Fence types",
     h1: "Fence Types",
-    lead: "Compare wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl fencing by use, maintenance, privacy, security, and appearance.",
+    lead: "Compare wrought iron, aluminum, wood, chain link, T-post, composite, temporary, pool safety, pipe, and vinyl fencing by use, maintenance, privacy, security, and appearance.",
     image: images.wood,
     imageAlt: "Wood privacy fence with stone columns",
     highlights: [
@@ -552,19 +582,25 @@ function addFenceTypeAndBuyerPages() {
       serviceCard("Wrought iron", "Best for visibility, curb appeal, pools, entries, and ornamental security.", "/wrought-iron-fence/"),
       serviceCard("Aluminum", "Best for clean metal lines, pools, entries, and low-maintenance decorative boundaries.", "/aluminum-fence/"),
       serviceCard("Chain link", "Best for practical boundaries, pets, utility areas, and commercial perimeter control.", "/chain-link-fence/"),
-      serviceCard("T-post", "Best for post-and-wire layouts, acreage edges, utility areas, and practical field boundaries.", "/t-post-fence/")
+      serviceCard("T-post", "Best for post-and-wire layouts, acreage edges, utility areas, and practical field boundaries.", "/t-post-fence/"),
+      serviceCard("Composite", "Best for low-maintenance privacy and decorative fence lines.", "/composite-fence/"),
+      serviceCard("Temporary fencing", "Best for construction, events, work zones, and short-term perimeter control.", "/temporary-fencing/"),
+      serviceCard("Pool safety fences", "Best for pool barriers, controlled access, visibility, and safety-focused yard layouts.", "/pool-safety-fences/")
     ],
     sections: [
       {
         eyebrow: "Materials",
         title: "Every material has a different job.",
-        body: "Strong Perimeter focuses on the fence types we actually service: wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl.",
+        body: "Strong Perimeter focuses on the fence types we actually service: wrought iron, aluminum, wood, chain link, T-post, composite, temporary fencing, pool safety fences, pipe, and vinyl.",
         items: [
           "Wrought iron: restoration, repair, painting, installation, and replacement.",
           "Aluminum: repair, painting, installation, and replacement.",
           "Wood: restoration, repair, staining, installation, and replacement.",
           "Chain link: repair, installation, and replacement.",
           "T-post: repair, installation, and replacement.",
+          "Composite: repair, installation, and replacement.",
+          "Temporary fencing: installation, removal, repair, and repositioning.",
+          "Pool safety fences: repair, installation, and replacement.",
           "Pipe: restoration, repair, and painting.",
           "Vinyl: repair, installation, and replacement."
         ]
@@ -591,7 +627,7 @@ function addFenceTypeAndBuyerPages() {
         title: "We match the scope to the property instead of forcing a one-size quote.",
         body: "Residential projects can be small repair visits, full backyard replacements, iron restoration, wood staining, or vinyl replacement.",
         items: [
-          "Wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl services.",
+          "Wrought iron, aluminum, wood, chain link, T-post, composite, temporary fencing, pool safety, pipe, and vinyl services.",
           "Privacy, pets, pools, alleys, gates, and curb appeal considerations.",
           "Clear quote communication before work starts."
         ]
@@ -608,7 +644,7 @@ function addFenceTypeAndBuyerPages() {
     h1: "Commercial Fence Services",
     lead: "Fence repair, restoration, painting, installation, and replacement for lots, yards, storefronts, facilities, and managed properties.",
     highlights: [
-      serviceCard("Practical boundaries", "Chain link, T-post, and pipe fencing often work well for utility, lots, yards, and property separation.", "/chain-link-fence/"),
+      serviceCard("Practical boundaries", "Chain link, T-post, temporary, and pipe fencing often work well for utility, lots, yards, and property separation.", "/chain-link-fence/"),
       serviceCard("Frontage and appearance", "Wrought iron and aluminum repair, painting, and replacement can improve the public-facing edge of a property.", "/wrought-iron-fence/"),
       serviceCard("Managed property repairs", "Repair scopes can be planned around access, safety, timing, and tenant or customer impact.", "/fence-repair/")
     ],
@@ -620,7 +656,7 @@ function addFenceTypeAndBuyerPages() {
         items: [
           "Commercial fence repair and replacement.",
           "Wrought iron, aluminum, and pipe painting/restoration.",
-          "Chain link and T-post installation and repair.",
+          "Chain link, T-post, and temporary fencing installation and repair.",
           "Clear communication for owners, managers, and operators."
         ]
       }
@@ -628,9 +664,11 @@ function addFenceTypeAndBuyerPages() {
     related: [
       ["/chain-link-fence/", "Chain link fence"],
       ["/t-post-fence/", "T-post fence"],
+      ["/temporary-fencing/", "Temporary fencing"],
       ["/pipe-fence/", "Pipe fence"],
       ["/wrought-iron-fence/", "Wrought iron fence"],
       ["/aluminum-fence/", "Aluminum fence"],
+      ["/composite-fence/", "Composite fence"],
       ["/fence-repair/", "Fence repair"]
     ]
   });
@@ -744,6 +782,69 @@ function addMaterialPages() {
       ]
     },
     {
+      slug: "composite-fence",
+      name: "Composite Fence",
+      image: images.wood,
+      title: "Composite Fence Services in DFW | Strong Perimeter",
+      description: "Composite fence repair, installation, and replacement for low-maintenance residential and commercial fence lines across Dallas-Fort Worth.",
+      h1: "Composite Fence Services",
+      lead: "Composite fencing gives properties a cleaner low-maintenance look when posts, panels, gates, and replacement sections are scoped correctly.",
+      items: [
+        "Repair for damaged composite panels, posts, gates, and alignment issues.",
+        "Installation for privacy, decorative boundaries, and low-maintenance fence goals.",
+        "Replacement when existing composite sections or posts are too damaged to repair cleanly.",
+        "Residential and commercial composite fence service."
+      ],
+      related: [
+        ["/composite-fence-repair/", "Composite repair"],
+        ["/composite-fence-installation-replacement/", "Composite installation/replacement"],
+        ["/wood-fence/", "Wood fence"],
+        ["/vinyl-fence/", "Vinyl fence"]
+      ]
+    },
+    {
+      slug: "temporary-fencing",
+      name: "Temporary Fencing",
+      image: images.chain,
+      title: "Temporary Fencing Services in DFW | Strong Perimeter",
+      description: "Temporary fencing installation, removal, repair, and repositioning for construction sites, events, work zones, and short-term perimeters across Dallas-Fort Worth.",
+      h1: "Temporary Fencing Services",
+      lead: "Temporary fencing is built around speed, access, safety, and clean perimeter control for short-term sites and changing project needs.",
+      items: [
+        "Installation and removal for temporary panels, gates, bases, and site perimeters.",
+        "Repair or repositioning when panels, stands, bracing, or gates shift or get damaged.",
+        "Planning for construction sites, events, work zones, and short-term property boundaries.",
+        "Residential, commercial, and managed-site temporary fencing service."
+      ],
+      related: [
+        ["/temporary-fencing-installation-removal/", "Temporary installation/removal"],
+        ["/temporary-fencing-repair/", "Temporary repair/repositioning"],
+        ["/commercial-fencing/", "Commercial fencing"],
+        ["/chain-link-fence/", "Chain link fence"]
+      ]
+    },
+    {
+      slug: "pool-safety-fences",
+      name: "Pool Safety Fences",
+      image: images.iron,
+      title: "Pool Safety Fence Services in DFW | Strong Perimeter",
+      description: "Pool safety fence repair, installation, and replacement for residential and commercial pool barriers across Dallas-Fort Worth.",
+      h1: "Pool Safety Fence Services",
+      lead: "Pool safety fencing should balance visibility, access, latch planning, spacing, and a finished look that fits the yard or property.",
+      items: [
+        "Repair for pool safety fence gates, latches, posts, panels, and alignment issues.",
+        "Installation for pool barriers, controlled access, visibility, and safety-focused layouts.",
+        "Replacement when existing pool safety sections or gates are too damaged to repair cleanly.",
+        "Residential and commercial pool safety fence service."
+      ],
+      related: [
+        ["/pool-safety-fence-repair/", "Pool safety repair"],
+        ["/pool-safety-fence-installation-replacement/", "Pool safety installation/replacement"],
+        ["/pool-fence-installation/", "Pool fence installation guide"],
+        ["/aluminum-fence/", "Aluminum fence"]
+      ]
+    },
+    {
       slug: "pipe-fence",
       name: "Pipe Fence",
       image: images.brandMark,
@@ -833,6 +934,12 @@ function addSpecificServicePages() {
     ["chain-link-fence-installation-replacement", "Chain Link Fence Installation and Replacement", "Chain link fence installation and replacement for homes, commercial sites, pet areas, and practical boundaries.", images.chain, ["New chain link installation", "Full replacement", "Commercial perimeter needs", "Pet and utility areas", "Access and gate planning"]],
     ["t-post-fence-repair", "T-post Fence Repair", "Repair for T-post fences with leaning posts, loose wire, bracing issues, gate problems, or damaged sections.", images.chain, ["Leaning T-posts", "Loose or damaged wire", "Brace and corner issues", "Gate and access problems", "Repair vs replacement guidance"]],
     ["t-post-fence-installation-replacement", "T-post Fence Installation and Replacement", "T-post fence installation and replacement for acreage edges, utility areas, field boundaries, and practical perimeters.", images.chain, ["New T-post fence installation", "Full replacement", "Post-and-wire layout", "Acreage and utility boundaries", "Access and gate planning"]],
+    ["composite-fence-repair", "Composite Fence Repair", "Repair for composite fences with damaged panels, posts, gates, alignment issues, or replacement sections.", images.wood, ["Damaged composite panels", "Post and rail issues", "Gate alignment", "Replacement section matching", "Repair vs replacement guidance"]],
+    ["composite-fence-installation-replacement", "Composite Fence Installation and Replacement", "Composite fence installation and replacement for low-maintenance privacy, decorative boundaries, and property-line fencing.", images.wood, ["New composite fence installation", "Full replacement", "Privacy and decorative applications", "Post and panel planning", "Residential and commercial composite fencing"]],
+    ["temporary-fencing-repair", "Temporary Fence Repair and Repositioning", "Repair and repositioning for temporary fencing with shifted panels, damaged stands, bracing issues, gate problems, or access changes.", images.chain, ["Panel repair and repositioning", "Damaged stands or bases", "Brace and stability issues", "Gate and access changes", "Short-term perimeter adjustments"]],
+    ["temporary-fencing-installation-removal", "Temporary Fence Installation and Removal", "Temporary fencing installation and removal for construction sites, events, work zones, and short-term property perimeters.", images.chain, ["Temporary panel installation", "Removal when the project is complete", "Construction and event perimeters", "Gate and access planning", "Short-term security needs"]],
+    ["pool-safety-fence-repair", "Pool Safety Fence Repair", "Repair for pool safety fences with damaged gates, latches, posts, panels, alignment issues, or loose sections.", images.iron, ["Gate and latch issues", "Damaged panels", "Loose posts", "Alignment and spacing concerns", "Repair vs replacement guidance"]],
+    ["pool-safety-fence-installation-replacement", "Pool Safety Fence Installation and Replacement", "Pool safety fence installation and replacement for residential pools, commercial pools, controlled access, and safety-focused yard layouts.", images.iron, ["New pool safety fence installation", "Full replacement", "Gate and latch planning", "Visibility and spacing", "Residential and commercial pool barriers"]],
     ["pipe-fence-restoration", "Pipe Fence Restoration", "Restoration includes repairs and painting for pipe fences that need structural and finish work.", images.brandMark, ["Rust assessment", "Bent or broken section repair", "Post and rail attention", "Paint prep", "Final paint finish"]],
     ["pipe-fence-repair", "Pipe Fence Repair", "Repair for pipe fencing with rust, bent rails, broken sections, loose posts, or gate issues.", images.brandMark, ["Bent rails", "Loose posts", "Rust damage", "Broken sections", "Repair before painting"]],
     ["pipe-fence-painting", "Pipe Fence Painting", "Painting for pipe fences that need a cleaner, more consistent finish.", images.brandMark, ["Surface prep", "Rust attention", "Paint coverage", "Commercial and residential pipe fences", "Maintenance expectations"]],
@@ -847,8 +954,11 @@ function addSpecificServicePages() {
       .replace("-repair", "")
       .replace("-painting", "")
       .replace("-staining", "")
+      .replace("-installation-removal", "")
       .replace("-installation-replacement", "");
-    const materialLabel = material === "t-post" ? "T-post" : capitalizeWords(material);
+    const isPoolSafety = slug.startsWith("pool-safety-fence-");
+    const serviceHubSlug = isPoolSafety ? "pool-safety-fences" : baseSlug;
+    const materialLabel = material === "t-post" ? "T-post" : isPoolSafety ? "Pool safety" : capitalizeWords(material);
 
     addPage({
       slug,
@@ -889,7 +999,7 @@ function addSpecificServicePages() {
         ["How do I get started?", "Send the project address, fence type, photos if available, and what you want fixed or changed."]
       ],
       related: [
-        [`/${baseSlug}/`, `${materialLabel} fence services`],
+        [`/${serviceHubSlug}/`, `${materialLabel} fence services`],
         ["/fence-repair/", "Fence repair"],
         ["/fence-restoration/", "Fence restoration"],
         ["/fence-installation-replacement/", "Installation/replacement"]
@@ -996,6 +1106,9 @@ function addSupportPages() {
             "Wood: restoration, repair, staining, installation, and replacement.",
             "Chain link: repair, installation, and replacement.",
             "T-post: repair, installation, and replacement.",
+            "Composite: repair, installation, and replacement.",
+            "Temporary fencing: installation, removal, repair, and repositioning.",
+            "Pool safety fences: repair, installation, and replacement.",
             "Pipe: restoration, repair, and painting.",
             "Vinyl: repair, installation, and replacement."
           ]
@@ -1003,7 +1116,7 @@ function addSupportPages() {
       ],
       faqs: [
         [`Do you provide fence repair in ${city}, TX?`, `Yes. Strong Perimeter provides residential and commercial fence repair in ${city}.`],
-        [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, and vinyl fences in ${city}.`],
+        [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, composite, pool safety, and vinyl fences in ${city}, and can help with temporary fencing.`],
         ["What should I send for a quote?", "Send the project address, fence type if you know it, photos if available, and what you want fixed or changed."]
       ],
       related: [
@@ -1017,7 +1130,7 @@ function addSupportPages() {
   addPage({
     slug: "projects",
     title: "Fence Projects and Gallery | Strong Perimeter",
-    description: "View Strong Perimeter fence project categories for wood, wrought iron, aluminum, chain link, T-post, pipe, vinyl, restorations, repairs, staining, and painting.",
+    description: "View Strong Perimeter fence project categories for wood, wrought iron, aluminum, chain link, T-post, composite, temporary, pool safety, pipe, vinyl, restorations, repairs, staining, and painting.",
     eyebrow: "Projects",
     h1: "Fence Projects and Gallery",
     lead: "Browse project categories by fence type and service so you can see examples that match the work you need.",
@@ -1026,6 +1139,9 @@ function addSupportPages() {
       serviceCard("Aluminum fences", "Aluminum project photos show repair, painting, installation, and clean metal fence lines.", "/projects/aluminum-fences/"),
       serviceCard("Wood fences", "Wood project photos show vertical and horizontal layouts, privacy style, finish, posts, and staining detail.", "/projects/wood-fences/"),
       serviceCard("T-post fences", "T-post project photos show post-and-wire layouts, bracing, gates, repair, and replacement scopes.", "/projects/t-post-fences/"),
+      serviceCard("Composite fences", "Composite project photos show panel layout, gates, posts, repair, and replacement scopes.", "/projects/composite-fences/"),
+      serviceCard("Temporary fencing", "Temporary fencing photos show panels, bases, gates, access points, and site perimeter layout.", "/projects/temporary-fencing/"),
+      serviceCard("Pool safety fences", "Pool safety project photos show barriers, gates, latches, visibility, and access planning.", "/projects/pool-safety-fences/"),
       serviceCard("Repair details", "Repair photos help buyers recognize similar problems on their own property.", "/projects/fence-repairs/")
     ],
     sections: [
@@ -1046,6 +1162,9 @@ function addSupportPages() {
       ["/projects/aluminum-fences/", "Aluminum projects"],
       ["/projects/chain-link-fences/", "Chain link projects"],
       ["/projects/t-post-fences/", "T-post projects"],
+      ["/projects/composite-fences/", "Composite projects"],
+      ["/projects/temporary-fencing/", "Temporary fencing projects"],
+      ["/projects/pool-safety-fences/", "Pool safety projects"],
       ["/projects/pipe-fences/", "Pipe fence projects"],
       ["/projects/vinyl-fences/", "Vinyl fence projects"]
     ]
@@ -1057,6 +1176,9 @@ function addSupportPages() {
     ["projects/aluminum-fences", "Aluminum Fence Projects", "Aluminum projects show repair, painting, installation, replacement, gates, and clean metal fence lines.", images.iron],
     ["projects/chain-link-fences", "Chain Link Fence Projects", "Chain link projects show practical repair, installation, replacement, access, and commercial perimeter work.", images.chain],
     ["projects/t-post-fences", "T-post Fence Projects", "T-post projects show post-and-wire layouts, bracing, gates, repairs, and practical perimeter work.", images.chain],
+    ["projects/composite-fences", "Composite Fence Projects", "Composite projects show repair, installation, replacement, panel layout, gates, and clean finished lines.", images.wood],
+    ["projects/temporary-fencing", "Temporary Fencing Projects", "Temporary fencing projects show panels, bases, gates, access planning, repair, repositioning, installation, and removal.", images.chain],
+    ["projects/pool-safety-fences", "Pool Safety Fence Projects", "Pool safety projects show barriers, gates, latches, spacing, visibility, repair, installation, and replacement.", images.iron],
     ["projects/pipe-fences", "Pipe Fence Projects", "Pipe fence projects show restoration, repair, painting, rust prep, and finished perimeter lines.", images.brandMark],
     ["projects/vinyl-fences", "Vinyl Fence Projects", "Vinyl projects show repair, replacement, panel alignment, privacy layouts, and clean installs.", images.brandGreen],
     ["projects/fence-restorations", "Fence Restoration Projects", "Restoration projects document the before condition, repair scope, finish work, and final result.", images.wood],
@@ -1144,7 +1266,7 @@ function addSupportPages() {
         items: [
           "Clear service recommendations.",
           "Residential and commercial fence work.",
-          "Wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl services.",
+          "Wrought iron, aluminum, wood, chain link, T-post, composite, temporary fencing, pool safety, pipe, and vinyl services.",
           "A practical repair, restore, or replace conversation."
         ]
       }
@@ -1242,7 +1364,7 @@ function addCostAndGuidePages() {
     ["pipe-fence-painting-vs-replacement", "Pipe Fence Painting vs Replacement", "Pipe fence painting helps when the structure is usable. Replacement is better when rails, posts, or welds are too compromised.", ["Rust", "Bent rails", "Loose posts", "Paint prep", "Commercial use"]],
     ["vinyl-fence-repair-or-replace", "Vinyl Fence Repair or Replace", "Vinyl fence repair works when the damage is isolated and parts can be matched. Replacement makes sense when panels and posts are widely damaged.", ["Panel damage", "Post condition", "Parts match", "Wind damage", "Privacy expectations"]],
     ["privacy-fence-installation", "Privacy Fence Installation", "Privacy fencing is usually about comfort, neighbors, pets, pools, alleys, and the look of the backyard.", ["Wood privacy fences", "Vertical or horizontal side-by-side", "Vertical or horizontal board-on-board", "Vertical or horizontal shadow box", "Vinyl privacy fences", "Height and layout"]],
-    ["pool-fence-installation", "Pool Fence Installation", "Pool fence planning should prioritize visibility, access, safety expectations, and local requirements.", ["Wrought iron visibility", "Gate and latch planning", "Height and spacing", "Local requirements", "Appearance around the pool"]],
+    ["pool-fence-installation", "Pool Fence Installation", "Pool fence planning should prioritize visibility, access, safety expectations, and local requirements.", ["Pool safety fences", "Wrought iron or aluminum visibility", "Gate and latch planning", "Height and spacing", "Local requirements", "Appearance around the pool"]],
     ["dog-fence-installation", "Dog Fence Installation", "Dog fence planning should match the dog, the yard, and the owner's privacy expectations.", ["Height", "Gaps", "Digging", "Visibility", "Gate security"]],
     ["security-fencing", "Security Fencing", "Security fencing should match the property type, visibility needs, access points, and maintenance expectations.", ["Chain link", "Wrought iron", "Pipe fence", "Commercial access", "Perimeter control"]],
     ["storm-damaged-fence-repair", "Storm Damaged Fence Repair", "Storm damage can show up as leaning posts, broken panels, loose fabric, bent sections, or damaged vinyl.", ["Wood storm repair", "Chain link damage", "Vinyl panels", "Post movement", "Repair vs replacement"]],
@@ -1261,7 +1383,7 @@ function addCostAndGuidePages() {
       imageAlt: name,
       highlights: [
         serviceCard("Start with the goal", "Privacy, security, repair, restoration, finish, and replacement all point to different scopes.", "/services/"),
-        serviceCard("Match the material", "Wrought iron, aluminum, wood, chain link, T-post, pipe, and vinyl behave differently in the field.", "/fence-types/"),
+        serviceCard("Match the material", "Wrought iron, aluminum, wood, chain link, T-post, composite, temporary fencing, pool safety, pipe, and vinyl behave differently in the field.", "/fence-types/"),
         serviceCard("Quote the real property", "Photos and address details help turn planning guidance into an actual estimate.", "/quote/")
       ],
       sections: [
@@ -1354,8 +1476,11 @@ function renderLinks(links, className = "link-grid") {
 
 function iconForHref(href) {
   if (href.includes("fence-types")) return images.woodIcon;
+  if (href.includes("temporary")) return images.chain;
   if (href.includes("t-post")) return images.chain;
   if (href.includes("chain-link")) return images.chain;
+  if (href.includes("composite")) return images.woodIcon;
+  if (href.includes("pool-safety") || href.includes("pool-fence")) return images.iron;
   if (href.includes("wrought-iron") || href.includes("aluminum") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
   if (href.includes("wood") || href.includes("privacy") || href.includes("staining")) return images.woodIcon;
   if (href.includes("repair") || href.includes("installation-replacement")) return images.brandMark;
@@ -1363,8 +1488,11 @@ function iconForHref(href) {
 }
 
 function visualImageForHref(href) {
+  if (href.includes("temporary")) return images.chain;
   if (href.includes("t-post")) return images.chain;
   if (href.includes("chain-link") || href.includes("commercial") || href.includes("security")) return images.chain;
+  if (href.includes("composite")) return images.wood;
+  if (href.includes("pool-safety") || href.includes("pool-fence")) return images.iron;
   if (href.includes("wood") || href.includes("privacy") || href.includes("staining") || href.includes("dog") || href.includes("hoa") || href.includes("fence-types") || href.includes("residential") || href.includes("projects")) return images.wood;
   if (href.includes("wrought-iron") || href.includes("aluminum") || href.includes("pipe") || href.includes("painting") || href.includes("restoration")) return images.iron;
   if (href.includes("repair") || href.includes("installation-replacement")) return images.wood;
@@ -1373,8 +1501,11 @@ function visualImageForHref(href) {
 
 function visualImageForPage(page) {
   const slug = page.slug;
+  if (slug.includes("temporary")) return images.chain;
   if (slug.includes("t-post")) return images.chain;
   if (slug.includes("chain-link") || slug.includes("commercial") || slug.includes("security")) return images.chain;
+  if (slug.includes("composite")) return images.wood;
+  if (slug.includes("pool-safety") || slug.includes("pool-fence")) return images.iron;
   if (slug.includes("wood") || slug.includes("privacy") || slug.includes("staining") || slug.includes("dog") || slug.includes("hoa")) return images.wood;
   if (slug.includes("wrought-iron") || slug.includes("aluminum") || slug.includes("pipe") || slug.includes("painting") || slug.includes("restoration")) return images.iron;
   if (slug.includes("team")) return "/images/daniel-wade-1200-min.jpg";
@@ -1633,7 +1764,7 @@ function renderRelatedSection(page) {
           <h2>More useful pages</h2>
           <p>Go straight to the service, fence type, or next step that fits better.</p>
         </div>
-        ${renderLinks(page.related.slice(0, 8), "link-grid link-grid--simple link-grid--visual")}
+        ${renderLinks(page.related.slice(0, 10), "link-grid link-grid--simple link-grid--visual")}
       </div>
     </section>`;
 }
@@ -1752,7 +1883,7 @@ ${styleSection}
 
 function renderQuoteWizard() {
   const serviceOptions = [
-    { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, chain link fabric, T-posts, aluminum or vinyl sections, or storm damage." },
+    { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, latches, chain link fabric, T-posts, composite, aluminum or vinyl sections, or storm damage." },
     { value: "Installation/replacement", label: "Installation or replacement", image: images.wood, text: "A new fence line, replacement sections, or a full rebuild." },
     { value: "Painting", label: "Painting", image: images.iron, text: "Wrought iron, aluminum, or pipe fence painting." },
     { value: "Staining", label: "Staining", image: images.wood, text: "Wood fence staining." },
@@ -1778,6 +1909,9 @@ function renderQuoteWizard() {
     },
     { value: "Chain link", label: "Chain link", image: images.chain, text: "Chain link fabric, posts, rails, or gates." },
     { value: "T-post", label: "T-post", image: images.chain, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
+    { value: "Composite", label: "Composite", image: images.wood, text: "Composite panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, damaged panels, loose posts, replacement section, photos available, etc." },
+    { value: "Temporary fencing", label: "Temporary fencing", image: images.chain, text: "Temporary panels, stands, gates, bases, or site perimeter.", notesPlaceholder: "Approximate length, site access, panel issue, damaged stands, repositioning, install/removal timing, photos available, etc." },
+    { value: "Pool safety fences", label: "Pool safety fences", image: images.iron, text: "Pool barriers, gates, latches, panels, or safety sections.", notesPlaceholder: "Approximate length, pool access, gate or latch issue, panel spacing, replacement section, photos available, etc." },
     { value: "Pipe fence", label: "Pipe fence", image: images.fabric, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
     { value: "Vinyl", label: "Vinyl", image: images.brandGreen, media: "symbol", text: "Vinyl panels, posts, gates, or sections." }
   ];
@@ -1806,6 +1940,21 @@ function renderQuoteWizard() {
       { value: "Not sure yet", label: "Not sure yet" }
     ],
     "T-post": [
+      { value: "Repair", label: "Repair" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    Composite: [
+      { value: "Repair", label: "Repair" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    "Temporary fencing": [
+      { value: "Repair/repositioning", label: "Repair or repositioning" },
+      { value: "Installation/removal", label: "Installation or removal" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    "Pool safety fences": [
       { value: "Repair", label: "Repair" },
       { value: "Installation/replacement", label: "Installation or replacement" },
       { value: "Not sure yet", label: "Not sure yet" }

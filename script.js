@@ -6,6 +6,7 @@ const youtubeEmbeds = document.querySelectorAll(".youtube-embed");
 const googleMapEl = document.querySelector("[data-google-map]");
 const googleMapDataEl = document.getElementById("strong-service-area-map-data");
 const quoteStepper = document.querySelector("[data-quote-stepper]");
+const googleAddressInputs = document.querySelectorAll("[data-google-address-autocomplete]");
 
 if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
@@ -148,28 +149,114 @@ function initStrongPerimeterServiceMap(mapData, mapEl) {
   mapEl.closest(".service-map")?.classList.add("is-google-map-loaded");
 }
 
+let strongPerimeterMapData = null;
+
 if (googleMapEl && googleMapDataEl) {
-  let mapData;
-
   try {
-    mapData = JSON.parse(googleMapDataEl.textContent);
+    strongPerimeterMapData = JSON.parse(googleMapDataEl.textContent);
   } catch {
-    mapData = null;
+    strongPerimeterMapData = null;
+  }
+}
+
+function componentValue(components, type, key = "long_name") {
+  return components.find((component) => component.types.includes(type))?.[key] || "";
+}
+
+function initStrongPerimeterAddressAutocomplete() {
+  if (!window.google?.maps?.places || !googleAddressInputs.length) {
+    return;
   }
 
-  const googleMapsApiKey = googleMapEl.dataset.apiKey || window.STRONG_PERIMETER_GOOGLE_MAPS_API_KEY || "";
+  googleAddressInputs.forEach((input) => {
+    if (input.dataset.googleAddressReady === "true") {
+      return;
+    }
 
-  if (mapData && googleMapsApiKey) {
-    window.initStrongPerimeterGoogleMap = () => {
-      initStrongPerimeterServiceMap(mapData, googleMapEl);
-    };
+    input.dataset.googleAddressReady = "true";
+    input.autocomplete = "off";
 
-    const googleMapsScript = document.createElement("script");
-    googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(googleMapsApiKey)}&callback=initStrongPerimeterGoogleMap&loading=async`;
-    googleMapsScript.async = true;
-    googleMapsScript.defer = true;
-    document.head.appendChild(googleMapsScript);
+    const autocomplete = new window.google.maps.places.Autocomplete(input, {
+      componentRestrictions: { country: "us" },
+      fields: ["address_components", "formatted_address", "name"],
+      types: ["address"]
+    });
+
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      const components = place.address_components || [];
+      const prefix = input.dataset.addressPrefix || input.id;
+      const form = input.form || document;
+      const streetNumber = componentValue(components, "street_number");
+      const route = componentValue(components, "route");
+      const street = [streetNumber, route].filter(Boolean).join(" ") || place.name || "";
+      const street2 = componentValue(components, "subpremise");
+      const city = componentValue(components, "locality")
+        || componentValue(components, "sublocality")
+        || componentValue(components, "postal_town");
+      const state = componentValue(components, "administrative_area_level_1", "short_name");
+      const postalCode = componentValue(components, "postal_code");
+      const postalSuffix = componentValue(components, "postal_code_suffix");
+      const zip = [postalCode, postalSuffix].filter(Boolean).join("-");
+      const values = {
+        [`${prefix}-street`]: street,
+        [`${prefix}-street-2`]: street2,
+        [`${prefix}-city`]: city,
+        [`${prefix}-state`]: state,
+        [`${prefix}-zip`]: zip
+      };
+
+      input.value = place.formatted_address || input.value;
+
+      Object.entries(values).forEach(([id, value]) => {
+        const field = form.querySelector(`#${CSS.escape(id)}`);
+        if (field && value) {
+          field.value = value;
+        }
+      });
+    });
+  });
+}
+
+function initStrongPerimeterGoogleIntegrations() {
+  if (googleMapEl && strongPerimeterMapData) {
+    initStrongPerimeterServiceMap(strongPerimeterMapData, googleMapEl);
   }
+
+  initStrongPerimeterAddressAutocomplete();
+}
+
+function loadStrongPerimeterGoogleMaps() {
+  const googleMapsApiKey = googleMapEl?.dataset.apiKey
+    || googleAddressInputs[0]?.dataset.apiKey
+    || window.STRONG_PERIMETER_GOOGLE_MAPS_API_KEY
+    || "";
+
+  if (!googleMapsApiKey) {
+    return;
+  }
+
+  window.initStrongPerimeterGoogleIntegrations = initStrongPerimeterGoogleIntegrations;
+
+  if (window.google?.maps?.places) {
+    initStrongPerimeterGoogleIntegrations();
+    return;
+  }
+
+  if (document.querySelector("[data-strong-google-maps-script]")) {
+    return;
+  }
+
+  const googleMapsScript = document.createElement("script");
+  googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(googleMapsApiKey)}&libraries=places&callback=initStrongPerimeterGoogleIntegrations&loading=async`;
+  googleMapsScript.async = true;
+  googleMapsScript.defer = true;
+  googleMapsScript.dataset.strongGoogleMapsScript = "true";
+  document.head.appendChild(googleMapsScript);
+}
+
+if ((googleMapEl && strongPerimeterMapData) || googleAddressInputs.length) {
+  loadStrongPerimeterGoogleMaps();
 }
 
 if (quoteStepper) {
@@ -345,6 +432,16 @@ if (quoteForm) {
     const email = document.getElementById("quote-email")?.value.trim() || "";
     const phone = document.getElementById("quote-phone")?.value.trim() || "";
     const address = document.getElementById("quote-address")?.value.trim() || "";
+    const addressStreet = document.getElementById("quote-address-street")?.value.trim() || "";
+    const addressStreet2 = document.getElementById("quote-address-street-2")?.value.trim() || "";
+    const addressCity = document.getElementById("quote-address-city")?.value.trim() || "";
+    const addressState = document.getElementById("quote-address-state")?.value.trim() || "";
+    const addressZip = document.getElementById("quote-address-zip")?.value.trim() || "";
+    const structuredAddress = [
+      addressStreet,
+      addressStreet2,
+      [addressCity, addressState, addressZip].filter(Boolean).join(", ")
+    ].filter(Boolean).join("\n");
     const quoteAreas = Array.from(quoteForm.querySelectorAll("[data-service-panel]"))
       .filter((panel) => !panel.hidden)
       .map((panel, index) => {
@@ -372,7 +469,6 @@ if (quoteForm) {
     const fenceType = quoteForm.querySelector('input[name="fence_type"]:checked')?.value
       || quoteAreas[0]?.fenceType
       || "";
-    const propertyType = quoteForm.querySelector('input[name="property_type"]:checked')?.value || "";
     const timeline = document.getElementById("quote-timeline")?.value.trim() || "";
     const details = document.getElementById("quote-details")?.value.trim() || "";
     const areaLines = quoteAreas.length
@@ -396,8 +492,12 @@ if (quoteForm) {
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${phone}`,
-      `Project address: ${address || "Not provided"}`,
-      `Property type: ${propertyType || "Not specified"}`,
+      `Project address: ${address || structuredAddress || "Not provided"}`,
+      `Street: ${addressStreet || "Not provided"}`,
+      `Street 2: ${addressStreet2 || "Not provided"}`,
+      `City: ${addressCity || "Not provided"}`,
+      `State: ${addressState || "Not provided"}`,
+      `ZIP: ${addressZip || "Not provided"}`,
       `Timeline: ${timeline || "Not specified"}`,
       "",
       "Fence areas:",

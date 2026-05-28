@@ -1908,6 +1908,24 @@ a.story-card:focus-visible {
   grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
 }
 
+.quote-fields--address {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.quote-fields--address label {
+  grid-column: span 3;
+}
+
+.quote-fields--address label:nth-of-type(4),
+.quote-fields--address label:nth-of-type(5),
+.quote-fields--address label:nth-of-type(6) {
+  grid-column: span 2;
+}
+
+.quote-fields--address .full-width {
+  grid-column: 1 / -1;
+}
+
 .quote-step__actions {
   display: flex;
   justify-content: flex-end;
@@ -2399,6 +2417,21 @@ a.story-card:focus-visible {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .quote-fields--address {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quote-fields--address label,
+  .quote-fields--address label:nth-of-type(4),
+  .quote-fields--address label:nth-of-type(5),
+  .quote-fields--address label:nth-of-type(6) {
+    grid-column: span 1;
+  }
+
+  .quote-fields--address .full-width {
+    grid-column: 1 / -1;
+  }
+
   .story-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2547,8 +2580,17 @@ a.story-card:focus-visible {
   .quote-options--fence-types,
   .quote-fields,
   .quote-fields--two,
+  .quote-fields--address,
   .quote-wizard__top {
     grid-template-columns: 1fr;
+  }
+
+  .quote-fields--address label,
+  .quote-fields--address label:nth-of-type(4),
+  .quote-fields--address label:nth-of-type(5),
+  .quote-fields--address label:nth-of-type(6),
+  .quote-fields--address .full-width {
+    grid-column: 1 / -1;
   }
 
   .quote-progress {

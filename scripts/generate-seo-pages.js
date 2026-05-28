@@ -2765,11 +2765,6 @@ function renderQuoteWizard() {
       { value: "Not sure yet", label: "Not sure yet" }
     ]
   };
-  const propertyOptions = [
-    { value: "Residential", label: "Residential", image: images.wood, text: "Home, backyard, pool, pet, privacy, alley, or HOA project." },
-    { value: "Commercial", label: "Commercial", image: images.chain, text: "Business, facility, lot, yard, storefront, or managed property." }
-  ];
-
   return `
     <section class="section section--quote-wizard page-section" id="quote-wizard">
       <div class="section-shell">
@@ -2778,7 +2773,6 @@ function renderQuoteWizard() {
             <div class="quote-wizard__intro">
               <p class="eyebrow eyebrow--green">Quote request</p>
               <h1>Tell us your fence story.</h1>
-              <p>We will turn the who, what, when, where, and why into a practical repair, restoration, finishing, installation, or replacement plan.</p>
             </div>
             <div class="quote-wizard__tools">
               <div class="quote-progress" aria-label="Quote form progress" aria-live="polite">
@@ -2823,11 +2817,33 @@ function renderQuoteWizard() {
           </fieldset>
 
           <fieldset class="quote-step" data-quote-step hidden>
-            <legend>Who uses the space, and when do you need it?</legend>
-            <div class="quote-options quote-options--property">
-              ${renderQuoteOptionCards("property_type", propertyOptions)}
-            </div>
-            <div class="quote-fields quote-fields--two">
+            <legend>Project address and timing</legend>
+            <p class="quote-step__lead">Start typing the full address, then confirm the individual address fields before continuing.</p>
+            <div class="quote-fields quote-fields--address">
+              <label class="full-width">
+                <span>Full project address</span>
+                <input type="text" id="quote-address" name="address_full" placeholder="Start typing the project address" required autocomplete="street-address" data-google-address-autocomplete data-address-prefix="quote-address" data-api-key="${escapeHtml(googleMapsApiKey)}">
+              </label>
+              <label>
+                <span>Street</span>
+                <input type="text" id="quote-address-street" name="address_street" placeholder="Street address" required autocomplete="address-line1">
+              </label>
+              <label>
+                <span>Street 2</span>
+                <input type="text" id="quote-address-street-2" name="address_street_2" placeholder="Apt, suite, unit, gate code" autocomplete="address-line2">
+              </label>
+              <label>
+                <span>City</span>
+                <input type="text" id="quote-address-city" name="address_city" placeholder="City" required autocomplete="address-level2">
+              </label>
+              <label>
+                <span>State</span>
+                <input type="text" id="quote-address-state" name="address_state" placeholder="TX" required maxlength="2" autocomplete="address-level1">
+              </label>
+              <label>
+                <span>ZIP</span>
+                <input type="text" id="quote-address-zip" name="address_zip" placeholder="ZIP code" required inputmode="numeric" autocomplete="postal-code">
+              </label>
               <label>
                 <span>Timing</span>
                 <select id="quote-timeline" name="timeline">
@@ -2836,9 +2852,9 @@ function renderQuoteWizard() {
                   <option value="Just gathering quotes">Just gathering quotes</option>
                 </select>
               </label>
-              <label>
+              <label class="full-width">
                 <span>Project details</span>
-                <textarea id="quote-details" name="details" rows="4" placeholder="What happened? Who uses the space? Why does this fence matter right now? Photos available, gate issue, approximate length, access notes, etc."></textarea>
+                <textarea id="quote-details" name="details" rows="4" placeholder="What happened? Gate issue, approximate length, access notes, photos available, timing details, HOA or permit notes, etc."></textarea>
               </label>
             </div>
             <div class="quote-step__actions">
@@ -2865,10 +2881,6 @@ function renderQuoteWizard() {
               <label>
                 <span>Phone</span>
                 <input type="tel" id="quote-phone" name="phone" placeholder="(214) 555-0123" required>
-              </label>
-              <label class="full-width">
-                <span>Project address</span>
-                <input type="text" id="quote-address" name="address" placeholder="Street address, city, ZIP" required>
               </label>
             </div>
             <div class="quote-step__actions">

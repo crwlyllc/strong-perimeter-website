@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
 
-# Build mode: pages use meta robots noindex, nofollow until launch.
-
 Sitemap: https://crwlyllc.github.io/strong-perimeter-website/sitemap.xml

@@ -671,10 +671,21 @@ h3,
 
 .story-card,
 .journey-step {
+  display: block;
   min-height: 14rem;
   padding: 1.15rem;
   border-radius: var(--radius-lg);
   background: rgba(255, 253, 249, 0.9);
+}
+
+a.story-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+a.story-card:hover,
+a.story-card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 40px rgba(24, 21, 19, 0.1);
 }
 
 .story-card:nth-child(2),

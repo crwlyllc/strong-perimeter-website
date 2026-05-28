@@ -5,7 +5,7 @@ const ROOT = path.resolve(__dirname, "..");
 const SITE_ORIGIN = "https://crwlyllc.github.io";
 const BASE_PATH = "/strong-perimeter-website";
 const SITE_URL = `${SITE_ORIGIN}${BASE_PATH}`;
-const LASTMOD = "2026-05-26";
+const LASTMOD = "2026-05-28";
 
 const navLinks = [
   ["Services", "/services/"],
@@ -17,6 +17,13 @@ const navLinks = [
 ];
 
 const quoteServices = [
+  "Board-on-board fence",
+  "Horizontal fence",
+  "Cedar fence",
+  "Pressure-treated pine fence",
+  "Fence gates",
+  "Gate repair",
+  "Automatic gates",
   "Wrought iron fence restoration",
   "Wrought iron fence repair",
   "Wrought iron fence painting",
@@ -93,6 +100,39 @@ const coreServiceLinks = [
   ["/fence-staining/", "Fence staining"]
 ];
 
+const designStyleLinks = [
+  ["/fence-designs/", "Fence designs"],
+  ["/board-on-board-fence/", "Board-on-board fence"],
+  ["/horizontal-fence/", "Horizontal fence"],
+  ["/side-by-side-fence/", "Side-by-side fence"],
+  ["/shadowbox-fence/", "Shadowbox fence"],
+  ["/cedar-fence/", "Cedar fence"],
+  ["/pressure-treated-pine-fence/", "Pressure-treated pine fence"],
+  ["/metal-post-wood-fence/", "Metal-post wood fence"],
+  ["/cap-and-trim-fence/", "Cap and trim fence"],
+  ["/stockade-fence/", "Stockade fence"]
+];
+
+const gateLinks = [
+  ["/fence-gates/", "Fence gates"],
+  ["/gate-repair/", "Gate repair"],
+  ["/automatic-gates/", "Automatic gates"],
+  ["/gate-operator-installation/", "Gate operator installation"],
+  ["/driveway-gates/", "Driveway gates"],
+  ["/wood-gates/", "Wood gates"],
+  ["/iron-gates/", "Iron gates"]
+];
+
+const trustAndAuthorityLinks = [
+  ["/why-strong-perimeter/", "Why Strong Perimeter"],
+  ["/our-process/", "Our process"],
+  ["/warranty/", "Warranty and workmanship"],
+  ["/financing/", "Financing and payment options"],
+  ["/trust-and-accountability/", "Trust and accountability"],
+  ["/texas-fence-laws/", "Texas fence laws"],
+  ["/fence-permits/", "Fence permits"]
+];
+
 const serviceAreaCities = [
   "Addison",
   "Allen",
@@ -101,16 +141,19 @@ const serviceAreaCities = [
   "Bedford",
   "Carrollton",
   "Cedar Hill",
+  "Celina",
   "Colleyville",
   "Coppell",
   "Corinth",
   "Dallas",
   "DeSoto",
+  "Denton",
   "Duncanville",
   "Euless",
   "Farmers Branch",
   "Fate",
   "Flower Mound",
+  "Fort Worth",
   "Forney",
   "Frisco",
   "Garland",
@@ -125,6 +168,7 @@ const serviceAreaCities = [
   "Kaufman",
   "Keller",
   "Lancaster",
+  "Lantana",
   "Lavon",
   "Lewisville",
   "Little Elm",
@@ -134,6 +178,7 @@ const serviceAreaCities = [
   "North Richland Hills",
   "Ovilla",
   "Plano",
+  "Prosper",
   "Richardson",
   "Richland Hills",
   "Rockwall",
@@ -145,6 +190,7 @@ const serviceAreaCities = [
   "Talty",
   "Terrell",
   "The Colony",
+  "Trophy Club",
   "University Park",
   "Waxahachie",
   "Wylie"
@@ -169,16 +215,19 @@ const serviceAreaCityCoordinates = {
   Bedford: [32.844, -97.1431],
   Carrollton: [32.9756, -96.8899],
   "Cedar Hill": [32.5885, -96.9561],
+  Celina: [33.3246, -96.7844],
   Colleyville: [32.8809, -97.155],
   Coppell: [32.9546, -97.015],
   Corinth: [33.154, -97.0647],
   Dallas: [32.7767, -96.797],
+  Denton: [33.2148, -97.1331],
   DeSoto: [32.5899, -96.8571],
   Duncanville: [32.6518, -96.9083],
   Euless: [32.8371, -97.0819],
   "Farmers Branch": [32.9265, -96.8961],
   Fate: [32.9415, -96.3814],
   "Flower Mound": [33.0146, -97.0969],
+  "Fort Worth": [32.7555, -97.3308],
   Forney: [32.7482, -96.4719],
   Frisco: [33.1507, -96.8236],
   Garland: [32.9126, -96.6389],
@@ -193,6 +242,7 @@ const serviceAreaCityCoordinates = {
   Kaufman: [32.589, -96.3089],
   Keller: [32.9346, -97.2517],
   Lancaster: [32.5921, -96.7561],
+  Lantana: [33.0907, -97.1245],
   Lavon: [33.0276, -96.4344],
   Lewisville: [33.0462, -96.9942],
   "Little Elm": [33.1626, -96.9375],
@@ -202,6 +252,7 @@ const serviceAreaCityCoordinates = {
   "North Richland Hills": [32.8343, -97.2289],
   Ovilla: [32.5265, -96.8864],
   Plano: [33.0198, -96.6989],
+  Prosper: [33.2362, -96.8011],
   Richardson: [32.9483, -96.7299],
   "Richland Hills": [32.816, -97.2281],
   Rockwall: [32.9312, -96.4597],
@@ -213,12 +264,129 @@ const serviceAreaCityCoordinates = {
   Talty: [32.6835, -96.3875],
   Terrell: [32.736, -96.2753],
   "The Colony": [33.0806, -96.8928],
+  "Trophy Club": [32.9979, -97.1836],
   "University Park": [32.8501, -96.8003],
   Waxahachie: [32.3865, -96.8483],
   Wylie: [33.0151, -96.5389]
 };
 
-const featuredServiceAreaCities = ["Rockwall", "Garland", "Plano", "Frisco"];
+const featuredServiceAreaCities = ["Rockwall", "Dallas", "Fort Worth", "Plano", "Frisco", "Mesquite"];
+
+const priorityCityProfiles = {
+  "Fort Worth": {
+    positioning: "Fort Worth fence projects need practical planning for larger lots, older neighborhoods, commercial edges, alley access, wind, sun, and repair-or-replace decisions.",
+    neighborhoods: ["Near Southside", "Westover Hills", "Tanglewood", "Alliance area", "Keller and North Fort Worth edges"],
+    concerns: ["Wood fence repair", "Commercial chain link", "Wrought iron restoration", "Driveway gates", "Permit and access planning"],
+    styles: ["Cedar privacy", "Board-on-board", "Chain link", "Wrought iron", "Automatic gates"],
+    cta: "Use this page when the Fort Worth project needs a clear local scope before price, schedule, and access are discussed."
+  },
+  Rockwall: {
+    positioning: "Rockwall fence work needs a local eye for lake-area wind, HOA expectations, clay soil movement, curb appeal, and fast storm-damage decisions.",
+    neighborhoods: ["The Shores", "Caruth Lake", "Chandlers Landing", "Heath-area properties", "Lake Ray Hubbard corridors"],
+    concerns: ["HOA-approved cedar and privacy styles", "Storm and wind repair", "Gate alignment and access", "Wrought iron restoration", "Pool safety and lake-area visibility"],
+    styles: ["Cedar privacy", "Board-on-board", "Horizontal wood", "Wrought iron", "Automatic gates"],
+    cta: "Use this page when the address is in Rockwall and the fence needs local planning, not a generic DFW answer."
+  },
+  Mesquite: {
+    positioning: "Mesquite buyers usually need a practical answer quickly: repair storm damage, replace tired wood, stain an aging fence, or add a gate that works every day.",
+    neighborhoods: ["Creek Crossing", "Skyline", "Town East", "Lawson", "Balch Springs and Forney edges"],
+    concerns: ["Wood fence repair", "Fence staining", "Chain link and utility fencing", "Gate repair", "Storm-damaged sections"],
+    styles: ["Cedar wood", "Pressure-treated pine", "Chain link", "Ornamental iron", "Wood gates"],
+    cta: "Use this page when the fence problem is specific and the next step needs to be simple."
+  },
+  Dallas: {
+    positioning: "Dallas fence projects can be tight, varied, and detail-heavy: alleys, older lots, privacy lines, pool barriers, storefronts, and managed properties all need different scopes.",
+    neighborhoods: ["East Dallas", "Lakewood", "Oak Cliff", "Preston Hollow", "North Dallas"],
+    concerns: ["Alley access", "Privacy upgrades", "Commercial perimeter needs", "Permit and HOA checks", "Repair vs replacement decisions"],
+    styles: ["Board-on-board", "Horizontal wood", "Iron", "Chain link", "Automatic gates"],
+    cta: "Use this page when the Dallas property needs clear options before the work starts."
+  },
+  Garland: {
+    positioning: "Garland fence work often starts with wind, age, alley exposure, pets, privacy, or a backyard that needs to feel settled again.",
+    neighborhoods: ["Firewheel", "Duck Creek", "North Garland", "South Garland", "Lake Ray Hubbard side"],
+    concerns: ["Wood repair", "Privacy replacement", "Chain link repair", "Gate alignment", "Staining and maintenance"],
+    styles: ["Wood privacy", "Board-on-board", "Chain link", "Vinyl", "Wood gates"],
+    cta: "Use this page when the project is in Garland and the fence needs a clean repair or replacement plan."
+  },
+  Plano: {
+    positioning: "Plano fence projects often need clean curb appeal, HOA awareness, backyard privacy, pet containment, and a finish that fits established neighborhoods.",
+    neighborhoods: ["West Plano", "Legacy area", "Central Plano", "East Plano", "Parker Road corridors"],
+    concerns: ["HOA style expectations", "Privacy fencing", "Gate and latch details", "Wood vs vinyl decisions", "Repair or replace planning"],
+    styles: ["Board-on-board", "Horizontal wood", "Cap and trim", "Vinyl privacy", "Pool safety fences"],
+    cta: "Use this page when the Plano fence needs a tidy scope and a final look that belongs with the home."
+  },
+  Frisco: {
+    positioning: "Frisco fence buyers often care about new-home standards, HOA details, privacy, pets, pool safety, and a finished fence line that looks intentional.",
+    neighborhoods: ["West Frisco", "Panther Creek", "Phillips Creek Ranch", "Starwood", "Stonebriar area"],
+    concerns: ["HOA approval", "Privacy upgrades", "Pool safety", "Wood style choices", "Gate access"],
+    styles: ["Board-on-board", "Horizontal wood", "Cedar", "Cap and trim", "Pool safety fencing"],
+    cta: "Use this page when the project needs newer-neighborhood polish and clear choices."
+  },
+  Forney: {
+    positioning: "Forney projects often blend fast-growing neighborhood needs with practical privacy, pets, new-home upgrades, and storm repair.",
+    neighborhoods: ["Devonshire", "Windmill Farms", "Gateway", "Travis Ranch", "Talty edges"],
+    concerns: ["New-home privacy", "Pet containment", "Wood repair", "Gate adjustment", "Fence staining"],
+    styles: ["Cedar privacy", "Pressure-treated pine", "Board-on-board", "Wood gates", "Chain link"],
+    cta: "Use this page when the Forney fence needs practical guidance and a clear quote path."
+  },
+  Rowlett: {
+    positioning: "Rowlett fence work needs attention to lake-area exposure, backyard privacy, storm damage, gate alignment, and pool safety.",
+    neighborhoods: ["Waterview", "Dalrock", "Lake Ray Hubbard side", "Pecan Grove area", "Liberty Grove corridors"],
+    concerns: ["Storm repair", "Wood privacy", "Wrought iron and aluminum", "Pool barriers", "Gate repair"],
+    styles: ["Wood privacy", "Horizontal wood", "Wrought iron", "Aluminum", "Pool safety fences"],
+    cta: "Use this page when lake-area weather, visibility, or access affects the fence scope."
+  },
+  "Royse City": {
+    positioning: "Royse City projects often need a mix of subdivision privacy, practical perimeter work, gates, pets, and storm-ready repairs.",
+    neighborhoods: ["Stone River", "Verandah", "Hidden Creek", "Woodcreek", "I-30 growth corridor"],
+    concerns: ["Privacy replacement", "Gate access", "Pet containment", "T-post and utility edges", "Storm repair"],
+    styles: ["Wood privacy", "Board-on-board", "T-post", "Chain link", "Driveway gates"],
+    cta: "Use this page when the Royse City project needs a practical plan that still looks finished."
+  }
+};
+
+const permitCities = ["Dallas", "Fort Worth", "Rockwall", "Garland", "Plano", "Frisco", "Mesquite", "Forney", "Rowlett", "Royse City"];
+
+const priorityCityServiceCities = ["Rockwall", "Mesquite", "Dallas", "Fort Worth", "Garland", "Plano", "Frisco", "Forney", "Rowlett", "Royse City"];
+
+const cityServiceTopics = [
+  {
+    slug: "fence-repair",
+    name: "Fence Repair",
+    intent: "repair a damaged, leaning, storm-hit, rusted, or aging fence without guessing whether a full replacement is needed",
+    links: [["/fence-repair/", "Fence repair"], ["/storm-damaged-fence-repair/", "Storm damage repair"], ["/repair-or-replace-fence/", "Repair or replace guide"]]
+  },
+  {
+    slug: "fence-installation",
+    name: "Fence Installation",
+    intent: "build a new fence line or replace a fence that no longer fits the property, privacy goal, or condition",
+    links: [["/fence-installation-replacement/", "Installation and replacement"], ["/privacy-fence-installation/", "Privacy fence installation"], ["/fence-designs/", "Fence designs"]]
+  },
+  {
+    slug: "wood-fence",
+    name: "Wood Fence",
+    intent: "plan wood fence repair, staining, installation, replacement, privacy, and design choices",
+    links: [["/wood-fence/", "Wood fence services"], ["/wood-fence-installation-replacement/", "Wood installation"], ["/wood-fence-repair/", "Wood repair"], ["/wood-fence-staining/", "Wood staining"]]
+  },
+  {
+    slug: "wrought-iron-fence",
+    name: "Wrought Iron Fence",
+    intent: "repair, restore, paint, install, or replace decorative metal fencing with a cleaner finished look",
+    links: [["/wrought-iron-fence/", "Wrought iron services"], ["/wrought-iron-fence-restoration/", "Iron restoration"], ["/wrought-iron-fence-painting/", "Iron painting"]]
+  },
+  {
+    slug: "chain-link-fence",
+    name: "Chain Link Fence",
+    intent: "repair, install, or replace practical fencing for pets, yards, utility areas, and commercial boundaries",
+    links: [["/chain-link-fence/", "Chain link services"], ["/chain-link-fence-repair/", "Chain link repair"], ["/chain-link-fence-installation-replacement/", "Chain link installation"]]
+  },
+  {
+    slug: "automatic-gates",
+    name: "Automatic Gates",
+    intent: "plan driveway access, gate automation, operator needs, repair, and daily convenience",
+    links: [["/automatic-gates/", "Automatic gates"], ["/gate-operator-installation/", "Gate operator installation"], ["/driveway-gates/", "Driveway gates"], ["/fence-gates/", "Fence gates"]]
+  }
+];
 
 const pages = [];
 
@@ -255,6 +423,24 @@ function citySlug(city) {
 
 function cityServiceAreaHref(city) {
   return `/service-areas/${citySlug(city)}-tx/`;
+}
+
+function cityPermitHref(city) {
+  return `/fence-permits/${citySlug(city)}-tx/`;
+}
+
+function localProfileFor(city) {
+  return priorityCityProfiles[city] || {
+    positioning: `${city} fence projects need clear repair, restoration, installation, replacement, and finish guidance before work starts.`,
+    neighborhoods: [`${city} homes`, `${city} commercial properties`, "Backyards", "Alleys", "Managed properties"],
+    concerns: ["Fence repair", "Fence restoration", "Installation and replacement", "Gate alignment", "Permit or HOA checks"],
+    styles: ["Wood privacy", "Wrought iron", "Chain link", "Vinyl", "Fence gates"],
+    cta: `Use this page when the project address is in ${city} and you need a plain-English fence scope.`
+  };
+}
+
+function linkCards(links, text, tag = "Page") {
+  return links.map(([href, label]) => serviceCard(label, text(label), href, tag, "View page"));
 }
 
 function projectGoogleMapPoint([lat, lng]) {
@@ -327,6 +513,18 @@ function addActionHubPages() {
           serviceCard("Residential fencing", "Homes, backyards, alleys, pools, pets, privacy, curb appeal, and HOA expectations.", "/residential-fencing/", "Homes", "View residential services"),
           serviceCard("Commercial fencing", "Lots, yards, storefronts, managed properties, facilities, access points, and practical perimeter control.", "/commercial-fencing/", "Commercial", "View commercial services")
         ]
+      },
+      {
+        id: "buyer-intent",
+        eyebrow: "Buyer intent",
+        title: "Style, gate, and trust pages customers expect",
+        body: "Page-one fence sites make the next question easy to answer. These pages cover the choices customers usually compare before they call.",
+        cards: [
+          serviceCard("Fence designs", "Compare board-on-board, horizontal, shadowbox, cedar, pine, metal-post, cap-and-trim, and stockade fence options.", "/fence-designs/", "Designs", "Compare styles"),
+          serviceCard("Fence gates", "Plan walk gates, double gates, driveway gates, gate repairs, automatic gates, and operator installation.", "/fence-gates/", "Gates", "View gate services"),
+          serviceCard("Fence permits", "Find city permit and HOA planning pages before you build or replace a fence.", "/fence-permits/", "Permits", "Check permit pages"),
+          serviceCard("Our process", "See how we move from the customer's story to scope, quote, work, cleanup, and final walkthrough.", "/our-process/", "Process", "View process")
+        ]
       }
     ],
     sections: [
@@ -355,7 +553,7 @@ function addActionHubPages() {
         ]
       }
     ],
-    related: [["/quote/", "Request a fence quote"], ...coreServiceLinks, ...materialLinks]
+    related: [["/quote/", "Request a fence quote"], ...coreServiceLinks, ...materialLinks, ...designStyleLinks.slice(0, 5), ...gateLinks.slice(0, 3), ...trustAndAuthorityLinks.slice(0, 4)]
   });
 
   addPage({
@@ -593,7 +791,24 @@ function addFenceTypeAndBuyerPages() {
       serviceCard("T-post", "Best for post-and-wire layouts, acreage edges, utility areas, and practical field boundaries.", "/t-post-fence/"),
       serviceCard("Composite", "Best for low-maintenance privacy and decorative fence lines.", "/composite-fence/"),
       serviceCard("Temporary fencing", "Best for construction, events, work zones, and short-term perimeter control.", "/temporary-fencing/"),
-      serviceCard("Pool safety fences", "Best for pool barriers, controlled access, visibility, and safety-focused yard layouts.", "/pool-safety-fences/")
+      serviceCard("Pool safety fences", "Best for pool barriers, controlled access, visibility, and safety-focused yard layouts.", "/pool-safety-fences/"),
+      serviceCard("Fence gates", "Best for controlled access, driveway entries, side yards, pools, and daily convenience.", "/fence-gates/")
+    ],
+    hubGroups: [
+      {
+        id: "designs",
+        eyebrow: "Fence designs",
+        title: "Wood fence styles buyers search before they call",
+        body: "Competitor pages rank by answering the exact style question. These pages give customers a direct path from style preference to quote.",
+        cards: linkCards(designStyleLinks.slice(1, 9), (label) => `Compare ${label.toLowerCase()} for privacy, appearance, maintenance, and fit across DFW homes.`, "Style")
+      },
+      {
+        id: "gates",
+        eyebrow: "Gates",
+        title: "Gate and access pages",
+        body: "Gate searches are high-intent because customers usually have an immediate access, safety, or convenience problem.",
+        cards: linkCards(gateLinks, (label) => `Plan ${label.toLowerCase()} with clear scope, access, hardware, and repair or installation guidance.`, "Gate")
+      }
     ],
     sections: [
       {
@@ -614,7 +829,7 @@ function addFenceTypeAndBuyerPages() {
         ]
       }
     ],
-    related: materialLinks
+    related: [...materialLinks, ...designStyleLinks, ...gateLinks]
   });
 
   addPage({
@@ -679,6 +894,300 @@ function addFenceTypeAndBuyerPages() {
       ["/composite-fence/", "Composite fence"],
       ["/fence-repair/", "Fence repair"]
     ]
+  });
+}
+
+function addDesignGateAndTrustPages() {
+  addPage({
+    slug: "fence-designs",
+    title: "Fence Designs and Styles in DFW | Strong Perimeter",
+    description: "Compare board-on-board, horizontal, side-by-side, shadowbox, cedar, pressure-treated pine, metal-post, cap-and-trim, stockade, and gate design options for DFW fences.",
+    eyebrow: "Fence designs",
+    h1: "Fence Designs and Styles",
+    lead: "A customer rarely searches only for a material. They search for the look, privacy, gate access, and daily experience they want from the fence.",
+    image: images.wood,
+    imageAlt: "Wood fence design examples",
+    summaryItems: ["Board-on-board", "Horizontal", "Cedar", "Gate access", "HOA fit"],
+    highlights: linkCards(designStyleLinks.slice(1, 7), (label) => `Open this page if you are comparing ${label.toLowerCase()} for a DFW home or property.`, "Style"),
+    hubGroups: [
+      {
+        id: "wood-styles",
+        eyebrow: "Wood styles",
+        title: "Privacy and curb appeal choices",
+        body: "Wood fence style pages help buyers see the difference before they ask for pricing.",
+        cards: linkCards(designStyleLinks.slice(1), (label) => `${label} planning for privacy, appearance, maintenance, HOA fit, and quote scope.`, "Wood style")
+      },
+      {
+        id: "gates",
+        eyebrow: "Access",
+        title: "Fence gates and openings",
+        body: "Gates are part of the design. They affect convenience, security, pets, pools, driveway use, and daily wear.",
+        cards: linkCards(gateLinks.slice(0, 5), (label) => `${label} planning for access, hardware, alignment, automation, and repair or installation scope.`, "Gate")
+      }
+    ],
+    sections: [
+      {
+        eyebrow: "How to choose",
+        title: "The right design depends on who uses the space.",
+        body: "A fence style should make sense for the people, property, maintenance expectations, and neighborhood standards.",
+        items: [
+          "Privacy: board-on-board, stockade, horizontal wood, vinyl, and cap-and-trim options can reduce visibility.",
+          "Curb appeal: horizontal, cap-and-trim, metal-post wood, and decorative gates can make the fence feel more finished.",
+          "Durability: cedar, pressure-treated pine, metal posts, and good gate framing change long-term performance.",
+          "Access: walk gates, double gates, driveway gates, and automatic gates should be planned with the fence.",
+          "HOA or city needs: height, material, color, and placement may need approval before work starts."
+        ]
+      }
+    ],
+    faqs: [
+      ["What is the most popular privacy fence style in DFW?", "Board-on-board and solid wood privacy styles are common because they reduce gaps and create a cleaner backyard view."],
+      ["Can Strong Perimeter help choose a wood fence style?", "Yes. The quote conversation can compare style, privacy, maintenance, budget, gate access, and finish expectations."],
+      ["Do fence gates need their own planning?", "Yes. Gate width, frame, hinges, latch, slope, and automation can change the project scope."]
+    ],
+    related: [...designStyleLinks, ...gateLinks, ["/wood-fence-installation-replacement/", "Wood fence installation"], ["/privacy-fence-installation/", "Privacy fence installation"]]
+  });
+
+  const stylePages = [
+    {
+      slug: "board-on-board-fence",
+      name: "Board-on-Board Fence",
+      lead: "Board-on-board fencing uses overlapping pickets to create a cleaner privacy line with fewer visible gaps than simple side-by-side layouts.",
+      bestFor: ["Backyard privacy", "Neighbor-facing fences", "Higher curb appeal", "HOA-friendly wood designs", "Premium cedar layouts"],
+      watch: ["Higher material use than side-by-side", "Gate framing matters because the fence is heavier", "Staining should be planned with the wood condition"]
+    },
+    {
+      slug: "horizontal-fence",
+      name: "Horizontal Fence",
+      lead: "Horizontal fencing gives a modern, clean-lined look that can make a backyard, entry, or side yard feel more designed.",
+      bestFor: ["Modern homes", "Backyard upgrades", "Privacy with a cleaner profile", "Statement side-yard lines", "Custom gate pairings"],
+      watch: ["Long runs need careful support", "Board spacing and movement matter", "HOA approval should be checked before choosing the style"]
+    },
+    {
+      slug: "side-by-side-fence",
+      name: "Side-by-Side Fence",
+      lead: "Side-by-side fencing is the straightforward wood privacy layout many homeowners recognize: pickets set next to each other in a clean vertical or horizontal run.",
+      bestFor: ["Budget-conscious privacy", "Simple replacement projects", "Backyard boundaries", "Pet containment", "Fast practical installs"],
+      watch: ["Small gaps can show as boards dry or move", "It is less private than board-on-board", "Stain and maintenance help the fence age better"]
+    },
+    {
+      slug: "shadowbox-fence",
+      name: "Shadowbox Fence",
+      lead: "Shadowbox fencing alternates pickets on both sides of the rails so the fence looks more finished from either side while still letting air move through.",
+      bestFor: ["Shared property lines", "Neighbor-facing projects", "Airflow", "A more balanced look from both yards", "HOA-sensitive streets"],
+      watch: ["It is not as private as full board-on-board", "Spacing should be discussed before the quote", "Gate style should match the alternating pattern"]
+    },
+    {
+      slug: "cedar-fence",
+      name: "Cedar Fence",
+      lead: "Cedar fencing is a strong fit for DFW homes that want a warmer look, better natural durability, and a privacy fence that can finish beautifully with stain.",
+      bestFor: ["Premium wood privacy", "Stained fence finishes", "Board-on-board designs", "Horizontal designs", "Backyard curb appeal"],
+      watch: ["Material grade matters", "Stain timing and maintenance matter", "Steel posts or stronger framing can improve long-term performance"]
+    },
+    {
+      slug: "pressure-treated-pine-fence",
+      name: "Pressure-Treated Pine Fence",
+      lead: "Pressure-treated pine can be a practical choice when budget, larger runs, or simple privacy matter more than a premium cedar appearance.",
+      bestFor: ["Large fence runs", "Budget-aware replacements", "Rental or managed properties", "Practical privacy", "Perimeter boundaries"],
+      watch: ["Appearance differs from cedar", "Boards still need finish planning", "Warping and movement should be discussed during scope"]
+    },
+    {
+      slug: "metal-post-wood-fence",
+      name: "Metal-Post Wood Fence",
+      lead: "Metal-post wood fencing pairs the privacy and warmth of wood with stronger posts that can help the fence line hold up better over time.",
+      bestFor: ["Long-term wood fence performance", "High-wind exposure", "Privacy fences", "Gate-heavy layouts", "Replacement projects where old posts failed"],
+      watch: ["Post visibility and boxed-post options should be discussed", "The quote should clarify post depth and spacing", "Gate framing still needs separate attention"]
+    },
+    {
+      slug: "cap-and-trim-fence",
+      name: "Cap and Trim Fence",
+      lead: "Cap and trim details make a wood fence feel more finished by adding a top cap, trim boards, and a cleaner architectural line.",
+      bestFor: ["Premium backyard appearance", "HOA-friendly upgrades", "Board-on-board fences", "Cedar privacy fences", "Homes where curb appeal matters"],
+      watch: ["More detail means more material and labor", "Trim should match the overall fence style", "Stain color and maintenance should be planned"]
+    },
+    {
+      slug: "stockade-fence",
+      name: "Stockade Fence",
+      lead: "Stockade fencing is a solid wood privacy style that creates a simple, direct screen for backyards, alleys, and property lines.",
+      bestFor: ["Straightforward privacy", "Backyard boundaries", "Pets", "Alley-facing fences", "Replacement of older privacy fencing"],
+      watch: ["It can feel plain without cap or trim", "Board quality changes final appearance", "Staining helps the fence age more gracefully"]
+    }
+  ];
+
+  stylePages.forEach((style) => {
+    addPage({
+      slug: style.slug,
+      title: `${style.name} in Dallas-Fort Worth | Strong Perimeter`,
+      description: `${style.lead} Strong Perimeter helps DFW homeowners compare fence styles, gates, materials, and quote scope.`,
+      eyebrow: "Fence style",
+      h1: style.name,
+      lead: style.lead,
+      image: images.wood,
+      imageAlt: `${style.name} planning page`,
+      highlights: [
+        serviceCard("Best fit", style.bestFor.slice(0, 3).join(", "), "/quote/", "Planning", "Ask about this style"),
+        serviceCard("Compare styles", "See how this style relates to other wood fence designs.", "/fence-designs/", "Styles", "Compare designs"),
+        serviceCard("Wood installation", "Open the installation page when you are ready to scope a build or replacement.", "/wood-fence-installation-replacement/", "Build", "View wood installs")
+      ],
+      sections: [
+        {
+          eyebrow: "Who it helps",
+          title: `When ${style.name.toLowerCase()} makes sense`,
+          body: "Start with the result the customer wants, then choose the fence style that supports it.",
+          items: style.bestFor
+        },
+        {
+          eyebrow: "What to discuss",
+          title: "Details that change the quote",
+          body: "Style choice affects materials, labor, gates, finish, and long-term maintenance.",
+          items: style.watch
+        }
+      ],
+      faqs: [
+        [`Can Strong Perimeter install a ${style.name.toLowerCase()}?`, "Yes. We can discuss this style during a wood fence installation or replacement quote."],
+        ["Should I choose cedar or pressure-treated pine?", "Cedar is usually chosen for appearance and finish quality. Pressure-treated pine can make sense for practical or budget-aware runs."],
+        ["Can this style include gates?", "Yes. Gate style, frame, hinges, latch, and width should be planned with the fence design."]
+      ],
+      related: [...designStyleLinks.filter(([href]) => href !== `/${style.slug}/`).slice(0, 8), ...gateLinks.slice(0, 4)]
+    });
+  });
+
+  addPage({
+    slug: "fence-gates",
+    title: "Fence Gates in Dallas-Fort Worth | Strong Perimeter",
+    description: "Fence gate repair, wood gates, iron gates, driveway gates, automatic gates, and gate operator installation planning for DFW homes and commercial properties.",
+    eyebrow: "Fence gates",
+    h1: "Fence Gates",
+    lead: "A fence is only as useful as the way people move through it. Gates need their own planning for access, hardware, alignment, pets, pools, and daily use.",
+    image: images.wood,
+    imageAlt: "Fence gate planning page",
+    summaryItems: ["Walk gates", "Double gates", "Driveway gates", "Automatic gates", "Gate repair"],
+    highlights: linkCards(gateLinks.slice(1), (label) => `Open this page for ${label.toLowerCase()} planning, repair, installation, hardware, and access details.`, "Gate"),
+    sections: [
+      {
+        eyebrow: "Access planning",
+        title: "Gate details customers notice every day",
+        body: "Gate issues are small until they interrupt daily life. The quote should consider how the gate opens, who uses it, and what it needs to hold up against.",
+        items: [
+          "Walk gates for side yards, pools, alleys, and backyard access.",
+          "Double gates for mowers, trailers, equipment, and wider backyard access.",
+          "Driveway gates for privacy, security, and controlled vehicle entry.",
+          "Automatic gates and operators for convenience and access control.",
+          "Gate repair for sagging, dragging, broken hinges, latches, frames, and alignment issues."
+        ]
+      }
+    ],
+    faqs: [
+      ["Do you repair existing fence gates?", "Yes. We can evaluate hinges, latches, frame condition, sagging, dragging, alignment, and whether replacement makes more sense."],
+      ["Can you plan a gate with a new fence?", "Yes. Gate size, location, frame, hardware, and opening direction should be part of the original fence scope."],
+      ["Do you install automatic gates?", "Yes. Automatic gate and operator installation can be scoped for suitable driveway and access-control projects."]
+    ],
+    related: [...gateLinks, ...designStyleLinks.slice(0, 5), ["/quote/", "Request a gate quote"]]
+  });
+
+  const gatePages = [
+    ["gate-repair", "Gate Repair", "Gate repair fixes the daily frustration points: sagging, dragging, broken hinges, latch problems, loose posts, damaged frames, or gates that no longer close cleanly.", ["Sagging or dragging gates", "Broken hinges or latches", "Loose posts", "Frame damage", "Gate alignment after fence movement"]],
+    ["automatic-gates", "Automatic Gates", "Automatic gates add controlled access and convenience when the driveway, operator, power, safety, and gate structure are planned together.", ["Driveway access", "Operator fit", "Remote or keypad entry", "Safety and clearance", "Maintenance expectations"]],
+    ["gate-operator-installation", "Gate Operator Installation", "Gate operator installation should match the gate weight, opening style, driveway layout, power needs, and daily use pattern.", ["Swing or sliding operator fit", "Gate weight and width", "Power and access control", "Clearance and safety", "Maintenance planning"]],
+    ["driveway-gates", "Driveway Gates", "Driveway gates need a stronger frame, clear opening plan, reliable hardware, and enough room for vehicles to move safely.", ["Vehicle access", "Privacy and security", "Double swing gates", "Sliding gate planning", "Automation-ready layouts"]],
+    ["wood-gates", "Wood Gates", "Wood gates should match the fence style while using the right frame and hardware to reduce sagging and daily wear.", ["Wood walk gates", "Double wood gates", "Privacy fence gates", "Board-on-board matching", "Frame and hinge planning"]],
+    ["iron-gates", "Iron Gates", "Iron gates create a cleaner entry point for decorative metal, pool, front-yard, or driveway fence lines.", ["Decorative entries", "Pool access", "Driveway gates", "Security and visibility", "Repair and repaint planning"]]
+  ];
+
+  gatePages.forEach(([slug, name, lead, items]) => {
+    addPage({
+      slug,
+      title: `${name} in Dallas-Fort Worth | Strong Perimeter`,
+      description: `${lead} Strong Perimeter helps scope gate repair, installation, access, and fence integration across DFW.`,
+      eyebrow: "Fence gates",
+      h1: name,
+      lead,
+      image: slug.includes("iron") || slug.includes("automatic") || slug.includes("operator") ? images.iron : images.wood,
+      imageAlt: `${name} planning page`,
+      highlights: [
+        serviceCard("Gate planning", "Width, swing, slope, access, hardware, and daily use all change the right answer.", "/fence-gates/", "Gates", "View gate hub"),
+        serviceCard("Fence design", "Gate style should fit the fence design, not feel like an afterthought.", "/fence-designs/", "Design", "Compare styles"),
+        serviceCard("Start a quote", "Photos of both sides of the gate help speed up the quote conversation.", "/quote/", "Quote", "Request a quote")
+      ],
+      sections: [
+        {
+          eyebrow: "Scope",
+          title: `What to discuss for ${name.toLowerCase()}`,
+          body: "Gate work is part carpentry, part hardware, part access planning, and part daily-life problem solving.",
+          items
+        }
+      ],
+      faqs: [
+        [`Can Strong Perimeter help with ${name.toLowerCase()}?`, "Yes. We can discuss the gate condition, access needs, hardware, and whether repair or replacement makes more sense."],
+        ["Should I send photos?", "Yes. Send the front, back, hinge side, latch side, posts, and any dragging or sagging detail."],
+        ["Can gate work be included with fence replacement?", "Yes. Gate planning should be included when the fence is being replaced or redesigned."]
+      ],
+      related: gateLinks.filter(([href]) => href !== `/${slug}/`).concat(designStyleLinks.slice(0, 5))
+    });
+  });
+
+  const trustPages = [
+    {
+      slug: "why-strong-perimeter",
+      name: "Why Strong Perimeter",
+      lead: "Strong Perimeter is built around people-first fence work: clear listening, practical options, respectful crews, and a finished fence line the customer understands.",
+      items: ["We start with the who, what, when, where, and why.", "We explain repair, restoration, replacement, paint, and stain options in plain language.", "We connect service pages, city pages, project proof, and reviews so customers can make an informed decision.", "We treat gates, cleanup, communication, and the final walkthrough as part of the work."]
+    },
+    {
+      slug: "our-process",
+      name: "Our Fence Process",
+      lead: "The Strong Perimeter process turns a real customer story into a practical scope, a clear quote, careful field work, and a final walkthrough.",
+      items: ["Listen to the story and the reason the project matters.", "Look at photos, address, access, fence type, and condition.", "Choose the right path: repair, restoration, finish, installation, or replacement.", "Build or repair with attention to the property and the people using it.", "Walk the fence line with the customer expectations in mind."]
+    },
+    {
+      slug: "warranty",
+      name: "Warranty and Workmanship Expectations",
+      lead: "Fence buyers want to know what happens after the crew leaves. This page explains how Strong Perimeter frames workmanship, materials, final walkthroughs, and follow-up expectations.",
+      items: ["Clarify the written scope before work starts.", "Discuss manufacturer material warranties when products include them.", "Review finish, gates, cleanup, and visible details at the end.", "Document what was repaired, restored, replaced, painted, or stained.", "Ask for current warranty terms during the quote conversation."]
+    },
+    {
+      slug: "financing",
+      name: "Fence Financing and Payment Options",
+      lead: "Fence projects can be planned around budget, timing, scope, and priority. This page gives customers a place to ask about current payment paths and phased project options.",
+      items: ["Compare repair, restoration, and replacement before assuming a full rebuild.", "Ask about current payment options during the quote conversation.", "Prioritize urgent safety, access, and storm-damage repairs first when needed.", "Plan optional upgrades like staining, cap and trim, or gate automation as separate scope items.", "Use photos and measurements to make the first estimate conversation more useful."]
+    },
+    {
+      slug: "trust-and-accountability",
+      name: "Trust and Accountability",
+      lead: "Trust is built through real people, visible proof, clear expectations, and a process that respects the property from first call to final walkthrough.",
+      items: ["Meet the team before the project feels anonymous.", "Use reviews and project examples to understand the customer experience.", "Ask for current insurance, documentation, or project details when needed.", "Confirm scope, access, cleanup, gates, finish, and communication expectations.", "Keep the quote tied to the actual property, not a generic price guess."]
+    }
+  ];
+
+  trustPages.forEach((page) => {
+    addPage({
+      slug: page.slug,
+      title: `${page.name} | Strong Perimeter`,
+      description: `${page.lead} People-first fence repair, restoration, installation, replacement, painting, and staining across DFW.`,
+      eyebrow: "Why us",
+      h1: page.name,
+      lead: page.lead,
+      image: page.slug === "trust-and-accountability" ? images.brandGreen : images.wood,
+      imageAlt: page.name,
+      highlights: [
+        serviceCard("Meet the team", "See the people behind the estimate, the crew, and the final walkthrough.", "/team/", "People", "Meet the team"),
+        serviceCard("Read reviews", "Customer notes show how communication and finish quality feel from the other side.", "/reviews/", "Reviews", "Read reviews"),
+        serviceCard("See projects", "Project pages connect fence type, service, condition, and finished result.", "/projects/", "Proof", "View projects")
+      ],
+      sections: [
+        {
+          eyebrow: "What to expect",
+          title: "Human touch at each stage",
+          body: "The competitor gap is not just more pages. It is making every page answer the next customer worry.",
+          items: page.items
+        }
+      ],
+      faqs: [
+        ["Can I talk through options before choosing a scope?", "Yes. Strong Perimeter helps compare repair, restoration, replacement, painting, and staining before work starts."],
+        ["What details help the quote?", "Photos, address, fence type, approximate length, gate issues, timeline, and why the project matters all help."],
+        ["Do you work on residential and commercial properties?", "Yes. Strong Perimeter serves both residential and commercial fence customers across DFW."]
+      ],
+      related: [...trustAndAuthorityLinks.filter(([href]) => href !== `/${page.slug}/`), ...coreServiceLinks, ...designStyleLinks.slice(0, 4)]
+    });
   });
 }
 
@@ -1076,13 +1585,16 @@ function addSupportPages() {
   });
 
   serviceAreaCities.forEach((city) => {
+    const profile = localProfileFor(city);
+    const isPriorityCity = Boolean(priorityCityProfiles[city]);
+
     addPage({
       slug: `service-areas/${citySlug(city)}-tx`,
-      title: `Fence Services in ${city}, TX | Strong Perimeter`,
-      description: `Fence restoration, repair, painting, staining, installation, and replacement in ${city}, TX for residential and commercial properties.`,
+      title: isPriorityCity ? `Fence Company in ${city}, TX | Strong Perimeter` : `Fence Services in ${city}, TX | Strong Perimeter`,
+      description: `${profile.positioning} Strong Perimeter provides fence repair, restoration, gates, installation, replacement, painting, and staining in ${city}, TX.`,
       eyebrow: "Texas service area",
-      h1: `Fence Services in ${city}, TX`,
-      lead: `Strong Perimeter serves ${city} with residential and commercial fence restoration, repair, painting, staining, installation, and replacement.`,
+      h1: isPriorityCity ? `Fence Company in ${city}, TX` : `Fence Services in ${city}, TX`,
+      lead: profile.positioning,
       areaServed: `${city}, TX`,
       summaryItems: ["Fence repair", "Fence restoration", "Installation and replacement"],
       hubHeading: `What do you need in ${city}?`,
@@ -1090,19 +1602,57 @@ function addSupportPages() {
       highlights: [
         serviceCard("Fence repair", `Fix damaged posts, panels, rails, pickets, gates, chain link fabric, rust, storm damage, or leaning sections in ${city}.`, "/fence-repair/", "Repair", "View repair services"),
         serviceCard("Fence restoration", `Repair and refinish wrought iron, aluminum, wood, or pipe fencing in ${city} when the structure is still worth saving.`, "/fence-restoration/", "Restore", "View restoration services"),
-        serviceCard("Installation & replacement", `Build new or replace a fence in ${city} when the existing fence has too much damage to repair cleanly.`, "/fence-installation-replacement/", "Build", "View installation services")
+        serviceCard("Installation & replacement", `Build new or replace a fence in ${city} when the existing fence has too much damage to repair cleanly.`, "/fence-installation-replacement/", "Build", "View installation services"),
+        serviceCard("Gates and access", `Plan gate repair, driveway gates, walk gates, or automatic gate needs in ${city}.`, "/fence-gates/", "Gates", "View gate services"),
+        serviceCard("Permit planning", `Check city, HOA, pool, and placement questions before a fence project in ${city}.`, cityPermitHref(city), "Permits", "View permit notes")
       ],
+      linkSections: isPriorityCity ? [
+        {
+          id: "popular-services",
+          eyebrow: "Popular searches",
+          title: `High-intent fence pages for ${city}`,
+          body: "These are the pages that answer the exact service and style questions buyers tend to search before calling.",
+          links: cityServiceTopics.map((topic) => [`/service-areas/${citySlug(city)}-tx/${topic.slug}/`, `${topic.name} in ${city}, TX`]),
+          className: "link-grid link-grid--simple link-grid--visual"
+        },
+        {
+          id: "style-gates",
+          eyebrow: "Styles and gates",
+          title: `Fence styles and access planning in ${city}`,
+          body: "Use these pages when the project is less about a generic fence and more about the finished look or daily access.",
+          links: [...designStyleLinks.slice(1, 6), ...gateLinks.slice(0, 4)],
+          className: "link-grid link-grid--simple link-grid--visual"
+        }
+      ] : [],
       sections: [
         {
           eyebrow: city,
-          title: `Fence work in ${city}`,
-          body: `Use this page if the project address is in ${city} and you need help choosing between repair, restoration, painting, staining, installation, or replacement.`,
+          title: `Fence work in ${city} should feel local.`,
+          body: profile.cta,
           items: [
             `Residential fence service in ${city} for homes, backyards, alleys, pools, pets, and privacy needs.`,
             `Commercial fence service in ${city} for lots, yards, storefronts, facilities, and managed properties.`,
             "Clear quote conversation before work starts.",
             "Photos of the fence line or damaged sections help speed up the estimate."
           ]
+        },
+        {
+          eyebrow: "Local signals",
+          title: `What we look for around ${city}`,
+          body: "A stronger city page answers the local concerns behind the search, not just the city name.",
+          items: profile.concerns
+        },
+        {
+          eyebrow: "Neighborhood notes",
+          title: `Where projects often need extra context in ${city}`,
+          body: "Neighborhood, street exposure, access, HOA expectations, and nearby weather patterns can all change the right scope.",
+          items: profile.neighborhoods
+        },
+        {
+          eyebrow: "Styles",
+          title: `Fence styles customers compare in ${city}`,
+          body: "Style pages help buyers choose what they actually want before the estimate conversation.",
+          items: profile.styles
         },
         {
           eyebrow: "Fence types",
@@ -1125,12 +1675,17 @@ function addSupportPages() {
       faqs: [
         [`Do you provide fence repair in ${city}, TX?`, `Yes. Strong Perimeter provides residential and commercial fence repair in ${city}.`],
         [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, composite, pool safety, and vinyl fences in ${city}, and can help with temporary fencing.`],
+        [`Can you help with gates in ${city}?`, `Yes. Strong Perimeter can scope walk gates, double gates, driveway gates, gate repair, and automatic gate questions in ${city}.`],
+        [`Do I need a fence permit in ${city}?`, `Permit and HOA requirements can vary by property, height, location, pool use, and city rules. Start with the ${city} permit planning page and confirm current requirements before building.`],
         ["What should I send for a quote?", "Send the project address, fence type if you know it, photos if available, and what you want fixed or changed."]
       ],
       related: [
         ["/service-areas/", "All service areas"],
+        [cityPermitHref(city), `${city} fence permit notes`],
         ...coreServiceLinks,
-        ...materialLinks
+        ...materialLinks,
+        ...designStyleLinks.slice(0, 6),
+        ...gateLinks.slice(0, 4)
       ]
     });
   });
@@ -1146,6 +1701,9 @@ function addSupportPages() {
       serviceCard("Wrought iron restorations", "Before and after proof is especially valuable for rust, repair, and paint work.", "/projects/wrought-iron-fences/"),
       serviceCard("Aluminum fences", "Aluminum project photos show repair, painting, installation, and clean metal fence lines.", "/projects/aluminum-fences/"),
       serviceCard("Wood fences", "Wood project photos show vertical and horizontal layouts, privacy style, finish, posts, and staining detail.", "/projects/wood-fences/"),
+      serviceCard("Board-on-board fences", "Board-on-board project photos help customers compare privacy, overlap, posts, trim, and final curb appeal.", "/projects/board-on-board-fences/"),
+      serviceCard("Horizontal fences", "Horizontal fence photos show modern line work, spacing, gates, and backyard fit.", "/projects/horizontal-fences/"),
+      serviceCard("Fence gates", "Gate project photos show walk gates, double gates, driveway gates, hardware, and access planning.", "/projects/fence-gates/"),
       serviceCard("T-post fences", "T-post project photos show post-and-wire layouts, bracing, gates, repair, and replacement scopes.", "/projects/t-post-fences/"),
       serviceCard("Composite fences", "Composite project photos show panel layout, gates, posts, repair, and replacement scopes.", "/projects/composite-fences/"),
       serviceCard("Temporary fencing", "Temporary fencing photos show panels, bases, gates, access points, and site perimeter layout.", "/projects/temporary-fencing/"),
@@ -1166,6 +1724,9 @@ function addSupportPages() {
     ],
     related: [
       ["/projects/wood-fences/", "Wood fence projects"],
+      ["/projects/board-on-board-fences/", "Board-on-board projects"],
+      ["/projects/horizontal-fences/", "Horizontal fence projects"],
+      ["/projects/fence-gates/", "Fence gate projects"],
       ["/projects/wrought-iron-fences/", "Wrought iron projects"],
       ["/projects/aluminum-fences/", "Aluminum projects"],
       ["/projects/chain-link-fences/", "Chain link projects"],
@@ -1180,6 +1741,11 @@ function addSupportPages() {
 
   [
     ["projects/wood-fences", "Wood Fence Projects", "Wood fence projects show vertical and horizontal layouts, side-by-side, board-on-board, shadow box, repair details, staining quality, and final curb presence.", images.wood],
+    ["projects/board-on-board-fences", "Board-on-Board Fence Projects", "Board-on-board projects show overlapping pickets, privacy coverage, post details, gates, cap and trim, and finished curb appeal.", images.wood],
+    ["projects/horizontal-fences", "Horizontal Fence Projects", "Horizontal fence projects show modern line work, board spacing, privacy, gates, posts, and final backyard fit.", images.wood],
+    ["projects/fence-gates", "Fence Gate Projects", "Fence gate projects show walk gates, double gates, driveway gates, automatic access, repairs, hardware, and alignment details.", images.wood],
+    ["projects/automatic-gates", "Automatic Gate Projects", "Automatic gate projects show driveway access, operator planning, gate frame details, safety, and controlled entry.", images.iron],
+    ["projects/commercial-fences", "Commercial Fence Projects", "Commercial fence projects show chain link, metal, access, security, repair, replacement, and practical perimeter control.", images.chain],
     ["projects/wrought-iron-fences", "Wrought Iron Fence Projects", "Wrought iron projects show rust, repair, painting, restoration, installation, and replacement examples.", images.iron],
     ["projects/aluminum-fences", "Aluminum Fence Projects", "Aluminum projects show repair, painting, installation, replacement, gates, and clean metal fence lines.", images.iron],
     ["projects/chain-link-fences", "Chain Link Fence Projects", "Chain link projects show practical repair, installation, replacement, access, and commercial perimeter work.", images.chain],
@@ -1210,12 +1776,14 @@ function addSupportPages() {
       sections: [
         {
           eyebrow: "Project library",
-          title: "What belongs in this project category",
-          body: "This gallery category should help customers compare similar fence work before they request a quote.",
+          title: "What customers should be able to see",
+          body: "Every strong project page should connect the customer's starting problem to the finished fence line.",
           items: [
-            "Fence type and material.",
-            "Service performed.",
-            "Starting condition and finished result."
+            "City or service area when it is available.",
+            "Fence type, style, material, gate details, and finish.",
+            "Starting condition, work performed, and finished result.",
+            "Before, during, and after photos when available.",
+            "A customer note or review when the customer has shared one."
           ]
         }
       ],
@@ -1246,6 +1814,18 @@ function addSupportPages() {
           "The fence type or service the customer needed.",
           "How clearly the scope and schedule were communicated.",
           "What the finished repair, restoration, installation, painting, or staining looked like."
+        ]
+      },
+      {
+        eyebrow: "Customer language",
+        title: "The proof should sound like people, not marketing.",
+        body: "These are the kinds of details we want every project and city page to keep surfacing.",
+        items: [
+          "Friendly crew and every question answered.",
+          "Old wrought iron repaired and repainted with a cleaner final look.",
+          "Prompt proposal, clear schedule, and stain color matching expectations.",
+          "Wind-storm fence repair handled quickly and professionally.",
+          "Custom iron work finished beautifully and on time."
         ]
       }
     ],
@@ -1356,6 +1936,195 @@ function addSupportPages() {
   });
 }
 
+function addPermitAndLocalIntentPages() {
+  addPage({
+    slug: "texas-fence-laws",
+    title: "Texas Fence Laws and Neighbor Questions | Strong Perimeter",
+    description: "Plain-English Texas fence law planning page for DFW property owners. Learn what to confirm about neighbors, HOA rules, city permits, pool fences, height, materials, and property lines.",
+    eyebrow: "Fence education",
+    h1: "Texas Fence Laws and Neighbor Questions",
+    lead: "Fence rules can involve state law, city rules, HOA standards, pool safety, property lines, and neighbor expectations. Treat this page as a planning checklist, not legal advice.",
+    image: images.wood,
+    imageAlt: "Fence law planning page",
+    summaryItems: ["Property lines", "Neighbors", "City permits", "HOA rules", "Pool safety"],
+    highlights: [
+      serviceCard("Fence permits", "Start with city and HOA permit planning before building or replacing a fence.", "/fence-permits/", "Permits", "View permit hub"),
+      serviceCard("HOA fence installation", "HOA work needs material, height, color, placement, and documentation planning.", "/hoa-fence-installation/", "HOA", "View HOA guide"),
+      serviceCard("Repair or replace", "A legal or neighbor concern can change whether repair or replacement is the right path.", "/repair-or-replace-fence/", "Planning", "Compare options")
+    ],
+    sections: [
+      {
+        eyebrow: "Before work starts",
+        title: "Questions worth answering early",
+        body: "Requirements can change by city, HOA, property type, height, location, and pool use. Confirm current requirements before building.",
+        items: [
+          "Where is the property line and is a survey needed?",
+          "Does the city require a permit for this height, location, or replacement scope?",
+          "Does an HOA control material, color, height, or style?",
+          "Does a pool barrier need specific gate, latch, spacing, or height planning?",
+          "Will the fence affect visibility near a street, alley, driveway, or corner?",
+          "Is the fence repair small enough to avoid a larger approval path?"
+        ]
+      }
+    ],
+    faqs: [
+      ["Is this legal advice?", "No. This page is general planning information. Confirm current requirements with the city, HOA, surveyor, or attorney when needed."],
+      ["Can Strong Perimeter help identify permit questions?", "Yes. We can help flag questions to confirm before a quote becomes active work."],
+      ["Do fence rules vary by city?", "Yes. City, HOA, pool, height, corner-lot, and property-line requirements can vary."]
+    ],
+    related: [["/fence-permits/", "Fence permits"], ["/do-i-need-a-permit-for-a-fence-in-dfw/", "DFW fence permit guide"], ["/hoa-fence-installation/", "HOA fence installation"], ...permitCities.map((city) => [cityPermitHref(city), `${city} fence permit notes`])]
+  });
+
+  addPage({
+    slug: "fence-permits",
+    title: "Fence Permits in Dallas-Fort Worth | Strong Perimeter",
+    description: "Fence permit planning hub for Dallas-Fort Worth cities. Check city, HOA, height, pool, property-line, and replacement questions before fence work starts.",
+    eyebrow: "Fence permits",
+    h1: "Fence Permits in Dallas-Fort Worth",
+    lead: "A fence project can be simple, but permit, HOA, pool, height, corner-lot, and property-line questions should be checked before work starts.",
+    image: images.brandGreen,
+    imageAlt: "Fence permit planning hub",
+    summaryItems: ["City rules", "HOA approval", "Pool barriers", "Height limits", "Property lines"],
+    highlights: permitCities.slice(0, 6).map((city) => serviceCard(`${city}, TX`, `Open the ${city} fence permit planning page before building, replacing, or changing a fence.`, cityPermitHref(city), "City", "View permit notes")),
+    linkSections: [
+      {
+        id: "city-permits",
+        eyebrow: "City pages",
+        title: "Fence permit planning by city",
+        body: "Open the city where the fence is located. These pages keep the customer's next permit question one click away.",
+        links: serviceAreaCities.map((city) => [cityPermitHref(city), `${city}, TX fence permit notes`]),
+        className: "link-grid link-grid--simple link-grid--cities"
+      }
+    ],
+    sections: [
+      {
+        eyebrow: "Planning",
+        title: "What can change permit needs",
+        body: "This page is a planning tool. Rules change, and the city or HOA has the final say.",
+        items: [
+          "New fence vs repair or replacement.",
+          "Fence height and location.",
+          "Front yard, corner lot, alley, driveway, or visibility triangle.",
+          "Pool barrier and gate/latch requirements.",
+          "HOA-controlled materials, color, style, and neighbor-facing details.",
+          "Commercial property, security fence, or access-control gates."
+        ]
+      }
+    ],
+    faqs: [
+      ["Do all DFW fence projects require permits?", "No. Requirements vary by city, property, height, location, pool use, and project scope. Confirm current rules before work starts."],
+      ["Can Strong Perimeter check permit questions with me?", "Yes. We can help identify what should be confirmed before a fence quote moves forward."],
+      ["Are HOA approvals separate from city permits?", "Often, yes. A project may need HOA approval even when the city permit path is simple."]
+    ],
+    related: [["/texas-fence-laws/", "Texas fence laws"], ["/do-i-need-a-permit-for-a-fence-in-dfw/", "DFW permit guide"], ["/hoa-fence-installation/", "HOA fence installation"], ...coreServiceLinks]
+  });
+
+  serviceAreaCities.forEach((city) => {
+    const profile = localProfileFor(city);
+
+    addPage({
+      slug: `fence-permits/${citySlug(city)}-tx`,
+      title: `Fence Permit Notes for ${city}, TX | Strong Perimeter`,
+      description: `Fence permit planning for ${city}, TX. Confirm city, HOA, height, pool, property-line, gate, and replacement requirements before fence work starts.`,
+      eyebrow: "Fence permits",
+      h1: `Fence Permit Notes for ${city}, TX`,
+      lead: `Planning a fence in ${city}? Check permit, HOA, height, pool, property-line, gate, and access questions before work starts.`,
+      areaServed: `${city}, TX`,
+      image: images.brandGreen,
+      imageAlt: `${city} fence permit planning page`,
+      summaryItems: ["City check", "HOA check", "Height and location", "Pool gates", "Scope notes"],
+      highlights: [
+        serviceCard(`${city} service area`, `Return to the main fence service page for ${city}.`, cityServiceAreaHref(city), "City", "View city page"),
+        serviceCard("Fence laws", "Review broad Texas fence-law planning questions before you build.", "/texas-fence-laws/", "Guide", "View guide"),
+        serviceCard("Start a quote", "Send photos, address, fence type, and any HOA or permit notes you already have.", "/quote/", "Quote", "Request a quote")
+      ],
+      sections: [
+        {
+          eyebrow: city,
+          title: `Permit questions to check in ${city}`,
+          body: "This page avoids overpromising legal answers. It gives customers the exact checks to make before a project turns into rework.",
+          items: [
+            "Is this a repair, replacement, new fence, gate, or pool barrier?",
+            "Does the fence height or front-yard placement trigger extra review?",
+            "Is the property on a corner, alley, driveway, easement, or visibility-sensitive area?",
+            "Does an HOA control material, color, height, or style?",
+            "Does the project include a pool gate, latch, or barrier section?",
+            "Do you have a survey or clear property-line information?"
+          ]
+        },
+        {
+          eyebrow: "Local fit",
+          title: `Common local context around ${city}`,
+          body: "The permit path is only one piece. The fence also needs to fit the place.",
+          items: profile.concerns
+        }
+      ],
+      faqs: [
+        [`Does Strong Perimeter decide whether ${city} requires a permit?`, "No. The city, HOA, or authority with jurisdiction decides current requirements. We help surface the questions to confirm before work starts."],
+        ["Should I check HOA approval too?", "Yes. HOA approval can be separate from city requirements and may control material, height, color, and style."],
+        ["Can I request a quote before I know every permit answer?", "Yes. Share what you know, and we can help identify what still needs to be confirmed."]
+      ],
+      related: [[cityServiceAreaHref(city), `${city} fence services`], ["/fence-permits/", "Fence permit hub"], ["/texas-fence-laws/", "Texas fence laws"], ["/hoa-fence-installation/", "HOA fence installation"], ...designStyleLinks.slice(0, 5)]
+    });
+  });
+
+  priorityCityServiceCities.forEach((city) => {
+    const profile = localProfileFor(city);
+
+    cityServiceTopics.forEach((topic) => {
+      addPage({
+        slug: `service-areas/${citySlug(city)}-tx/${topic.slug}`,
+        title: `${topic.name} in ${city}, TX | Strong Perimeter`,
+        description: `${topic.name} in ${city}, TX for customers who need to ${topic.intent}. Strong Perimeter provides people-first fence service across DFW.`,
+        eyebrow: "Local fence service",
+        h1: `${topic.name} in ${city}, TX`,
+        lead: `Use this page when you need to ${topic.intent} in ${city}.`,
+        areaServed: `${city}, TX`,
+        image: topic.slug.includes("chain") ? images.chain : topic.slug.includes("iron") || topic.slug.includes("automatic") ? images.iron : images.wood,
+        imageAlt: `${topic.name} in ${city}, TX`,
+        summaryItems: [`${topic.name}`, `${city}, TX`, "Local context", "Quote path"],
+        highlights: [
+          serviceCard(`${city} context`, profile.positioning, cityServiceAreaHref(city), "City", "View city hub"),
+          serviceCard("Permit notes", `Check ${city} permit, HOA, height, pool, and access questions before work starts.`, cityPermitHref(city), "Permits", "View permit notes"),
+          serviceCard("Request a quote", "Send photos, address, timing, gate notes, and what changed.", "/quote/", "Quote", "Start a quote")
+        ],
+        sections: [
+          {
+            eyebrow: city,
+            title: `Why ${topic.name.toLowerCase()} in ${city} needs context`,
+            body: "This page narrows the customer's search from a broad service to a local situation with real scope questions.",
+            items: profile.concerns
+          },
+          {
+            eyebrow: "Who, what, when, where, why",
+            title: "What we ask before quoting",
+            body: "The fastest path to a useful estimate is a practical story, not just a keyword.",
+            items: [
+              "Who uses the space: family, pets, tenants, customers, crews, or pool guests.",
+              `What changed: damage, age, privacy, access, HOA note, storm, or planned upgrade in ${city}.`,
+              "When it needs to be handled: urgent, scheduled, or just gathering options.",
+              `Where it sits: backyard, alley, pool, driveway, storefront, lot, or managed property in ${city}.`,
+              "Why it matters: safety, privacy, curb appeal, security, access, or peace of mind."
+            ]
+          },
+          {
+            eyebrow: "Next pages",
+            title: `Useful pages for ${topic.name.toLowerCase()} in ${city}`,
+            body: "These pages help customers compare the service, style, gates, and city requirements before they call.",
+            items: topic.links.map(([, label]) => label).concat(profile.styles)
+          }
+        ],
+        faqs: [
+          [`Do you provide ${topic.name.toLowerCase()} in ${city}?`, `Yes. Strong Perimeter can help scope ${topic.name.toLowerCase()} for residential and commercial properties in ${city}.`],
+          ["What should I send first?", "Send the project address, photos of the whole fence line, close-ups of damage or gates, approximate length, timing, and any HOA or permit notes."],
+          [`Can you compare options for my ${city} property?`, "Yes. We can compare repair, restoration, replacement, style, gates, and finish decisions before work starts."]
+        ],
+        related: [[cityServiceAreaHref(city), `${city} fence services`], ...topic.links, ...designStyleLinks.slice(0, 6), ...gateLinks.slice(0, 4)]
+      });
+    });
+  });
+}
+
 function addCostAndGuidePages() {
   const guides = [
     ["fence-cost-dfw", "Fence Cost in Dallas-Fort Worth", "Fence cost depends on material, length, height, removal, access, repair scope, finish work, and whether the project is residential or commercial.", ["Linear footage and height", "Material choice", "Removal or replacement needs", "Repair or restoration scope", "Painting or staining", "Access and scheduling"]],
@@ -1426,9 +2195,11 @@ function addCostAndGuidePages() {
 
 addActionHubPages();
 addFenceTypeAndBuyerPages();
+addDesignGateAndTrustPages();
 addMaterialPages();
 addSpecificServicePages();
 addSupportPages();
+addPermitAndLocalIntentPages();
 addCostAndGuidePages();
 
 function escapeHtml(value) {
@@ -1486,6 +2257,8 @@ function renderLinks(links, className = "link-grid") {
 
 function iconForHref(href) {
   if (href.includes("fence-types")) return images.woodIcon;
+  if (href.includes("gate")) return images.iron;
+  if (href.includes("permit") || href.includes("law") || href.includes("warranty") || href.includes("financing") || href.includes("process") || href.includes("why-strong")) return images.brandMark;
   if (href.includes("temporary")) return images.chain;
   if (href.includes("t-post")) return images.chain;
   if (href.includes("chain-link")) return images.chain;
@@ -1498,6 +2271,8 @@ function iconForHref(href) {
 }
 
 function visualImageForHref(href) {
+  if (href.includes("gate") || href.includes("automatic")) return images.iron;
+  if (href.includes("permit") || href.includes("law") || href.includes("warranty") || href.includes("financing") || href.includes("process") || href.includes("why-strong")) return images.brandGreen;
   if (href.includes("temporary")) return images.chain;
   if (href.includes("t-post")) return images.chain;
   if (href.includes("chain-link") || href.includes("commercial") || href.includes("security")) return images.chain;
@@ -1511,6 +2286,8 @@ function visualImageForHref(href) {
 
 function visualImageForPage(page) {
   const slug = page.slug;
+  if (slug.includes("gate") || slug.includes("automatic")) return images.iron;
+  if (slug.includes("permit") || slug.includes("law") || slug.includes("warranty") || slug.includes("financing") || slug.includes("process") || slug.includes("why-strong")) return images.brandGreen;
   if (slug.includes("temporary")) return images.chain;
   if (slug.includes("t-post")) return images.chain;
   if (slug.includes("chain-link") || slug.includes("commercial") || slug.includes("security")) return images.chain;
@@ -1917,6 +2694,7 @@ function renderQuoteWizard() {
       ]
     },
     { value: "Pipe fence", label: "Pipe fence", image: quoteFenceImages.pipe, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
+    { value: "Gates", label: "Gates", image: quoteFenceImages.wood, text: "Walk gates, double gates, driveway gates, gate repair, or automatic gates.", notesPlaceholder: "Gate type, opening width, hinge or latch issue, sagging/dragging, driveway access, automation needs, photos available, etc." },
     { value: "Chain link", label: "Chain link", image: quoteFenceImages.chainLink, text: "Chain link fabric, posts, rails, or gates." },
     { value: "Pool safety fences", label: "Pool safety fences", image: quoteFenceImages.poolSafety, text: "Pool barriers, gates, latches, panels, or safety sections.", notesPlaceholder: "Approximate length, pool access, gate or latch issue, panel spacing, replacement section, photos available, etc." },
     { value: "Temporary fencing", label: "Temporary fencing", image: quoteFenceImages.temporary, text: "Temporary panels, stands, gates, bases, or site perimeter.", notesPlaceholder: "Approximate length, site access, panel issue, damaged stands, repositioning, install/removal timing, photos available, etc." },
@@ -1973,6 +2751,12 @@ function renderQuoteWizard() {
       { value: "Repair", label: "Repair" },
       { value: "Painting", label: "Painting" },
       { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    Gates: [
+      { value: "Gate repair", label: "Gate repair" },
+      { value: "Gate installation", label: "Gate installation" },
+      { value: "Automatic gate/operator", label: "Automatic gate or operator" },
       { value: "Not sure yet", label: "Not sure yet" }
     ],
     Vinyl: [
@@ -2139,9 +2923,14 @@ function renderFooter() {
       <a href="${withBase("/fence-restoration/")}">Restoration</a>
       <a href="${withBase("/fence-repair/")}">Repair</a>
       <a href="${withBase("/fence-types/")}">Fence types</a>
+      <a href="${withBase("/fence-designs/")}">Fence designs</a>
+      <a href="${withBase("/fence-gates/")}">Gates</a>
       <a href="${withBase("/residential-fencing/")}">Residential</a>
       <a href="${withBase("/commercial-fencing/")}">Commercial</a>
       <a href="${withBase("/service-areas/")}">Service areas</a>
+      <a href="${withBase("/fence-permits/")}">Permits</a>
+      <a href="${withBase("/our-process/")}">Process</a>
+      <a href="${withBase("/warranty/")}">Warranty</a>
       <a href="${withBase("/projects/")}">Projects</a>
       <a href="${withBase("/reviews/")}">Reviews</a>
       <a href="${withBase("/privacy-policy.html")}">Privacy policy</a>
@@ -2300,7 +3089,7 @@ ${renderQuoteForm()}`;
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(page.title)}</title>
   <meta name="description" content="${escapeHtml(page.description)}">
@@ -2336,7 +3125,7 @@ ${renderFooter()}
 function writePage(page) {
   const dir = path.join(ROOT, page.slug);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, "index.html"), renderPage(page));
+  fs.writeFileSync(path.join(dir, "index.html"), renderPage(page).replace(/[ \t]+$/gm, ""));
 }
 
 function writeSitemap() {
@@ -2362,8 +3151,6 @@ ${urls.map((url) => `  <url>
 function writeRobots() {
   const robots = `User-agent: *
 Allow: /
-
-# Build mode: pages use meta robots noindex, nofollow until launch.
 
 Sitemap: ${SITE_URL}/sitemap.xml
 `;

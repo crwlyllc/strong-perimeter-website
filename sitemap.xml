@@ -2,712 +2,1487 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/privacy-policy.html</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/services/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-restoration/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-painting/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-staining/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-types/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/residential-fencing/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/commercial-fencing/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-designs/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/board-on-board-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/horizontal-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/side-by-side-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/shadowbox-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/cedar-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/pressure-treated-pine-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/metal-post-wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/cap-and-trim-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/stockade-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/gate-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/gate-operator-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/driveway-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/iron-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/why-strong-perimeter/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/our-process/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/warranty/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/financing/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/trust-and-accountability/</loc>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wrought-iron-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/aluminum-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/chain-link-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/t-post-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/composite-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/temporary-fencing/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pool-safety-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pipe-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/vinyl-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wrought-iron-fence-restoration/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wrought-iron-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wrought-iron-fence-painting/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wrought-iron-fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/aluminum-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/aluminum-fence-painting/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/aluminum-fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-fence-restoration/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-fence-staining/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/chain-link-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/chain-link-fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/t-post-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/t-post-fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/composite-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/composite-fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/temporary-fencing-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/temporary-fencing-installation-removal/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pool-safety-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pool-safety-fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pipe-fence-restoration/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pipe-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pipe-fence-painting/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/vinyl-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/vinyl-fence-installation-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/quote/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/addison-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/allen-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/arlington-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/balch-springs-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/bedford-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/carrollton-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/cedar-hill-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/celina-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/colleyville-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/coppell-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/corinth-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/dallas-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/desoto-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/denton-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/duncanville-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/euless-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/farmers-branch-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/fate-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/flower-mound-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/fort-worth-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/forney-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/frisco-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/garland-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/glenn-heights-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/grand-prairie-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/grapevine-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/heath-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/highland-park-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/highland-village-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/hurst-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/irving-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/kaufman-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/keller-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/lancaster-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/lantana-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/lavon-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/lewisville-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/little-elm-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/lucas-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/mckinney-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/mesquite-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/north-richland-hills-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/ovilla-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/plano-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/prosper-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/richardson-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/richland-hills-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rockwall-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rowlett-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/royse-city-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/sachse-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/seagoville-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/southlake-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/talty-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/terrell-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/the-colony-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/trophy-club-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/university-park-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/waxahachie-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/wylie-tx/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/wood-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/board-on-board-fences/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/horizontal-fences/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/fence-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/commercial-fences/</loc>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/wrought-iron-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/aluminum-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/chain-link-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/t-post-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/composite-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/temporary-fencing/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/pool-safety-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/pipe-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/vinyl-fences/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/fence-restorations/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/fence-repairs/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/projects/fence-staining-painting/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/reviews/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/about/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/team/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/contact/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/texas-fence-laws/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/addison-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/allen-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/arlington-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/balch-springs-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/bedford-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/carrollton-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/cedar-hill-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/celina-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/colleyville-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/coppell-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/corinth-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/dallas-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/desoto-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/denton-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/duncanville-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/euless-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/farmers-branch-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/fate-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/flower-mound-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/fort-worth-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/forney-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/frisco-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/garland-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/glenn-heights-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/grand-prairie-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/grapevine-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/heath-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/highland-park-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/highland-village-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/hurst-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/irving-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/kaufman-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/keller-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/lancaster-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/lantana-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/lavon-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/lewisville-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/little-elm-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/lucas-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/mckinney-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/mesquite-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/north-richland-hills-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/ovilla-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/plano-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/prosper-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/richardson-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/richland-hills-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/rockwall-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/rowlett-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/royse-city-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/sachse-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/seagoville-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/southlake-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/talty-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/terrell-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/the-colony-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/trophy-club-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/university-park-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/waxahachie-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-permits/wylie-tx/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rockwall-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rockwall-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rockwall-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rockwall-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rockwall-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rockwall-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/mesquite-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/mesquite-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/mesquite-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/mesquite-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/mesquite-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/mesquite-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/dallas-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/dallas-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/dallas-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/dallas-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/dallas-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/dallas-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/fort-worth-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/fort-worth-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/fort-worth-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/fort-worth-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/fort-worth-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/fort-worth-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/garland-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/garland-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/garland-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/garland-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/garland-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/garland-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/plano-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/plano-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/plano-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/plano-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/plano-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/plano-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/frisco-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/frisco-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/frisco-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/frisco-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/frisco-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/frisco-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/forney-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/forney-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/forney-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/forney-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/forney-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/forney-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rowlett-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rowlett-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rowlett-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rowlett-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rowlett-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/rowlett-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/royse-city-tx/fence-repair/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/royse-city-tx/fence-installation/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/royse-city-tx/wood-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/royse-city-tx/wrought-iron-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/royse-city-tx/chain-link-fence/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://crwlyllc.github.io/strong-perimeter-website/service-areas/royse-city-tx/automatic-gates/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-cost-dfw/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-cost-calculator/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/fence-restoration-cost-dfw/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/restore-or-replace-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/repair-or-replace-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/best-fence-for-privacy/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/best-fence-for-dogs/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/when-to-stain-a-new-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/do-i-need-a-permit-for-a-fence-in-dfw/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-vs-vinyl-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-vs-chain-link-fence/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wrought-iron-fence-restoration-vs-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/wood-fence-restoration-vs-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pipe-fence-painting-vs-replacement/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/vinyl-fence-repair-or-replace/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/privacy-fence-installation/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/pool-fence-installation/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/dog-fence-installation/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/security-fencing/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/storm-damaged-fence-repair/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://crwlyllc.github.io/strong-perimeter-website/hoa-fence-installation/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-05-28</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

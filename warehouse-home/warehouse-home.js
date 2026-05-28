@@ -1,9 +1,7 @@
 import * as THREE from "../js/vendor/three.module.min.js";
 
 const canvas = document.getElementById("warehouse-canvas");
-const statusEl = document.getElementById("scene-status");
 const fallbackEl = document.querySelector(".scene-fallback");
-const resetButton = document.querySelector("[data-scene-reset]");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const serviceAreas = [
@@ -135,15 +133,6 @@ if (renderer) {
   canvas.addEventListener("pointercancel", handlePointerCancel);
   canvas.addEventListener("wheel", handleWheel, { passive: false });
 
-  document.querySelectorAll("[data-focus]").forEach((link) => {
-    const key = link.dataset.focus;
-
-    link.addEventListener("mouseenter", () => focusScene(key));
-    link.addEventListener("focus", () => focusScene(key));
-  });
-
-  resetButton.addEventListener("click", () => focusScene("overview"));
-
   window.strongPerimeterWarehouse = {
     focus: focusScene
   };
@@ -222,27 +211,27 @@ if (renderer) {
       height: 1024,
       background: "#fffaf1",
       accent: "#db7337",
-      title: "STRONG PERIMETER",
-      kicker: "DFW FENCE COMPANY",
+      title: "FENCE REPAIR INSTALL RESTORE",
+      kicker: "STRONG PERIMETER",
       primaryLine: "(214) 247-6369",
       lines: [
+        "DFW RESIDENTIAL + COMMERCIAL",
         "FREE QUOTES",
-        "REPAIR | RESTORE | INSTALL",
-        "RESIDENTIAL + COMMERCIAL"
+        "WOOD | IRON | CHAIN LINK | GATES"
       ],
       dark: true
     });
 
     const signMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(9.8, 4.9),
+      new THREE.PlaneGeometry(12.8, 6.4),
       new THREE.MeshBasicMaterial({ map: sign, toneMapped: false })
     );
-    signMesh.position.set(-5.0, 4.45, -23.78);
+    signMesh.position.set(-4.7, 6.35, -23.78);
     signMesh.castShadow = true;
     scene.add(signMesh);
 
-    const signFrame = new THREE.Mesh(new THREE.BoxGeometry(10.15, 5.25, 0.22), mats.darkSteel);
-    signFrame.position.set(-5, 4.45, -23.92);
+    const signFrame = new THREE.Mesh(new THREE.BoxGeometry(13.15, 6.75, 0.22), mats.darkSteel);
+    signFrame.position.set(-4.7, 6.35, -23.92);
     signFrame.receiveShadow = true;
     scene.add(signFrame);
     signFrame.renderOrder = -1;
@@ -260,13 +249,13 @@ if (renderer) {
     });
 
     const quoteBoard = new THREE.Mesh(
-      new THREE.PlaneGeometry(3.2, 3.2),
+      new THREE.PlaneGeometry(4.8, 4.8),
       new THREE.MeshBasicMaterial({ map: quoteBoardTexture, toneMapped: false })
     );
-    quoteBoard.position.set(3.2, 4.15, -23.76);
+    quoteBoard.position.set(5.6, 5.45, -23.76);
     scene.add(quoteBoard);
 
-    const hit = new THREE.Mesh(new THREE.BoxGeometry(3.5, 3.5, 0.6), mats.hit);
+    const hit = new THREE.Mesh(new THREE.BoxGeometry(5.1, 5.1, 0.6), mats.hit);
     hit.position.copy(quoteBoard.position);
     hit.userData.hotspot = {
       key: "quote",
@@ -277,8 +266,8 @@ if (renderer) {
     scene.add(hit);
 
     focusTargets.set("brand", {
-      position: new THREE.Vector3(-3.6, 4.4, -12.8),
-      target: new THREE.Vector3(-3.4, 4.15, -23.7),
+      position: new THREE.Vector3(-2.2, 7.0, -10.8),
+      target: new THREE.Vector3(-2.2, 5.9, -23.7),
       label: "Brand wall"
     });
   }
@@ -690,8 +679,7 @@ if (renderer) {
     };
   }
 
-  function updateStatus(label) {
-    statusEl.textContent = label;
+  function updateStatus() {
   }
 
   function updateOrbitCamera() {

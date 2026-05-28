@@ -120,16 +120,15 @@ if (renderer) {
   };
 
   const cameraState = {
-    target: new THREE.Vector3(0, 2.35, -8.5),
+    target: new THREE.Vector3(0, 2.35, -8.0),
     yaw: 0,
-    pitch: 0.16,
-    radius: 21,
+    pitch: 0.2,
+    radius: 16.5,
     tween: null
   };
 
   buildWarehouse();
   buildBrandWall();
-  buildTruckAndTrailer();
   buildServiceDisplays();
   buildLighting();
   updateOrbitCamera();
@@ -261,8 +260,8 @@ if (renderer) {
     addPalletStack(9.9, 4.4, 0.12);
     addPalletStack(-10.6, 7.1, -0.08);
 
-    const overviewPosition = new THREE.Vector3(0, 8.2, 16.5);
-    const overviewTarget = new THREE.Vector3(0, 4.15, -9.5);
+    const overviewPosition = new THREE.Vector3(0, 5.9, 8.8);
+    const overviewTarget = new THREE.Vector3(0, 2.6, -8.1);
     focusTargets.set("overview", { position: overviewPosition, target: overviewTarget, label: "Warehouse overview" });
   }
 
@@ -477,13 +476,18 @@ if (renderer) {
   }
 
   function buildServiceDisplays() {
-    const spacing = 4.05;
-    const startX = -10.2;
-    const z = -13.8;
+    const spacing = 3.75;
+    const startX = -9.35;
+    const showroomZ = -8.35;
+    const panelScale = 1.22;
 
     serviceAreas.forEach((service, index) => {
+      const x = startX + index * spacing;
+      const centerOffset = index - (serviceAreas.length - 1) / 2;
       const group = new THREE.Group();
-      group.position.set(startX + index * spacing, 0, z);
+      group.position.set(x, 0, showroomZ - Math.abs(centerOffset) * 0.22);
+      group.rotation.y = -x * 0.018;
+      group.scale.setScalar(panelScale);
       group.userData.service = service;
 
       const colorMaterial = new THREE.MeshStandardMaterial({
@@ -510,14 +514,14 @@ if (renderer) {
       });
 
       const sign = new THREE.Mesh(
-        new THREE.PlaneGeometry(3.25, 1.6),
+        new THREE.PlaneGeometry(3.45, 1.7),
         new THREE.MeshBasicMaterial({ map: signTexture, toneMapped: false })
       );
-      sign.position.set(0, 3.35, -0.18);
+      sign.position.set(0, 3.48, -0.18);
       group.add(sign);
 
-      const frame = new THREE.Mesh(new THREE.BoxGeometry(3.42, 1.76, 0.16), mats.darkSteel);
-      frame.position.set(0, 3.35, -0.28);
+      const frame = new THREE.Mesh(new THREE.BoxGeometry(3.62, 1.88, 0.16), mats.darkSteel);
+      frame.position.set(0, 3.48, -0.28);
       group.add(frame);
       frame.renderOrder = -1;
 
@@ -554,8 +558,8 @@ if (renderer) {
 
       scene.add(group);
       focusTargets.set(service.key, {
-        position: new THREE.Vector3(group.position.x, 2.85, -8.0),
-        target: new THREE.Vector3(group.position.x, 1.9, -13.7),
+        position: new THREE.Vector3(group.position.x, 3.1, -2.6),
+        target: new THREE.Vector3(group.position.x, 2.35, group.position.z),
         label: service.short
       });
     });

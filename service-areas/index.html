@@ -97,7 +97,7 @@
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow eyebrow--green">Map</p>
-          <h2>Google Map of our service area</h2>
+          <h2>Service area map</h2>
           <p>Use the map to see the Dallas-Fort Worth cities Strong Perimeter serves for residential and commercial fence work.</p>
         </div>
 
@@ -108,211 +108,404 @@
               class="service-map__google-canvas"
               data-google-map
               data-api-key=""
-              aria-label="Interactive Google Map of the Strong Perimeter service area">
+              aria-label="Interactive Strong Perimeter service area map">
             </div>
-            <iframe
-              class="service-map__google-iframe"
-              title="Google Map of Strong Perimeter's Dallas-Fort Worth service area"
-              loading="lazy"
-              allowfullscreen
-              tabindex="-1"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?ll=32.8,-96.8&amp;z=10&amp;t=m&amp;output=embed">
-            </iframe>
-            <svg class="service-map__overlay" viewBox="0 0 1000 800" aria-label="Strong Perimeter service area and city markers">
+            <svg class="service-map__fallback" viewBox="0 0 1000 800" role="img" aria-label="Strong Perimeter service area city map">
+              <rect class="service-map__fallback-base" width="1000" height="800" rx="28"></rect>
+              <g class="service-map__fallback-grid" aria-hidden="true">
+                <path d="M120 165 C260 130 420 140 590 185 C720 220 820 214 910 180"></path>
+                <path d="M95 445 C235 394 390 400 545 452 C710 508 825 498 925 432"></path>
+                <path d="M245 88 C298 230 328 384 312 712"></path>
+                <path d="M684 82 C630 236 621 394 662 714"></path>
+              </g>
+              <ellipse class="service-map__fallback-region" cx="500" cy="400" rx="380" ry="270"></ellipse>
+              <g class="service-map__fallback-cities">
 
-                <circle class="service-map__overlay-dot" cx="479" cy="260" r="6">
-                  <title>Addison, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="594" cy="137" r="6">
-                  <title>Allen, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="683" cy="-77" r="6">
-                  <title>Anna, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="276" cy="456" r="6">
-                  <title>Arlington, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="364" cy="-38" r="6">
-                  <title>Aubrey, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="629" cy="462" r="6">
-                  <title>Balch Springs, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="250" cy="362" r="6">
-                  <title>Bedford, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="435" cy="248" r="6">
-                  <title>Carrollton, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="386" cy="583" r="6">
-                  <title>Cedar Hill, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="511" cy="-56" r="6">
-                  <title>Celina, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="241" cy="330" r="6">
-                  <title>Colleyville, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="343" cy="266" r="6">
-                  <title>Coppell, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="307" cy="93" r="6">
-                  <title>Corinth, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="502" cy="420" r="6">
-                  <title>Dallas, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="458" cy="582" r="6">
-                  <title>DeSoto, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="257" cy="40" r="6">
-                  <title>Denton, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="421" cy="528" r="6">
-                  <title>Duncanville, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="295" cy="368" r="6">
-                  <title>Euless, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="430" cy="290" r="6">
-                  <title>Farmers Branch, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="805" cy="277" r="6">
-                  <title>Fate, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="284" cy="214" r="6">
-                  <title>Flower Mound, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="113" cy="439" r="6">
-                  <title>Fort Worth, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="739" cy="445" r="6">
-                  <title>Forney, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="483" cy="96" r="6">
-                  <title>Frisco, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="617" cy="302" r="6">
-                  <title>Garland, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="459" cy="617" r="6">
-                  <title>Glenn Heights, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="356" cy="447" r="6">
-                  <title>Grand Prairie, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="297" cy="284" r="6">
-                  <title>Grapevine, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="737" cy="368" r="6">
-                  <title>Heath, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="506" cy="371" r="6">
-                  <title>Highland Park, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="320" cy="147" r="6">
-                  <title>Highland Village, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="230" cy="380" r="6">
-                  <title>Hurst, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="392" cy="388" r="6">
-                  <title>Irving, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="858" cy="583" r="6">
-                  <title>Kaufman, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="171" cy="283" r="6">
-                  <title>Keller, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="532" cy="580" r="6">
-                  <title>Lancaster, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="264" cy="148" r="6">
-                  <title>Lantana, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="766" cy="203" r="6">
-                  <title>Lavon, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="359" cy="186" r="6">
-                  <title>Lewisville, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="400" cy="85" r="6">
-                  <title>Little Elm, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="663" cy="153" r="6">
-                  <title>Lucas, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="617" cy="55" r="6">
-                  <title>McKinney, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="665" cy="-22" r="6">
-                  <title>Melissa, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="646" cy="429" r="6">
-                  <title>Mesquite, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="188" cy="370" r="6">
-                  <title>North Richland Hills, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="437" cy="637" r="6">
-                  <title>Ovilla, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="574" cy="209" r="6">
-                  <title>Plano, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="499" cy="21" r="6">
-                  <title>Prosper, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="551" cy="271" r="6">
-                  <title>Richardson, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="188" cy="386" r="6">
-                  <title>Richland Hills, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="748" cy="286" r="6">
-                  <title>Rockwall, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="672" cy="311" r="6">
-                  <title>Rowlett, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="840" cy="248" r="6">
-                  <title>Royse City, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="649" cy="247" r="6">
-                  <title>Sachse, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="691" cy="539" r="6">
-                  <title>Seagoville, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="257" cy="278" r="6">
-                  <title>Southlake, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="800" cy="501" r="6">
-                  <title>Talty, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="882" cy="455" r="6">
-                  <title>Terrell, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="432" cy="157" r="6">
-                  <title>The Colony, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="221" cy="228" r="6">
-                  <title>Trophy Club, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="500" cy="357" r="6">
-                  <title>University Park, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="465" cy="757" r="6">
-                  <title>Waxahachie, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="613" cy="-53" r="6">
-                  <title>Weston, TX</title>
-                </circle>
-                <circle class="service-map__overlay-dot" cx="690" cy="213" r="6">
-                  <title>Wylie, TX</title>
-                </circle>
+                <g class="service-map__fallback-city">
+                  <circle cx="479" cy="337" r="5">
+                    <title>Addison, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="607" cy="240" r="5">
+                    <title>Allen, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="706" cy="72" r="5">
+                    <title>Anna, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="253" cy="491" r="5">
+                    <title>Arlington, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="352" cy="103" r="5">
+                    <title>Aubrey, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="646" cy="496" r="5">
+                    <title>Balch Springs, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="224" cy="417" r="5">
+                    <title>Bedford, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="430" cy="327" r="5">
+                    <title>Carrollton, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="376" cy="591" r="5">
+                    <title>Cedar Hill, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="515" cy="89" r="5">
+                    <title>Celina, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="215" cy="392" r="5">
+                    <title>Colleyville, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="328" cy="342" r="5">
+                    <title>Coppell, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="288" cy="205" r="5">
+                    <title>Corinth, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city service-map__fallback-city--featured">
+                  <circle cx="505" cy="463" r="8">
+                    <title>Dallas, TX</title>
+                  </circle>
+                  <text x="519" y="453" text-anchor="start">Dallas</text>
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="456" cy="590" r="5">
+                    <title>DeSoto, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="232" cy="164" r="5">
+                    <title>Denton, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="415" cy="548" r="5">
+                    <title>Duncanville, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="274" cy="422" r="5">
+                    <title>Euless, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="425" cy="361" r="5">
+                    <title>Farmers Branch, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="842" cy="351" r="5">
+                    <title>Fate, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="262" cy="301" r="5">
+                    <title>Flower Mound, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city service-map__fallback-city--featured">
+                  <circle cx="72" cy="477" r="8">
+                    <title>Fort Worth, TX</title>
+                  </circle>
+                  <text x="86" y="467" text-anchor="start">Fort Worth</text>
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="769" cy="482" r="5">
+                    <title>Forney, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city service-map__fallback-city--featured">
+                  <circle cx="483" cy="208" r="8">
+                    <title>Frisco, TX</title>
+                  </circle>
+                  <text x="497" y="198" text-anchor="start">Frisco</text>
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="633" cy="370" r="5">
+                    <title>Garland, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="456" cy="618" r="5">
+                    <title>Glenn Heights, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="342" cy="484" r="5">
+                    <title>Grand Prairie, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="277" cy="356" r="5">
+                    <title>Grapevine, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="767" cy="422" r="5">
+                    <title>Heath, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="509" cy="424" r="5">
+                    <title>Highland Park, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="302" cy="248" r="5">
+                    <title>Highland Village, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="202" cy="431" r="5">
+                    <title>Hurst, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="382" cy="438" r="5">
+                    <title>Irving, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="901" cy="591" r="5">
+                    <title>Kaufman, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="136" cy="355" r="5">
+                    <title>Keller, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="538" cy="588" r="5">
+                    <title>Lancaster, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="239" cy="249" r="5">
+                    <title>Lantana, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="799" cy="292" r="5">
+                    <title>Lavon, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="345" cy="279" r="5">
+                    <title>Lewisville, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="391" cy="200" r="5">
+                    <title>Little Elm, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="684" cy="253" r="5">
+                    <title>Lucas, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="632" cy="176" r="5">
+                    <title>McKinney, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="687" cy="115" r="5">
+                    <title>Melissa, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city service-map__fallback-city--featured">
+                  <circle cx="665" cy="470" r="8">
+                    <title>Mesquite, TX</title>
+                  </circle>
+                  <text x="679" y="460" text-anchor="start">Mesquite</text>
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="155" cy="424" r="5">
+                    <title>North Richland Hills, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="432" cy="633" r="5">
+                    <title>Ovilla, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city service-map__fallback-city--featured">
+                  <circle cx="584" cy="297" r="8">
+                    <title>Plano, TX</title>
+                  </circle>
+                  <text x="598" y="287" text-anchor="start">Plano</text>
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="502" cy="149" r="5">
+                    <title>Prosper, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="559" cy="346" r="5">
+                    <title>Richardson, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="155" cy="436" r="5">
+                    <title>Richland Hills, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city service-map__fallback-city--featured">
+                  <circle cx="778" cy="358" r="8">
+                    <title>Rockwall, TX</title>
+                  </circle>
+                  <text x="792" y="348" text-anchor="start">Rockwall</text>
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="694" cy="377" r="5">
+                    <title>Rowlett, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="882" cy="328" r="5">
+                    <title>Royse City, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="668" cy="327" r="5">
+                    <title>Sachse, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="715" cy="556" r="5">
+                    <title>Seagoville, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="231" cy="351" r="5">
+                    <title>Southlake, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="837" cy="526" r="5">
+                    <title>Talty, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="928" cy="491" r="5">
+                    <title>Terrell, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="427" cy="256" r="5">
+                    <title>The Colony, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="191" cy="312" r="5">
+                    <title>Trophy Club, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="502" cy="413" r="5">
+                    <title>University Park, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="463" cy="728" r="5">
+                    <title>Waxahachie, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="628" cy="91" r="5">
+                    <title>Weston, TX</title>
+                  </circle>
+
+                </g>
+                <g class="service-map__fallback-city">
+                  <circle cx="714" cy="300" r="5">
+                    <title>Wylie, TX</title>
+                  </circle>
+
+                </g>
+              </g>
             </svg>
           </div>
           <script type="application/json" id="strong-service-area-map-data">{"center":{"lat":32.8,"lng":-96.8},"zoom":10,"cities":[{"name":"Addison, TX","lat":32.9618,"lng":-96.8292,"href":"/strong-perimeter-website/service-areas/addison-tx/","featured":false},{"name":"Allen, TX","lat":33.1032,"lng":-96.6706,"href":"/strong-perimeter-website/service-areas/allen-tx/","featured":false},{"name":"Anna, TX","lat":33.349,"lng":-96.5486,"href":"/strong-perimeter-website/service-areas/anna-tx/","featured":false},{"name":"Arlington, TX","lat":32.7357,"lng":-97.1081,"href":"/strong-perimeter-website/service-areas/arlington-tx/","featured":false},{"name":"Aubrey, TX","lat":33.3043,"lng":-96.9861,"href":"/strong-perimeter-website/service-areas/aubrey-tx/","featured":false},{"name":"Balch Springs, TX","lat":32.7287,"lng":-96.6228,"href":"/strong-perimeter-website/service-areas/balch-springs-tx/","featured":false},{"name":"Bedford, TX","lat":32.844,"lng":-97.1431,"href":"/strong-perimeter-website/service-areas/bedford-tx/","featured":false},{"name":"Carrollton, TX","lat":32.9756,"lng":-96.8899,"href":"/strong-perimeter-website/service-areas/carrollton-tx/","featured":false},{"name":"Cedar Hill, TX","lat":32.5885,"lng":-96.9561,"href":"/strong-perimeter-website/service-areas/cedar-hill-tx/","featured":false},{"name":"Celina, TX","lat":33.3246,"lng":-96.7844,"href":"/strong-perimeter-website/service-areas/celina-tx/","featured":false},{"name":"Colleyville, TX","lat":32.8809,"lng":-97.155,"href":"/strong-perimeter-website/service-areas/colleyville-tx/","featured":false},{"name":"Coppell, TX","lat":32.9546,"lng":-97.015,"href":"/strong-perimeter-website/service-areas/coppell-tx/","featured":false},{"name":"Corinth, TX","lat":33.154,"lng":-97.0647,"href":"/strong-perimeter-website/service-areas/corinth-tx/","featured":false},{"name":"Dallas, TX","lat":32.7767,"lng":-96.797,"href":"/strong-perimeter-website/service-areas/dallas-tx/","featured":true},{"name":"DeSoto, TX","lat":32.5899,"lng":-96.8571,"href":"/strong-perimeter-website/service-areas/desoto-tx/","featured":false},{"name":"Denton, TX","lat":33.2148,"lng":-97.1331,"href":"/strong-perimeter-website/service-areas/denton-tx/","featured":false},{"name":"Duncanville, TX","lat":32.6518,"lng":-96.9083,"href":"/strong-perimeter-website/service-areas/duncanville-tx/","featured":false},{"name":"Euless, TX","lat":32.8371,"lng":-97.0819,"href":"/strong-perimeter-website/service-areas/euless-tx/","featured":false},{"name":"Farmers Branch, TX","lat":32.9265,"lng":-96.8961,"href":"/strong-perimeter-website/service-areas/farmers-branch-tx/","featured":false},{"name":"Fate, TX","lat":32.9415,"lng":-96.3814,"href":"/strong-perimeter-website/service-areas/fate-tx/","featured":false},{"name":"Flower Mound, TX","lat":33.0146,"lng":-97.0969,"href":"/strong-perimeter-website/service-areas/flower-mound-tx/","featured":false},{"name":"Fort Worth, TX","lat":32.7555,"lng":-97.3308,"href":"/strong-perimeter-website/service-areas/fort-worth-tx/","featured":true},{"name":"Forney, TX","lat":32.7482,"lng":-96.4719,"href":"/strong-perimeter-website/service-areas/forney-tx/","featured":false},{"name":"Frisco, TX","lat":33.1507,"lng":-96.8236,"href":"/strong-perimeter-website/service-areas/frisco-tx/","featured":true},{"name":"Garland, TX","lat":32.9126,"lng":-96.6389,"href":"/strong-perimeter-website/service-areas/garland-tx/","featured":false},{"name":"Glenn Heights, TX","lat":32.5487,"lng":-96.8567,"href":"/strong-perimeter-website/service-areas/glenn-heights-tx/","featured":false},{"name":"Grand Prairie, TX","lat":32.7459,"lng":-96.9978,"href":"/strong-perimeter-website/service-areas/grand-prairie-tx/","featured":false},{"name":"Grapevine, TX","lat":32.9343,"lng":-97.0781,"href":"/strong-perimeter-website/service-areas/grapevine-tx/","featured":false},{"name":"Heath, TX","lat":32.8365,"lng":-96.4744,"href":"/strong-perimeter-website/service-areas/heath-tx/","featured":false},{"name":"Highland Park, TX","lat":32.8335,"lng":-96.7919,"href":"/strong-perimeter-website/service-areas/highland-park-tx/","featured":false},{"name":"Highland Village, TX","lat":33.0918,"lng":-97.0467,"href":"/strong-perimeter-website/service-areas/highland-village-tx/","featured":false},{"name":"Hurst, TX","lat":32.8235,"lng":-97.1706,"href":"/strong-perimeter-website/service-areas/hurst-tx/","featured":false},{"name":"Irving, TX","lat":32.814,"lng":-96.9489,"href":"/strong-perimeter-website/service-areas/irving-tx/","featured":false},{"name":"Kaufman, TX","lat":32.589,"lng":-96.3089,"href":"/strong-perimeter-website/service-areas/kaufman-tx/","featured":false},{"name":"Keller, TX","lat":32.9346,"lng":-97.2517,"href":"/strong-perimeter-website/service-areas/keller-tx/","featured":false},{"name":"Lancaster, TX","lat":32.5921,"lng":-96.7561,"href":"/strong-perimeter-website/service-areas/lancaster-tx/","featured":false},{"name":"Lantana, TX","lat":33.0907,"lng":-97.1245,"href":"/strong-perimeter-website/service-areas/lantana-tx/","featured":false},{"name":"Lavon, TX","lat":33.0276,"lng":-96.4344,"href":"/strong-perimeter-website/service-areas/lavon-tx/","featured":false},{"name":"Lewisville, TX","lat":33.0462,"lng":-96.9942,"href":"/strong-perimeter-website/service-areas/lewisville-tx/","featured":false},{"name":"Little Elm, TX","lat":33.1626,"lng":-96.9375,"href":"/strong-perimeter-website/service-areas/little-elm-tx/","featured":false},{"name":"Lucas, TX","lat":33.0843,"lng":-96.5767,"href":"/strong-perimeter-website/service-areas/lucas-tx/","featured":false},{"name":"McKinney, TX","lat":33.1972,"lng":-96.6398,"href":"/strong-perimeter-website/service-areas/mckinney-tx/","featured":false},{"name":"Melissa, TX","lat":33.2859,"lng":-96.5728,"href":"/strong-perimeter-website/service-areas/melissa-tx/","featured":false},{"name":"Mesquite, TX","lat":32.7668,"lng":-96.5992,"href":"/strong-perimeter-website/service-areas/mesquite-tx/","featured":true},{"name":"North Richland Hills, TX","lat":32.8343,"lng":-97.2289,"href":"/strong-perimeter-website/service-areas/north-richland-hills-tx/","featured":false},{"name":"Ovilla, TX","lat":32.5265,"lng":-96.8864,"href":"/strong-perimeter-website/service-areas/ovilla-tx/","featured":false},{"name":"Plano, TX","lat":33.0198,"lng":-96.6989,"href":"/strong-perimeter-website/service-areas/plano-tx/","featured":true},{"name":"Prosper, TX","lat":33.2362,"lng":-96.8011,"href":"/strong-perimeter-website/service-areas/prosper-tx/","featured":false},{"name":"Richardson, TX","lat":32.9483,"lng":-96.7299,"href":"/strong-perimeter-website/service-areas/richardson-tx/","featured":false},{"name":"Richland Hills, TX","lat":32.816,"lng":-97.2281,"href":"/strong-perimeter-website/service-areas/richland-hills-tx/","featured":false},{"name":"Rockwall, TX","lat":32.9312,"lng":-96.4597,"href":"/strong-perimeter-website/service-areas/rockwall-tx/","featured":true},{"name":"Rowlett, TX","lat":32.9029,"lng":-96.5639,"href":"/strong-perimeter-website/service-areas/rowlett-tx/","featured":false},{"name":"Royse City, TX","lat":32.9751,"lng":-96.3325,"href":"/strong-perimeter-website/service-areas/royse-city-tx/","featured":false},{"name":"Sachse, TX","lat":32.9762,"lng":-96.5953,"href":"/strong-perimeter-website/service-areas/sachse-tx/","featured":false},{"name":"Seagoville, TX","lat":32.6396,"lng":-96.5383,"href":"/strong-perimeter-website/service-areas/seagoville-tx/","featured":false},{"name":"Southlake, TX","lat":32.9412,"lng":-97.1342,"href":"/strong-perimeter-website/service-areas/southlake-tx/","featured":false},{"name":"Talty, TX","lat":32.6835,"lng":-96.3875,"href":"/strong-perimeter-website/service-areas/talty-tx/","featured":false},{"name":"Terrell, TX","lat":32.736,"lng":-96.2753,"href":"/strong-perimeter-website/service-areas/terrell-tx/","featured":false},{"name":"The Colony, TX","lat":33.0806,"lng":-96.8928,"href":"/strong-perimeter-website/service-areas/the-colony-tx/","featured":false},{"name":"Trophy Club, TX","lat":32.9979,"lng":-97.1836,"href":"/strong-perimeter-website/service-areas/trophy-club-tx/","featured":false},{"name":"University Park, TX","lat":32.8501,"lng":-96.8003,"href":"/strong-perimeter-website/service-areas/university-park-tx/","featured":false},{"name":"Waxahachie, TX","lat":32.3865,"lng":-96.8483,"href":"/strong-perimeter-website/service-areas/waxahachie-tx/","featured":false},{"name":"Weston, TX","lat":33.3215,"lng":-96.6453,"href":"/strong-perimeter-website/service-areas/weston-tx/","featured":false},{"name":"Wylie, TX","lat":33.0151,"lng":-96.5389,"href":"/strong-perimeter-website/service-areas/wylie-tx/","featured":false}]}</script>

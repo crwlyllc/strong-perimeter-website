@@ -107,7 +107,8 @@ function initStrongPerimeterServiceMap(mapData, mapEl) {
     zoom: preferredZoom,
     mapTypeControl: false,
     streetViewControl: false,
-    fullscreenControl: true
+    fullscreenControl: false,
+    clickableIcons: false
   });
 
   const bounds = new window.google.maps.LatLngBounds();

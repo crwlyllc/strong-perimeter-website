@@ -2167,12 +2167,11 @@ a.story-card:focus-visible {
 }
 
 .service-map__google-canvas,
-.service-map__google-iframe {
+.service-map__fallback {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: 0;
 }
 
 .service-map__google-canvas {
@@ -2182,24 +2181,47 @@ a.story-card:focus-visible {
   transition: opacity 0.2s ease;
 }
 
-.service-map__google-iframe {
+.service-map__fallback {
   z-index: 0;
-  pointer-events: none;
+  background: linear-gradient(135deg, #edf2ec, #fff8ef 54%, #eef5f8);
 }
 
-.service-map__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+.service-map__fallback-base {
+  fill: transparent;
 }
 
-.service-map__overlay-dot {
-  fill: var(--terracotta);
+.service-map__fallback-grid path {
+  fill: none;
+  stroke: rgba(0, 75, 61, 0.11);
+  stroke-linecap: round;
+  stroke-width: 14;
+}
+
+.service-map__fallback-region {
+  fill: rgba(255, 253, 249, 0.58);
+  stroke: rgba(0, 75, 61, 0.14);
+  stroke-width: 2;
+}
+
+.service-map__fallback-city circle {
+  fill: var(--green-800);
   stroke: #fffdf9;
   stroke-width: 3;
+}
+
+.service-map__fallback-city--featured circle {
+  fill: var(--terracotta);
+}
+
+.service-map__fallback-city text {
+  fill: var(--green-900);
+  font-family: var(--font-ui);
+  font-size: 28px;
+  font-weight: 800;
+  paint-order: stroke;
+  stroke: rgba(255, 253, 249, 0.92);
+  stroke-linejoin: round;
+  stroke-width: 7px;
 }
 
 .service-map.is-google-map-loaded .service-map__google-canvas {
@@ -2207,12 +2229,7 @@ a.story-card:focus-visible {
   pointer-events: auto;
 }
 
-.service-map.is-google-map-loaded .service-map__google-iframe {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.service-map.is-google-map-loaded .service-map__overlay {
+.service-map.is-google-map-loaded .service-map__fallback {
   display: none;
 }
 

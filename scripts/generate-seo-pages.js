@@ -451,26 +451,42 @@ function linkCards(links, text, tag = "Page") {
   return links.map(([href, label]) => serviceCard(label, text(label), href, tag, "View page"));
 }
 
-function projectGoogleMapPoint([lat, lng]) {
-  const { center, zoom, width, height } = googleMapView;
-  const scale = 256 * (2 ** zoom);
-  const toWorldPoint = (pointLat, pointLng) => {
-    const safeLat = Math.max(Math.min(pointLat, 85), -85);
-    const sinLat = Math.sin((safeLat * Math.PI) / 180);
+function toMercatorUnitPoint([lat, lng]) {
+  const safeLat = Math.max(Math.min(lat, 85), -85);
+  const sinLat = Math.sin((safeLat * Math.PI) / 180);
 
-    return {
-      x: ((pointLng + 180) / 360) * scale,
-      y: (0.5 - Math.log((1 + sinLat) / (1 - sinLat)) / (4 * Math.PI)) * scale
-    };
+  return {
+    x: (lng + 180) / 360,
+    y: 0.5 - Math.log((1 + sinLat) / (1 - sinLat)) / (4 * Math.PI)
   };
+}
 
-  const point = toWorldPoint(lat, lng);
-  const mapCenter = toWorldPoint(center.lat, center.lng);
+const serviceAreaMapBounds = (() => {
+  const points = serviceAreaCities.map((city) => toMercatorUnitPoint(serviceAreaCityCoordinates[city]));
 
-  return [
-    Math.round((width / 2) + point.x - mapCenter.x),
-    Math.round((height / 2) + point.y - mapCenter.y)
-  ];
+  return points.reduce((bounds, point) => ({
+    minX: Math.min(bounds.minX, point.x),
+    maxX: Math.max(bounds.maxX, point.x),
+    minY: Math.min(bounds.minY, point.y),
+    maxY: Math.max(bounds.maxY, point.y)
+  }), {
+    minX: Number.POSITIVE_INFINITY,
+    maxX: Number.NEGATIVE_INFINITY,
+    minY: Number.POSITIVE_INFINITY,
+    maxY: Number.NEGATIVE_INFINITY
+  });
+})();
+
+function projectServiceAreaMapPoint(coordinates) {
+  const { width, height } = googleMapView;
+  const padding = 72;
+  const point = toMercatorUnitPoint(coordinates);
+  const xRange = serviceAreaMapBounds.maxX - serviceAreaMapBounds.minX || 1;
+  const yRange = serviceAreaMapBounds.maxY - serviceAreaMapBounds.minY || 1;
+  const x = padding + ((point.x - serviceAreaMapBounds.minX) / xRange) * (width - (padding * 2));
+  const y = padding + ((point.y - serviceAreaMapBounds.minY) / yRange) * (height - (padding * 2));
+
+  return [Math.round(x), Math.round(y)];
 }
 
 function addActionHubPages() {
@@ -1611,8 +1627,7 @@ function addSupportPages() {
         serviceCard("Fence repair", `Fix damaged posts, panels, rails, pickets, gates, chain link fabric, rust, storm damage, or leaning sections in ${city}.`, "/fence-repair/", "Repair", "View repair services"),
         serviceCard("Fence restoration", `Repair and refinish wrought iron, aluminum, wood, or pipe fencing in ${city} when the structure is still worth saving.`, "/fence-restoration/", "Restore", "View restoration services"),
         serviceCard("Installation & replacement", `Build new or replace a fence in ${city} when the existing fence has too much damage to repair cleanly.`, "/fence-installation-replacement/", "Build", "View installation services"),
-        serviceCard("Gates and access", `Plan gate repair, driveway gates, walk gates, or automatic gate needs in ${city}.`, "/fence-gates/", "Gates", "View gate services"),
-        serviceCard("Permit planning", `Check city, HOA, pool, and placement questions before a fence project in ${city}.`, cityPermitHref(city), "Permits", "View permit notes")
+        serviceCard("Gates and access", `Plan gate repair, driveway gates, walk gates, or automatic gate needs in ${city}.`, "/fence-gates/", "Gates", "View gate services")
       ],
       linkSections: isPriorityCity ? [
         {
@@ -1684,12 +1699,10 @@ function addSupportPages() {
         [`Do you provide fence repair in ${city}, TX?`, `Yes. Strong Perimeter provides residential and commercial fence repair in ${city}.`],
         [`Do you handle fence installation and replacement in ${city}?`, `Yes. Strong Perimeter installs and replaces wrought iron, aluminum, wood, chain link, T-post, composite, pool safety, and vinyl fences in ${city}, and can help with temporary fencing.`],
         [`Can you help with gates in ${city}?`, `Yes. Strong Perimeter can scope walk gates, double gates, driveway gates, gate repair, and automatic gate questions in ${city}.`],
-        [`Do I need a fence permit in ${city}?`, `Permit and HOA requirements can vary by property, height, location, pool use, and city rules. Start with the ${city} permit planning page and confirm current requirements before building.`],
         ["What should I send for a quote?", "Send the project address, fence type if you know it, photos if available, and what you want fixed or changed."]
       ],
       related: [
         ["/service-areas/", "All service areas"],
-        [cityPermitHref(city), `${city} fence permit notes`],
         ...coreServiceLinks,
         ...materialLinks,
         ...designStyleLinks.slice(0, 6),
@@ -2377,13 +2390,22 @@ function renderServiceAreaMap(page) {
       featured: featuredServiceAreaCities.includes(city)
     };
   });
-  const overlayDots = serviceAreaCities.map((city) => {
-    const [x, y] = projectGoogleMapPoint(serviceAreaCityCoordinates[city]);
+  const fallbackCityMarkers = serviceAreaCities.map((city) => {
+    const [x, y] = projectServiceAreaMapPoint(serviceAreaCityCoordinates[city]);
+    const isFeatured = featuredServiceAreaCities.includes(city);
+    const labelOffset = x > googleMapView.width - 180 ? -14 : 14;
+    const labelAnchor = x > googleMapView.width - 180 ? "end" : "start";
+    const label = isFeatured
+      ? `<text x="${x + labelOffset}" y="${y - 10}" text-anchor="${labelAnchor}">${escapeHtml(city)}</text>`
+      : "";
 
     return `
-                <circle class="service-map__overlay-dot" cx="${x}" cy="${y}" r="6">
-                  <title>${escapeHtml(`${city}, TX`)}</title>
-                </circle>`;
+                <g class="service-map__fallback-city${isFeatured ? " service-map__fallback-city--featured" : ""}">
+                  <circle cx="${x}" cy="${y}" r="${isFeatured ? 8 : 5}">
+                    <title>${escapeHtml(`${city}, TX`)}</title>
+                  </circle>
+                  ${label}
+                </g>`;
   }).join("");
   const mapData = {
     center: googleMapView.center,
@@ -2398,7 +2420,7 @@ function renderServiceAreaMap(page) {
       <div class="section-shell">
         <div class="section-heading">
           <p class="eyebrow eyebrow--green">Map</p>
-          <h2>Google Map of our service area</h2>
+          <h2>Service area map</h2>
           <p>Use the map to see the Dallas-Fort Worth cities Strong Perimeter serves for residential and commercial fence work.</p>
         </div>
 
@@ -2409,19 +2431,20 @@ function renderServiceAreaMap(page) {
               class="service-map__google-canvas"
               data-google-map
               data-api-key="${escapeHtml(googleMapsApiKey)}"
-              aria-label="Interactive Google Map of the Strong Perimeter service area">
+              aria-label="Interactive Strong Perimeter service area map">
             </div>
-            <iframe
-              class="service-map__google-iframe"
-              title="Google Map of Strong Perimeter's Dallas-Fort Worth service area"
-              loading="lazy"
-              allowfullscreen
-              tabindex="-1"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?ll=${googleMapView.center.lat},${googleMapView.center.lng}&amp;z=${googleMapView.zoom}&amp;t=m&amp;output=embed">
-            </iframe>
-            <svg class="service-map__overlay" viewBox="0 0 ${googleMapView.width} ${googleMapView.height}" aria-label="Strong Perimeter service area and city markers">
-              ${overlayDots}
+            <svg class="service-map__fallback" viewBox="0 0 ${googleMapView.width} ${googleMapView.height}" role="img" aria-label="Strong Perimeter service area city map">
+              <rect class="service-map__fallback-base" width="${googleMapView.width}" height="${googleMapView.height}" rx="28"></rect>
+              <g class="service-map__fallback-grid" aria-hidden="true">
+                <path d="M120 165 C260 130 420 140 590 185 C720 220 820 214 910 180"></path>
+                <path d="M95 445 C235 394 390 400 545 452 C710 508 825 498 925 432"></path>
+                <path d="M245 88 C298 230 328 384 312 712"></path>
+                <path d="M684 82 C630 236 621 394 662 714"></path>
+              </g>
+              <ellipse class="service-map__fallback-region" cx="500" cy="400" rx="380" ry="270"></ellipse>
+              <g class="service-map__fallback-cities">
+                ${fallbackCityMarkers}
+              </g>
             </svg>
           </div>
           <script type="application/json" id="strong-service-area-map-data">${mapDataJson}</script>

@@ -2795,7 +2795,7 @@ function renderQuoteWizard() {
           </div>
 
           <fieldset class="quote-step is-active" data-quote-step data-fence-type-step>
-            <legend>What kind of fence are we meeting?</legend>
+            <legend>What kind of fence needs help?</legend>
             <p class="quote-step__lead">Select all that apply. You can choose one fence type or several, even if you are not completely sure yet.</p>
             <div class="quote-options quote-options--fence-types">
               ${renderQuoteOptionCards("fence_types", fenceOptions, {

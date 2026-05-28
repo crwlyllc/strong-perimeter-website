@@ -71,6 +71,12 @@ try {
 }
 
 if (renderer) {
+  const warehouseHeight = 17.6;
+  const warehouseWallY = warehouseHeight / 2 - 0.15;
+  const roofBeamY = warehouseHeight - 0.95;
+  const roofCrossBeamY = warehouseHeight - 0.82;
+  const lampY = warehouseHeight - 2.45;
+
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x101815);
   scene.fog = new THREE.Fog(0x101815, 18, 42);
@@ -148,18 +154,18 @@ if (renderer) {
     floor.receiveShadow = true;
     scene.add(floor);
 
-    const backWall = new THREE.Mesh(new THREE.BoxGeometry(28, 8.8, 0.32), mats.wall);
-    backWall.position.set(0, 4.25, -24);
+    const backWall = new THREE.Mesh(new THREE.BoxGeometry(28, warehouseHeight, 0.32), mats.wall);
+    backWall.position.set(0, warehouseWallY, -24);
     backWall.receiveShadow = true;
     scene.add(backWall);
 
-    const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, 8.8, 36), mats.wallDark);
-    leftWall.position.set(-14, 4.25, -6);
+    const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, warehouseHeight, 36), mats.wallDark);
+    leftWall.position.set(-14, warehouseWallY, -6);
     leftWall.receiveShadow = true;
     scene.add(leftWall);
 
-    const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, 8.8, 36), mats.wallDark);
-    rightWall.position.set(14, 4.25, -6);
+    const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, warehouseHeight, 36), mats.wallDark);
+    rightWall.position.set(14, warehouseWallY, -6);
     rightWall.receiveShadow = true;
     scene.add(rightWall);
 
@@ -186,14 +192,14 @@ if (renderer) {
 
     for (let x = -12; x <= 12; x += 6) {
       const beam = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.34, 35), mats.darkSteel);
-      beam.position.set(x, 8.2, -6);
+      beam.position.set(x, roofBeamY, -6);
       beam.castShadow = true;
       scene.add(beam);
     }
 
     for (let z = -22; z <= 8; z += 6) {
       const beam = new THREE.Mesh(new THREE.BoxGeometry(27, 0.28, 0.34), mats.darkSteel);
-      beam.position.set(0, 8.28, z);
+      beam.position.set(0, roofCrossBeamY, z);
       beam.castShadow = true;
       scene.add(beam);
     }
@@ -205,8 +211,8 @@ if (renderer) {
       scene.add(line);
     });
 
-    const overviewPosition = new THREE.Vector3(0, 5.15, 14);
-    const overviewTarget = new THREE.Vector3(0, 2.35, -8.5);
+    const overviewPosition = new THREE.Vector3(0, 8.2, 16.5);
+    const overviewTarget = new THREE.Vector3(0, 4.15, -9.5);
     focusTargets.set("overview", { position: overviewPosition, target: overviewTarget, label: "Warehouse overview" });
   }
 
@@ -217,11 +223,12 @@ if (renderer) {
       background: "#fffaf1",
       accent: "#db7337",
       title: "STRONG PERIMETER",
-      kicker: "DALLAS-FORT WORTH FENCE WORK",
+      kicker: "DFW FENCE COMPANY",
+      primaryLine: "(214) 247-6369",
       lines: [
-        "(214) 247-6369",
-        "Residential + Commercial",
-        "Repair | Restore | Install"
+        "FREE QUOTES",
+        "REPAIR | RESTORE | INSTALL",
+        "RESIDENTIAL + COMMERCIAL"
       ],
       dark: true
     });
@@ -245,8 +252,9 @@ if (renderer) {
       height: 1024,
       background: "#004b3d",
       accent: "#d2aa54",
-      title: "FREE QUOTE",
-      kicker: "PROJECTS START WITH THE STORY",
+      title: "GET A FREE QUOTE",
+      kicker: "START HERE",
+      primaryLine: "(214) 247-6369",
       lines: ["Fence repair", "Fence installation", "Gates + perimeter work"],
       dark: false
     });
@@ -573,11 +581,11 @@ if (renderer) {
     scene.add(sun);
 
     [
-      [-9, 7.5, -11],
-      [-3, 7.5, -11],
-      [3, 7.5, -11],
-      [9, 7.5, -11],
-      [-8, 7, 3]
+      [-9, lampY, -11],
+      [-3, lampY, -11],
+      [3, lampY, -11],
+      [9, lampY, -11],
+      [-8, lampY - 0.5, 3]
     ].forEach(([x, y, z]) => {
       const lamp = new THREE.PointLight(0xfff0c6, 1.25, 13, 1.8);
       lamp.position.set(x, y, z);
@@ -607,17 +615,27 @@ if (renderer) {
     ctx.fillRect(0, h - Math.round(h * 0.08), w, Math.round(h * 0.08));
 
     ctx.fillStyle = options.dark ? "#004b3d" : "#fffaf1";
-    ctx.font = `700 ${Math.round(h * 0.07)}px Arial, sans-serif`;
-    ctx.fillText(options.kicker, pad, Math.round(h * 0.22));
+    ctx.font = `800 ${Math.round(h * 0.07)}px Arial, sans-serif`;
+    ctx.fillText(options.kicker, pad, Math.round(h * 0.18));
 
     ctx.fillStyle = options.dark ? "#17211e" : "#fffaf1";
-    ctx.font = `900 ${Math.round(h * 0.14)}px Arial, sans-serif`;
-    wrapCanvasText(ctx, options.title, pad, Math.round(h * 0.42), w - pad * 1.4, Math.round(h * 0.145));
+    ctx.font = `900 ${Math.round(h * 0.13)}px Arial, sans-serif`;
+    wrapCanvasText(ctx, options.title, pad, Math.round(h * 0.36), w - pad * 1.4, Math.round(h * 0.135));
 
-    ctx.fillStyle = options.dark ? "#394541" : "rgba(255, 250, 241, 0.78)";
-    ctx.font = `700 ${Math.round(h * 0.055)}px Arial, sans-serif`;
+    if (options.primaryLine) {
+      const bannerY = Math.round(h * 0.52);
+      const bannerH = Math.round(h * 0.17);
+      ctx.fillStyle = options.accent;
+      ctx.fillRect(pad, bannerY, w - pad * 1.35, bannerH);
+      ctx.fillStyle = options.dark ? "#17211e" : "#071c17";
+      ctx.font = `900 ${Math.round(h * 0.095)}px Arial, sans-serif`;
+      ctx.fillText(options.primaryLine, pad + Math.round(w * 0.025), bannerY + Math.round(h * 0.115));
+    }
+
+    ctx.fillStyle = options.dark ? "#394541" : "rgba(255, 250, 241, 0.82)";
+    ctx.font = `800 ${Math.round(h * 0.055)}px Arial, sans-serif`;
     options.lines.forEach((line, index) => {
-      ctx.fillText(line, pad, Math.round(h * 0.68) + index * Math.round(h * 0.075));
+      ctx.fillText(line, pad, Math.round(h * 0.78) + index * Math.round(h * 0.07));
     });
 
     const texture = new THREE.CanvasTexture(canvasTexture);

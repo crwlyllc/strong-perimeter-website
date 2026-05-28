@@ -283,21 +283,21 @@ function addActionHubPages() {
   addPage({
     slug: "services",
     title: "Fence Services in Dallas-Fort Worth | Strong Perimeter",
-    description: "Explore Strong Perimeter fence restoration, repair, painting, staining, installation, and replacement services for residential and commercial properties in DFW.",
+    description: "Explore people-first fence repair, restoration, painting, staining, installation, and replacement services from Strong Perimeter across Dallas-Fort Worth.",
     eyebrow: "Fence services",
     h1: "Fence Services",
-    lead: "Restore, repair, paint, stain, install, or replace residential and commercial fences across Dallas-Fort Worth. Start with what you need done, or choose your fence type.",
+    lead: "Start with what happened, who uses the space, when it needs to be handled, where the fence sits, and why the project matters. We will help turn that into a clear scope.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
-    summaryItems: ["Repair", "Restoration", "Installation and replacement", "Fence painting", "Wood fence staining"],
-    hubHeading: "What do you need done?",
-    hubLead: "Choose the closest match. If you are unsure, the quote conversation can compare repair, restoration, and replacement.",
+    summaryItems: ["What happened", "Who uses it", "When it matters", "Where it is", "Why it matters"],
+    hubHeading: "What is happening with the fence?",
+    hubLead: "Choose the closest starting point. If you are unsure, the quote conversation can compare repair, restoration, finishing, and replacement.",
     highlights: [
-      serviceCard("Fence repair", "Fix damaged posts, panels, rails, pickets, gates, chain link fabric, rust, storm damage, or leaning sections.", "/fence-repair/", "Repair", "View repair services"),
-      serviceCard("Fence restoration", "Save wrought iron, aluminum, wood, or pipe fencing when repair plus a fresh finish makes sense.", "/fence-restoration/", "Restore", "View restoration services"),
-      serviceCard("Installation & replacement", "Build new or replace a fence that has too much damage to repair cleanly.", "/fence-installation-replacement/", "Build", "View installation services"),
-      serviceCard("Fence painting", "Paint wrought iron, aluminum, or pipe fencing after prep, rust attention, and needed repairs.", "/fence-painting/", "Paint", "View painting services"),
-      serviceCard("Fence staining", "Stain new, repaired, or restored wood fencing for a finished look.", "/fence-staining/", "Stain", "View staining services")
+      serviceCard("Something broke", "Fix damaged posts, panels, rails, pickets, gates, chain link fabric, rust, storm damage, or leaning sections.", "/fence-repair/", "Repair", "View repair services"),
+      serviceCard("It can be saved", "Restore wrought iron, aluminum, wood, or pipe fencing when repair plus a fresh finish makes sense.", "/fence-restoration/", "Restore", "View restoration services"),
+      serviceCard("It needs to change", "Build new or replace a fence that no longer fits the property, safety need, privacy goal, or condition.", "/fence-installation-replacement/", "Build", "View installation services"),
+      serviceCard("It needs a finish", "Paint metal or stain wood after the practical repairs and prep are understood.", "/fence-painting/", "Finish", "View painting services"),
+      serviceCard("You are not sure yet", "Talk through the fence type, condition, photos, address, access, and timing before choosing the scope.", "/quote/", "Guidance", "Start a quote")
     ],
     hubGroups: [
       {
@@ -332,31 +332,26 @@ function addActionHubPages() {
     sections: [
       {
         eyebrow: "Service breakdown",
-        title: "What each service means",
-        body: "Here is the plain-language version before you open the individual service page.",
+        title: "What each service means from the customer side",
+        body: "Most people do not start with industry terms. They start with a problem, a deadline, or a result they want to feel good about.",
         items: [
-          "Restoration: repair plus finishing work for a fence that is still worth saving.",
-          "Repair: fix failed parts without rebuilding the whole fence line.",
-          "Installation/replacement: build new or replace a fence that has too much damage to repair cleanly.",
-          "Painting: finish work for wrought iron, aluminum, and pipe fencing after prep and needed repairs.",
-          "Staining: finish work for new, repaired, or restored wood fencing."
+          "Repair: something failed and the fence should work again without overbuilding the answer.",
+          "Restoration: the fence still has life left, but needs repair, prep, and finish work to look cared for again.",
+          "Installation/replacement: the current fence no longer fits the property, safety need, privacy goal, or condition.",
+          "Painting: metal fencing needs rust-conscious prep, repair attention, and a cleaner finished line.",
+          "Staining: wood fencing needs a warmer finished look after new work, repair, or restoration."
         ]
       },
       {
-        eyebrow: "Fence types",
-        title: "Services by material",
-        body: "Not every fence material uses every service. This is the quick map.",
+        eyebrow: "Customer process",
+        title: "How we get from story to scope",
+        body: "The path is simple on purpose, because a fence project should feel understandable before anyone starts work.",
         items: [
-          "Wrought iron: restoration, repair, painting, installation, and replacement.",
-          "Aluminum: repair, painting, installation, and replacement.",
-          "Wood: restoration, repair, staining, installation, and replacement.",
-          "Chain link: repair, installation, and replacement.",
-          "T-post: repair, installation, and replacement.",
-          "Composite: repair, installation, and replacement.",
-          "Temporary fencing: installation, removal, repair, and repositioning.",
-          "Pool safety fences: repair, installation, and replacement.",
-          "Pipe: restoration, repair, and painting.",
-          "Vinyl: repair, installation, and replacement."
+          "Listen: what changed, who uses the space, and what would make the project feel right.",
+          "Look: photos, address, material, access, timing, and the visible condition of the fence.",
+          "Choose: compare repair, restoration, replacement, paint, or stain options.",
+          "Build: show up with the plan, protect the property, and keep the work moving cleanly.",
+          "Walk: review gates, finish, cleanup, expectations, and the final view."
         ]
       }
     ],
@@ -1025,15 +1020,15 @@ function addSupportPages() {
   addPage({
     slug: "quote",
     title: "Get a Fence Quote in Dallas-Fort Worth | Strong Perimeter",
-    description: "Request a fence quote from Strong Perimeter with a simple form that supports multiple fence areas, fence types, services, project details, and contact information.",
+    description: "Tell Strong Perimeter the fence story, location, timing, and contact details so the team can help map the right repair, restoration, or replacement scope.",
     eyebrow: "Quote request",
-    h1: "Get a Fence Quote",
-    lead: "Tell us what kind of fence help you need, what materials are involved, and where the project is located.",
+    h1: "Tell Us Your Fence Story",
+    lead: "Start with what happened, who uses the space, when you need it handled, where the fence is, and why the project matters.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
-    ctaLabel: "Start quote request",
+    ctaLabel: "Start with the story",
     ctaHref: "#quote-wizard",
-    summaryItems: ["Service type", "Fence type", "Project address", "Contact info"],
+    summaryItems: ["Fence story", "Fence type", "Timing", "Project address", "Contact info"],
     isQuotePage: true
   });
 
@@ -1260,27 +1255,28 @@ function addSupportPages() {
   addPage({
     slug: "about",
     title: "About Strong Perimeter | DFW Fence Company",
-    description: "Learn about Strong Perimeter, a Dallas-Fort Worth fence company focused on clear communication, quality work, and practical fence guidance.",
+    description: "Learn who Strong Perimeter is, why the team leads with people first, and how the company guides DFW fence customers from story to finished work.",
     eyebrow: "About",
-    h1: "About Strong Perimeter",
-    lead: "A Dallas-Fort Worth fence company focused on clear scope, clean work, and practical guidance before the project starts.",
+    h1: "Who We Are",
+    lead: "Strong Perimeter is a Dallas-Fort Worth fence company built around real people, practical guidance, clean work, and a calmer customer process.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
+    summaryItems: ["Real people", "Clear guidance", "Respectful crews", "Finished work"],
     highlights: [
-      serviceCard("Field-aware guidance", "The right scope depends on the actual condition of the fence line.", "/services/"),
-      serviceCard("Real people", "Customers can see who they are working with before the crew arrives.", "/team/"),
-      serviceCard("Visible proof", "Project photos, reviews, and service pages show the work clearly.", "/projects/")
+      serviceCard("Who you meet", "Customers can see the people behind the estimate, the schedule, the crew, and the final walkthrough.", "/team/"),
+      serviceCard("What we believe", "A fence project should feel clear before it feels busy, with plain-language options instead of pressure.", "/services/"),
+      serviceCard("Why proof matters", "Project photos, reviews, and service pages help customers connect the story to finished work.", "/projects/")
     ],
     sections: [
       {
         eyebrow: "What matters",
-        title: "The finished fence and the process both count.",
+        title: "The finished fence and the customer experience both count.",
         body: "Fence buyers want a result that looks right, but they also want the estimate, schedule, crew, and final walkthrough to feel steady.",
         items: [
-          "Clear service recommendations.",
-          "Residential and commercial fence work.",
-          "Wrought iron, aluminum, wood, chain link, T-post, composite, temporary fencing, pool safety, pipe, and vinyl services.",
-          "A practical repair, restore, or replace conversation."
+          "We start with the story: who, what, when, where, and why.",
+          "We explain service recommendations in plain language.",
+          "We handle residential and commercial fence work across Dallas-Fort Worth.",
+          "We help customers compare repair, restoration, replacement, paint, and stain options."
         ]
       }
     ],
@@ -1295,27 +1291,28 @@ function addSupportPages() {
   addPage({
     slug: "team",
     title: "Strong Perimeter Team | DFW Fence Company",
-    description: "Meet the Strong Perimeter team behind residential and commercial fence restoration, repair, painting, staining, installation, and replacement in DFW.",
+    description: "Meet the people behind Strong Perimeter fence estimates, customer guidance, field work, and final walkthroughs across Dallas-Fort Worth.",
     eyebrow: "Team",
-    h1: "Strong Perimeter Team",
-    lead: "Meet the people behind residential and commercial fence restoration, repair, painting, staining, installation, and replacement in DFW.",
+    h1: "People You Can Put a Face To",
+    lead: "The estimate, the schedule, the crew, and the follow-through all come from real people who care about making the project feel steady.",
     image: "/images/daniel-wade-1200-min.jpg",
     imageAlt: "Daniel Wade of Strong Perimeter",
+    summaryItems: ["Daniel Wade", "Robert Hill", "Crew leadership"],
     highlights: [
-      serviceCard("Daniel Wade", "Founder and CEO focused on quality, communication, and finish standards.", "/contact/"),
-      serviceCard("Robert Hill", "Sales Manager helping customers sort through scope, material, and scheduling.", "/contact/"),
-      serviceCard("Crew leadership", "Field execution focused on straight lines, clean details, and dependable work.", "/projects/")
+      serviceCard("Daniel Wade", "Founder and CEO focused on quality, finish standards, and the customer experience before, during, and after the work.", "/contact/"),
+      serviceCard("Robert Hill", "Sales Manager helping customers talk through scope, material, access, photos, and scheduling.", "/contact/"),
+      serviceCard("Crew leadership", "Field execution focused on clean lines, dependable work, and respectful jobsite care.", "/projects/")
     ],
     sections: [
       {
         eyebrow: "How the team helps",
-        title: "Good fence work gets easier when the communication is clear.",
-        body: "The team supports trust, especially for higher-value restoration, replacement, and commercial projects.",
+        title: "Good fence work gets easier when the communication feels human.",
+        body: "The team supports trust from the first conversation through the final walkthrough.",
         items: [
-          "Clear estimate conversations.",
-          "Material and finish recommendations.",
-          "Respectful crews and site awareness.",
-          "Final walkthrough expectations."
+          "A real conversation about what happened and what needs to change.",
+          "Material and finish recommendations that match the property.",
+          "Respectful crews, site awareness, and clean execution.",
+          "Final walkthrough expectations before the work is considered done."
         ]
       }
     ],
@@ -1330,28 +1327,28 @@ function addSupportPages() {
   addPage({
     slug: "contact",
     title: "Request a Fence Quote | Strong Perimeter",
-    description: "Request a free quote for fence restoration, repair, painting, staining, installation, or replacement in Dallas-Fort Worth.",
+    description: "Contact Strong Perimeter to share your fence story and request help with repair, restoration, finishing, installation, or replacement in Dallas-Fort Worth.",
     eyebrow: "Request a quote",
-    h1: "Request a Fence Quote",
-    lead: "Send the address, fence type, photos if you have them, and whether you need restoration, repair, painting, staining, installation, or replacement.",
+    h1: "Start With the Story",
+    lead: "Tell us what happened, who relies on the fence, where it is, and when you need it handled. We will help map the scope from there.",
     image: images.brandGreen,
     imageAlt: "Strong Perimeter logo",
     highlights: [
-      serviceCard("Call", "Speak with Strong Perimeter at (214) 247-6369.", "tel:+12142476369"),
-      serviceCard("Email", "Send project details to sales@strongperimeter.com.", "mailto:sales@strongperimeter.com"),
-      serviceCard("Step-by-step quote", "Use the visual quote page to tell us what service and fence type you need.", "/quote/")
+      serviceCard("Call", "Talk with Strong Perimeter at (214) 247-6369.", "tel:+12142476369"),
+      serviceCard("Email", "Send the story, address, timing, photos, and questions to sales@strongperimeter.com.", "mailto:sales@strongperimeter.com"),
+      serviceCard("Step-by-step quote", "Use the visual quote page to share fence types, services, timing, and contact details.", "/quote/")
     ],
     sections: [
       {
         eyebrow: "What helps",
-        title: "The best first message includes the basics.",
+        title: "The best first message sounds like a real project note.",
         body: "A few clear details help us respond faster and avoid vague back-and-forth.",
         items: [
-          "Project address or city.",
-          "Fence type if you know it.",
-          "Whether you need restoration, repair, painting, staining, installation, or replacement.",
-          "Photos of the fence line or damaged sections when available.",
-          "Residential or commercial property."
+          "Who uses the space: family, pets, pool guests, tenants, customers, staff, or a managed property.",
+          "What happened or what you want changed.",
+          "When you need the work handled or when you are just gathering options.",
+          "Where the fence is: address, city, alley, backyard, pool, lot, or access point.",
+          "Why it matters: safety, privacy, curb appeal, storm damage, HOA, access, or peace of mind."
         ]
       }
     ],
@@ -1868,7 +1865,7 @@ ${styleOptions.map((option, index) => {
                   </figure>
                   <div>
                     <h2>${escapeHtml(fenceOption.label)}</h2>
-                    <p>Choose everything you need for this fence type.</p>
+                    <p>Choose what feels closest. We can help refine the scope.</p>
                   </div>
                 </div>
 
@@ -1994,8 +1991,10 @@ function renderQuoteWizard() {
       <div class="section-shell">
         <form class="quote-wizard quote-form" id="quote-form" data-quote-stepper data-to="sales@strongperimeter.com">
           <div class="quote-wizard__top">
-            <div>
-              <h1>Get a Fence Quote</h1>
+            <div class="quote-wizard__intro">
+              <p class="eyebrow eyebrow--green">Quote request</p>
+              <h1>Tell us your fence story.</h1>
+              <p>We will turn the who, what, when, where, and why into a practical repair, restoration, finishing, installation, or replacement plan.</p>
             </div>
             <div class="quote-wizard__tools">
               <div class="quote-progress" aria-label="Quote form progress" aria-live="polite">
@@ -2012,8 +2011,8 @@ function renderQuoteWizard() {
           </div>
 
           <fieldset class="quote-step is-active" data-quote-step data-fence-type-step>
-            <legend>What fence types need work?</legend>
-            <p class="quote-step__lead">Select all that apply. You can choose one fence type or several.</p>
+            <legend>What kind of fence are we meeting?</legend>
+            <p class="quote-step__lead">Select all that apply. You can choose one fence type or several, even if you are not completely sure yet.</p>
             <div class="quote-options quote-options--fence-types">
               ${renderQuoteOptionCards("fence_types", fenceOptions, {
                 type: "checkbox",
@@ -2028,7 +2027,7 @@ function renderQuoteWizard() {
           </fieldset>
 
           <fieldset class="quote-step" data-quote-step hidden>
-            <legend>What do you need for each fence?</legend>
+            <legend>What should we help with?</legend>
             <div class="quote-service-panels" data-fence-service-panels>
               ${fenceOptions.map((fenceOption) => renderQuoteServicePanel(fenceOption, serviceOptionsByFence[fenceOption.value] || serviceOptions)).join("")}
             </div>
@@ -2040,7 +2039,7 @@ function renderQuoteWizard() {
           </fieldset>
 
           <fieldset class="quote-step" data-quote-step hidden>
-            <legend>Tell us about the property.</legend>
+            <legend>Who uses the space, and when do you need it?</legend>
             <div class="quote-options quote-options--property">
               ${renderQuoteOptionCards("property_type", propertyOptions)}
             </div>
@@ -2055,7 +2054,7 @@ function renderQuoteWizard() {
               </label>
               <label>
                 <span>Project details</span>
-                <textarea id="quote-details" name="details" rows="4" placeholder="Leaning post, rust, broken pickets, staining, new install, gate issue, approximate length, photos available, etc."></textarea>
+                <textarea id="quote-details" name="details" rows="4" placeholder="What happened? Who uses the space? Why does this fence matter right now? Photos available, gate issue, approximate length, access notes, etc."></textarea>
               </label>
             </div>
             <div class="quote-step__actions">
@@ -2065,7 +2064,7 @@ function renderQuoteWizard() {
           </fieldset>
 
           <fieldset class="quote-step" data-quote-step hidden>
-            <legend>Where should we follow up?</legend>
+            <legend>Where should Robert or Daniel follow up?</legend>
             <div class="quote-fields quote-fields--contact">
               <label>
                 <span>First name</span>
@@ -2132,7 +2131,7 @@ function renderFooter() {
       </a>
       <div class="footer-callout">
         <a href="tel:+12142476369">(214) 247-6369</a>
-        <p>Dallas-Fort Worth fence restoration, repair, painting, staining, installation, and replacement.</p>
+        <p>People-first fence repair, restoration, finishing, installation, and replacement across Dallas-Fort Worth.</p>
       </div>
     </div>
     <div class="footer-links">
@@ -2162,12 +2161,12 @@ function renderQuoteForm() {
       <div class="contact-shell">
         <div class="contact-copy">
           <p class="eyebrow eyebrow--green">Request a quote</p>
-          <h2>Send the project details and we will help map the cleanest next step.</h2>
-          <p>Tell us the fence type, address, whether it is residential or commercial, and what you want restored, repaired, painted, stained, installed, or replaced.</p>
+          <h2>Start with the story. We will help with the scope.</h2>
+          <p>Tell us what happened, who relies on the fence, where it is, and when you need it done. Photos help, but a plain-English note is enough to start.</p>
           <ul class="contact-list">
             <li>Call <a href="tel:+12142476369">(214) 247-6369</a></li>
             <li>Email <a href="mailto:sales@strongperimeter.com">sales@strongperimeter.com</a></li>
-            <li>Serving Dallas-Fort Worth</li>
+            <li>Serving homes, businesses, pools, lots, and property lines across Dallas-Fort Worth</li>
           </ul>
         </div>
         <form class="quote-form" id="quote-form" data-to="sales@strongperimeter.com">
@@ -2203,7 +2202,7 @@ function renderQuoteForm() {
           </label>
           <label class="full-width">
             <span>Project details</span>
-            <textarea id="quote-details" name="details" rows="6" placeholder="Tell us what is going on with the fence. Photos are helpful if you email them too."></textarea>
+            <textarea id="quote-details" name="details" rows="6" placeholder="What happened? Who uses the space? Where is the fence? When do you need it handled?"></textarea>
           </label>
           <button class="button button--solid full-width" type="submit">Open quote email</button>
           <p class="form-note">Submitting opens a prefilled email draft to sales@strongperimeter.com in your default mail app.</p>

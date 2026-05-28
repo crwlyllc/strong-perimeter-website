@@ -29,9 +29,9 @@
   --font-ui: "Onest", sans-serif;
   --font-body: "Red Hat Text", sans-serif;
   --page-background:
-    radial-gradient(circle at top center, rgba(111, 141, 125, 0.14), transparent 22rem),
-    radial-gradient(circle at 10% 10%, rgba(219, 115, 55, 0.08), transparent 16rem),
-    linear-gradient(180deg, #fcfaf6 0%, #f6f0e7 40%, #fbf8f2 100%);
+    radial-gradient(circle at top center, rgba(111, 141, 125, 0.16), transparent 24rem),
+    radial-gradient(circle at 8% 12%, rgba(219, 115, 55, 0.1), transparent 18rem),
+    linear-gradient(180deg, #fcfaf6 0%, #f7f1e8 42%, #fbf8f2 100%);
 }
 
 *,
@@ -43,7 +43,7 @@
 html {
   min-height: 100%;
   scroll-behavior: smooth;
-  background: var(--page-background);
+  background: #fbf8f2;
 }
 
 body {
@@ -51,7 +51,9 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--ink);
-  background: transparent;
+  background: var(--page-background);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 img {
@@ -83,6 +85,12 @@ iframe {
 .hero,
 .section {
   padding-inline: clamp(1rem, 2.2vw, 2rem);
+}
+
+section.hero,
+section.section,
+section.page-section {
+  background: transparent;
 }
 
 .site-header {
@@ -1316,7 +1324,6 @@ a.story-card:focus-visible {
 }
 
 .section--quote-wizard {
-  background: linear-gradient(180deg, rgba(247, 241, 233, 0.72), rgba(255, 253, 249, 0.96));
   padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 

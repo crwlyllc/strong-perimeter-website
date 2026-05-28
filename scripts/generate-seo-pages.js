@@ -136,7 +136,9 @@ const trustAndAuthorityLinks = [
 const serviceAreaCities = [
   "Addison",
   "Allen",
+  "Anna",
   "Arlington",
+  "Aubrey",
   "Balch Springs",
   "Bedford",
   "Carrollton",
@@ -174,6 +176,7 @@ const serviceAreaCities = [
   "Little Elm",
   "Lucas",
   "McKinney",
+  "Melissa",
   "Mesquite",
   "North Richland Hills",
   "Ovilla",
@@ -193,6 +196,7 @@ const serviceAreaCities = [
   "Trophy Club",
   "University Park",
   "Waxahachie",
+  "Weston",
   "Wylie"
 ];
 
@@ -210,7 +214,9 @@ const googleMapView = {
 const serviceAreaCityCoordinates = {
   Addison: [32.9618, -96.8292],
   Allen: [33.1032, -96.6706],
+  Anna: [33.349, -96.5486],
   Arlington: [32.7357, -97.1081],
+  Aubrey: [33.3043, -96.9861],
   "Balch Springs": [32.7287, -96.6228],
   Bedford: [32.844, -97.1431],
   Carrollton: [32.9756, -96.8899],
@@ -248,6 +254,7 @@ const serviceAreaCityCoordinates = {
   "Little Elm": [33.1626, -96.9375],
   Lucas: [33.0843, -96.5767],
   McKinney: [33.1972, -96.6398],
+  Melissa: [33.2859, -96.5728],
   Mesquite: [32.7668, -96.5992],
   "North Richland Hills": [32.8343, -97.2289],
   Ovilla: [32.5265, -96.8864],
@@ -267,6 +274,7 @@ const serviceAreaCityCoordinates = {
   "Trophy Club": [32.9979, -97.1836],
   "University Park": [32.8501, -96.8003],
   Waxahachie: [32.3865, -96.8483],
+  Weston: [33.3215, -96.6453],
   Wylie: [33.0151, -96.5389]
 };
 

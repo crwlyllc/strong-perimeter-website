@@ -333,7 +333,6 @@ h3,
 .info-card,
 .category-card,
 .service-card,
-.story-note,
 .story-card,
 .journey-step,
 .promise-card,
@@ -637,36 +636,6 @@ h3,
   margin-top: 0.16rem;
   color: var(--ink-soft);
   line-height: 1.45;
-}
-
-.story-split {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
-  gap: 1rem;
-  align-items: stretch;
-}
-
-.story-split .section-heading {
-  margin-bottom: 0;
-}
-
-.story-note {
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.4rem;
-  border-radius: var(--radius-xl);
-  background: linear-gradient(180deg, #fff6ee, #fffdfa);
-}
-
-.story-note p:last-child {
-  margin: 1rem 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.4vw, 2rem);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1.08;
 }
 
 .story-grid,
@@ -2429,8 +2398,7 @@ a.story-card:focus-visible {
   .promise-shell,
   .contact-shell,
   .split-block,
-  .visual-overview,
-  .story-split {
+  .visual-overview {
     grid-template-columns: 1fr;
   }
 

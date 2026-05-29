@@ -277,72 +277,10 @@ if (quoteStepper) {
   const progressValue = quoteStepper.querySelector("[data-quote-progress-value]");
   const navPrevButtons = Array.from(quoteStepper.querySelectorAll("[data-quote-prev]"));
   const navNextButtons = Array.from(quoteStepper.querySelectorAll("[data-quote-next]"));
-  const fenceTypeInputs = Array.from(quoteStepper.querySelectorAll("[data-fence-type-select]"));
-  const servicePanels = Array.from(quoteStepper.querySelectorAll("[data-service-panel]"));
-  const fenceTypeError = quoteStepper.querySelector("[data-fence-type-error]");
-  const serviceChoiceError = quoteStepper.querySelector("[data-service-choice-error]");
   let activeStep = 0;
-
-  const selectedFenceTypes = () => fenceTypeInputs
-    .filter((input) => input.checked)
-    .map((input) => input.value);
-
-  const setGroupValidity = (input, message) => {
-    if (!input) return;
-    input.setCustomValidity(message);
-    input.reportValidity();
-    input.setCustomValidity("");
-  };
-
-  const syncStyleSections = () => {
-    quoteStepper.querySelectorAll("[data-style-section]").forEach((section) => {
-      const panel = section.closest("[data-service-panel]");
-      const triggerValue = section.dataset.styleTriggerValue || "Installation/replacement";
-      const triggerIsChecked = Array.from(panel?.querySelectorAll("[data-service-choice]") || [])
-        .some((input) => input.value === triggerValue && input.checked);
-      const isActive = Boolean(panel && !panel.hidden && triggerIsChecked);
-
-      section.hidden = !isActive;
-      section.querySelectorAll("input").forEach((field) => {
-        field.disabled = !isActive;
-
-        if (!isActive) {
-          field.checked = false;
-        }
-      });
-    });
-  };
-
-  const syncServicePanels = () => {
-    const selected = new Set(selectedFenceTypes());
-
-    servicePanels.forEach((panel) => {
-      const isSelected = selected.has(panel.dataset.fenceValue);
-      panel.hidden = !isSelected;
-
-      panel.querySelectorAll("input, textarea").forEach((field) => {
-        field.disabled = !isSelected;
-
-        if (!isSelected) {
-          if (field.type === "checkbox" || field.type === "radio") field.checked = false;
-          else field.value = "";
-        }
-      });
-    });
-
-    syncStyleSections();
-  };
-
-  fenceTypeInputs.forEach((input) => {
-    input.addEventListener("change", () => {
-      if (fenceTypeError) fenceTypeError.hidden = selectedFenceTypes().length > 0;
-      syncServicePanels();
-    });
-  });
 
   const showStep = (index) => {
     activeStep = Math.max(0, Math.min(index, steps.length - 1));
-    syncServicePanels();
 
     steps.forEach((step, stepIndex) => {
       const isActive = stepIndex === activeStep;
@@ -364,31 +302,6 @@ if (quoteStepper) {
   };
 
   const validateStep = (step) => {
-    const fenceGroup = Array.from(step.querySelectorAll("[data-fence-type-select]"));
-    if (fenceGroup.length && !fenceGroup.some((input) => input.checked)) {
-      if (fenceTypeError) fenceTypeError.hidden = false;
-      setGroupValidity(fenceGroup[0], "Choose at least one fence type.");
-      return false;
-    }
-
-    if (fenceGroup.length && fenceTypeError) {
-      fenceTypeError.hidden = true;
-    }
-
-    const visibleServicePanels = Array.from(step.querySelectorAll("[data-service-panel]:not([hidden])"));
-    for (const panel of visibleServicePanels) {
-      const serviceChoices = Array.from(panel.querySelectorAll("[data-service-choice]"));
-      if (serviceChoices.length && !serviceChoices.some((input) => input.checked)) {
-        if (serviceChoiceError) serviceChoiceError.hidden = false;
-        setGroupValidity(serviceChoices[0], "Choose at least one service for this fence type.");
-        return false;
-      }
-    }
-
-    if (visibleServicePanels.length && serviceChoiceError) {
-      serviceChoiceError.hidden = true;
-    }
-
     const requiredRadioGroups = new Set(
       Array.from(step.querySelectorAll('input[type="radio"][required]')).map((input) => input.name)
     );
@@ -425,11 +338,6 @@ if (quoteStepper) {
     });
   });
 
-  quoteStepper.querySelectorAll("[data-service-choice]").forEach((input) => {
-    input.addEventListener("change", syncStyleSections);
-  });
-
-  syncServicePanels();
   showStep(0);
 }
 
@@ -454,50 +362,11 @@ if (quoteForm) {
       addressStreet2,
       [addressCity, addressState, addressZip].filter(Boolean).join(", ")
     ].filter(Boolean).join("\n");
-    const quoteAreas = Array.from(quoteForm.querySelectorAll("[data-service-panel]"))
-      .filter((panel) => !panel.hidden)
-      .map((panel, index) => {
-        const serviceNeeded = Array.from(panel.querySelectorAll("[data-service-choice]:checked"))
-          .map((input) => input.value)
-          .join(", ");
-        const areaFenceType = panel.dataset.fenceValue || "";
-        const styleSection = panel.querySelector("[data-style-section]:not([hidden])");
-        const hasStyleOptions = Boolean(styleSection);
-        const style = styleSection?.querySelector("[data-scope-style]:checked")?.value || "";
-        const notes = panel.querySelector("[data-scope-notes]")?.value.trim() || "";
-
-        return {
-          index: index + 1,
-          serviceNeeded,
-          fenceType: areaFenceType,
-          style: style || (hasStyleOptions ? "Not specified" : ""),
-          notes
-        };
-      });
-    const service = document.getElementById("quote-service")?.value.trim()
-      || quoteForm.querySelector('input[name="service"]:checked')?.value
-      || quoteAreas[0]?.serviceNeeded
-      || "";
-    const fenceType = quoteForm.querySelector('input[name="fence_type"]:checked')?.value
-      || quoteAreas[0]?.fenceType
-      || "";
     const timeline = document.getElementById("quote-timeline")?.value.trim() || "";
     const details = document.getElementById("quote-details")?.value.trim() || "";
-    const areaLines = quoteAreas.length
-      ? quoteAreas.flatMap((area) => [
-        `${area.index}. ${area.fenceType || "Fence area"}`,
-        `   Service needed: ${area.serviceNeeded || "Not specified"}`,
-        ...(area.style ? [`   Style: ${area.style}`] : []),
-        `   Notes: ${area.notes || "No notes provided."}`
-      ])
-      : [
-        `1. ${fenceType || "Fence area"}`,
-        `   Fence type: ${fenceType || "Not specified"}`,
-        `   Service needed: ${service || "Not specified"}`,
-        "   Notes: No notes provided."
-      ];
 
-    const subject = `Strong Perimeter Quote Request - ${quoteAreas.length > 1 ? "Multiple Fence Types" : fenceType || service || "New Project"}`;
+    const subjectLocation = addressCity || address || "New Project";
+    const subject = `Strong Perimeter Quote Request - ${subjectLocation}`;
     const body = [
       "Strong Perimeter quote request",
       "",
@@ -511,9 +380,6 @@ if (quoteForm) {
       `State: ${addressState || "Not provided"}`,
       `ZIP: ${addressZip || "Not provided"}`,
       `Timeline: ${timeline || "Not specified"}`,
-      "",
-      "Fence areas:",
-      ...areaLines,
       "",
       "Project details:",
       details || "No project details provided yet."

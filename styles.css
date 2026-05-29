@@ -1909,6 +1909,277 @@ a.story-card:focus-visible {
   margin-top: 1rem;
 }
 
+body.quote-page {
+  min-height: 100vh;
+  background: #eff1f3;
+  color: #111827;
+}
+
+.quote-page .quote-app.quote-form {
+  display: block;
+  min-height: 100vh;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #eff1f3;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.quote-app-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) 4.5rem;
+  align-items: center;
+  min-height: 5.05rem;
+  padding: 0 clamp(0.75rem, 2vw, 1.5rem);
+  background: #fff;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.06);
+}
+
+.quote-app-logo {
+  justify-self: center;
+  width: clamp(11rem, 20vw, 14rem);
+}
+
+.quote-app-logo img {
+  width: 100%;
+  height: auto;
+}
+
+.quote-shell-button {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 3rem;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #4b5563;
+  transition: color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.quote-shell-button:hover,
+.quote-shell-button:focus-visible {
+  background: rgba(17, 24, 39, 0.06);
+  color: #111827;
+  outline: 0;
+}
+
+.quote-shell-button:disabled,
+.quote-shell-button:disabled:hover,
+.quote-shell-button:disabled:focus-visible {
+  cursor: default;
+  opacity: 0.34;
+  background: transparent;
+  color: #4b5563;
+}
+
+.quote-shell-button--back {
+  justify-self: start;
+}
+
+.quote-shell-button--close {
+  justify-self: end;
+}
+
+.quote-icon {
+  position: relative;
+  display: block;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.quote-icon--back::before {
+  content: "";
+  position: absolute;
+  inset: 0.27rem 0.15rem 0.27rem 0.35rem;
+  border-left: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.quote-icon--close::before,
+.quote-icon--close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.45rem;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.quote-icon--close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.quote-icon--close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.quote-page .quote-flow-progress {
+  position: sticky;
+  top: 5.05rem;
+  z-index: 39;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  background: #e5e7eb;
+}
+
+.quote-page .quote-flow-progress .quote-progress__track {
+  height: 4px;
+  border-radius: 0;
+  background: transparent;
+}
+
+.quote-page .quote-flow-progress .quote-progress__fill {
+  border-radius: 0;
+  background: #db7337;
+}
+
+.quote-page-main {
+  min-height: calc(100vh - 5.3rem);
+}
+
+.quote-flow {
+  padding: clamp(2.4rem, 5vw, 4.25rem) clamp(1rem, 3vw, 2rem) clamp(3rem, 7vw, 5rem);
+}
+
+.quote-flow-shell {
+  width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+.quote-step__eyebrow {
+  margin: 0 0 1rem;
+  color: #db7337;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.quote-page .quote-step {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.quote-page .quote-step legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  color: #111827;
+  font-family: var(--font-display);
+  font-size: clamp(2.35rem, 5.2vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.98;
+  text-align: center;
+}
+
+.quote-page .quote-step__lead {
+  max-width: 48rem;
+  margin: 1.15rem auto 0;
+  color: #6b7280;
+  font-size: clamp(1.05rem, 1.7vw, 1.28rem);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.quote-page .quote-fields {
+  gap: 1.25rem;
+  margin: clamp(1.9rem, 4vw, 2.7rem) auto 0;
+}
+
+.quote-page .quote-fields--address {
+  width: min(58rem, 100%);
+}
+
+.quote-page .quote-fields--project,
+.quote-page .quote-fields--contact {
+  width: min(50rem, 100%);
+  grid-template-columns: 1fr;
+}
+
+.quote-page .quote-form label {
+  gap: 0.65rem;
+}
+
+.quote-page .quote-form label span {
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.quote-page .quote-form input,
+.quote-page .quote-form select,
+.quote-page .quote-form textarea {
+  min-height: 4.2rem;
+  padding: 1.05rem 1.2rem;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: #fff;
+  color: #111827;
+  font-size: 1.08rem;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+}
+
+.quote-page .quote-form textarea {
+  min-height: 11rem;
+  resize: vertical;
+}
+
+.quote-page .quote-form input::placeholder,
+.quote-page .quote-form textarea::placeholder {
+  color: #9ca3af;
+}
+
+.quote-page .quote-form input:focus,
+.quote-page .quote-form select:focus,
+.quote-page .quote-form textarea:focus {
+  border-color: rgba(219, 115, 55, 0.65);
+  outline: 4px solid rgba(219, 115, 55, 0.14);
+}
+
+.quote-page .quote-step__actions {
+  justify-content: center;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.quote-page .quote-step__actions .button {
+  width: min(23rem, 100%);
+  min-height: 4.25rem;
+  border-radius: 999px;
+  background: #df982e;
+  color: #fff;
+  font-size: 1.08rem;
+  box-shadow: 0 12px 24px rgba(178, 111, 26, 0.16);
+}
+
+.quote-page .quote-step__actions .button:hover,
+.quote-page .quote-step__actions .button:focus-visible {
+  background: #cf8522;
+}
+
+.quote-page .form-note {
+  max-width: 34rem;
+  margin: 1.25rem auto 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .site-footer {
   width: min(var(--max-width), calc(100vw - 2rem));
   margin: 0 auto 1.4rem;
@@ -2655,5 +2926,52 @@ a.story-card:focus-visible {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .quote-app-header {
+    grid-template-columns: 3.5rem minmax(0, 1fr) 3.5rem;
+    min-height: 4.5rem;
+    padding-inline: 0.5rem;
+  }
+
+  .quote-app-logo {
+    width: min(10.5rem, 52vw);
+  }
+
+  .quote-shell-button {
+    width: 2.75rem;
+  }
+
+  .quote-page .quote-flow-progress {
+    top: 4.5rem;
+  }
+
+  .quote-flow {
+    padding: 2.2rem 1rem 3rem;
+  }
+
+  .quote-page .quote-step legend {
+    font-size: clamp(2rem, 10vw, 2.85rem);
+  }
+
+  .quote-page .quote-fields--address {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-page .quote-fields--address label,
+  .quote-page .quote-fields--address label:nth-of-type(4),
+  .quote-page .quote-fields--address label:nth-of-type(5),
+  .quote-page .quote-fields--address label:nth-of-type(6),
+  .quote-page .quote-fields--address .full-width {
+    grid-column: 1 / -1;
+  }
+
+  .quote-page .quote-form input,
+  .quote-page .quote-form select,
+  .quote-page .quote-form textarea {
+    min-height: 3.9rem;
+    font-size: 1rem;
   }
 }

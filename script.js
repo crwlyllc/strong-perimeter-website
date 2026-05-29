@@ -275,8 +275,10 @@ if (quoteStepper) {
   const steps = Array.from(quoteStepper.querySelectorAll("[data-quote-step]"));
   const progressFill = quoteStepper.querySelector("[data-quote-progress-fill]");
   const progressValue = quoteStepper.querySelector("[data-quote-progress-value]");
+  const progressFormat = progressValue?.dataset.quoteProgressFormat || "percent";
   const navPrevButtons = Array.from(quoteStepper.querySelectorAll("[data-quote-prev]"));
   const navNextButtons = Array.from(quoteStepper.querySelectorAll("[data-quote-next]"));
+  const shellBackButtons = Array.from(quoteStepper.querySelectorAll("[data-quote-shell-back]"));
   const fenceTypeInputs = Array.from(quoteStepper.querySelectorAll("[data-fence-type-select]"));
   const servicePanels = Array.from(quoteStepper.querySelectorAll("[data-service-panel]"));
   const fenceTypeError = quoteStepper.querySelector("[data-fence-type-error]");
@@ -352,7 +354,11 @@ if (quoteStepper) {
 
     const percent = Math.round(((activeStep + 1) / steps.length) * 100);
     if (progressFill) progressFill.style.width = `${percent}%`;
-    if (progressValue) progressValue.textContent = `${percent}%`;
+    if (progressValue) {
+      progressValue.textContent = progressFormat === "step"
+        ? `Step ${activeStep + 1} of ${steps.length}`
+        : `${percent}%`;
+    }
 
     navPrevButtons.forEach((button) => {
       button.disabled = activeStep === 0;
@@ -422,6 +428,15 @@ if (quoteStepper) {
   navPrevButtons.forEach((button) => {
     button.addEventListener("click", () => {
       showStep(activeStep - 1);
+    });
+  });
+
+  shellBackButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      if (activeStep > 0) {
+        event.preventDefault();
+        showStep(activeStep - 1);
+      }
     });
   });
 

@@ -71,8 +71,6 @@ try {
 if (renderer) {
   const warehouseHeight = 17.6;
   const warehouseWallY = warehouseHeight / 2 - 0.15;
-  const roofBeamY = warehouseHeight - 0.95;
-  const roofCrossBeamY = warehouseHeight - 0.82;
   const lampY = warehouseHeight - 2.45;
 
   const scene = new THREE.Scene();
@@ -95,8 +93,8 @@ if (renderer) {
 
   const textures = {
     concrete: createConcreteTexture(),
-    wall: createSheetrockTexture(0xf2efe7, 0xded8cb),
-    wallDark: createSheetrockTexture(0xe7ece6, 0xcbd8d0),
+    wall: createSheetrockTexture(0xf4f2ed, 0xe7e2d8),
+    wallDark: createSheetrockTexture(0xf4f2ed, 0xe7e2d8),
     steel: createBrushedMetalTexture(0x8d9aa0, 0xb3bec1),
     darkSteel: createBrushedMetalTexture(0x20282a, 0x3a4444),
     wood: createWoodTexture(0xb97942, 0x6f4628),
@@ -150,19 +148,6 @@ if (renderer) {
     floor.receiveShadow = true;
     scene.add(floor);
 
-    const jointMaterial = new THREE.MeshBasicMaterial({ color: 0x171b19, transparent: true, opacity: 0.42 });
-    for (let x = -10.5; x <= 10.5; x += 7) {
-      const joint = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.018, 35.5), jointMaterial);
-      joint.position.set(x, 0.012, -6);
-      scene.add(joint);
-    }
-
-    for (let z = -20; z <= 8; z += 7) {
-      const joint = new THREE.Mesh(new THREE.BoxGeometry(27.5, 0.018, 0.035), jointMaterial);
-      joint.position.set(0, 0.014, z);
-      scene.add(joint);
-    }
-
     const backWall = new THREE.Mesh(new THREE.BoxGeometry(28, warehouseHeight, 0.32), mats.wall);
     backWall.position.set(0, warehouseWallY, -24);
     backWall.receiveShadow = true;
@@ -178,39 +163,15 @@ if (renderer) {
     rightWall.receiveShadow = true;
     scene.add(rightWall);
 
-    const roof = new THREE.Mesh(new THREE.BoxGeometry(28.4, 0.3, 36.4), mats.wallDark);
+    const roof = new THREE.Mesh(new THREE.BoxGeometry(28.4, 0.3, 36.4), mats.concrete);
     roof.position.set(0, warehouseHeight - 0.08, -6);
     roof.receiveShadow = true;
     scene.add(roof);
 
     const trimMaterial = new THREE.MeshStandardMaterial({ color: 0xfffbf1, roughness: 0.72 });
-    const accentTrimMaterial = new THREE.MeshStandardMaterial({ color: 0x1f6b5a, roughness: 0.68 });
-    const paintedSteelMaterial = new THREE.MeshStandardMaterial({ color: 0xf2f0e8, roughness: 0.5, metalness: 0.16 });
     scene.add(box(27.7, 0.34, 0.12, 0, 0.36, -23.72, trimMaterial));
-    scene.add(box(27.7, 0.12, 0.1, 0, 3.08, -23.71, accentTrimMaterial));
     scene.add(box(0.12, 0.34, 35.6, -13.72, 0.36, -6, trimMaterial));
     scene.add(box(0.12, 0.34, 35.6, 13.72, 0.36, -6, trimMaterial));
-    scene.add(box(0.1, 0.12, 35.6, -13.71, 3.08, -6, accentTrimMaterial));
-    scene.add(box(0.1, 0.12, 35.6, 13.71, 3.08, -6, accentTrimMaterial));
-
-    for (let x = -10.5; x <= 10.5; x += 7) {
-      const seam = new THREE.Mesh(new THREE.BoxGeometry(0.035, warehouseHeight - 1.2, 0.035), trimMaterial);
-      seam.position.set(x, warehouseWallY, -23.68);
-      scene.add(seam);
-    }
-
-    [-13.68, 13.68].forEach((x) => {
-      for (let z = -18; z <= 6; z += 8) {
-        const wallPanel = new THREE.Group();
-        wallPanel.position.set(x, 4.7, z);
-        wallPanel.rotation.y = x < 0 ? Math.PI / 2 : -Math.PI / 2;
-        wallPanel.add(box(4.8, 0.065, 0.07, 0, 1.8, 0, trimMaterial));
-        wallPanel.add(box(4.8, 0.065, 0.07, 0, -1.8, 0, trimMaterial));
-        wallPanel.add(box(0.065, 3.6, 0.07, -2.4, 0, 0, trimMaterial));
-        wallPanel.add(box(0.065, 3.6, 0.07, 2.4, 0, 0, trimMaterial));
-        scene.add(wallPanel);
-      }
-    });
 
     [-12.9, 12.9].forEach((x) => addWarehouseColumn(x, -22.7));
     [-18, -10, -2, 6].forEach((z) => {
@@ -249,22 +210,6 @@ if (renderer) {
     scene.add(box(0.1, 2.42, 0.14, 2.05, 1.21, -23.57, doorFrameMaterial));
     scene.add(box(0.1, 2.42, 0.14, 3.35, 1.21, -23.57, doorFrameMaterial));
 
-    for (let x = -12; x <= 12; x += 6) {
-      const beam = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.34, 35), paintedSteelMaterial);
-      beam.position.set(x, roofBeamY, -6);
-      beam.castShadow = true;
-      scene.add(beam);
-    }
-
-    for (let z = -22; z <= 8; z += 6) {
-      const beam = new THREE.Mesh(new THREE.BoxGeometry(27, 0.28, 0.34), paintedSteelMaterial);
-      beam.position.set(0, roofCrossBeamY, z);
-      beam.castShadow = true;
-      scene.add(beam);
-    }
-
-    addLeftBrownWall();
-    addCeilingPanels();
     addSuspendedHvac();
     addElectricalDetails();
 
@@ -752,57 +697,6 @@ if (renderer) {
         scene.add(openPanel);
       }
     });
-  }
-
-  function addLeftBrownWall() {
-    const baseBrown = new THREE.MeshStandardMaterial({ color: 0x5a3023, roughness: 0.64, metalness: 0.08 });
-    const darkBrown = new THREE.MeshStandardMaterial({ color: 0x3f241c, roughness: 0.72, metalness: 0.05 });
-    const trimBrown = new THREE.MeshStandardMaterial({ color: 0x2a1a16, roughness: 0.62, metalness: 0.12 });
-
-    for (let z = -22.4; z <= 10.4; z += 0.42) {
-      const material = Math.round((z + 22.4) * 10) % 2 === 0 ? baseBrown : darkBrown;
-      const panel = new THREE.Mesh(new THREE.BoxGeometry(0.12, 8.2, 0.28), material);
-      panel.position.set(-13.78, 4.1, z);
-      panel.receiveShadow = true;
-      scene.add(panel);
-    }
-
-    scene.add(box(0.18, 0.18, 33.2, -13.64, 8.32, -6, trimBrown));
-    scene.add(box(0.18, 0.18, 33.2, -13.64, 0.22, -6, trimBrown));
-    scene.add(box(0.2, 8.3, 0.14, -13.62, 4.15, -22.85, trimBrown));
-    scene.add(box(0.2, 8.3, 0.14, -13.62, 4.15, 10.8, trimBrown));
-  }
-
-  function addCeilingPanels() {
-    const whiteBeamMaterial = new THREE.MeshStandardMaterial({ color: 0xf8f6ef, roughness: 0.55, metalness: 0.03 });
-    const shadowMaterial = new THREE.MeshStandardMaterial({ color: 0xd8d6cc, roughness: 0.75, metalness: 0.02 });
-
-    for (let z = -22; z <= 10; z += 4) {
-      const truss = new THREE.Group();
-      truss.position.set(0, warehouseHeight - 1.15, z);
-      truss.add(box(27.2, 0.18, 0.18, 0, 0, 0, whiteBeamMaterial));
-
-      [-10.5, -7, -3.5, 0, 3.5, 7, 10.5].forEach((x) => {
-        const rib = box(0.15, 0.15, 3.5, x, -0.08, 0, shadowMaterial);
-        rib.rotation.z = x < 0 ? 0.08 : -0.08;
-        truss.add(rib);
-      });
-
-      scene.add(truss);
-    }
-
-    for (let x = -12; x <= 12; x += 4) {
-      scene.add(box(0.16, 0.18, 35.5, x, warehouseHeight - 0.48, -6, whiteBeamMaterial));
-    }
-
-    for (let x = -10; x <= 10; x += 5) {
-      for (let z = -19.5; z <= 7.5; z += 5.5) {
-        const panel = new THREE.Mesh(new THREE.BoxGeometry(3.85, 0.045, 4.65), mats.wall);
-        panel.position.set(x, warehouseHeight - 0.32, z);
-        panel.receiveShadow = true;
-        scene.add(panel);
-      }
-    }
   }
 
   function addSuspendedHvac() {

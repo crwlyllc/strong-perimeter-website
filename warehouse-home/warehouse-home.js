@@ -120,16 +120,14 @@ if (renderer) {
   };
 
   const cameraState = {
-    target: new THREE.Vector3(0, 2.05, -7.7),
-    yaw: 0,
-    pitch: 0.03,
-    radius: 17.1,
+    target: new THREE.Vector3(0.6, 2.25, -8.4),
+    yaw: -0.16,
+    pitch: 0.02,
+    radius: 17.8,
     tween: null
   };
 
   buildWarehouse();
-  buildBrandWall();
-  buildServiceDisplays();
   buildLighting();
   updateOrbitCamera();
   resizeRenderer();
@@ -187,6 +185,7 @@ if (renderer) {
 
     const trimMaterial = new THREE.MeshStandardMaterial({ color: 0xfffbf1, roughness: 0.72 });
     const accentTrimMaterial = new THREE.MeshStandardMaterial({ color: 0x1f6b5a, roughness: 0.68 });
+    const paintedSteelMaterial = new THREE.MeshStandardMaterial({ color: 0xf2f0e8, roughness: 0.5, metalness: 0.16 });
     scene.add(box(27.7, 0.34, 0.12, 0, 0.36, -23.72, trimMaterial));
     scene.add(box(27.7, 0.12, 0.1, 0, 3.08, -23.71, accentTrimMaterial));
     scene.add(box(0.12, 0.34, 35.6, -13.72, 0.36, -6, trimMaterial));
@@ -213,8 +212,6 @@ if (renderer) {
       }
     });
 
-    addOpenFrontBayDoors(trimMaterial, accentTrimMaterial);
-
     [-12.9, 12.9].forEach((x) => addWarehouseColumn(x, -22.7));
     [-18, -10, -2, 6].forEach((z) => {
       addWarehouseColumn(-13.15, z);
@@ -222,52 +219,57 @@ if (renderer) {
     });
 
     const rollup = new THREE.Mesh(new THREE.BoxGeometry(8.5, 5.2, 0.18), new THREE.MeshStandardMaterial({
-      color: 0x9ba69e,
+      color: 0xb9bdb8,
       metalness: 0.46,
       roughness: 0.58
     }));
-    rollup.position.set(8.3, 2.6, -23.79);
+    rollup.position.set(-8.9, 2.6, -23.79);
     rollup.receiveShadow = true;
     scene.add(rollup);
 
     for (let y = 0.9; y < 5.1; y += 0.55) {
-      const seam = new THREE.Mesh(new THREE.BoxGeometry(8.6, 0.035, 0.08), mats.darkSteel);
-      seam.position.set(8.3, y, -23.67);
+      const seam = new THREE.Mesh(new THREE.BoxGeometry(8.6, 0.035, 0.08), mats.steel);
+      seam.position.set(-8.9, y, -23.67);
       scene.add(seam);
     }
 
-    [-4.1, 4.1, 12.2].forEach((x) => {
-      addBollard(x, -20.95);
-    });
+    const doorFrameMaterial = new THREE.MeshStandardMaterial({ color: 0xf7f4ec, roughness: 0.6 });
+    scene.add(box(8.95, 0.18, 0.16, -8.9, 5.32, -23.62, doorFrameMaterial));
+    scene.add(box(0.18, 5.48, 0.16, -13.45, 2.72, -23.62, doorFrameMaterial));
+    scene.add(box(0.18, 5.48, 0.16, -4.35, 2.72, -23.62, doorFrameMaterial));
+
+    const manDoor = new THREE.Mesh(new THREE.BoxGeometry(1.1, 2.3, 0.12), new THREE.MeshStandardMaterial({
+      color: 0xe7e4db,
+      roughness: 0.55,
+      metalness: 0.04
+    }));
+    manDoor.position.set(2.7, 1.15, -23.64);
+    scene.add(manDoor);
+    scene.add(box(1.22, 0.1, 0.14, 2.7, 2.34, -23.57, doorFrameMaterial));
+    scene.add(box(0.1, 2.42, 0.14, 2.05, 1.21, -23.57, doorFrameMaterial));
+    scene.add(box(0.1, 2.42, 0.14, 3.35, 1.21, -23.57, doorFrameMaterial));
 
     for (let x = -12; x <= 12; x += 6) {
-      const beam = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.34, 35), mats.darkSteel);
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.34, 35), paintedSteelMaterial);
       beam.position.set(x, roofBeamY, -6);
       beam.castShadow = true;
       scene.add(beam);
     }
 
     for (let z = -22; z <= 8; z += 6) {
-      const beam = new THREE.Mesh(new THREE.BoxGeometry(27, 0.28, 0.34), mats.darkSteel);
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(27, 0.28, 0.34), paintedSteelMaterial);
       beam.position.set(0, roofCrossBeamY, z);
       beam.castShadow = true;
       scene.add(beam);
     }
 
-    const aisleLineMaterial = new THREE.MeshBasicMaterial({ color: 0xdb7337, transparent: true, opacity: 0.64 });
-    [-4.3, 4.3].forEach((x) => {
-      const line = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.025, 23), aisleLineMaterial);
-      line.position.set(x, 0.035, -6.5);
-      scene.add(line);
-    });
+    addLeftBrownWall();
+    addCeilingPanels();
+    addSuspendedHvac();
+    addElectricalDetails();
 
-    addMaterialRack(11.7, -9.8, Math.PI / 2);
-    addMaterialRack(-12.1, -3.4, -Math.PI / 2);
-    addPalletStack(9.9, 4.4, 0.12);
-    addPalletStack(-10.6, 7.1, -0.08);
-
-    const overviewPosition = new THREE.Vector3(0, 2.7, 9.6);
-    const overviewTarget = new THREE.Vector3(0, 2.15, -8.2);
+    const overviewPosition = new THREE.Vector3(-1.2, 2.6, 9.6);
+    const overviewTarget = new THREE.Vector3(0.4, 2.25, -10.2);
     focusTargets.set("overview", { position: overviewPosition, target: overviewTarget, label: "Warehouse overview" });
   }
 
@@ -752,13 +754,136 @@ if (renderer) {
     });
   }
 
+  function addLeftBrownWall() {
+    const baseBrown = new THREE.MeshStandardMaterial({ color: 0x5a3023, roughness: 0.64, metalness: 0.08 });
+    const darkBrown = new THREE.MeshStandardMaterial({ color: 0x3f241c, roughness: 0.72, metalness: 0.05 });
+    const trimBrown = new THREE.MeshStandardMaterial({ color: 0x2a1a16, roughness: 0.62, metalness: 0.12 });
+
+    for (let z = -22.4; z <= 10.4; z += 0.42) {
+      const material = Math.round((z + 22.4) * 10) % 2 === 0 ? baseBrown : darkBrown;
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(0.12, 8.2, 0.28), material);
+      panel.position.set(-13.78, 4.1, z);
+      panel.receiveShadow = true;
+      scene.add(panel);
+    }
+
+    scene.add(box(0.18, 0.18, 33.2, -13.64, 8.32, -6, trimBrown));
+    scene.add(box(0.18, 0.18, 33.2, -13.64, 0.22, -6, trimBrown));
+    scene.add(box(0.2, 8.3, 0.14, -13.62, 4.15, -22.85, trimBrown));
+    scene.add(box(0.2, 8.3, 0.14, -13.62, 4.15, 10.8, trimBrown));
+  }
+
+  function addCeilingPanels() {
+    const whiteBeamMaterial = new THREE.MeshStandardMaterial({ color: 0xf8f6ef, roughness: 0.55, metalness: 0.03 });
+    const shadowMaterial = new THREE.MeshStandardMaterial({ color: 0xd8d6cc, roughness: 0.75, metalness: 0.02 });
+
+    for (let z = -22; z <= 10; z += 4) {
+      const truss = new THREE.Group();
+      truss.position.set(0, warehouseHeight - 1.15, z);
+      truss.add(box(27.2, 0.18, 0.18, 0, 0, 0, whiteBeamMaterial));
+
+      [-10.5, -7, -3.5, 0, 3.5, 7, 10.5].forEach((x) => {
+        const rib = box(0.15, 0.15, 3.5, x, -0.08, 0, shadowMaterial);
+        rib.rotation.z = x < 0 ? 0.08 : -0.08;
+        truss.add(rib);
+      });
+
+      scene.add(truss);
+    }
+
+    for (let x = -12; x <= 12; x += 4) {
+      scene.add(box(0.16, 0.18, 35.5, x, warehouseHeight - 0.48, -6, whiteBeamMaterial));
+    }
+
+    for (let x = -10; x <= 10; x += 5) {
+      for (let z = -19.5; z <= 7.5; z += 5.5) {
+        const panel = new THREE.Mesh(new THREE.BoxGeometry(3.85, 0.045, 4.65), mats.wall);
+        panel.position.set(x, warehouseHeight - 0.32, z);
+        panel.receiveShadow = true;
+        scene.add(panel);
+      }
+    }
+  }
+
+  function addSuspendedHvac() {
+    const unitMaterial = new THREE.MeshStandardMaterial({ color: 0xd6d9d4, roughness: 0.48, metalness: 0.18 });
+    const ventMaterial = new THREE.MeshStandardMaterial({ color: 0xaeb4b1, roughness: 0.42, metalness: 0.32 });
+    const cableMaterial = new THREE.LineBasicMaterial({ color: 0x252525, transparent: true, opacity: 0.7 });
+
+    [
+      [5.2, 12.2, -4.4, 0.05],
+      [-6.4, 11.6, -17.2, -0.08]
+    ].forEach(([x, y, z, rotation]) => {
+      const unit = new THREE.Group();
+      unit.position.set(x, y, z);
+      unit.rotation.y = rotation;
+      unit.add(box(3.2, 1.0, 2.0, 0, 0, 0, unitMaterial));
+      unit.add(box(2.6, 0.18, 1.45, 0, -0.62, 0, ventMaterial));
+      unit.add(box(0.18, 0.92, 1.72, 1.72, 0, 0, ventMaterial));
+      unit.add(box(0.18, 0.92, 1.72, -1.72, 0, 0, ventMaterial));
+
+      [-1.25, 1.25].forEach((cableX) => {
+        [-0.7, 0.7].forEach((cableZ) => {
+          const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(x + cableX, y + 0.55, z + cableZ),
+            new THREE.Vector3(x + cableX, warehouseHeight - 0.35, z + cableZ)
+          ]);
+          scene.add(new THREE.Line(lineGeometry, cableMaterial));
+        });
+      });
+
+      unit.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+      scene.add(unit);
+    });
+  }
+
+  function addElectricalDetails() {
+    const conduitMaterial = new THREE.MeshStandardMaterial({ color: 0x9aa09c, roughness: 0.35, metalness: 0.52 });
+    const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xbfc4c1, roughness: 0.42, metalness: 0.36 });
+    const cableMaterial = new THREE.LineBasicMaterial({ color: 0x202020, transparent: true, opacity: 0.64 });
+
+    [
+      [-0.9, -23.58],
+      [0.1, -23.58],
+      [1.1, -23.58]
+    ].forEach(([x, z]) => {
+      scene.add(box(0.08, 5.3, 0.08, x, 3.0, z, conduitMaterial));
+    });
+
+    scene.add(box(0.72, 1.12, 0.12, -0.38, 1.65, -23.52, boxMaterial));
+    scene.add(box(0.72, 1.12, 0.12, 0.62, 1.65, -23.52, boxMaterial));
+    scene.add(box(3.1, 0.08, 0.08, 0.1, 5.58, -23.5, conduitMaterial));
+
+    const overheadRuns = [
+      [[-12.6, warehouseHeight - 1.2, 3.8], [-6, warehouseHeight - 1.0, -3.8], [1, warehouseHeight - 1.25, -10.2], [8.4, warehouseHeight - 1.1, -17.6]],
+      [[-2.2, warehouseHeight - 0.9, 9.2], [0.6, warehouseHeight - 1.05, 2.4], [3.4, warehouseHeight - 0.92, -5.4], [5.8, warehouseHeight - 1.0, -13.4]]
+    ];
+
+    overheadRuns.forEach((points) => {
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points.map(([x, y, z]) => new THREE.Vector3(x, y, z)));
+      scene.add(new THREE.Line(lineGeometry, cableMaterial));
+    });
+
+    const outletMaterial = new THREE.MeshStandardMaterial({ color: 0xf2eee3, roughness: 0.5 });
+    [-18.6, -11.2, -4.0, 3.6].forEach((z) => {
+      scene.add(box(0.04, 0.28, 0.22, 13.55, 0.95, z, outletMaterial));
+      scene.add(box(0.22, 0.28, 0.04, -13.55, 0.95, z, outletMaterial));
+    });
+  }
+
   function addWarehouseColumn(x, z) {
     const column = new THREE.Group();
     const height = warehouseHeight - 0.7;
+    const paintedSteel = new THREE.MeshStandardMaterial({ color: 0xf2f0e8, roughness: 0.5, metalness: 0.16 });
     column.position.set(x, 0, z);
-    column.add(box(0.28, height, 0.12, 0, height / 2, 0, mats.darkSteel));
-    column.add(box(0.72, height, 0.08, 0, height / 2, 0.16, mats.darkSteel));
-    column.add(box(0.72, height, 0.08, 0, height / 2, -0.16, mats.darkSteel));
+    column.add(box(0.28, height, 0.12, 0, height / 2, 0, paintedSteel));
+    column.add(box(0.72, height, 0.08, 0, height / 2, 0.16, paintedSteel));
+    column.add(box(0.72, height, 0.08, 0, height / 2, -0.16, paintedSteel));
     column.add(box(0.9, 0.08, 0.62, 0, 0.08, 0, mats.steel));
     column.traverse((child) => {
       if (child.isMesh) {
@@ -872,12 +997,12 @@ if (renderer) {
   }
 
   function buildLighting() {
-    const hemisphere = new THREE.HemisphereLight(0xfff7e8, 0x1a2421, 0.9);
+    const hemisphere = new THREE.HemisphereLight(0xfffbf0, 0x29302c, 1.15);
     scene.add(hemisphere);
 
-    const sun = new THREE.DirectionalLight(0xffdfad, 1.8);
-    sun.position.set(0, 8.5, 18);
-    sun.target.position.set(0, 2.2, -9);
+    const sun = new THREE.DirectionalLight(0xfff0d6, 0.65);
+    sun.position.set(-7, 10, 9);
+    sun.target.position.set(0, 2.8, -12);
     sun.castShadow = true;
     sun.shadow.mapSize.width = 2048;
     sun.shadow.mapSize.height = 2048;
@@ -890,22 +1015,9 @@ if (renderer) {
     scene.add(sun);
     scene.add(sun.target);
 
-    [-3.65, 3.65].forEach((doorX) => {
-      const bayLight = new THREE.RectAreaLight(0xfff0cf, 5.5, 5.8, 6.4);
-      bayLight.position.set(doorX, 3.5, 12.15);
-      bayLight.lookAt(doorX, 2.4, -8);
-      scene.add(bayLight);
-
-      const daylightThrow = new THREE.SpotLight(0xffefd1, 2.8, 28, Math.PI / 4.2, 0.65, 1.1);
-      daylightThrow.position.set(doorX, 6.4, 12.4);
-      daylightThrow.target.position.set(doorX * 0.45, 1.4, -8.8);
-      daylightThrow.castShadow = true;
-      scene.add(daylightThrow);
-      scene.add(daylightThrow.target);
-    });
-
     const lightBarMaterial = new THREE.MeshBasicMaterial({ color: 0xfff8e7 });
-    const fixtureHousing = new THREE.MeshStandardMaterial({ color: 0xf3f0e9, roughness: 0.42, metalness: 0.12 });
+    const fixtureHousing = new THREE.MeshStandardMaterial({ color: 0xf4f1e9, roughness: 0.42, metalness: 0.12 });
+    const fixtureRim = new THREE.MeshStandardMaterial({ color: 0xe2e0d8, roughness: 0.42, metalness: 0.2 });
 
     [
       [-9, lampY, -12.8],
@@ -921,32 +1033,24 @@ if (renderer) {
       [3, lampY, -0.6],
       [9, lampY, -0.6]
     ].forEach(([x, y, z]) => {
-      const lamp = new THREE.PointLight(0xfff2d7, 1.75, 18, 1.5);
+      const lamp = new THREE.PointLight(0xfff3dc, 2.7, 20, 1.42);
       lamp.position.set(x, y, z);
       lamp.castShadow = true;
       scene.add(lamp);
 
-      const fixture = new THREE.Mesh(new THREE.BoxGeometry(2.95, 0.11, 0.42), fixtureHousing);
+      const fixture = new THREE.Mesh(new THREE.CylinderGeometry(0.58, 0.76, 0.24, 32), fixtureHousing);
       fixture.position.set(x, y + 0.1, z);
       fixture.castShadow = true;
       scene.add(fixture);
 
-      const lens = new THREE.Mesh(new THREE.BoxGeometry(2.72, 0.035, 0.26), lightBarMaterial);
-      lens.position.set(x, y - 0.005, z);
+      const lens = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.52, 0.045, 32), lightBarMaterial);
+      lens.position.set(x, y - 0.045, z);
       scene.add(lens);
-    });
 
-    [
-      [-4.75, lampY - 0.4, -8.2],
-      [0, lampY - 0.4, -8.2],
-      [4.75, lampY - 0.4, -8.2]
-    ].forEach(([x, y, z]) => {
-      const showroomLight = new THREE.SpotLight(0xfff3dc, 1.55, 18, Math.PI / 5.2, 0.45, 1.25);
-      showroomLight.position.set(x, y, z + 4.2);
-      showroomLight.target.position.set(x, 1.7, z);
-      showroomLight.castShadow = true;
-      scene.add(showroomLight);
-      scene.add(showroomLight.target);
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.58, 0.025, 10, 32), fixtureRim);
+      ring.rotation.x = Math.PI / 2;
+      ring.position.set(x, y - 0.075, z);
+      scene.add(ring);
     });
   }
 

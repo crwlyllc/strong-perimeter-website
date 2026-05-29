@@ -2112,11 +2112,13 @@ body.quote-page {
   grid-template-columns: 1fr;
 }
 
-.quote-page .quote-form label {
+.quote-page .quote-fields > label,
+.quote-page .quote-area-notes {
   gap: 0.65rem;
 }
 
-.quote-page .quote-form label span {
+.quote-page .quote-fields > label > span,
+.quote-page .quote-area-notes > span {
   color: #374151;
   font-size: 0.95rem;
 }
@@ -2137,6 +2139,44 @@ body.quote-page {
 .quote-page .quote-form textarea {
   min-height: 11rem;
   resize: vertical;
+}
+
+.quote-page .quote-option input,
+.quote-page .quote-service-choice input,
+.quote-page .quote-style-choice input {
+  width: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.quote-page .quote-options,
+.quote-page .quote-service-panels {
+  width: min(72rem, 100%);
+  margin: clamp(1.9rem, 4vw, 2.7rem) auto 0;
+}
+
+.quote-page .quote-options--fence-types {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.quote-page .quote-option,
+.quote-page .quote-service-panel {
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+}
+
+.quote-page .quote-option__media {
+  height: clamp(7.5rem, 11vw, 9.25rem);
+}
+
+.quote-page .quote-validation-message {
+  width: min(72rem, 100%);
+  margin: 1rem auto 0;
+  text-align: center;
 }
 
 .quote-page .quote-form input::placeholder,
@@ -2957,6 +2997,10 @@ body.quote-page {
   }
 
   .quote-page .quote-fields--address {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-page .quote-options--fence-types {
     grid-template-columns: 1fr;
   }
 

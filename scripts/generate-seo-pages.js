@@ -202,8 +202,8 @@ const serviceAreaCities = [
 
 const serviceAreaCityLinks = serviceAreaCities.map((city) => [cityServiceAreaHref(city), `${city}, TX`]);
 
-// Add a browser-restricted Google Maps JavaScript API key to enable custom city pins.
-const googleMapsApiKey = "";
+// Add a browser-restricted Google Maps JavaScript API key to enable custom city pins and quote address autocomplete.
+const googleMapsApiKey = process.env.STRONG_PERIMETER_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY || "";
 const googleMapView = {
   center: { lat: 32.8, lng: -96.8 },
   zoom: 10,
@@ -1898,11 +1898,12 @@ function addSupportPages() {
     lead: "The estimate, the schedule, the crew, and the follow-through all come from real people who care about making the project feel steady.",
     image: "/images/daniel-wade-1200-min.jpg",
     imageAlt: "Daniel Wade of Strong Perimeter",
-    summaryItems: ["Daniel Wade", "Robert Hill", "Crew leadership"],
+    summaryItems: ["Daniel Wade", "Robert Hill", "Crew leadership", "Patrick"],
     highlights: [
       serviceCard("Daniel Wade", "Founder and CEO focused on quality, finish standards, and the customer experience before, during, and after the work.", "/contact/"),
       serviceCard("Robert Hill", "Sales Manager helping customers talk through scope, material, access, photos, and scheduling.", "/contact/"),
-      serviceCard("Crew leadership", "Field execution focused on clean lines, dependable work, and respectful jobsite care.", "/projects/")
+      serviceCard("Crew leadership", "Field execution focused on clean lines, dependable work, and respectful jobsite care.", "/projects/"),
+      serviceCard("Patrick", "Crew Member helping projects stay steady with site support, cleanup, and finish-detail follow-through.", "/contact/")
     ],
     sections: [
       {
@@ -2426,6 +2427,13 @@ function renderServiceAreaMap(page) {
 
         <div class="service-map service-map--google">
           <div class="service-map__google-frame">
+            <iframe
+              class="service-map__google-iframe"
+              title="Dallas-Fort Worth service area map"
+              src="https://maps.google.com/maps?q=Dallas-Fort%20Worth%2C%20TX&amp;z=9&amp;t=m&amp;output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
             <div
               id="strong-service-area-google-map"
               class="service-map__google-canvas"

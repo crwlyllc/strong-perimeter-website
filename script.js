@@ -7,6 +7,7 @@ const googleMapEl = document.querySelector("[data-google-map]");
 const googleMapDataEl = document.getElementById("strong-service-area-map-data");
 const quoteStepper = document.querySelector("[data-quote-stepper]");
 const googleAddressInputs = document.querySelectorAll("[data-google-address-autocomplete]");
+const googleMapsApiKeyMeta = document.querySelector('meta[name="strong-perimeter-google-maps-api-key"]');
 
 if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
@@ -227,20 +228,27 @@ function initStrongPerimeterGoogleIntegrations() {
   initStrongPerimeterAddressAutocomplete();
 }
 
+function getStrongPerimeterGoogleMapsApiKey() {
+  return [
+    googleMapEl?.dataset.apiKey,
+    googleAddressInputs[0]?.dataset.apiKey,
+    googleMapsApiKeyMeta?.content,
+    window.STRONG_PERIMETER_GOOGLE_MAPS_API_KEY
+  ].find((value) => value && value.trim())?.trim() || "";
+}
+
 function loadStrongPerimeterGoogleMaps() {
-  const googleMapsApiKey = googleMapEl?.dataset.apiKey
-    || googleAddressInputs[0]?.dataset.apiKey
-    || window.STRONG_PERIMETER_GOOGLE_MAPS_API_KEY
-    || "";
-
-  if (!googleMapsApiKey) {
-    return;
-  }
-
   window.initStrongPerimeterGoogleIntegrations = initStrongPerimeterGoogleIntegrations;
 
   if (window.google?.maps?.places) {
     initStrongPerimeterGoogleIntegrations();
+    return;
+  }
+
+  const googleMapsApiKey = getStrongPerimeterGoogleMapsApiKey();
+
+  if (!googleMapsApiKey) {
+    console.warn("Strong Perimeter Google address autocomplete is disabled because no Google Maps JavaScript API key is configured.");
     return;
   }
 
@@ -253,6 +261,9 @@ function loadStrongPerimeterGoogleMaps() {
   googleMapsScript.async = true;
   googleMapsScript.defer = true;
   googleMapsScript.dataset.strongGoogleMapsScript = "true";
+  googleMapsScript.onerror = () => {
+    console.warn("Strong Perimeter could not load the Google Maps JavaScript API for address autocomplete.");
+  };
   document.head.appendChild(googleMapsScript);
 }
 

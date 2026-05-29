@@ -1084,7 +1084,7 @@ a.story-card:focus-visible {
 }
 
 .crew-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin-top: 1rem;
 }
 
@@ -2166,6 +2166,7 @@ a.story-card:focus-visible {
   background: #e9e5da;
 }
 
+.service-map__google-iframe,
 .service-map__google-canvas,
 .service-map__fallback {
   position: absolute;
@@ -2174,8 +2175,13 @@ a.story-card:focus-visible {
   height: 100%;
 }
 
-.service-map__google-canvas {
+.service-map__google-iframe {
   z-index: 1;
+  border: 0;
+}
+
+.service-map__google-canvas {
+  z-index: 2;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -2229,6 +2235,7 @@ a.story-card:focus-visible {
   pointer-events: auto;
 }
 
+.service-map.is-google-map-loaded .service-map__google-iframe,
 .service-map.is-google-map-loaded .service-map__fallback {
   display: none;
 }
@@ -2468,6 +2475,10 @@ a.story-card:focus-visible {
   .leadership-grid,
   .gallery-grid {
     grid-template-columns: 1fr;
+  }
+
+  .crew-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .leadership-card {

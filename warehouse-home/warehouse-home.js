@@ -69,6 +69,13 @@ try {
 }
 
 if (renderer) {
+  const warehouseWidth = 52;
+  const warehouseHalfWidth = warehouseWidth / 2;
+  const warehouseDepth = 36;
+  const warehouseCenterZ = -6;
+  const warehouseBackZ = warehouseCenterZ - warehouseDepth / 2;
+  const warehouseFrontZ = warehouseCenterZ + warehouseDepth / 2;
+  const cameraWallPadding = 1.35;
   const warehouseHeight = 17.6;
   const warehouseWallY = warehouseHeight / 2 - 0.15;
   const lampY = warehouseHeight - 2.45;
@@ -143,40 +150,40 @@ if (renderer) {
   };
 
   function buildWarehouse() {
-    const floor = new THREE.Mesh(new THREE.BoxGeometry(28, 0.22, 36), mats.concrete);
-    floor.position.set(0, -0.12, -6);
+    const floor = new THREE.Mesh(new THREE.BoxGeometry(warehouseWidth, 0.22, warehouseDepth), mats.concrete);
+    floor.position.set(0, -0.12, warehouseCenterZ);
     floor.receiveShadow = true;
     scene.add(floor);
 
-    const backWall = new THREE.Mesh(new THREE.BoxGeometry(28, warehouseHeight, 0.32), mats.wall);
-    backWall.position.set(0, warehouseWallY, -24);
+    const backWall = new THREE.Mesh(new THREE.BoxGeometry(warehouseWidth, warehouseHeight, 0.32), mats.wall);
+    backWall.position.set(0, warehouseWallY, warehouseBackZ);
     backWall.receiveShadow = true;
     scene.add(backWall);
 
-    const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, warehouseHeight, 36), mats.wallDark);
-    leftWall.position.set(-14, warehouseWallY, -6);
+    const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, warehouseHeight, warehouseDepth), mats.wallDark);
+    leftWall.position.set(-warehouseHalfWidth, warehouseWallY, warehouseCenterZ);
     leftWall.receiveShadow = true;
     scene.add(leftWall);
 
-    const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, warehouseHeight, 36), mats.wallDark);
-    rightWall.position.set(14, warehouseWallY, -6);
+    const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, warehouseHeight, warehouseDepth), mats.wallDark);
+    rightWall.position.set(warehouseHalfWidth, warehouseWallY, warehouseCenterZ);
     rightWall.receiveShadow = true;
     scene.add(rightWall);
 
-    const roof = new THREE.Mesh(new THREE.BoxGeometry(28.4, 0.3, 36.4), mats.concrete);
-    roof.position.set(0, warehouseHeight - 0.08, -6);
+    const roof = new THREE.Mesh(new THREE.BoxGeometry(warehouseWidth + 0.4, 0.3, warehouseDepth + 0.4), mats.concrete);
+    roof.position.set(0, warehouseHeight - 0.08, warehouseCenterZ);
     roof.receiveShadow = true;
     scene.add(roof);
 
     const trimMaterial = new THREE.MeshStandardMaterial({ color: 0xfffbf1, roughness: 0.72 });
-    scene.add(box(27.7, 0.34, 0.12, 0, 0.36, -23.72, trimMaterial));
-    scene.add(box(0.12, 0.34, 35.6, -13.72, 0.36, -6, trimMaterial));
-    scene.add(box(0.12, 0.34, 35.6, 13.72, 0.36, -6, trimMaterial));
+    scene.add(box(warehouseWidth - 0.3, 0.34, 0.12, 0, 0.36, warehouseBackZ + 0.28, trimMaterial));
+    scene.add(box(0.12, 0.34, warehouseDepth - 0.4, -warehouseHalfWidth + 0.28, 0.36, warehouseCenterZ, trimMaterial));
+    scene.add(box(0.12, 0.34, warehouseDepth - 0.4, warehouseHalfWidth - 0.28, 0.36, warehouseCenterZ, trimMaterial));
 
-    [-12.9, 12.9].forEach((x) => addWarehouseColumn(x, -22.7));
+    [-warehouseHalfWidth + 1.1, warehouseHalfWidth - 1.1].forEach((x) => addWarehouseColumn(x, warehouseBackZ + 1.3));
     [-18, -10, -2, 6].forEach((z) => {
-      addWarehouseColumn(-13.15, z);
-      addWarehouseColumn(13.15, z);
+      addWarehouseColumn(-warehouseHalfWidth + 0.85, z);
+      addWarehouseColumn(warehouseHalfWidth - 0.85, z);
     });
 
     const rollup = new THREE.Mesh(new THREE.BoxGeometry(8.5, 5.2, 0.18), new THREE.MeshStandardMaterial({
@@ -764,9 +771,10 @@ if (renderer) {
     });
 
     const outletMaterial = new THREE.MeshStandardMaterial({ color: 0xf2eee3, roughness: 0.5 });
+    const sideOutletX = warehouseHalfWidth - 0.22;
     [-18.6, -11.2, -4.0, 3.6].forEach((z) => {
-      scene.add(box(0.04, 0.28, 0.22, 13.55, 0.95, z, outletMaterial));
-      scene.add(box(0.22, 0.28, 0.04, -13.55, 0.95, z, outletMaterial));
+      scene.add(box(0.04, 0.28, 0.22, sideOutletX, 0.95, z, outletMaterial));
+      scene.add(box(0.04, 0.28, 0.22, -sideOutletX, 0.95, z, outletMaterial));
     });
   }
 
@@ -902,8 +910,8 @@ if (renderer) {
     sun.shadow.mapSize.height = 2048;
     sun.shadow.camera.near = 1;
     sun.shadow.camera.far = 36;
-    sun.shadow.camera.left = -18;
-    sun.shadow.camera.right = 18;
+    sun.shadow.camera.left = -warehouseHalfWidth - 2;
+    sun.shadow.camera.right = warehouseHalfWidth + 2;
     sun.shadow.camera.top = 18;
     sun.shadow.camera.bottom = -18;
     scene.add(sun);
@@ -913,20 +921,9 @@ if (renderer) {
     const fixtureHousing = new THREE.MeshStandardMaterial({ color: 0xf4f1e9, roughness: 0.42, metalness: 0.12 });
     const fixtureRim = new THREE.MeshStandardMaterial({ color: 0xe2e0d8, roughness: 0.42, metalness: 0.2 });
 
-    [
-      [-9, lampY, -12.8],
-      [-3, lampY, -12.8],
-      [3, lampY, -12.8],
-      [9, lampY, -12.8],
-      [-9, lampY, -6.7],
-      [-3, lampY, -6.7],
-      [3, lampY, -6.7],
-      [9, lampY, -6.7],
-      [-9, lampY, -0.6],
-      [-3, lampY, -0.6],
-      [3, lampY, -0.6],
-      [9, lampY, -0.6]
-    ].forEach(([x, y, z]) => {
+    const lightGridX = [-18, -9, 0, 9, 18];
+    const lightGridZ = [-14.8, -8.1, -1.4, 5.3];
+    lightGridZ.flatMap((z) => lightGridX.map((x) => [x, lampY, z])).forEach(([x, y, z]) => {
       const lamp = new THREE.PointLight(0xfff3dc, 2.7, 20, 1.42);
       lamp.position.set(x, y, z);
       lamp.castShadow = true;
@@ -1227,7 +1224,21 @@ if (renderer) {
       cameraState.target.y + Math.sin(cameraState.pitch) * radius,
       cameraState.target.z + Math.cos(cameraState.yaw) * cosPitch * radius
     );
+    keepCameraInsideWarehouse();
     camera.lookAt(cameraState.target);
+  }
+
+  function keepCameraInsideWarehouse() {
+    camera.position.x = THREE.MathUtils.clamp(
+      camera.position.x,
+      -warehouseHalfWidth + cameraWallPadding,
+      warehouseHalfWidth - cameraWallPadding
+    );
+    camera.position.z = THREE.MathUtils.clamp(
+      camera.position.z,
+      warehouseBackZ + cameraWallPadding,
+      warehouseFrontZ - cameraWallPadding
+    );
   }
 
   function syncOrbitFromCamera() {
@@ -1245,6 +1256,7 @@ if (renderer) {
       const eased = t * t * (3 - 2 * t);
       camera.position.lerpVectors(cameraState.tween.startPosition, cameraState.tween.endPosition, eased);
       cameraState.target.lerpVectors(cameraState.tween.startTarget, cameraState.tween.endTarget, eased);
+      keepCameraInsideWarehouse();
       camera.lookAt(cameraState.target);
 
       if (t >= 1) {

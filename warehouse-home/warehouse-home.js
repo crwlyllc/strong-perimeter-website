@@ -81,8 +81,8 @@ if (renderer) {
   const lampY = warehouseHeight - 2.45;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x18211f);
-  scene.fog = new THREE.Fog(0x18211f, 22, 48);
+  scene.background = new THREE.Color(0xdce5df);
+  scene.fog = new THREE.Fog(0xdce5df, 34, 72);
 
   const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 100);
   const raycaster = new THREE.Raycaster();
@@ -92,9 +92,9 @@ if (renderer) {
   const clock = new THREE.Clock();
 
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.setClearColor(0x18211f, 1);
+  renderer.setClearColor(0xdce5df, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.18;
+  renderer.toneMappingExposure = 1.32;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -899,11 +899,14 @@ if (renderer) {
   }
 
   function buildLighting() {
-    const hemisphere = new THREE.HemisphereLight(0xfffbf0, 0x29302c, 1.15);
+    const ambient = new THREE.AmbientLight(0xfffbf0, 0.52);
+    scene.add(ambient);
+
+    const hemisphere = new THREE.HemisphereLight(0xfffbf0, 0x6f756d, 1.45);
     scene.add(hemisphere);
 
-    const sun = new THREE.DirectionalLight(0xfff0d6, 0.65);
-    sun.position.set(-7, 10, 9);
+    const sun = new THREE.DirectionalLight(0xfff0d6, 1.12);
+    sun.position.set(-7, 11, 16);
     sun.target.position.set(0, 2.8, -12);
     sun.castShadow = true;
     sun.shadow.mapSize.width = 2048;
@@ -917,18 +920,33 @@ if (renderer) {
     scene.add(sun);
     scene.add(sun.target);
 
+    const bayLight = new THREE.DirectionalLight(0xffffff, 0.82);
+    bayLight.position.set(5, 7, warehouseFrontZ + 8);
+    bayLight.target.position.set(0, 2.4, warehouseBackZ + 6);
+    scene.add(bayLight);
+    scene.add(bayLight.target);
+
     const lightBarMaterial = new THREE.MeshBasicMaterial({ color: 0xfff8e7 });
     const fixtureHousing = new THREE.MeshStandardMaterial({ color: 0xf4f1e9, roughness: 0.42, metalness: 0.12 });
     const fixtureRim = new THREE.MeshStandardMaterial({ color: 0xe2e0d8, roughness: 0.42, metalness: 0.2 });
+    const activeLampPositions = [
+      [-18, lampY, -12.8],
+      [0, lampY, -12.8],
+      [18, lampY, -12.8],
+      [-18, lampY, 0.4],
+      [0, lampY, 0.4],
+      [18, lampY, 0.4]
+    ];
+
+    activeLampPositions.forEach(([x, y, z]) => {
+      const lamp = new THREE.PointLight(0xfff3dc, 1.45, 24, 1.7);
+      lamp.position.set(x, y, z);
+      scene.add(lamp);
+    });
 
     const lightGridX = [-18, -9, 0, 9, 18];
     const lightGridZ = [-14.8, -8.1, -1.4, 5.3];
     lightGridZ.flatMap((z) => lightGridX.map((x) => [x, lampY, z])).forEach(([x, y, z]) => {
-      const lamp = new THREE.PointLight(0xfff3dc, 2.7, 20, 1.42);
-      lamp.position.set(x, y, z);
-      lamp.castShadow = true;
-      scene.add(lamp);
-
       const fixture = new THREE.Mesh(new THREE.CylinderGeometry(0.58, 0.76, 0.24, 32), fixtureHousing);
       fixture.position.set(x, y + 0.1, z);
       fixture.castShadow = true;

@@ -18,7 +18,7 @@ body {
   width: 100%;
   min-height: 100%;
   margin: 0;
-  background: var(--green-950);
+  background: #dce5df;
 }
 
 body {
@@ -34,7 +34,7 @@ a {
 .warehouse-shell {
   position: relative;
   min-height: 100dvh;
-  background: #111b18;
+  background: #dce5df;
 }
 
 #warehouse-canvas {
@@ -44,7 +44,7 @@ a {
   width: 100%;
   height: 100%;
   touch-action: none;
-  background: #111b18;
+  background: #dce5df;
 }
 
 .screen-reader-only {

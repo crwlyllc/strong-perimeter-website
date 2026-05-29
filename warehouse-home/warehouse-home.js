@@ -76,8 +76,8 @@ if (renderer) {
   const lampY = warehouseHeight - 2.45;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x101815);
-  scene.fog = new THREE.Fog(0x101815, 18, 42);
+  scene.background = new THREE.Color(0x18211f);
+  scene.fog = new THREE.Fog(0x18211f, 22, 48);
 
   const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 100);
   const raycaster = new THREE.Raycaster();
@@ -87,16 +87,16 @@ if (renderer) {
   const clock = new THREE.Clock();
 
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.setClearColor(0x101815, 1);
+  renderer.setClearColor(0x18211f, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.06;
+  renderer.toneMappingExposure = 1.18;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   const textures = {
     concrete: createConcreteTexture(),
-    wall: createCorrugatedTexture(0x1f3a34, 0x2c4a42),
-    wallDark: createCorrugatedTexture(0x15241f, 0x20352f),
+    wall: createSheetrockTexture(0xf2efe7, 0xded8cb),
+    wallDark: createSheetrockTexture(0xe7ece6, 0xcbd8d0),
     steel: createBrushedMetalTexture(0x8d9aa0, 0xb3bec1),
     darkSteel: createBrushedMetalTexture(0x20282a, 0x3a4444),
     wood: createWoodTexture(0xb97942, 0x6f4628),
@@ -105,8 +105,8 @@ if (renderer) {
 
   const mats = {
     concrete: new THREE.MeshStandardMaterial({ map: textures.concrete, color: 0xb8b3a8, roughness: 0.96, metalness: 0.01 }),
-    wall: new THREE.MeshStandardMaterial({ map: textures.wall, color: 0xffffff, roughness: 0.78, metalness: 0.2 }),
-    wallDark: new THREE.MeshStandardMaterial({ map: textures.wallDark, color: 0xffffff, roughness: 0.84, metalness: 0.18 }),
+    wall: new THREE.MeshStandardMaterial({ map: textures.wall, color: 0xffffff, roughness: 0.9, metalness: 0 }),
+    wallDark: new THREE.MeshStandardMaterial({ map: textures.wallDark, color: 0xffffff, roughness: 0.88, metalness: 0 }),
     steel: new THREE.MeshStandardMaterial({ map: textures.steel, color: 0xffffff, roughness: 0.34, metalness: 0.68 }),
     darkSteel: new THREE.MeshStandardMaterial({ map: textures.darkSteel, color: 0xffffff, roughness: 0.42, metalness: 0.72 }),
     green: new THREE.MeshStandardMaterial({ color: 0x004b3d, roughness: 0.48, metalness: 0.16 }),
@@ -165,14 +165,6 @@ if (renderer) {
       scene.add(joint);
     }
 
-    const tireMarkMaterial = new THREE.MeshBasicMaterial({ color: 0x0f1211, transparent: true, opacity: 0.16 });
-    [-8.9, -7.55, 7.55, 8.9].forEach((x) => {
-      const mark = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.02, 15.5), tireMarkMaterial);
-      mark.position.set(x, 0.028, -3.5);
-      mark.rotation.y = x < 0 ? -0.035 : 0.035;
-      scene.add(mark);
-    });
-
     const backWall = new THREE.Mesh(new THREE.BoxGeometry(28, warehouseHeight, 0.32), mats.wall);
     backWall.position.set(0, warehouseWallY, -24);
     backWall.receiveShadow = true;
@@ -193,19 +185,31 @@ if (renderer) {
     roof.receiveShadow = true;
     scene.add(roof);
 
-    for (let x = -13.2; x <= 13.2; x += 1.2) {
-      const rib = new THREE.Mesh(new THREE.BoxGeometry(0.04, warehouseHeight - 0.6, 0.08), mats.darkSteel);
-      rib.position.set(x, warehouseWallY, -23.56);
-      rib.receiveShadow = true;
-      scene.add(rib);
+    const trimMaterial = new THREE.MeshStandardMaterial({ color: 0xfffbf1, roughness: 0.72 });
+    const accentTrimMaterial = new THREE.MeshStandardMaterial({ color: 0x1f6b5a, roughness: 0.68 });
+    scene.add(box(27.7, 0.34, 0.12, 0, 0.36, -23.72, trimMaterial));
+    scene.add(box(27.7, 0.12, 0.1, 0, 3.08, -23.71, accentTrimMaterial));
+    scene.add(box(0.12, 0.34, 35.6, -13.72, 0.36, -6, trimMaterial));
+    scene.add(box(0.12, 0.34, 35.6, 13.72, 0.36, -6, trimMaterial));
+    scene.add(box(0.1, 0.12, 35.6, -13.71, 3.08, -6, accentTrimMaterial));
+    scene.add(box(0.1, 0.12, 35.6, 13.71, 3.08, -6, accentTrimMaterial));
+
+    for (let x = -10.5; x <= 10.5; x += 7) {
+      const seam = new THREE.Mesh(new THREE.BoxGeometry(0.035, warehouseHeight - 1.2, 0.035), trimMaterial);
+      seam.position.set(x, warehouseWallY, -23.68);
+      scene.add(seam);
     }
 
-    [-13.56, 13.56].forEach((x) => {
-      for (let z = -22.4; z <= 10.4; z += 1.2) {
-        const rib = new THREE.Mesh(new THREE.BoxGeometry(0.08, warehouseHeight - 0.6, 0.04), mats.darkSteel);
-        rib.position.set(x, warehouseWallY, z);
-        rib.receiveShadow = true;
-        scene.add(rib);
+    [-13.68, 13.68].forEach((x) => {
+      for (let z = -18; z <= 6; z += 8) {
+        const wallPanel = new THREE.Group();
+        wallPanel.position.set(x, 4.7, z);
+        wallPanel.rotation.y = x < 0 ? Math.PI / 2 : -Math.PI / 2;
+        wallPanel.add(box(4.8, 0.065, 0.07, 0, 1.8, 0, trimMaterial));
+        wallPanel.add(box(4.8, 0.065, 0.07, 0, -1.8, 0, trimMaterial));
+        wallPanel.add(box(0.065, 3.6, 0.07, -2.4, 0, 0, trimMaterial));
+        wallPanel.add(box(0.065, 3.6, 0.07, 2.4, 0, 0, trimMaterial));
+        scene.add(wallPanel);
       }
     });
 
@@ -821,10 +825,10 @@ if (renderer) {
   }
 
   function buildLighting() {
-    const hemisphere = new THREE.HemisphereLight(0xfff2dc, 0x0b1412, 0.62);
+    const hemisphere = new THREE.HemisphereLight(0xfff7e8, 0x1a2421, 0.9);
     scene.add(hemisphere);
 
-    const sun = new THREE.DirectionalLight(0xffdfad, 1.35);
+    const sun = new THREE.DirectionalLight(0xffdfad, 0.65);
     sun.position.set(8, 7, 11);
     sun.castShadow = true;
     sun.shadow.mapSize.width = 2048;
@@ -837,29 +841,49 @@ if (renderer) {
     sun.shadow.camera.bottom = -18;
     scene.add(sun);
 
-    const lightBarMaterial = new THREE.MeshBasicMaterial({ color: 0xfff4dc });
-    const fixtureHousing = new THREE.MeshStandardMaterial({ color: 0x252c2c, roughness: 0.42, metalness: 0.55 });
+    const lightBarMaterial = new THREE.MeshBasicMaterial({ color: 0xfff8e7 });
+    const fixtureHousing = new THREE.MeshStandardMaterial({ color: 0xf3f0e9, roughness: 0.42, metalness: 0.12 });
 
     [
-      [-9, lampY, -11],
-      [-3, lampY, -11],
-      [3, lampY, -11],
-      [9, lampY, -11],
-      [-8, lampY - 0.5, 3]
+      [-9, lampY, -12.8],
+      [-3, lampY, -12.8],
+      [3, lampY, -12.8],
+      [9, lampY, -12.8],
+      [-9, lampY, -6.7],
+      [-3, lampY, -6.7],
+      [3, lampY, -6.7],
+      [9, lampY, -6.7],
+      [-9, lampY, -0.6],
+      [-3, lampY, -0.6],
+      [3, lampY, -0.6],
+      [9, lampY, -0.6]
     ].forEach(([x, y, z]) => {
-      const lamp = new THREE.PointLight(0xfff0c6, 1.85, 18, 1.65);
+      const lamp = new THREE.PointLight(0xfff2d7, 2.6, 20, 1.5);
       lamp.position.set(x, y, z);
       lamp.castShadow = true;
       scene.add(lamp);
 
-      const fixture = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.12, 0.28), fixtureHousing);
+      const fixture = new THREE.Mesh(new THREE.BoxGeometry(2.95, 0.11, 0.42), fixtureHousing);
       fixture.position.set(x, y + 0.1, z);
       fixture.castShadow = true;
       scene.add(fixture);
 
-      const lens = new THREE.Mesh(new THREE.BoxGeometry(2.38, 0.035, 0.16), lightBarMaterial);
+      const lens = new THREE.Mesh(new THREE.BoxGeometry(2.72, 0.035, 0.26), lightBarMaterial);
       lens.position.set(x, y - 0.005, z);
       scene.add(lens);
+    });
+
+    [
+      [-4.75, lampY - 0.4, -8.2],
+      [0, lampY - 0.4, -8.2],
+      [4.75, lampY - 0.4, -8.2]
+    ].forEach(([x, y, z]) => {
+      const showroomLight = new THREE.SpotLight(0xfff3dc, 3.1, 18, Math.PI / 5.2, 0.45, 1.25);
+      showroomLight.position.set(x, y, z + 4.2);
+      showroomLight.target.position.set(x, 1.7, z);
+      showroomLight.castShadow = true;
+      scene.add(showroomLight);
+      scene.add(showroomLight.target);
     });
   }
 
@@ -898,33 +922,37 @@ if (renderer) {
     return finishTexture(textureCanvas, 3.8, 4.8);
   }
 
-  function createCorrugatedTexture(baseHex, ribHex) {
+  function createSheetrockTexture(baseHex, shadowHex) {
     const textureCanvas = document.createElement("canvas");
-    textureCanvas.width = 512;
-    textureCanvas.height = 512;
+    textureCanvas.width = 1024;
+    textureCanvas.height = 1024;
     const ctx = textureCanvas.getContext("2d");
-    const random = seededRandom(baseHex);
+    const random = seededRandom(baseHex + shadowHex);
     const base = hexToRgb(baseHex);
-    const rib = hexToRgb(ribHex);
+    const shadow = hexToRgb(shadowHex);
 
     ctx.fillStyle = rgb(base);
-    ctx.fillRect(0, 0, 512, 512);
+    ctx.fillRect(0, 0, 1024, 1024);
 
-    for (let x = 0; x < 512; x += 24) {
-      const width = 8 + Math.round(random() * 3);
-      ctx.fillStyle = `rgba(${rib.r}, ${rib.g}, ${rib.b}, 0.74)`;
-      ctx.fillRect(x, 0, width, 512);
-      ctx.fillStyle = "rgba(255, 255, 255, 0.045)";
-      ctx.fillRect(x + width, 0, 2, 512);
+    for (let i = 0; i < 9000; i += 1) {
+      const alpha = 0.018 + random() * 0.035;
+      const shade = random() > 0.5 ? base : shadow;
+      ctx.fillStyle = `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${alpha})`;
+      const width = 1 + random() * 3.5;
+      const height = 1 + random() * 3.5;
+      ctx.fillRect(random() * 1024, random() * 1024, width, height);
     }
 
-    for (let i = 0; i < 1700; i += 1) {
-      const noise = Math.round(25 + random() * 70);
-      ctx.fillStyle = `rgba(${noise}, ${noise + 6}, ${noise + 4}, 0.035)`;
-      ctx.fillRect(random() * 512, random() * 512, 1 + random() * 2, 1 + random() * 6);
+    ctx.strokeStyle = `rgba(${shadow.r}, ${shadow.g}, ${shadow.b}, 0.16)`;
+    ctx.lineWidth = 2;
+    for (let y = 256; y < 1024; y += 256) {
+      ctx.beginPath();
+      ctx.moveTo(0, y + (random() - 0.5) * 2);
+      ctx.lineTo(1024, y + (random() - 0.5) * 2);
+      ctx.stroke();
     }
 
-    return finishTexture(textureCanvas, 5.5, 3.5);
+    return finishTexture(textureCanvas, 2.8, 2.8);
   }
 
   function createBrushedMetalTexture(baseHex, highlightHex) {

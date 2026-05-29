@@ -2645,7 +2645,7 @@ function renderQuoteServicePanel(fenceOption, serviceOptions) {
   const slug = citySlug(fenceOption.value);
   const image = fenceOption.image || images.wood;
   const mediaClass = fenceOption.media === "symbol" ? "quote-service-panel__media--symbol" : "quote-service-panel__media--photo";
-  const notesPlaceholder = fenceOption.notesPlaceholder || "Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc.";
+  const notesPlaceholder = "Any details to include?";
   const styleOptions = fenceOption.styleOptions || [];
   const styleSection = styleOptions.length ? `
 
@@ -2722,7 +2722,6 @@ function renderQuoteWizard() {
       label: "Wood",
       image: quoteFenceImages.wood,
       text: "Privacy, perimeter, or backyard wood fencing.",
-      notesPlaceholder: "Approximate length, gates, height, wood style, staining, replacement section, photos available, etc.",
       styleOptions: [
         { value: "Vertical side by side" },
         { value: "Vertical board on board" },
@@ -2733,14 +2732,14 @@ function renderQuoteWizard() {
       ]
     },
     { value: "Pipe fence", label: "Pipe fence", image: quoteFenceImages.pipe, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
-    { value: "Gates", label: "Gates", image: quoteFenceImages.wood, text: "Walk gates, double gates, driveway gates, gate repair, or automatic gates.", notesPlaceholder: "Gate type, opening width, hinge or latch issue, sagging/dragging, driveway access, automation needs, photos available, etc." },
+    { value: "Gates", label: "Gates", image: quoteFenceImages.wood, text: "Walk gates, double gates, driveway gates, gate repair, or automatic gates." },
     { value: "Chain link", label: "Chain link", image: quoteFenceImages.chainLink, text: "Chain link fabric, posts, rails, or gates." },
-    { value: "Pool safety fences", label: "Pool safety fences", image: quoteFenceImages.poolSafety, text: "Pool barriers, gates, latches, panels, or safety sections.", notesPlaceholder: "Approximate length, pool access, gate or latch issue, panel spacing, replacement section, photos available, etc." },
-    { value: "Temporary fencing", label: "Temporary fencing", image: quoteFenceImages.temporary, text: "Temporary panels, stands, gates, bases, or site perimeter.", notesPlaceholder: "Approximate length, site access, panel issue, damaged stands, repositioning, install/removal timing, photos available, etc." },
-    { value: "T-post", label: "T-post", image: quoteFenceImages.tPost, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
+    { value: "Pool safety fences", label: "Pool safety fences", image: quoteFenceImages.poolSafety, text: "Pool barriers, gates, latches, panels, or safety sections." },
+    { value: "Temporary fencing", label: "Temporary fencing", image: quoteFenceImages.temporary, text: "Temporary panels, stands, gates, bases, or site perimeter." },
+    { value: "T-post", label: "T-post", image: quoteFenceImages.tPost, text: "T-posts, wire fencing, braces, gates, or perimeter sections." },
     { value: "Vinyl", label: "Vinyl", image: quoteFenceImages.vinyl, text: "Vinyl panels, posts, gates, or sections." },
-    { value: "Aluminum", label: "Aluminum", image: quoteFenceImages.aluminum, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
-    { value: "Composite", label: "Composite", image: quoteFenceImages.composite, text: "Composite panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, damaged panels, loose posts, replacement section, photos available, etc." }
+    { value: "Aluminum", label: "Aluminum", image: quoteFenceImages.aluminum, text: "Aluminum panels, posts, gates, or sections." },
+    { value: "Composite", label: "Composite", image: quoteFenceImages.composite, text: "Composite panels, posts, gates, or sections." }
   ];
   const serviceOptionsByFence = {
     "Wrought iron": [
@@ -2893,7 +2892,7 @@ function renderQuoteWizard() {
               </label>
               <label class="full-width">
                 <span>Project details</span>
-                <textarea id="quote-details" name="details" rows="4" placeholder="What happened? Gate issue, approximate length, access notes, photos available, timing details, HOA or permit notes, etc."></textarea>
+                <textarea id="quote-details" name="details" rows="4" placeholder="Any additional project details we should know?"></textarea>
               </label>
             </div>
             <div class="quote-step__actions">
@@ -3042,7 +3041,7 @@ function renderQuoteForm() {
           </label>
           <label class="full-width">
             <span>Project details</span>
-            <textarea id="quote-details" name="details" rows="6" placeholder="What happened? Who uses the space? Where is the fence? When do you need it handled?"></textarea>
+            <textarea id="quote-details" name="details" rows="6" placeholder="Any additional project details we should know?"></textarea>
           </label>
           <button class="button button--solid full-width" type="submit">Open quote email</button>
           <p class="form-note">Submitting opens a prefilled email draft to sales@strongperimeter.com in your default mail app.</p>

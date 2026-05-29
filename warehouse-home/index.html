@@ -4,23 +4,28 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Strong Perimeter Warehouse Home Prototype</title>
-  <meta name="description" content="A hidden immersive Strong Perimeter warehouse home prototype for exploring services, brand information, and future 3D service areas.">
+  <title>Strong Perimeter Fence Company Simulator</title>
+  <meta name="description" content="A hidden Strong Perimeter fence company simulator prototype where players complete repair and installation jobs, manage time, solve field problems, and make money.">
   <link rel="icon" href="../images/favicon.jpg" type="image/jpeg">
   <link rel="apple-touch-icon" href="../images/webclip.jpg">
   <link rel="stylesheet" href="warehouse-home.css">
   <script type="module" src="warehouse-home.js"></script>
 </head>
 <body>
-  <main class="warehouse-shell" aria-labelledby="warehouse-title">
-    <h1 class="screen-reader-only" id="warehouse-title">Strong Perimeter warehouse home</h1>
-    <canvas id="warehouse-canvas" aria-label="Interactive 3D warehouse interior for Strong Perimeter"></canvas>
+  <main class="sim-shell" aria-labelledby="sim-title">
+    <h1 class="screen-reader-only" id="sim-title">Strong Perimeter fence company simulator</h1>
+    <header class="sim-hud" id="sim-hud" aria-live="polite"></header>
 
-    <div class="scene-fallback" hidden>
-      <p>The warehouse preview needs WebGL. You can still reach Strong Perimeter here:</p>
-      <a href="../quote/">Get a free quote</a>
-      <a href="tel:+12142476369">(214) 247-6369</a>
-    </div>
+    <section class="sim-stage" aria-label="Fence company simulator">
+      <aside class="sim-panel sim-panel-left" id="job-panel"></aside>
+
+      <section class="scene-panel" aria-label="Current yard or job site">
+        <canvas id="sim-canvas" aria-label="Animated fence company simulator scene"></canvas>
+        <div class="scene-readout" id="scene-readout"></div>
+      </section>
+
+      <aside class="sim-panel sim-panel-right" id="action-panel"></aside>
+    </section>
   </main>
 </body>
 </html>

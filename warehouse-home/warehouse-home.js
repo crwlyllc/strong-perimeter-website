@@ -1,1373 +1,1194 @@
-import * as THREE from "../js/vendor/three.module.min.js";
+const canvas = document.getElementById("sim-canvas");
+const ctx = canvas.getContext("2d");
+const hudEl = document.getElementById("sim-hud");
+const jobPanelEl = document.getElementById("job-panel");
+const actionPanelEl = document.getElementById("action-panel");
+const sceneReadoutEl = document.getElementById("scene-readout");
 
-const canvas = document.getElementById("warehouse-canvas");
-const fallbackEl = document.querySelector(".scene-fallback");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const moneyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0
+});
 
-const serviceAreas = [
+const supplyCatalog = {
+  posts: { label: "Steel posts", unit: "post", price: 28, bundle: 2 },
+  rails: { label: "Cedar rails", unit: "rail", price: 13, bundle: 6 },
+  pickets: { label: "Cedar pickets", unit: "picket", price: 3, bundle: 24 },
+  concrete: { label: "Concrete bags", unit: "bag", price: 7, bundle: 6 },
+  hardware: { label: "Gate hardware", unit: "set", price: 36, bundle: 1 },
+  sprinklerRepair: { label: "Sprinkler repair kits", unit: "kit", price: 18, bundle: 1 }
+};
+
+const jobTemplates = [
   {
-    key: "wood",
-    label: "Wood Fence",
-    detail: "Privacy builds, board-on-board, stain, repair",
-    short: "Wood fence display",
-    url: "../wood-fence/",
-    color: 0xb97942
+    id: "cedar-storm-repair",
+    title: "Storm-damaged cedar repair",
+    kind: "Repair",
+    location: "Lake Highlands",
+    payout: 1450,
+    dueHour: 14.75,
+    difficulty: "Medium",
+    risk: "Old tree roots around the failed post",
+    scope: "Replace one leaned post, rebuild a broken bay, and match the cedar pickets.",
+    required: { posts: 1, rails: 3, pickets: 18, concrete: 2 },
+    stages: [
+      { key: "inspect", title: "Inspect leaning section", verb: "Inspect section", time: 0.35, energy: 2, quality: 1, note: "Measured the failed bay and marked the string line." },
+      { key: "demo", title: "Demo broken bay", verb: "Demo bay", time: 0.8, energy: 10, cost: 20, quality: 0, note: "Removed broken rails, pickets, and old concrete." },
+      { key: "dig-a", title: "Dig replacement post hole", verb: "Dig post hole", type: "dig", hole: 0, time: 0.7, energy: 12, hazard: { type: "roots" }, note: "Replacement post hole is open and clean." },
+      { key: "set-a", title: "Set steel post", verb: "Set post", type: "set", hole: 0, uses: { posts: 1, concrete: 2 }, time: 0.8, energy: 10, quality: 1, note: "Post is plumb, braced, and set in concrete." },
+      { key: "rails", title: "Install cedar rails", verb: "Install rails", visual: "rails", uses: { rails: 3 }, time: 0.75, energy: 8, quality: 1, note: "Rails are tight and level." },
+      { key: "pickets", title: "Replace cedar pickets", verb: "Hang pickets", visual: "pickets", uses: { pickets: 18 }, time: 0.95, energy: 9, quality: 1, note: "New pickets blend into the existing fence line." },
+      { key: "walkthrough", title: "Cleanup and walkthrough", verb: "Finish walkthrough", visual: "cleanup", time: 0.45, energy: 4, quality: 2, note: "Customer walkthrough complete." }
+    ]
   },
   {
-    key: "wrought",
-    label: "Wrought Iron",
-    detail: "Rust repair, paint, restoration, replacement",
-    short: "Wrought iron display",
-    url: "../wrought-iron-fence/",
-    color: 0x8da0a8
+    id: "board-on-board-install",
+    title: "Board-on-board side yard install",
+    kind: "Install",
+    location: "Plano",
+    payout: 2650,
+    dueHour: 17.0,
+    difficulty: "Hard",
+    risk: "Irrigation line crosses the fence path",
+    scope: "Build a short privacy run with three new posts and a clean gate tie-in.",
+    required: { posts: 3, rails: 6, pickets: 42, concrete: 6, hardware: 1 },
+    stages: [
+      { key: "layout", title: "Layout fence line", verb: "Layout line", time: 0.55, energy: 4, quality: 2, note: "Fence line is squared from the house corner." },
+      { key: "dig-a", title: "Dig first post hole", verb: "Dig first hole", type: "dig", hole: 0, time: 0.65, energy: 11, hazard: { type: "sprinkler" }, note: "First post hole is dug to depth." },
+      { key: "dig-b", title: "Dig middle post hole", verb: "Dig middle hole", type: "dig", hole: 1, time: 0.65, energy: 11, note: "Middle post hole is dug to depth." },
+      { key: "dig-c", title: "Dig gate-side post hole", verb: "Dig gate hole", type: "dig", hole: 2, time: 0.8, energy: 13, hazard: { type: "rock" }, note: "Gate-side hole is dug through the hard layer." },
+      { key: "set-posts", title: "Set three posts", verb: "Set posts", type: "set", hole: 0, uses: { posts: 3, concrete: 6 }, time: 1.25, energy: 16, quality: 2, note: "All posts are plumb and braced." },
+      { key: "rails", title: "Build rail structure", verb: "Build rails", visual: "rails", uses: { rails: 6 }, time: 1.15, energy: 12, quality: 1, note: "Rail structure is ready for pickets." },
+      { key: "pickets", title: "Hang board-on-board pickets", verb: "Hang pickets", visual: "pickets", uses: { pickets: 42 }, time: 1.65, energy: 16, quality: 2, note: "Privacy face is straight and consistent." },
+      { key: "gate", title: "Install gate hardware", verb: "Install hardware", visual: "gate", uses: { hardware: 1 }, time: 0.75, energy: 8, quality: 1, note: "Gate swings cleanly and latches." },
+      { key: "walkthrough", title: "Cleanup and walkthrough", verb: "Finish walkthrough", visual: "cleanup", time: 0.55, energy: 5, quality: 2, note: "The site is clean and ready for photos." }
+    ]
   },
   {
-    key: "chain",
-    label: "Chain Link",
-    detail: "Fabric, posts, gates, commercial security",
-    short: "Chain link display",
-    url: "../chain-link-fence/",
-    color: 0xc5d1cd
+    id: "sagging-gate-repair",
+    title: "Sagging double gate repair",
+    kind: "Gate",
+    location: "Arlington",
+    payout: 980,
+    dueHour: 13.5,
+    difficulty: "Medium",
+    risk: "Latch post may be rotten below grade",
+    scope: "Rebuild the latch side, square both leaves, and replace the worn hardware.",
+    required: { posts: 1, concrete: 2, pickets: 8, hardware: 1 },
+    stages: [
+      { key: "diagnose", title: "Diagnose gate sag", verb: "Diagnose gate", time: 0.35, energy: 2, quality: 1, note: "Found hinge wear and a soft latch post." },
+      { key: "dig-a", title: "Dig latch post hole", verb: "Dig latch hole", type: "dig", hole: 0, time: 0.65, energy: 10, hazard: { type: "roots" }, note: "Latch post hole is open." },
+      { key: "set-a", title: "Set latch post", verb: "Set latch post", type: "set", hole: 0, uses: { posts: 1, concrete: 2 }, time: 0.75, energy: 10, quality: 1, note: "Latch post is square and braced." },
+      { key: "skin", title: "Replace damaged pickets", verb: "Replace pickets", visual: "pickets", uses: { pickets: 8 }, time: 0.55, energy: 5, quality: 1, note: "Gate face is patched cleanly." },
+      { key: "hardware", title: "Replace gate hardware", verb: "Replace hardware", visual: "gate", uses: { hardware: 1 }, time: 0.65, energy: 5, quality: 2, note: "Hinges, latch, and drop rod are aligned." },
+      { key: "walkthrough", title: "Test and walkthrough", verb: "Test gate", visual: "cleanup", time: 0.35, energy: 3, quality: 2, note: "Gate opens, closes, and latches without drag." }
+    ]
   },
   {
-    key: "pipe",
-    label: "Pipe Fence",
-    detail: "Ranch perimeters, paint, weld repair",
-    short: "Pipe fence display",
-    url: "../pipe-fence/",
-    color: 0xdb7337
-  },
-  {
-    key: "pool",
-    label: "Pool Safety",
-    detail: "Code-aware barriers, gates, repair",
-    short: "Pool safety display",
-    url: "../pool-safety-fences/",
-    color: 0x60b7b2
-  },
-  {
-    key: "temporary",
-    label: "Temporary",
-    detail: "Job sites, panels, delivery, removal",
-    short: "Temporary fencing display",
-    url: "../temporary-fencing/",
-    color: 0xd2aa54
+    id: "chain-link-corner",
+    title: "Commercial chain-link corner repair",
+    kind: "Commercial",
+    location: "Mesquite",
+    payout: 1720,
+    dueHour: 16.25,
+    difficulty: "Hard",
+    risk: "Caliche and old low-voltage landscape wire",
+    scope: "Reset two corner posts, stretch the corner fabric, and restore the bottom tension wire.",
+    required: { posts: 2, concrete: 4, hardware: 1 },
+    stages: [
+      { key: "secure", title: "Secure work area", verb: "Secure area", time: 0.4, energy: 3, quality: 1, note: "Work zone is coned and documented." },
+      { key: "cutout", title: "Cut out bent corner", verb: "Cut out corner", time: 0.85, energy: 10, cost: 15, quality: 0, note: "Bent fabric and old fittings are removed." },
+      { key: "dig-a", title: "Dig first corner post", verb: "Dig first hole", type: "dig", hole: 0, time: 0.75, energy: 12, hazard: { type: "rock" }, note: "First corner hole is ready." },
+      { key: "dig-b", title: "Dig second corner post", verb: "Dig second hole", type: "dig", hole: 1, time: 0.75, energy: 12, hazard: { type: "wire" }, note: "Second corner hole is ready." },
+      { key: "set-posts", title: "Set corner posts", verb: "Set posts", type: "set", hole: 0, uses: { posts: 2, concrete: 4 }, time: 1.1, energy: 14, quality: 2, note: "Corner posts are set and aligned." },
+      { key: "stretch", title: "Stretch and tie fabric", verb: "Stretch fabric", visual: "rails", uses: { hardware: 1 }, time: 1.15, energy: 13, quality: 2, note: "Fabric is tight with new fittings." },
+      { key: "wire", title: "Restore bottom tension wire", verb: "Restore wire", visual: "pickets", time: 0.55, energy: 5, quality: 1, note: "Bottom wire is tensioned and clipped." },
+      { key: "walkthrough", title: "Cleanup and photos", verb: "Finish photos", visual: "cleanup", time: 0.45, energy: 4, quality: 1, note: "Closeout photos are uploaded." }
+    ]
   }
 ];
 
-let renderer;
+const hazardOptions = {
+  roots: {
+    title: "Roots in the dig path",
+    detail: "The auger is hitting woody roots right where the post needs to land.",
+    options: [
+      { id: "hand-dig", label: "Hand-dig around roots", time: 0.75, energy: 10, cost: 0, quality: 3, reputation: 1, note: "Protected the roots and kept the post line true." },
+      { id: "shift-post", label: "Shift the post layout", time: 0.35, energy: 4, cost: 12, quality: -2, reputation: 0, note: "Moved the post slightly and adjusted rail spans." },
+      { id: "cut-root", label: "Cut through and reset", time: 0.25, energy: 5, cost: 0, quality: -4, reputation: -2, note: "Got through the hole fast, but the tree risk may annoy the customer." }
+    ]
+  },
+  sprinkler: {
+    title: "Sprinkler line nicked",
+    detail: "A shallow irrigation line crossed the fence path. Water is starting to seep into the hole.",
+    options: [
+      { id: "repair-coupling", label: "Repair with coupling kit", time: 0.55, energy: 4, cost: 18, uses: { sprinklerRepair: 1 }, quality: 1, reputation: 1, note: "Repaired the line, tested pressure, and moved the post slightly clear." },
+      { id: "call-irrigation", label: "Call irrigation tech", time: 0.95, energy: 1, cost: 125, quality: 3, reputation: 2, note: "Paid for help and kept the customer confident." },
+      { id: "quick-patch", label: "Quick patch and keep moving", time: 0.3, energy: 2, cost: 10, quality: -5, reputation: -4, note: "The fast patch saved time, but it is a callback risk." }
+    ]
+  },
+  rock: {
+    title: "Hard rock layer",
+    detail: "The hole stalls in a hard caliche layer before reaching proper depth.",
+    options: [
+      { id: "rock-bar", label: "Break it with rock bar", time: 0.85, energy: 16, cost: 0, quality: 1, reputation: 0, note: "Powered through the hard layer by hand." },
+      { id: "rent-bit", label: "Rent rock auger bit", time: 0.4, energy: 5, cost: 85, quality: 2, reputation: 1, note: "Rented the right bit and hit proper depth." },
+      { id: "shallower", label: "Set shallower with extra concrete", time: 0.25, energy: 3, cost: 18, quality: -5, reputation: -2, note: "Saved time, but the post is less durable." }
+    ]
+  },
+  wire: {
+    title: "Low-voltage wire in the soil",
+    detail: "A landscape lighting wire is buried close to the new corner post location.",
+    options: [
+      { id: "trace-wire", label: "Trace and hand expose", time: 0.55, energy: 6, cost: 0, quality: 2, reputation: 1, note: "Exposed the wire by hand and kept it intact." },
+      { id: "reroute-wire", label: "Reroute with waterproof splice", time: 0.65, energy: 4, cost: 32, quality: 3, reputation: 1, note: "Rerouted the lighting wire with a sealed splice." },
+      { id: "work-around", label: "Work around it fast", time: 0.25, energy: 2, cost: 0, quality: -3, reputation: -1, note: "Avoided the wire, but the post placement is less ideal." }
+    ]
+  }
+};
 
-try {
-  renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-    powerPreference: "high-performance"
-  });
-} catch {
-  canvas.hidden = true;
-  fallbackEl.hidden = false;
+const state = {
+  cash: 1850,
+  reputation: 68,
+  day: 1,
+  clock: 7.5,
+  crewEnergy: 88,
+  selectedJobId: "cedar-storm-repair",
+  activeJob: null,
+  jobs: makeJobs(),
+  supplies: {
+    posts: 4,
+    rails: 8,
+    pickets: 56,
+    concrete: 8,
+    hardware: 1,
+    sprinklerRepair: 1
+  },
+  completedJobs: [],
+  modal: null,
+  log: [
+    "Morning dispatch is open. Pick a job, load materials, and protect your margin."
+  ]
+};
+
+document.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-action]");
+  if (!button || button.disabled) {
+    return;
+  }
+
+  const { action } = button.dataset;
+
+  if (action === "select-job") {
+    state.selectedJobId = button.dataset.jobId;
+  } else if (action === "start-job") {
+    startSelectedJob();
+  } else if (action === "perform-stage") {
+    performNextStage();
+  } else if (action === "resolve-hazard") {
+    resolveHazard(button.dataset.optionId);
+  } else if (action === "mark-utilities") {
+    markUtilities();
+  } else if (action === "crew-break") {
+    takeCrewBreak();
+  } else if (action === "restock") {
+    restock(button.dataset.item);
+  } else if (action === "cancel-job") {
+    cancelJob();
+  } else if (action === "next-day") {
+    startNextDay();
+  }
+
+  render();
+});
+
+window.addEventListener("resize", resizeCanvas);
+
+render();
+requestAnimationFrame(drawFrame);
+
+function makeJobs() {
+  return jobTemplates.map((job) => ({
+    ...JSON.parse(JSON.stringify(job)),
+    completed: false
+  }));
 }
 
-if (renderer) {
-  const warehouseWidth = 52;
-  const warehouseHalfWidth = warehouseWidth / 2;
-  const warehouseDepth = 36;
-  const warehouseCenterZ = -6;
-  const warehouseBackZ = warehouseCenterZ - warehouseDepth / 2;
-  const warehouseFrontZ = warehouseCenterZ + warehouseDepth / 2;
-  const cameraWallPadding = 1.35;
-  const warehouseHeight = 17.6;
-  const warehouseWallY = warehouseHeight / 2 - 0.15;
-  const lampY = warehouseHeight - 2.45;
+function createActiveJob(job) {
+  const activeJob = JSON.parse(JSON.stringify(job));
+  activeJob.started = true;
+  activeJob.timeSpent = 0;
+  activeJob.costs = 0;
+  activeJob.quality = 82;
+  activeJob.utilityMarked = false;
+  activeJob.stages = activeJob.stages.map((stage) => ({
+    ...stage,
+    done: false,
+    hazardResolved: false
+  }));
+  return activeJob;
+}
 
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xdce5df);
-  scene.fog = new THREE.Fog(0xdce5df, 34, 72);
+function render() {
+  renderHud();
+  renderJobPanel();
+  renderActionPanel();
+  renderSceneReadout();
+}
 
-  const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 100);
-  const raycaster = new THREE.Raycaster();
-  const pointer = new THREE.Vector2();
-  const hotspotMeshes = [];
-  const focusTargets = new Map();
-  const clock = new THREE.Clock();
+function renderHud() {
+  const active = state.activeJob;
+  const jobLabel = active ? active.title : "Yard";
+  hudEl.innerHTML = [
+    hudStat("Cash", formatMoney(state.cash)),
+    hudStat("Reputation", `${Math.round(state.reputation)}/100`),
+    hudStat("Day / Time", `Day ${state.day} - ${formatTime(state.clock)}`),
+    hudStat("Crew Energy", `${Math.round(state.crewEnergy)}%`),
+    hudStat("Current", jobLabel)
+  ].join("");
+}
 
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.setClearColor(0xdce5df, 1);
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.32;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-  const textures = {
-    concrete: createConcreteTexture(),
-    wall: createSheetrockTexture(0xf4f2ed, 0xe7e2d8),
-    wallDark: createSheetrockTexture(0xf4f2ed, 0xe7e2d8),
-    steel: createBrushedMetalTexture(0x8d9aa0, 0xb3bec1),
-    darkSteel: createBrushedMetalTexture(0x20282a, 0x3a4444),
-    wood: createWoodTexture(0xb97942, 0x6f4628),
-    rubber: createRubberTexture()
-  };
-
-  const mats = {
-    concrete: new THREE.MeshStandardMaterial({ map: textures.concrete, color: 0xb8b3a8, roughness: 0.96, metalness: 0.01 }),
-    wall: new THREE.MeshStandardMaterial({ map: textures.wall, color: 0xffffff, roughness: 0.9, metalness: 0 }),
-    wallDark: new THREE.MeshStandardMaterial({ map: textures.wallDark, color: 0xffffff, roughness: 0.88, metalness: 0 }),
-    steel: new THREE.MeshStandardMaterial({ map: textures.steel, color: 0xffffff, roughness: 0.34, metalness: 0.68 }),
-    darkSteel: new THREE.MeshStandardMaterial({ map: textures.darkSteel, color: 0xffffff, roughness: 0.42, metalness: 0.72 }),
-    green: new THREE.MeshStandardMaterial({ color: 0x004b3d, roughness: 0.48, metalness: 0.16 }),
-    orange: new THREE.MeshStandardMaterial({ color: 0xdb7337, roughness: 0.62 }),
-    wood: new THREE.MeshStandardMaterial({ map: textures.wood, color: 0xffffff, roughness: 0.82 }),
-    woodDark: new THREE.MeshStandardMaterial({ map: textures.wood, color: 0x6f4628, roughness: 0.88 }),
-    cream: new THREE.MeshStandardMaterial({ color: 0xfffaf1, roughness: 0.54 }),
-    tire: new THREE.MeshStandardMaterial({ map: textures.rubber, color: 0x111313, roughness: 0.86 }),
-    glass: new THREE.MeshPhysicalMaterial({ color: 0x9fd5d0, roughness: 0.06, metalness: 0, transparent: true, opacity: 0.42, transmission: 0.12 }),
-    hit: new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false })
-  };
-
-  const cameraState = {
-    target: new THREE.Vector3(0.6, 2.25, -8.4),
-    yaw: -0.16,
-    pitch: 0.02,
-    radius: 17.8,
-    tween: null
-  };
-
-  buildWarehouse();
-  buildLighting();
-  updateOrbitCamera();
-  resizeRenderer();
-  renderer.setAnimationLoop(animate);
-
-  window.addEventListener("resize", resizeRenderer);
-  canvas.addEventListener("pointerdown", handlePointerDown);
-  canvas.addEventListener("pointermove", handlePointerMove);
-  canvas.addEventListener("pointerup", handlePointerUp);
-  canvas.addEventListener("pointercancel", handlePointerCancel);
-  canvas.addEventListener("wheel", handleWheel, { passive: false });
-
-  window.strongPerimeterWarehouse = {
-    focus: focusScene
-  };
-
-  function buildWarehouse() {
-    const floor = new THREE.Mesh(new THREE.BoxGeometry(warehouseWidth, 0.22, warehouseDepth), mats.concrete);
-    floor.position.set(0, -0.12, warehouseCenterZ);
-    floor.receiveShadow = true;
-    scene.add(floor);
-
-    const backWall = new THREE.Mesh(new THREE.BoxGeometry(warehouseWidth, warehouseHeight, 0.32), mats.wall);
-    backWall.position.set(0, warehouseWallY, warehouseBackZ);
-    backWall.receiveShadow = true;
-    scene.add(backWall);
-
-    const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, warehouseHeight, warehouseDepth), mats.wallDark);
-    leftWall.position.set(-warehouseHalfWidth, warehouseWallY, warehouseCenterZ);
-    leftWall.receiveShadow = true;
-    scene.add(leftWall);
-
-    const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.32, warehouseHeight, warehouseDepth), mats.wallDark);
-    rightWall.position.set(warehouseHalfWidth, warehouseWallY, warehouseCenterZ);
-    rightWall.receiveShadow = true;
-    scene.add(rightWall);
-
-    const roof = new THREE.Mesh(new THREE.BoxGeometry(warehouseWidth + 0.4, 0.3, warehouseDepth + 0.4), mats.concrete);
-    roof.position.set(0, warehouseHeight - 0.08, warehouseCenterZ);
-    roof.receiveShadow = true;
-    scene.add(roof);
-
-    const trimMaterial = new THREE.MeshStandardMaterial({ color: 0xfffbf1, roughness: 0.72 });
-    scene.add(box(warehouseWidth - 0.3, 0.34, 0.12, 0, 0.36, warehouseBackZ + 0.28, trimMaterial));
-    scene.add(box(0.12, 0.34, warehouseDepth - 0.4, -warehouseHalfWidth + 0.28, 0.36, warehouseCenterZ, trimMaterial));
-    scene.add(box(0.12, 0.34, warehouseDepth - 0.4, warehouseHalfWidth - 0.28, 0.36, warehouseCenterZ, trimMaterial));
-
-    [-warehouseHalfWidth + 1.1, warehouseHalfWidth - 1.1].forEach((x) => addWarehouseColumn(x, warehouseBackZ + 1.3));
-    [-18, -10, -2, 6].forEach((z) => {
-      addWarehouseColumn(-warehouseHalfWidth + 0.85, z);
-      addWarehouseColumn(warehouseHalfWidth - 0.85, z);
-    });
-
-    const rollup = new THREE.Mesh(new THREE.BoxGeometry(8.5, 5.2, 0.18), new THREE.MeshStandardMaterial({
-      color: 0xb9bdb8,
-      metalness: 0.46,
-      roughness: 0.58
-    }));
-    rollup.position.set(-8.9, 2.6, -23.79);
-    rollup.receiveShadow = true;
-    scene.add(rollup);
-
-    for (let y = 0.9; y < 5.1; y += 0.55) {
-      const seam = new THREE.Mesh(new THREE.BoxGeometry(8.6, 0.035, 0.08), mats.steel);
-      seam.position.set(-8.9, y, -23.67);
-      scene.add(seam);
-    }
-
-    const doorFrameMaterial = new THREE.MeshStandardMaterial({ color: 0xf7f4ec, roughness: 0.6 });
-    scene.add(box(8.95, 0.18, 0.16, -8.9, 5.32, -23.62, doorFrameMaterial));
-    scene.add(box(0.18, 5.48, 0.16, -13.45, 2.72, -23.62, doorFrameMaterial));
-    scene.add(box(0.18, 5.48, 0.16, -4.35, 2.72, -23.62, doorFrameMaterial));
-
-    const manDoor = new THREE.Mesh(new THREE.BoxGeometry(1.1, 2.3, 0.12), new THREE.MeshStandardMaterial({
-      color: 0xe7e4db,
-      roughness: 0.55,
-      metalness: 0.04
-    }));
-    manDoor.position.set(2.7, 1.15, -23.64);
-    scene.add(manDoor);
-    scene.add(box(1.22, 0.1, 0.14, 2.7, 2.34, -23.57, doorFrameMaterial));
-    scene.add(box(0.1, 2.42, 0.14, 2.05, 1.21, -23.57, doorFrameMaterial));
-    scene.add(box(0.1, 2.42, 0.14, 3.35, 1.21, -23.57, doorFrameMaterial));
-
-    addSuspendedHvac();
-    addElectricalDetails();
-
-    const overviewPosition = new THREE.Vector3(-1.2, 2.6, 9.6);
-    const overviewTarget = new THREE.Vector3(0.4, 2.25, -10.2);
-    focusTargets.set("overview", { position: overviewPosition, target: overviewTarget, label: "Warehouse overview" });
+function renderJobPanel() {
+  if (state.activeJob) {
+    const job = state.activeJob;
+    const nextStage = getNextStage(job);
+    jobPanelEl.innerHTML = `
+      <div class="panel-title">
+        <div>
+          <h2>${job.title}</h2>
+          <p>${job.location} - ${job.scope}</p>
+        </div>
+        <span class="tag warning">${job.kind}</span>
+      </div>
+      <div class="metric-grid">
+        ${metric("Bid", formatMoney(job.payout))}
+        ${metric("Due", formatTime(job.dueHour))}
+        ${metric("Job Cost", formatMoney(job.costs))}
+        ${metric("Quality", `${Math.round(job.quality)}/100`)}
+      </div>
+      <div class="progress-list">
+        ${job.stages.map((stage) => progressItem(stage, nextStage)).join("")}
+      </div>
+    `;
+    return;
   }
 
-  function buildBrandWall() {
-    const sign = createCanvasPanel({
-      width: 2048,
-      height: 1024,
-      background: "#f2efe7",
-      accent: "#db7337",
-      title: "STRONG PERIMETER",
-      kicker: "DFW FENCE COMPANY",
-      primaryLine: "(214) 247-6369",
-      lines: [
-        "FENCE REPAIR | INSTALL | RESTORE",
-        "DFW RESIDENTIAL + COMMERCIAL",
-        "FREE QUOTES"
-      ],
-      dark: true
-    });
+  const availableJobs = state.jobs.filter((job) => !job.completed);
+  const jobCards = availableJobs.map((job) => {
+    const selected = job.id === state.selectedJobId;
+    const missing = missingForJob(job);
+    return `
+      <article class="job-card ${selected ? "is-selected" : ""}">
+        <div class="panel-title">
+          <div>
+            <h3>${job.title}</h3>
+            <p>${job.location} - ${job.scope}</p>
+          </div>
+          <span class="tag">${job.kind}</span>
+        </div>
+        <div class="job-meta">
+          <span><b>Bid</b><strong>${formatMoney(job.payout)}</strong></span>
+          <span><b>Due</b><strong>${formatTime(job.dueHour)}</strong></span>
+          <span><b>Risk</b><strong>${job.difficulty}</strong></span>
+        </div>
+        <p class="small-note">${job.risk}</p>
+        ${missing.length ? `<p class="small-note">Missing: ${missing.join(", ")}</p>` : `<p class="small-note">Materials are ready to load.</p>`}
+        <button class="${selected ? "primary-button" : "secondary-button"}" data-action="select-job" data-job-id="${job.id}">
+          ${selected ? "Selected" : "Review job"}
+        </button>
+      </article>
+    `;
+  }).join("");
 
-    const signMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(12.9, 6.45),
-      new THREE.MeshBasicMaterial({ map: sign, toneMapped: false })
-    );
-    signMesh.position.set(-4.75, 6.38, -23.69);
-    scene.add(signMesh);
+  jobPanelEl.innerHTML = `
+    <div class="panel-title">
+      <div>
+        <h2>Bid Board</h2>
+        <p>Choose work that fits your materials, time, and risk tolerance.</p>
+      </div>
+      <span class="tag good">${availableJobs.length} open</span>
+    </div>
+    <div class="job-list">
+      ${jobCards || `<p class="small-note">All posted jobs are complete. Start the next day to get a new board.</p>`}
+    </div>
+  `;
+}
 
-    const quoteBoardTexture = createCanvasPanel({
-      width: 1024,
-      height: 1024,
-      background: "#f2efe7",
-      accent: "#d2aa54",
-      title: "GET A FREE QUOTE",
-      kicker: "START HERE",
-      primaryLine: "(214) 247-6369",
-      lines: ["Fence repair", "Fence installation", "Gates + perimeter work"],
-      dark: false
-    });
+function renderActionPanel() {
+  const selected = getSelectedJob();
 
-    const quoteBoard = new THREE.Mesh(
-      new THREE.PlaneGeometry(4.8, 4.8),
-      new THREE.MeshBasicMaterial({ map: quoteBoardTexture, toneMapped: false })
-    );
-    quoteBoard.position.set(5.6, 5.45, -23.68);
-    scene.add(quoteBoard);
+  if (state.modal) {
+    actionPanelEl.innerHTML = renderProblemPanel();
+    return;
+  }
 
-    const hit = new THREE.Mesh(new THREE.BoxGeometry(5.1, 5.1, 0.6), mats.hit);
-    hit.position.copy(quoteBoard.position);
-    hit.userData.hotspot = {
-      key: "quote",
-      label: "Quote wall",
-      url: "../quote/"
+  if (state.activeJob) {
+    const job = state.activeJob;
+    const nextStage = getNextStage(job);
+    const missing = nextStage ? missingSupplies(nextStage.uses) : [];
+    const canWork = nextStage && missing.length === 0;
+    const utilitiesButton = job.utilityMarked
+      ? `<button class="secondary-button" disabled>Utilities located</button>`
+      : `<button class="secondary-button" data-action="mark-utilities">Locate utilities - ${formatMoney(45)} / 0.45 hr</button>`;
+
+    actionPanelEl.innerHTML = `
+      <div class="panel-title">
+        <div>
+          <h2>Field Controls</h2>
+          <p>${nextStage ? `Next: ${nextStage.title}` : "Ready to close out."}</p>
+        </div>
+        <span class="tag ${job.quality >= 84 ? "good" : "warning"}">Quality ${Math.round(job.quality)}</span>
+      </div>
+      <div class="metric-grid">
+        ${metric("Time spent", `${job.timeSpent.toFixed(1)} hr`)}
+        ${metric("Deadline", formatTime(job.dueHour))}
+        ${metric("Energy", `${Math.round(state.crewEnergy)}%`)}
+        ${metric("Margin", formatMoney(job.payout - job.costs))}
+      </div>
+      ${nextStage ? `
+        <button class="primary-button" data-action="perform-stage" ${canWork ? "" : "disabled"}>
+          ${nextStage.verb}
+        </button>
+        ${missing.length ? `<p class="small-note section-gap">Missing for this step: ${missing.join(", ")}.</p>` : ""}
+      ` : `<button class="primary-button" data-action="perform-stage">Collect payment</button>`}
+      <div class="button-grid section-gap">
+        ${utilitiesButton}
+        <button class="secondary-button" data-action="crew-break">Crew break - 0.40 hr</button>
+      </div>
+      <div class="section-gap">
+        ${renderSupplies()}
+      </div>
+      <div class="section-gap">
+        <button class="danger-button" data-action="cancel-job">Walk away from job</button>
+      </div>
+      ${renderLog()}
+    `;
+    return;
+  }
+
+  const missing = selected ? missingForJob(selected) : [];
+  const allJobsDone = state.jobs.every((job) => job.completed);
+  actionPanelEl.innerHTML = `
+    <div class="panel-title">
+      <div>
+        <h2>Company Yard</h2>
+        <p>${selected ? selected.scope : "Select a job to load the truck."}</p>
+      </div>
+      <span class="tag">${selected ? selected.difficulty : "Dispatch"}</span>
+    </div>
+    ${selected ? `
+      <div class="metric-grid">
+        ${metric("Bid", formatMoney(selected.payout))}
+        ${metric("Due", formatTime(selected.dueHour))}
+        ${metric("Job type", selected.kind)}
+        ${metric("Risk", selected.difficulty)}
+      </div>
+      <button class="primary-button" data-action="start-job" ${missing.length ? "disabled" : ""}>
+        Load truck and drive out
+      </button>
+      ${missing.length ? `<p class="small-note section-gap">Restock before starting: ${missing.join(", ")}.</p>` : `<p class="small-note section-gap">Starting the job adds 0.35 hr of loading and drive time.</p>`}
+    ` : ""}
+    ${allJobsDone ? `<button class="primary-button" data-action="next-day">Start next day</button>` : ""}
+    <div class="section-gap">
+      ${renderSupplies()}
+    </div>
+    ${renderLog()}
+  `;
+}
+
+function renderProblemPanel() {
+  const job = state.activeJob;
+  const stage = job.stages.find((item) => item.key === state.modal.stageKey);
+  const hazard = hazardOptions[state.modal.hazardType];
+  const markedText = job.utilityMarked ? "Your utility locate gave you a warning, so this is manageable." : "This was not marked before digging, so the choice matters.";
+
+  return `
+    <div class="problem-box">
+      <span class="tag warning">Field problem</span>
+      <h3>${hazard.title}</h3>
+      <p>${hazard.detail}</p>
+      <p>${markedText}</p>
+      <div class="problem-options">
+        ${hazard.options.map((option) => {
+          const missing = missingSupplies(option.uses);
+          return `
+            <button class="option-button" data-action="resolve-hazard" data-option-id="${option.id}" ${missing.length ? "disabled" : ""}>
+              <strong>${option.label}</strong>
+              <span>${formatProblemCost(option)}${missing.length ? ` - Missing ${missing.join(", ")}` : ""}</span>
+            </button>
+          `;
+        }).join("")}
+      </div>
+      <p class="small-note">Problem found while working: ${stage.title}</p>
+    </div>
+    <div class="section-gap">
+      ${renderSupplies()}
+    </div>
+    ${renderLog()}
+  `;
+}
+
+function renderSupplies() {
+  const rows = Object.entries(supplyCatalog).map(([key, item]) => `
+    <div class="supply-row">
+      <div>
+        <strong>${item.label}</strong>
+        <span>${formatMoney(item.price)} per ${item.unit}</span>
+      </div>
+      <div class="supply-count">${state.supplies[key] || 0}</div>
+      <button class="plain-button" data-action="restock" data-item="${key}">
+        Buy ${item.bundle}
+      </button>
+    </div>
+  `).join("");
+
+  return `
+    <div class="panel-title">
+      <div>
+        <h3>Materials</h3>
+        <p>Restock from the yard before or during a job. Running out costs time.</p>
+      </div>
+    </div>
+    <div class="supplies">${rows}</div>
+  `;
+}
+
+function renderLog() {
+  return `
+    <div class="section-gap">
+      <div class="panel-title">
+        <div>
+          <h3>Job Log</h3>
+        </div>
+      </div>
+      <div class="log-list">
+        ${state.log.slice(0, 8).map((line) => `<div class="log-line">${line}</div>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderSceneReadout() {
+  if (state.activeJob) {
+    const next = getNextStage(state.activeJob);
+    sceneReadoutEl.innerHTML = `
+      <span>${state.activeJob.location} job site</span>
+      <span>${next ? next.title : "Closeout ready"}</span>
+    `;
+    return;
+  }
+
+  sceneReadoutEl.innerHTML = `
+    <span>Strong Perimeter yard</span>
+    <span>${getSelectedJob() ? `Selected: ${getSelectedJob().title}` : "No active job"}</span>
+  `;
+}
+
+function hudStat(label, value) {
+  return `<div class="hud-stat"><span>${label}</span><strong>${value}</strong></div>`;
+}
+
+function metric(label, value) {
+  return `<div class="metric"><b>${label}</b><strong>${value}</strong></div>`;
+}
+
+function progressItem(stage, nextStage) {
+  const className = stage.done ? "is-done" : nextStage && nextStage.key === stage.key ? "is-current" : "";
+  const detail = stage.hazard && (stage.hazardResolved || stage.hazard.revealed)
+    ? `${stage.hazard.type} handled`
+    : `${stage.time.toFixed(2)} hr estimate`;
+  return `
+    <div class="progress-item ${className}">
+      <span class="progress-dot"></span>
+      <div>
+        <strong>${stage.title}</strong>
+        <span>${detail}</span>
+      </div>
+    </div>
+  `;
+}
+
+function getSelectedJob() {
+  return state.jobs.find((job) => job.id === state.selectedJobId && !job.completed) || state.jobs.find((job) => !job.completed);
+}
+
+function startSelectedJob() {
+  const selected = getSelectedJob();
+  if (!selected) {
+    return;
+  }
+
+  const missing = missingForJob(selected);
+  if (missing.length) {
+    addLog(`Cannot load out yet. Missing ${missing.join(", ")}.`);
+    return;
+  }
+
+  state.activeJob = createActiveJob(selected);
+  state.selectedJobId = selected.id;
+  advanceTime(0.35);
+  spendEnergy(2);
+  addLog(`Loaded for ${selected.title} and drove to ${selected.location}.`);
+}
+
+function performNextStage() {
+  const job = state.activeJob;
+  if (!job) {
+    return;
+  }
+
+  const stage = getNextStage(job);
+  if (!stage) {
+    finishJob();
+    return;
+  }
+
+  if (stage.type === "dig" && stage.hazard && !stage.hazardResolved) {
+    stage.hazard.revealed = true;
+    state.modal = {
+      type: "hazard",
+      stageKey: stage.key,
+      hazardType: stage.hazard.type
     };
-    hotspotMeshes.push(hit);
-    scene.add(hit);
-
-    focusTargets.set("brand", {
-      position: new THREE.Vector3(-2.2, 7.0, -10.8),
-      target: new THREE.Vector3(-2.2, 5.9, -23.7),
-      label: "Brand wall"
-    });
+    addLog(`${hazardOptions[stage.hazard.type].title} found at ${stage.title.toLowerCase()}.`);
+    return;
   }
 
-  function buildTruckAndTrailer() {
-    const truck = new THREE.Group();
-    truck.position.set(-8.35, 0.1, 3.6);
-    truck.rotation.y = -0.08;
+  completeStage(job, stage);
+}
 
-    const truckWhite = new THREE.MeshStandardMaterial({ color: 0xf8f7f1, roughness: 0.48, metalness: 0.08 });
-    const blackTrim = new THREE.MeshStandardMaterial({ color: 0x171b1b, roughness: 0.62, metalness: 0.34 });
-    const headlight = new THREE.MeshBasicMaterial({ color: 0xfff1c7 });
-    const taillight = new THREE.MeshBasicMaterial({ color: 0xc43224 });
+function completeStage(job, stage) {
+  const missing = missingSupplies(stage.uses);
+  if (missing.length) {
+    addLog(`Work stopped. Missing ${missing.join(", ")}.`);
+    return;
+  }
 
-    const bed = box(4.95, 1.22, 2.42, -0.95, 1.02, 0, truckWhite);
-    const crewCab = box(3.15, 1.92, 2.38, 2.25, 1.35, -0.03, truckWhite);
-    const hood = box(1.6, 0.92, 2.28, 4.63, 0.96, -0.03, truckWhite);
-    const frontBumper = box(0.24, 0.42, 2.5, 5.56, 0.5, -0.03, mats.steel);
-    const grille = box(0.12, 0.86, 1.48, 5.42, 0.98, -0.03, blackTrim);
-    const rearBumper = box(0.22, 0.38, 2.42, -3.55, 0.48, 0, mats.steel);
-    const windshield = box(0.06, 0.82, 1.65, 3.82, 1.84, -0.03, mats.glass);
-    truck.add(bed, crewCab, hood, frontBumper, grille, rearBumper, windshield);
+  consumeSupplies(stage.uses);
+  chargeJob(stage.cost || 0);
+  advanceTime(adjustedTime(stage.time));
+  spendEnergy(stage.energy || 4);
+  job.quality = clamp(job.quality + (stage.quality || 0), 0, 100);
+  stage.done = true;
 
-    [0.72, 0.98, 1.24].forEach((y) => {
-      truck.add(box(0.14, 0.045, 1.54, 5.5, y, -0.03, mats.steel));
-    });
+  addLog(stage.note || `${stage.title} complete.`);
 
-    [-0.92, 0.92].forEach((z) => {
-      truck.add(box(0.08, 0.36, 0.42, 5.52, 1.0, z, headlight));
-      truck.add(box(0.08, 0.42, 0.28, -3.66, 1.0, z, taillight));
-    });
+  if (!getNextStage(job)) {
+    finishJob();
+  }
+}
 
-    [1.18, -1.25].forEach((z) => {
-      const sideMultiplier = z > 0 ? 1 : -1;
-      const windowDepth = 0.06;
-      const windowZ = z;
-      const frontWindow = box(0.86, 0.62, windowDepth, 2.95, 1.78, windowZ, mats.glass);
-      const rearWindow = box(0.86, 0.62, windowDepth, 1.85, 1.78, windowZ, mats.glass);
-      const bedTrim = box(4.55, 0.08, 0.05, -0.98, 1.62, windowZ, blackTrim);
-      const stepRail = box(3.5, 0.1, 0.12, 1.45, 0.54, sideMultiplier * 1.34, blackTrim);
-      truck.add(frontWindow, rearWindow, bedTrim, stepRail);
+function resolveHazard(optionId) {
+  const job = state.activeJob;
+  if (!job || !state.modal) {
+    return;
+  }
 
-      [1.72, 2.72].forEach((x) => {
-        truck.add(box(0.34, 0.06, 0.055, x, 1.28, sideMultiplier * 1.285, blackTrim));
-      });
+  const stage = job.stages.find((item) => item.key === state.modal.stageKey);
+  const hazard = hazardOptions[state.modal.hazardType];
+  const option = hazard.options.find((item) => item.id === optionId);
+  if (!stage || !option) {
+    return;
+  }
 
-      const mirrorArm = box(0.06, 0.06, 0.44, 3.7, 1.6, sideMultiplier * 1.45, blackTrim);
-      const mirror = box(0.12, 0.42, 0.28, 3.7, 1.58, sideMultiplier * 1.68, blackTrim);
-      truck.add(mirrorArm, mirror);
-    });
+  const missing = missingSupplies(option.uses);
+  if (missing.length) {
+    addLog(`Cannot solve that yet. Missing ${missing.join(", ")}.`);
+    return;
+  }
 
-    [0.85, 1.78, 2.72, 3.44].forEach((x) => {
-      truck.add(box(0.035, 1.18, 0.045, x, 1.2, 1.22, blackTrim));
-      truck.add(box(0.035, 1.18, 0.045, x, 1.2, -1.28, blackTrim));
-    });
+  consumeSupplies(option.uses);
+  chargeJob(option.cost || 0);
+  advanceTime(adjustedTime(option.time));
+  spendEnergy(option.energy || 2);
+  job.quality = clamp(job.quality + (option.quality || 0), 0, 100);
+  state.reputation = clamp(state.reputation + (option.reputation || 0), 0, 100);
+  stage.hazardResolved = true;
+  stage.hazardChoice = option.label;
+  state.modal = null;
+  addLog(option.note);
+  completeStage(job, stage);
+}
 
-    const roofMarker = new THREE.MeshBasicMaterial({ color: 0xffb24a });
-    [-0.45, 0, 0.45].forEach((z) => {
-      truck.add(box(0.16, 0.06, 0.11, 2.95, 2.34, z, roofMarker));
-    });
+function markUtilities() {
+  const job = state.activeJob;
+  if (!job || job.utilityMarked) {
+    return;
+  }
 
-    truck.add(box(1.35, 0.035, 0.05, 4.55, 1.44, 1.15, blackTrim));
-    truck.add(box(1.35, 0.035, 0.05, 4.55, 1.44, -1.21, blackTrim));
-    truck.add(box(0.08, 0.62, 2.05, -3.42, 1.15, 0, blackTrim));
-
-    const truckLogo = createCanvasPanel({
-      width: 1024,
-      height: 512,
-      background: "#fffaf1",
-      accent: "#004b3d",
-      title: "STRONG PERIMETER",
-      kicker: "2025 F-350 CREW CAB",
-      lines: ["8 FT BED", "FENCE CREW"],
-      dark: true
-    });
-
-    const logoPanel = new THREE.Mesh(
-      new THREE.PlaneGeometry(2.9, 1.45),
-      new THREE.MeshBasicMaterial({ map: truckLogo, toneMapped: false })
-    );
-    logoPanel.position.set(-0.72, 1.22, 1.235);
-    truck.add(logoPanel);
-
-    [-2.55, 3.85].forEach((x) => {
-      [-1.25, 1.25].forEach((z) => {
-        addWheel(truck, x, z, 0.56, 0.44);
-        const flare = new THREE.Mesh(new THREE.TorusGeometry(0.64, 0.035, 10, 32), blackTrim);
-        flare.position.set(x, 0.62, z > 0 ? 1.255 : -1.255);
-        truck.add(flare);
-      });
-    });
-
-    truck.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-    scene.add(truck);
-
-    const trailer = new THREE.Group();
-    trailer.position.set(-7.7, 0.1, 0.0);
-    trailer.rotation.y = -0.08;
-    trailer.add(box(5.7, 0.22, 2.35, -0.4, 0.62, 0, mats.wood));
-    trailer.add(box(5.25, 0.16, 0.18, -0.4, 1.12, -1.16, mats.darkSteel));
-    trailer.add(box(5.25, 0.16, 0.18, -0.4, 1.12, 1.16, mats.darkSteel));
-    trailer.add(box(0.12, 1.3, 0.12, -2.8, 1.25, -1.05, mats.darkSteel));
-    trailer.add(box(0.12, 1.3, 0.12, 1.8, 1.25, -1.05, mats.darkSteel));
-    trailer.add(box(0.12, 1.3, 0.12, -2.8, 1.25, 1.05, mats.darkSteel));
-    trailer.add(box(0.12, 1.3, 0.12, 1.8, 1.25, 1.05, mats.darkSteel));
-    trailer.add(box(2.4, 0.12, 0.12, 2.75, 0.78, 0, mats.darkSteel));
-    trailer.add(box(1.4, 0.12, 0.12, 3.12, 0.78, 0.48, mats.darkSteel));
-    trailer.add(box(1.4, 0.12, 0.12, 3.12, 0.78, -0.48, mats.darkSteel));
-    trailer.add(box(0.4, 0.12, 0.4, 4.05, 0.68, 0, mats.steel));
-
-    for (let i = 0; i < 7; i += 1) {
-      const rail = box(0.08, 1.15, 2.1, -2.3 + i * 0.65, 1.38, 0, mats.wood);
-      trailer.add(rail);
+  chargeJob(45);
+  advanceTime(0.45);
+  spendEnergy(1);
+  job.utilityMarked = true;
+  job.quality = clamp(job.quality + 1, 0, 100);
+  job.stages.forEach((stage) => {
+    if (stage.hazard) {
+      stage.hazard.revealed = true;
     }
+  });
+  addLog("Located utilities and irrigation before the next dig.");
+}
 
-    [-1.35, 0.6].forEach((x) => {
-      [-1.23, 1.23].forEach((z) => {
-        addWheel(trailer, x, z, 0.42, 0.32);
-      });
-    });
+function takeCrewBreak() {
+  advanceTime(0.4);
+  state.crewEnergy = clamp(state.crewEnergy + 24, 0, 100);
+  addLog("Crew took water, shade, and a reset. Work speed improves.");
+}
 
-    [-1.35, 0.6].forEach((x) => {
-      [-1.23, 1.23].forEach((z) => {
-        trailer.add(box(0.9, 0.16, 0.12, x, 0.96, z > 0 ? 1.25 : -1.25, mats.darkSteel));
-      });
-    });
-
-    trailer.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-    scene.add(trailer);
-
-    focusTargets.set("truck", {
-      position: new THREE.Vector3(-8.7, 3.1, 9.4),
-      target: new THREE.Vector3(-7.4, 1.35, 1.5),
-      label: "Crew truck and trailer"
-    });
+function restock(itemKey) {
+  const item = supplyCatalog[itemKey];
+  if (!item) {
+    return;
   }
 
-  function buildServiceDisplays() {
-    const spacing = 3.75;
-    const startX = -9.35;
-    const showroomZ = -8.35;
-    const panelScale = 1.22;
-
-    serviceAreas.forEach((service, index) => {
-      const x = startX + index * spacing;
-      const centerOffset = index - (serviceAreas.length - 1) / 2;
-      const group = new THREE.Group();
-      group.position.set(x, 0, showroomZ - Math.abs(centerOffset) * 0.22);
-      group.rotation.y = -x * 0.018;
-      group.scale.setScalar(panelScale);
-      group.userData.service = service;
-
-      const colorMaterial = new THREE.MeshStandardMaterial({
-        color: service.color,
-        roughness: 0.58,
-        metalness: service.key === "wood" ? 0.05 : 0.38
-      });
-
-      const bayPaint = new THREE.MeshBasicMaterial({ color: service.color, transparent: true, opacity: 0.26 });
-      const frontStripe = box(3.25, 0.018, 0.06, 0, 0.045, 1.12, bayPaint);
-      const leftStripe = box(0.06, 0.018, 2.2, -1.62, 0.045, 0.05, bayPaint);
-      const rightStripe = box(0.06, 0.018, 2.2, 1.62, 0.045, 0.05, bayPaint);
-      group.add(frontStripe, leftStripe, rightStripe);
-
-      const signTexture = createCanvasPanel({
-        width: 1024,
-        height: 512,
-        background: "#fffaf1",
-        accent: `#${service.color.toString(16).padStart(6, "0")}`,
-        title: service.label.toUpperCase(),
-        kicker: "WAREHOUSE BAY",
-        lines: service.detail.split(", "),
-        dark: true
-      });
-
-      const sign = new THREE.Mesh(
-        new THREE.PlaneGeometry(3.45, 1.7),
-        new THREE.MeshBasicMaterial({ map: signTexture, toneMapped: false })
-      );
-      sign.position.set(0, 3.48, -0.18);
-      group.add(sign);
-
-      const frame = new THREE.Mesh(new THREE.BoxGeometry(3.62, 1.88, 0.16), mats.darkSteel);
-      frame.position.set(0, 3.48, -0.28);
-      group.add(frame);
-      frame.renderOrder = -1;
-
-      if (service.key === "wood") {
-        createWoodDisplay(group, colorMaterial);
-      } else if (service.key === "wrought") {
-        createIronDisplay(group, colorMaterial);
-      } else if (service.key === "chain") {
-        createChainDisplay(group);
-      } else if (service.key === "pipe") {
-        createPipeDisplay(group, colorMaterial);
-      } else if (service.key === "pool") {
-        createPoolDisplay(group);
-      } else {
-        createTemporaryDisplay(group, colorMaterial);
-      }
-
-      const hit = new THREE.Mesh(new THREE.BoxGeometry(3.75, 4.4, 1.25), mats.hit);
-      hit.position.set(0, 2.05, 0);
-      hit.userData.hotspot = {
-        key: service.key,
-        label: service.short,
-        url: service.url
-      };
-      group.add(hit);
-      hotspotMeshes.push(hit);
-
-      group.traverse((child) => {
-        if (child.isMesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
-
-      scene.add(group);
-      focusTargets.set(service.key, {
-        position: new THREE.Vector3(group.position.x, 3.1, -2.6),
-        target: new THREE.Vector3(group.position.x, 2.35, group.position.z),
-        label: service.short
-      });
-    });
+  const total = item.price * item.bundle;
+  if (state.cash < total) {
+    addLog(`Not enough cash to buy ${item.label.toLowerCase()}.`);
+    return;
   }
 
-  function createWoodDisplay(group) {
-    group.add(box(0.22, 2.5, 0.24, -1.35, 1.25, 0, mats.woodDark));
-    group.add(box(0.22, 2.5, 0.24, 1.35, 1.25, 0, mats.woodDark));
-    group.add(box(0.34, 0.1, 0.34, -1.35, 2.54, 0, mats.woodDark));
-    group.add(box(0.34, 0.1, 0.34, 1.35, 2.54, 0, mats.woodDark));
-    group.add(box(2.95, 0.22, 0.18, 0, 2.15, 0, mats.woodDark));
-    group.add(box(2.95, 0.22, 0.18, 0, 0.85, 0, mats.woodDark));
+  state.cash -= total;
+  state.supplies[itemKey] = (state.supplies[itemKey] || 0) + item.bundle;
+  addLog(`Bought ${item.bundle} ${item.label.toLowerCase()} for ${formatMoney(total)}.`);
+}
 
-    for (let i = 0; i < 9; i += 1) {
-      const board = box(0.25, 2.22, 0.16, -1.04 + i * 0.26, 1.34, 0.04, mats.wood);
-      board.rotation.z = (i % 2 === 0 ? -1 : 1) * 0.01;
-      group.add(board);
+function cancelJob() {
+  if (!state.activeJob) {
+    return;
+  }
 
-      [0.62, 2.04].forEach((y) => {
-        const screw = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.012, 10), mats.darkSteel);
-        screw.rotation.x = Math.PI / 2;
-        screw.position.set(-1.04 + i * 0.26, y, 0.13);
-        group.add(screw);
-      });
+  state.cash -= 120;
+  state.reputation = clamp(state.reputation - 7, 0, 100);
+  advanceTime(0.35);
+  addLog(`Walked away from ${state.activeJob.title}. Lost dispatch trust and a trip charge.`);
+  state.activeJob = null;
+  state.modal = null;
+}
+
+function finishJob() {
+  const job = state.activeJob;
+  if (!job) {
+    return;
+  }
+
+  const lateHours = Math.max(0, state.clock - job.dueHour);
+  const earlyHours = Math.max(0, job.dueHour - state.clock);
+  const scheduleAdjustment = lateHours > 0 ? -Math.round(lateHours * 95) : Math.round(Math.min(120, earlyHours * 24));
+  const qualityAdjustment = job.quality >= 90 ? 125 : job.quality >= 84 ? 60 : job.quality < 70 ? -160 : 0;
+  const finalPayment = Math.max(0, job.payout + scheduleAdjustment + qualityAdjustment);
+  const repChange = (job.quality >= 86 ? 3 : job.quality < 72 ? -5 : 1) + (lateHours > 0.25 ? -2 : 1);
+  const net = finalPayment - job.costs;
+
+  state.cash += finalPayment;
+  state.reputation = clamp(state.reputation + repChange, 0, 100);
+  state.completedJobs.unshift({
+    title: job.title,
+    net,
+    quality: job.quality,
+    paid: finalPayment
+  });
+
+  const postedJob = state.jobs.find((item) => item.id === job.id);
+  if (postedJob) {
+    postedJob.completed = true;
+  }
+
+  addLog(`Collected ${formatMoney(finalPayment)}. Net on job: ${formatMoney(net)}.`);
+  state.activeJob = null;
+  state.modal = null;
+
+  const remaining = state.jobs.find((item) => !item.completed);
+  state.selectedJobId = remaining ? remaining.id : null;
+}
+
+function startNextDay() {
+  state.day += 1;
+  state.clock = 7.5;
+  state.crewEnergy = 92;
+  state.cash -= 180;
+  state.jobs = makeJobs();
+  state.selectedJobId = state.jobs[0].id;
+  state.activeJob = null;
+  state.modal = null;
+  addLog("New day started. Paid yard overhead and opened a fresh bid board.");
+}
+
+function getNextStage(job) {
+  return job.stages.find((stage) => !stage.done);
+}
+
+function adjustedTime(hours) {
+  if (state.crewEnergy < 24) {
+    return hours * 1.28;
+  }
+  if (state.crewEnergy < 45) {
+    return hours * 1.12;
+  }
+  return hours;
+}
+
+function advanceTime(hours) {
+  state.clock += hours;
+  if (state.activeJob) {
+    state.activeJob.timeSpent += hours;
+  }
+
+  while (state.clock >= 24) {
+    state.clock -= 24;
+    state.day += 1;
+  }
+}
+
+function spendEnergy(amount) {
+  state.crewEnergy = clamp(state.crewEnergy - amount, 0, 100);
+}
+
+function chargeJob(amount) {
+  if (!amount) {
+    return;
+  }
+  state.cash -= amount;
+  if (state.activeJob) {
+    state.activeJob.costs += amount;
+  }
+}
+
+function consumeSupplies(uses = {}) {
+  Object.entries(uses).forEach(([key, amount]) => {
+    state.supplies[key] = (state.supplies[key] || 0) - amount;
+  });
+}
+
+function missingForJob(job) {
+  return missingSupplies(job.required);
+}
+
+function missingSupplies(uses = {}) {
+  return Object.entries(uses)
+    .filter(([key, amount]) => (state.supplies[key] || 0) < amount)
+    .map(([key, amount]) => `${amount} ${supplyCatalog[key].unit}${amount === 1 ? "" : "s"}`);
+}
+
+function formatProblemCost(option) {
+  const cost = option.cost ? formatMoney(option.cost) : "$0";
+  return `${cost} / ${option.time.toFixed(2)} hr / quality ${signed(option.quality || 0)}`;
+}
+
+function signed(number) {
+  return number > 0 ? `+${number}` : `${number}`;
+}
+
+function addLog(message) {
+  state.log.unshift(`${formatTime(state.clock)} - ${message}`);
+  state.log = state.log.slice(0, 20);
+}
+
+function formatMoney(value) {
+  return moneyFormatter.format(value);
+}
+
+function formatTime(hourValue) {
+  const totalMinutes = Math.round(hourValue * 60);
+  const normalized = ((totalMinutes % 1440) + 1440) % 1440;
+  const hours24 = Math.floor(normalized / 60);
+  const minutes = normalized % 60;
+  const suffix = hours24 >= 12 ? "PM" : "AM";
+  const hours12 = hours24 % 12 || 12;
+  return `${hours12}:${String(minutes).padStart(2, "0")} ${suffix}`;
+}
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const width = Math.max(1, Math.floor(rect.width * dpr));
+  const height = Math.max(1, Math.floor(rect.height * dpr));
+
+  if (canvas.width !== width || canvas.height !== height) {
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function drawFrame() {
+  resizeCanvas();
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  if (state.activeJob) {
+    drawJobSite(width, height);
+  } else {
+    drawYard(width, height);
+  }
+
+  requestAnimationFrame(drawFrame);
+}
+
+function drawYard(width, height) {
+  drawSky(width, height);
+  drawConcrete(width, height);
+
+  const warehouseY = height * 0.2;
+  const warehouseH = height * 0.38;
+  drawBuilding(width * 0.06, warehouseY, width * 0.88, warehouseH);
+  drawFenceRack(width * 0.1, height * 0.63, width * 0.24, height * 0.18);
+  drawTruck(width * 0.5, height * 0.7, Math.min(width, height) * 0.0022);
+  drawMaterialStacks(width * 0.68, height * 0.62, width * 0.22, height * 0.2);
+
+  ctx.fillStyle = "#071c17";
+  ctx.font = "900 22px Helvetica, Arial, sans-serif";
+  ctx.fillText("STRONG PERIMETER", width * 0.1, warehouseY + 42);
+  ctx.font = "700 13px Helvetica, Arial, sans-serif";
+  ctx.fillText("Fence repair and installation dispatch yard", width * 0.1, warehouseY + 64);
+}
+
+function drawJobSite(width, height) {
+  const job = state.activeJob;
+  drawSky(width, height);
+
+  ctx.fillStyle = "#7fb26d";
+  ctx.fillRect(0, height * 0.48, width, height * 0.52);
+
+  ctx.fillStyle = "#d8d3c6";
+  ctx.fillRect(width * 0.02, height * 0.58, width * 0.96, height * 0.1);
+  ctx.fillStyle = "#8c785f";
+  ctx.fillRect(0, height * 0.68, width, height * 0.32);
+
+  drawHouse(width * 0.64, height * 0.19, width * 0.26, height * 0.28);
+  drawTree(width * 0.18, height * 0.5, Math.min(width, height) * 0.12);
+  drawFenceJob(job, width, height);
+  drawCrew(width * 0.13, height * 0.68, Math.min(width, height) * 0.0018);
+  drawTruck(width * 0.25, height * 0.82, Math.min(width, height) * 0.00165);
+}
+
+function drawSky(width, height) {
+  const sky = ctx.createLinearGradient(0, 0, 0, height * 0.72);
+  sky.addColorStop(0, "#9cc7dc");
+  sky.addColorStop(0.62, "#d7e6df");
+  sky.addColorStop(1, "#f4ead0");
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.fillStyle = "rgba(243, 198, 92, 0.9)";
+  ctx.beginPath();
+  ctx.arc(width * 0.1, height * 0.14, Math.min(width, height) * 0.055, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawConcrete(width, height) {
+  ctx.fillStyle = "#c9c7bd";
+  ctx.fillRect(0, height * 0.55, width, height * 0.45);
+
+  ctx.strokeStyle = "rgba(86, 98, 104, 0.22)";
+  ctx.lineWidth = 2;
+  for (let i = 0; i < 12; i += 1) {
+    const y = height * 0.58 + i * height * 0.035;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y + Math.sin(i) * 8);
+    ctx.stroke();
+  }
+}
+
+function drawBuilding(x, y, width, height) {
+  ctx.fillStyle = "#f3efe4";
+  roundRect(x, y, width, height, 8);
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(86, 98, 104, 0.28)";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(x + 8, y + 8, width - 16, height - 16);
+
+  ctx.fillStyle = "#bec2bd";
+  ctx.fillRect(x + width * 0.62, y + height * 0.28, width * 0.2, height * 0.5);
+  ctx.strokeStyle = "#566268";
+  ctx.lineWidth = 2;
+  for (let i = 1; i < 7; i += 1) {
+    const lineY = y + height * 0.28 + i * height * 0.07;
+    ctx.beginPath();
+    ctx.moveTo(x + width * 0.62, lineY);
+    ctx.lineTo(x + width * 0.82, lineY);
+    ctx.stroke();
+  }
+}
+
+function drawFenceRack(x, y, width, height) {
+  ctx.fillStyle = "#566268";
+  ctx.fillRect(x, y + height * 0.82, width, height * 0.08);
+  ctx.fillRect(x + width * 0.05, y, width * 0.04, height);
+  ctx.fillRect(x + width * 0.9, y, width * 0.04, height);
+
+  const samples = ["#b97942", "#6f4628", "#c5d1cd", "#20282a"];
+  samples.forEach((color, index) => {
+    const panelX = x + width * (0.13 + index * 0.2);
+    ctx.fillStyle = color;
+    ctx.fillRect(panelX, y + height * 0.12, width * 0.12, height * 0.68);
+    ctx.strokeStyle = "rgba(24, 33, 30, 0.34)";
+    ctx.strokeRect(panelX, y + height * 0.12, width * 0.12, height * 0.68);
+  });
+}
+
+function drawMaterialStacks(x, y, width, height) {
+  ctx.fillStyle = "#6f4628";
+  for (let i = 0; i < 6; i += 1) {
+    ctx.fillRect(x + i * width * 0.08, y + height * 0.35 - i * 3, width * 0.45, height * 0.055);
+  }
+
+  ctx.fillStyle = "#db7337";
+  ctx.fillRect(x + width * 0.52, y + height * 0.26, width * 0.34, height * 0.48);
+  ctx.fillStyle = "#fffaf1";
+  ctx.fillRect(x + width * 0.56, y + height * 0.32, width * 0.26, height * 0.09);
+}
+
+function drawTruck(x, y, scale) {
+  const s = scale * 100;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(s, s);
+
+  ctx.fillStyle = "#f8f7f1";
+  roundRect(-2.4, -0.72, 3.3, 0.82, 0.08);
+  ctx.fill();
+  roundRect(0.35, -1.15, 1.35, 1.05, 0.08);
+  ctx.fill();
+  roundRect(1.35, -0.86, 1.08, 0.72, 0.08);
+  ctx.fill();
+
+  ctx.fillStyle = "#18211e";
+  ctx.fillRect(0.58, -0.98, 0.42, 0.36);
+  ctx.fillRect(1.05, -0.98, 0.42, 0.36);
+  ctx.fillRect(2.28, -0.62, 0.08, 0.28);
+  ctx.fillStyle = "#db7337";
+  ctx.fillRect(-1.35, -0.5, 0.9, 0.28);
+  ctx.fillStyle = "#fffaf1";
+  ctx.font = "700 0.12px Helvetica, Arial, sans-serif";
+  ctx.fillText("SP", -1.08, -0.31);
+
+  drawWheel(-1.55, 0.03);
+  drawWheel(1.55, 0.03);
+  ctx.restore();
+}
+
+function drawWheel(x, y) {
+  ctx.fillStyle = "#151819";
+  ctx.beginPath();
+  ctx.arc(x, y, 0.28, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#aeb8b8";
+  ctx.beginPath();
+  ctx.arc(x, y, 0.13, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawHouse(x, y, width, height) {
+  ctx.fillStyle = "#e7dfcf";
+  ctx.fillRect(x, y + height * 0.28, width, height * 0.72);
+  ctx.fillStyle = "#73503a";
+  ctx.beginPath();
+  ctx.moveTo(x - width * 0.05, y + height * 0.3);
+  ctx.lineTo(x + width * 0.5, y);
+  ctx.lineTo(x + width * 1.05, y + height * 0.3);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle = "#315f8f";
+  ctx.fillRect(x + width * 0.16, y + height * 0.47, width * 0.2, height * 0.2);
+  ctx.fillRect(x + width * 0.62, y + height * 0.47, width * 0.2, height * 0.2);
+}
+
+function drawTree(x, y, size) {
+  ctx.strokeStyle = "#6f4628";
+  ctx.lineWidth = size * 0.12;
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + size * 0.04, y - size * 1.3);
+  ctx.stroke();
+
+  ctx.fillStyle = "#2d7a4f";
+  ctx.beginPath();
+  ctx.arc(x, y - size * 1.42, size * 0.65, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawFenceJob(job, width, height) {
+  const x1 = width * 0.18;
+  const x2 = width * 0.86;
+  const groundY = height * 0.68;
+  const fenceH = height * 0.22;
+  const digs = job.stages.filter((stage) => stage.type === "dig");
+  const sets = job.stages.filter((stage) => stage.type === "set");
+  const count = Math.max(2, digs.length || sets.length || 2);
+  const railDone = isVisualDone(job, "rails");
+  const picketsDone = isVisualDone(job, "pickets");
+  const gateDone = isVisualDone(job, "gate");
+
+  ctx.strokeStyle = "rgba(24, 33, 30, 0.35)";
+  ctx.lineWidth = 3;
+  ctx.setLineDash([8, 7]);
+  ctx.beginPath();
+  ctx.moveTo(x1, groundY);
+  ctx.lineTo(x2, groundY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  if (railDone) {
+    ctx.fillStyle = "#6f4628";
+    ctx.fillRect(x1, groundY - fenceH * 0.74, x2 - x1, 8);
+    ctx.fillRect(x1, groundY - fenceH * 0.32, x2 - x1, 8);
+  }
+
+  if (picketsDone) {
+    const picketCount = 22;
+    const gap = (x2 - x1) / picketCount;
+    for (let i = 0; i < picketCount; i += 1) {
+      ctx.fillStyle = i % 2 ? "#b97942" : "#c48954";
+      ctx.fillRect(x1 + i * gap, groundY - fenceH, gap * 0.72, fenceH);
     }
   }
 
-  function createIronDisplay(group, material) {
-    group.add(box(3.05, 0.16, 0.16, 0, 2.35, 0, mats.darkSteel));
-    group.add(box(3.05, 0.16, 0.16, 0, 0.7, 0, mats.darkSteel));
-    group.add(box(0.5, 0.08, 0.32, -1.45, 0.18, 0, mats.darkSteel));
-    group.add(box(0.5, 0.08, 0.32, 1.45, 0.18, 0, mats.darkSteel));
+  for (let i = 0; i < count; i += 1) {
+    const x = x1 + ((x2 - x1) / Math.max(1, count - 1)) * i;
+    const digStage = digs[i];
+    const setDone = sets.some((stage) => stage.done && (stage.hole === i || sets.length === 1));
+    const dug = digStage && digStage.done;
 
-    for (let i = 0; i < 11; i += 1) {
-      const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 1.85, 18), material);
-      bar.position.set(-1.35 + i * 0.27, 1.5, 0);
-      group.add(bar);
-
-      const finial = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.24, 12), material);
-      finial.position.set(-1.35 + i * 0.27, 2.62, 0);
-      group.add(finial);
-    }
-  }
-
-  function createChainDisplay(group) {
-    const frameMaterial = mats.steel;
-    group.add(box(3.05, 0.12, 0.12, 0, 2.25, 0, frameMaterial));
-    group.add(box(3.05, 0.12, 0.12, 0, 0.75, 0, frameMaterial));
-    group.add(box(0.14, 2.05, 0.14, -1.45, 1.5, 0, frameMaterial));
-    group.add(box(0.14, 2.05, 0.14, 1.45, 1.5, 0, frameMaterial));
-    group.add(box(0.18, 0.18, 0.18, -1.45, 2.55, 0, frameMaterial));
-    group.add(box(0.18, 0.18, 0.18, 1.45, 2.55, 0, frameMaterial));
-
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0xdce5e1, transparent: true, opacity: 0.58 });
-
-    for (let i = -10; i <= 10; i += 1) {
-      const geometryA = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(i * 0.18 - 0.7, 0.75, 0.03),
-        new THREE.Vector3(i * 0.18 + 0.7, 2.25, 0.03)
-      ]);
-      const geometryB = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(i * 0.18 - 0.7, 2.25, 0.035),
-        new THREE.Vector3(i * 0.18 + 0.7, 0.75, 0.035)
-      ]);
-      group.add(new THREE.Line(geometryA, lineMaterial));
-      group.add(new THREE.Line(geometryB, lineMaterial));
-    }
-  }
-
-  function createPipeDisplay(group, material) {
-    [-1.35, 1.35].forEach((x) => {
-      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 2.25, 24), material);
-      post.position.set(x, 1.45, 0);
-      group.add(post);
-      group.add(box(0.48, 0.08, 0.48, x, 0.16, 0, mats.concrete));
-    });
-
-    [0.85, 1.45, 2.05].forEach((y) => {
-      const rail = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 3.05, 24), material);
-      rail.rotation.z = Math.PI / 2;
-      rail.position.set(0, y, 0);
-      group.add(rail);
-
-      [-1.35, 1.35].forEach((x) => {
-        const weldCollar = new THREE.Mesh(new THREE.TorusGeometry(0.11, 0.012, 8, 24), mats.darkSteel);
-        weldCollar.rotation.y = Math.PI / 2;
-        weldCollar.position.set(x, y, 0);
-        group.add(weldCollar);
-      });
-    });
-  }
-
-  function createPoolDisplay(group) {
-    group.add(box(0.13, 2.15, 0.13, -1.45, 1.45, 0, mats.darkSteel));
-    group.add(box(0.13, 2.15, 0.13, 1.45, 1.45, 0, mats.darkSteel));
-    group.add(box(3.0, 0.12, 0.12, 0, 2.35, 0, mats.darkSteel));
-    group.add(box(3.0, 0.12, 0.12, 0, 0.65, 0, mats.darkSteel));
-
-    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2.7, 1.55), mats.glass);
-    mesh.position.set(0, 1.48, 0.02);
-    group.add(mesh);
-
-    const stripeMaterial = new THREE.MeshBasicMaterial({ color: 0x60b7b2, transparent: true, opacity: 0.52 });
-    for (let i = 0; i < 6; i += 1) {
-      const stripe = box(0.04, 1.45, 0.03, -1.08 + i * 0.43, 1.48, 0.06, stripeMaterial);
-      group.add(stripe);
-    }
-  }
-
-  function createTemporaryDisplay(group, material) {
-    group.add(box(3.05, 0.12, 0.12, 0, 2.28, 0, material));
-    group.add(box(3.05, 0.12, 0.12, 0, 0.78, 0, material));
-    group.add(box(0.12, 1.85, 0.12, -1.45, 1.52, 0, material));
-    group.add(box(0.12, 1.85, 0.12, 1.45, 1.52, 0, material));
-    group.add(box(1.1, 0.1, 0.28, -1.45, 0.15, 0.2, mats.darkSteel));
-    group.add(box(1.1, 0.1, 0.28, 1.45, 0.15, 0.2, mats.darkSteel));
-
-    for (let i = 0; i < 9; i += 1) {
-      const bar = box(0.045, 1.5, 0.045, -1.08 + i * 0.27, 1.52, 0.02, mats.steel);
-      group.add(bar);
-    }
-
-    const meshLineMaterial = new THREE.LineBasicMaterial({ color: 0xcbd4cf, transparent: true, opacity: 0.45 });
-    for (let i = -6; i <= 6; i += 1) {
-      group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(i * 0.25 - 0.7, 0.82, 0.055),
-        new THREE.Vector3(i * 0.25 + 0.7, 2.2, 0.055)
-      ]), meshLineMaterial));
-      group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(i * 0.25 - 0.7, 2.2, 0.06),
-        new THREE.Vector3(i * 0.25 + 0.7, 0.82, 0.06)
-      ]), meshLineMaterial));
-    }
-
-    const brace = box(0.08, 2.0, 0.06, 0, 1.5, 0.05, mats.steel);
-    brace.rotation.z = Math.PI / 4;
-    group.add(brace);
-    group.add(box(0.78, 0.16, 0.38, -1.45, 0.1, 0.35, mats.concrete));
-    group.add(box(0.78, 0.16, 0.38, 1.45, 0.1, 0.35, mats.concrete));
-  }
-
-  function addOpenFrontBayDoors(trimMaterial, accentTrimMaterial) {
-    const frontZ = 11.92;
-    const wallY = 3.4;
-    const doorWidth = 5.9;
-    const doorHeight = 6.7;
-    const doorCenters = [-3.65, 3.65];
-    const frontWallMaterial = mats.wall;
-    const daylightMaterial = new THREE.MeshBasicMaterial({
-      color: 0xfff3d6,
-      transparent: true,
-      opacity: 0.58,
-      depthWrite: false
-    });
-    const daylightFloorMaterial = new THREE.MeshBasicMaterial({
-      color: 0xfff0c6,
-      transparent: true,
-      opacity: 0.26,
-      depthWrite: false
-    });
-    const doorTrackMaterial = new THREE.MeshStandardMaterial({ color: 0x38413f, roughness: 0.38, metalness: 0.54 });
-    const doorPanelMaterial = new THREE.MeshStandardMaterial({ color: 0xf4f1ea, roughness: 0.46, metalness: 0.08 });
-
-    scene.add(box(3.3, doorHeight, 0.24, -12.35, wallY, frontZ, frontWallMaterial));
-    scene.add(box(1.1, doorHeight, 0.24, 0, wallY, frontZ, frontWallMaterial));
-    scene.add(box(3.3, doorHeight, 0.24, 12.35, wallY, frontZ, frontWallMaterial));
-    scene.add(box(28, warehouseHeight - doorHeight, 0.24, 0, doorHeight + (warehouseHeight - doorHeight) / 2, frontZ, frontWallMaterial));
-    scene.add(box(27.7, 0.34, 0.14, 0, 0.36, frontZ - 0.02, trimMaterial));
-    scene.add(box(27.7, 0.12, 0.12, 0, 3.08, frontZ - 0.03, accentTrimMaterial));
-
-    doorCenters.forEach((doorX) => {
-      const glow = new THREE.Mesh(new THREE.PlaneGeometry(doorWidth, doorHeight), daylightMaterial);
-      glow.position.set(doorX, doorHeight / 2, frontZ + 0.04);
-      glow.rotation.y = Math.PI;
-      scene.add(glow);
-
-      const lightPatch = new THREE.Mesh(new THREE.PlaneGeometry(doorWidth * 0.9, 11.5), daylightFloorMaterial);
-      lightPatch.rotation.x = -Math.PI / 2;
-      lightPatch.position.set(doorX, 0.052, 5.2);
-      scene.add(lightPatch);
-
-      scene.add(box(0.15, doorHeight + 0.35, 0.16, doorX - doorWidth / 2, doorHeight / 2, frontZ - 0.12, doorTrackMaterial));
-      scene.add(box(0.15, doorHeight + 0.35, 0.16, doorX + doorWidth / 2, doorHeight / 2, frontZ - 0.12, doorTrackMaterial));
-      scene.add(box(doorWidth + 0.38, 0.18, 0.18, doorX, doorHeight + 0.15, frontZ - 0.12, doorTrackMaterial));
-
-      for (let i = 0; i < 5; i += 1) {
-        const openPanel = box(doorWidth - 0.42, 0.22, 0.62, doorX, warehouseHeight - 0.75 - i * 0.28, 9.9 - i * 0.55, doorPanelMaterial);
-        openPanel.rotation.x = -0.08;
-        scene.add(openPanel);
-      }
-    });
-  }
-
-  function addSuspendedHvac() {
-    const unitMaterial = new THREE.MeshStandardMaterial({ color: 0xd6d9d4, roughness: 0.48, metalness: 0.18 });
-    const ventMaterial = new THREE.MeshStandardMaterial({ color: 0xaeb4b1, roughness: 0.42, metalness: 0.32 });
-    const cableMaterial = new THREE.LineBasicMaterial({ color: 0x252525, transparent: true, opacity: 0.7 });
-
-    [
-      [5.2, 12.2, -4.4, 0.05],
-      [-6.4, 11.6, -17.2, -0.08]
-    ].forEach(([x, y, z, rotation]) => {
-      const unit = new THREE.Group();
-      unit.position.set(x, y, z);
-      unit.rotation.y = rotation;
-      unit.add(box(3.2, 1.0, 2.0, 0, 0, 0, unitMaterial));
-      unit.add(box(2.6, 0.18, 1.45, 0, -0.62, 0, ventMaterial));
-      unit.add(box(0.18, 0.92, 1.72, 1.72, 0, 0, ventMaterial));
-      unit.add(box(0.18, 0.92, 1.72, -1.72, 0, 0, ventMaterial));
-
-      [-1.25, 1.25].forEach((cableX) => {
-        [-0.7, 0.7].forEach((cableZ) => {
-          const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-            new THREE.Vector3(x + cableX, y + 0.55, z + cableZ),
-            new THREE.Vector3(x + cableX, warehouseHeight - 0.35, z + cableZ)
-          ]);
-          scene.add(new THREE.Line(lineGeometry, cableMaterial));
-        });
-      });
-
-      unit.traverse((child) => {
-        if (child.isMesh) {
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
-      scene.add(unit);
-    });
-  }
-
-  function addElectricalDetails() {
-    const conduitMaterial = new THREE.MeshStandardMaterial({ color: 0x9aa09c, roughness: 0.35, metalness: 0.52 });
-    const boxMaterial = new THREE.MeshStandardMaterial({ color: 0xbfc4c1, roughness: 0.42, metalness: 0.36 });
-    const cableMaterial = new THREE.LineBasicMaterial({ color: 0x202020, transparent: true, opacity: 0.64 });
-
-    [
-      [-0.9, -23.58],
-      [0.1, -23.58],
-      [1.1, -23.58]
-    ].forEach(([x, z]) => {
-      scene.add(box(0.08, 5.3, 0.08, x, 3.0, z, conduitMaterial));
-    });
-
-    scene.add(box(0.72, 1.12, 0.12, -0.38, 1.65, -23.52, boxMaterial));
-    scene.add(box(0.72, 1.12, 0.12, 0.62, 1.65, -23.52, boxMaterial));
-    scene.add(box(3.1, 0.08, 0.08, 0.1, 5.58, -23.5, conduitMaterial));
-
-    const overheadRuns = [
-      [[-12.6, warehouseHeight - 1.2, 3.8], [-6, warehouseHeight - 1.0, -3.8], [1, warehouseHeight - 1.25, -10.2], [8.4, warehouseHeight - 1.1, -17.6]],
-      [[-2.2, warehouseHeight - 0.9, 9.2], [0.6, warehouseHeight - 1.05, 2.4], [3.4, warehouseHeight - 0.92, -5.4], [5.8, warehouseHeight - 1.0, -13.4]]
-    ];
-
-    overheadRuns.forEach((points) => {
-      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points.map(([x, y, z]) => new THREE.Vector3(x, y, z)));
-      scene.add(new THREE.Line(lineGeometry, cableMaterial));
-    });
-
-    const outletMaterial = new THREE.MeshStandardMaterial({ color: 0xf2eee3, roughness: 0.5 });
-    const sideOutletX = warehouseHalfWidth - 0.22;
-    [-18.6, -11.2, -4.0, 3.6].forEach((z) => {
-      scene.add(box(0.04, 0.28, 0.22, sideOutletX, 0.95, z, outletMaterial));
-      scene.add(box(0.04, 0.28, 0.22, -sideOutletX, 0.95, z, outletMaterial));
-    });
-  }
-
-  function addWarehouseColumn(x, z) {
-    const column = new THREE.Group();
-    const height = warehouseHeight - 0.7;
-    const paintedSteel = new THREE.MeshStandardMaterial({ color: 0xf2f0e8, roughness: 0.5, metalness: 0.16 });
-    column.position.set(x, 0, z);
-    column.add(box(0.28, height, 0.12, 0, height / 2, 0, paintedSteel));
-    column.add(box(0.72, height, 0.08, 0, height / 2, 0.16, paintedSteel));
-    column.add(box(0.72, height, 0.08, 0, height / 2, -0.16, paintedSteel));
-    column.add(box(0.9, 0.08, 0.62, 0, 0.08, 0, mats.steel));
-    column.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-    scene.add(column);
-  }
-
-  function addBollard(x, z) {
-    const bollard = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.13, 0.13, 1.05, 24),
-      new THREE.MeshStandardMaterial({ color: 0xd2aa54, roughness: 0.48, metalness: 0.28 })
-    );
-    bollard.position.set(x, 0.55, z);
-    bollard.castShadow = true;
-    bollard.receiveShadow = true;
-    scene.add(bollard);
-
-    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.035, 24), mats.darkSteel);
-    cap.position.set(x, 1.1, z);
-    cap.castShadow = true;
-    scene.add(cap);
-  }
-
-  function addMaterialRack(x, z, rotationY) {
-    const rack = new THREE.Group();
-    rack.position.set(x, 0, z);
-    rack.rotation.y = rotationY;
-    const rackPaint = new THREE.MeshStandardMaterial({ color: 0xc56a2d, roughness: 0.46, metalness: 0.38 });
-
-    [-1.8, 1.8].forEach((railX) => {
-      [-0.7, 0.7].forEach((railZ) => {
-        rack.add(box(0.12, 2.9, 0.12, railX, 1.45, railZ, rackPaint));
-      });
-    });
-
-    [0.85, 1.75, 2.65].forEach((y) => {
-      rack.add(box(3.8, 0.12, 0.12, 0, y, -0.7, rackPaint));
-      rack.add(box(3.8, 0.12, 0.12, 0, y, 0.7, rackPaint));
-      rack.add(box(0.12, 0.12, 1.52, -1.8, y, 0, rackPaint));
-      rack.add(box(0.12, 0.12, 1.52, 1.8, y, 0, rackPaint));
-    });
-
-    for (let i = 0; i < 6; i += 1) {
-      const panel = box(0.16, 1.7, 0.08, -1.32 + i * 0.52, 1.56, 0.04, mats.wood);
-      panel.rotation.z = (i % 2 === 0 ? 1 : -1) * 0.04;
-      rack.add(panel);
-    }
-
-    rack.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-    scene.add(rack);
-  }
-
-  function addPalletStack(x, z, rotationY) {
-    const stack = new THREE.Group();
-    stack.position.set(x, 0.02, z);
-    stack.rotation.y = rotationY;
-
-    for (let level = 0; level < 3; level += 1) {
-      const y = 0.14 + level * 0.24;
-      [-0.55, 0, 0.55].forEach((slatZ) => {
-        stack.add(box(1.7, 0.08, 0.18, 0, y, slatZ, mats.woodDark));
-      });
-      [-0.62, 0.62].forEach((slatX) => {
-        stack.add(box(0.16, 0.1, 1.4, slatX, y - 0.08, 0, mats.woodDark));
-      });
-    }
-
-    for (let i = 0; i < 8; i += 1) {
-      const bundle = box(0.11, 1.25, 0.1, -0.7 + i * 0.2, 1.25, 0.05, mats.wood);
-      bundle.rotation.z = 0.02;
-      stack.add(bundle);
-    }
-
-    stack.traverse((child) => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-      }
-    });
-    scene.add(stack);
-  }
-
-  function addWheel(group, x, z, radius, width) {
-    const tire = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, width, 36), mats.tire);
-    tire.rotation.x = Math.PI / 2;
-    tire.position.set(x, 0.46, z);
-    tire.castShadow = true;
-    tire.receiveShadow = true;
-    group.add(tire);
-
-    const hub = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.42, radius * 0.42, width + 0.025, 28), mats.steel);
-    hub.rotation.x = Math.PI / 2;
-    hub.position.copy(tire.position);
-    hub.castShadow = true;
-    group.add(hub);
-
-    [-1, 1].forEach((side) => {
-      const sidewall = new THREE.Mesh(new THREE.TorusGeometry(radius * 0.76, 0.028, 10, 32), mats.darkSteel);
-      sidewall.position.set(x, 0.46, z + side * width * 0.52);
-      sidewall.castShadow = true;
-      group.add(sidewall);
-    });
-  }
-
-  function buildLighting() {
-    const ambient = new THREE.AmbientLight(0xfffbf0, 0.52);
-    scene.add(ambient);
-
-    const hemisphere = new THREE.HemisphereLight(0xfffbf0, 0x6f756d, 1.45);
-    scene.add(hemisphere);
-
-    const sun = new THREE.DirectionalLight(0xfff0d6, 1.12);
-    sun.position.set(-7, 11, 16);
-    sun.target.position.set(0, 2.8, -12);
-    sun.castShadow = true;
-    sun.shadow.mapSize.width = 2048;
-    sun.shadow.mapSize.height = 2048;
-    sun.shadow.camera.near = 1;
-    sun.shadow.camera.far = 36;
-    sun.shadow.camera.left = -warehouseHalfWidth - 2;
-    sun.shadow.camera.right = warehouseHalfWidth + 2;
-    sun.shadow.camera.top = 18;
-    sun.shadow.camera.bottom = -18;
-    scene.add(sun);
-    scene.add(sun.target);
-
-    const bayLight = new THREE.DirectionalLight(0xffffff, 0.82);
-    bayLight.position.set(5, 7, warehouseFrontZ + 8);
-    bayLight.target.position.set(0, 2.4, warehouseBackZ + 6);
-    scene.add(bayLight);
-    scene.add(bayLight.target);
-
-    const lightBarMaterial = new THREE.MeshBasicMaterial({ color: 0xfff8e7 });
-    const fixtureHousing = new THREE.MeshStandardMaterial({ color: 0xf4f1e9, roughness: 0.42, metalness: 0.12 });
-    const fixtureRim = new THREE.MeshStandardMaterial({ color: 0xe2e0d8, roughness: 0.42, metalness: 0.2 });
-    const activeLampPositions = [
-      [-18, lampY, -12.8],
-      [0, lampY, -12.8],
-      [18, lampY, -12.8],
-      [-18, lampY, 0.4],
-      [0, lampY, 0.4],
-      [18, lampY, 0.4]
-    ];
-
-    activeLampPositions.forEach(([x, y, z]) => {
-      const lamp = new THREE.PointLight(0xfff3dc, 1.45, 24, 1.7);
-      lamp.position.set(x, y, z);
-      scene.add(lamp);
-    });
-
-    const lightGridX = [-18, -9, 0, 9, 18];
-    const lightGridZ = [-14.8, -8.1, -1.4, 5.3];
-    lightGridZ.flatMap((z) => lightGridX.map((x) => [x, lampY, z])).forEach(([x, y, z]) => {
-      const fixture = new THREE.Mesh(new THREE.CylinderGeometry(0.58, 0.76, 0.24, 32), fixtureHousing);
-      fixture.position.set(x, y + 0.1, z);
-      fixture.castShadow = true;
-      scene.add(fixture);
-
-      const lens = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.52, 0.045, 32), lightBarMaterial);
-      lens.position.set(x, y - 0.045, z);
-      scene.add(lens);
-
-      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.58, 0.025, 10, 32), fixtureRim);
-      ring.rotation.x = Math.PI / 2;
-      ring.position.set(x, y - 0.075, z);
-      scene.add(ring);
-    });
-  }
-
-  function createConcreteTexture() {
-    const textureCanvas = document.createElement("canvas");
-    textureCanvas.width = 1024;
-    textureCanvas.height = 1024;
-    const ctx = textureCanvas.getContext("2d");
-    const random = seededRandom(42);
-
-    ctx.fillStyle = "#a6a196";
-    ctx.fillRect(0, 0, textureCanvas.width, textureCanvas.height);
-
-    for (let i = 0; i < 9000; i += 1) {
-      const shade = Math.round(120 + random() * 62);
-      ctx.fillStyle = `rgba(${shade}, ${shade - 3}, ${shade - 9}, ${0.07 + random() * 0.12})`;
-      const size = 1 + random() * 3;
-      ctx.fillRect(random() * 1024, random() * 1024, size, size);
-    }
-
-    ctx.strokeStyle = "rgba(70, 68, 62, 0.36)";
-    ctx.lineWidth = 2;
-    for (let i = 0; i < 14; i += 1) {
+    if (setDone) {
+      ctx.fillStyle = "#566268";
+      ctx.fillRect(x - 5, groundY - fenceH - 12, 10, fenceH + 26);
+      ctx.fillStyle = "#d8d3c6";
       ctx.beginPath();
-      let x = random() * 1024;
-      let y = random() * 1024;
-      ctx.moveTo(x, y);
-      for (let step = 0; step < 6; step += 1) {
-        x += (random() - 0.5) * 120;
-        y += (random() - 0.5) * 120;
-        ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-    }
-
-    return finishTexture(textureCanvas, 3.8, 4.8);
-  }
-
-  function createSheetrockTexture(baseHex, shadowHex) {
-    const textureCanvas = document.createElement("canvas");
-    textureCanvas.width = 1024;
-    textureCanvas.height = 1024;
-    const ctx = textureCanvas.getContext("2d");
-    const random = seededRandom(baseHex + shadowHex);
-    const base = hexToRgb(baseHex);
-    const shadow = hexToRgb(shadowHex);
-
-    ctx.fillStyle = rgb(base);
-    ctx.fillRect(0, 0, 1024, 1024);
-
-    for (let i = 0; i < 9000; i += 1) {
-      const alpha = 0.018 + random() * 0.035;
-      const shade = random() > 0.5 ? base : shadow;
-      ctx.fillStyle = `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${alpha})`;
-      const width = 1 + random() * 3.5;
-      const height = 1 + random() * 3.5;
-      ctx.fillRect(random() * 1024, random() * 1024, width, height);
-    }
-
-    ctx.strokeStyle = `rgba(${shadow.r}, ${shadow.g}, ${shadow.b}, 0.16)`;
-    ctx.lineWidth = 2;
-    for (let y = 256; y < 1024; y += 256) {
+      ctx.ellipse(x, groundY + 8, 18, 7, 0, 0, Math.PI * 2);
+      ctx.fill();
+    } else if (dug) {
+      ctx.fillStyle = "#3a2419";
       ctx.beginPath();
-      ctx.moveTo(0, y + (random() - 0.5) * 2);
-      ctx.lineTo(1024, y + (random() - 0.5) * 2);
-      ctx.stroke();
-    }
-
-    return finishTexture(textureCanvas, 2.8, 2.8);
-  }
-
-  function createBrushedMetalTexture(baseHex, highlightHex) {
-    const textureCanvas = document.createElement("canvas");
-    textureCanvas.width = 512;
-    textureCanvas.height = 256;
-    const ctx = textureCanvas.getContext("2d");
-    const random = seededRandom(baseHex + highlightHex);
-    const base = hexToRgb(baseHex);
-    const highlight = hexToRgb(highlightHex);
-
-    ctx.fillStyle = rgb(base);
-    ctx.fillRect(0, 0, 512, 256);
-
-    for (let y = 0; y < 256; y += 2) {
-      const alpha = 0.05 + random() * 0.12;
-      ctx.strokeStyle = `rgba(${highlight.r}, ${highlight.g}, ${highlight.b}, ${alpha})`;
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(512, y + (random() - 0.5) * 1.4);
-      ctx.stroke();
-    }
-
-    return finishTexture(textureCanvas, 2.5, 2);
-  }
-
-  function createWoodTexture(baseHex, darkHex) {
-    const textureCanvas = document.createElement("canvas");
-    textureCanvas.width = 512;
-    textureCanvas.height = 1024;
-    const ctx = textureCanvas.getContext("2d");
-    const random = seededRandom(baseHex + darkHex);
-    const base = hexToRgb(baseHex);
-    const dark = hexToRgb(darkHex);
-
-    ctx.fillStyle = rgb(base);
-    ctx.fillRect(0, 0, 512, 1024);
-
-    for (let y = 0; y < 1024; y += 8) {
-      const wave = Math.sin(y * 0.028) * 16 + Math.sin(y * 0.011) * 28;
-      ctx.strokeStyle = `rgba(${dark.r}, ${dark.g}, ${dark.b}, ${0.16 + random() * 0.18})`;
-      ctx.lineWidth = 1 + random() * 2.5;
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.bezierCurveTo(170, y + wave, 340, y - wave, 512, y + wave * 0.5);
-      ctx.stroke();
-    }
-
-    for (let i = 0; i < 12; i += 1) {
-      ctx.strokeStyle = `rgba(${dark.r}, ${dark.g}, ${dark.b}, 0.22)`;
-      ctx.strokeRect(random() * 420, random() * 920, 45 + random() * 60, 18 + random() * 40);
-    }
-
-    return finishTexture(textureCanvas, 1.2, 2.8);
-  }
-
-  function createRubberTexture() {
-    const textureCanvas = document.createElement("canvas");
-    textureCanvas.width = 512;
-    textureCanvas.height = 512;
-    const ctx = textureCanvas.getContext("2d");
-    const random = seededRandom(777);
-
-    ctx.fillStyle = "#151818";
-    ctx.fillRect(0, 0, 512, 512);
-
-    for (let i = 0; i < 2600; i += 1) {
-      const shade = Math.round(12 + random() * 26);
-      ctx.fillStyle = `rgba(${shade}, ${shade}, ${shade}, 0.22)`;
-      ctx.fillRect(random() * 512, random() * 512, 1 + random() * 3, 1 + random() * 3);
-    }
-
-    ctx.strokeStyle = "rgba(70, 74, 72, 0.32)";
-    ctx.lineWidth = 8;
-    for (let x = -512; x < 512; x += 42) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x + 512, 512);
-      ctx.stroke();
-    }
-
-    return finishTexture(textureCanvas, 2, 2);
-  }
-
-  function finishTexture(textureCanvas, repeatX, repeatY) {
-    const texture = new THREE.CanvasTexture(textureCanvas);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(repeatX, repeatY);
-    texture.anisotropy = 8;
-    return texture;
-  }
-
-  function seededRandom(seed) {
-    let value = seed >>> 0;
-    return () => {
-      value = (value * 1664525 + 1013904223) >>> 0;
-      return value / 4294967296;
-    };
-  }
-
-  function hexToRgb(hex) {
-    return {
-      r: (hex >> 16) & 255,
-      g: (hex >> 8) & 255,
-      b: hex & 255
-    };
-  }
-
-  function rgb(color) {
-    return `rgb(${color.r}, ${color.g}, ${color.b})`;
-  }
-
-  function createCanvasPanel(options) {
-    const canvasTexture = document.createElement("canvas");
-    canvasTexture.width = options.width;
-    canvasTexture.height = options.height;
-
-    const ctx = canvasTexture.getContext("2d");
-    const w = canvasTexture.width;
-    const h = canvasTexture.height;
-    const pad = Math.round(w * 0.07);
-
-    ctx.fillStyle = options.background;
-    ctx.fillRect(0, 0, w, h);
-
-    ctx.fillStyle = options.accent;
-    ctx.fillRect(0, 0, Math.round(w * 0.055), h);
-    ctx.fillRect(0, h - Math.round(h * 0.08), w, Math.round(h * 0.08));
-
-    ctx.fillStyle = options.dark ? "#004b3d" : "#fffaf1";
-    ctx.font = `800 ${Math.round(h * 0.07)}px Arial, sans-serif`;
-    ctx.fillText(options.kicker, pad, Math.round(h * 0.18));
-
-    ctx.fillStyle = options.dark ? "#17211e" : "#fffaf1";
-    ctx.font = `900 ${Math.round(h * 0.13)}px Arial, sans-serif`;
-    wrapCanvasText(ctx, options.title, pad, Math.round(h * 0.36), w - pad * 1.4, Math.round(h * 0.135));
-
-    if (options.primaryLine) {
-      const bannerY = Math.round(h * 0.52);
-      const bannerH = Math.round(h * 0.17);
-      ctx.fillStyle = options.accent;
-      ctx.fillRect(pad, bannerY, w - pad * 1.35, bannerH);
-      ctx.fillStyle = options.dark ? "#17211e" : "#071c17";
-      ctx.font = `900 ${Math.round(h * 0.095)}px Arial, sans-serif`;
-      ctx.fillText(options.primaryLine, pad + Math.round(w * 0.025), bannerY + Math.round(h * 0.115));
-    }
-
-    ctx.fillStyle = options.dark ? "#394541" : "rgba(255, 250, 241, 0.82)";
-    ctx.font = `800 ${Math.round(h * 0.055)}px Arial, sans-serif`;
-    options.lines.forEach((line, index) => {
-      ctx.fillText(line, pad, Math.round(h * 0.78) + index * Math.round(h * 0.07));
-    });
-
-    const texture = new THREE.CanvasTexture(canvasTexture);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = 8;
-    return texture;
-  }
-
-  function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
-    const words = text.split(" ");
-    let line = "";
-    let lineIndex = 0;
-
-    words.forEach((word) => {
-      const testLine = line ? `${line} ${word}` : word;
-      if (ctx.measureText(testLine).width > maxWidth && line) {
-        ctx.fillText(line, x, y + lineIndex * lineHeight);
-        line = word;
-        lineIndex += 1;
-      } else {
-        line = testLine;
-      }
-    });
-
-    ctx.fillText(line, x, y + lineIndex * lineHeight);
-  }
-
-  function box(width, height, depth, x, y, z, material) {
-    const mesh = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), material);
-    mesh.position.set(x, y, z);
-    return mesh;
-  }
-
-  function focusScene(key) {
-    const view = focusTargets.get(key);
-    if (!view) {
-      return;
-    }
-
-    const startPosition = camera.position.clone();
-    const startTarget = cameraState.target.clone();
-
-    cameraState.tween = {
-      start: clock.elapsedTime,
-      duration: reduceMotion ? 0.01 : 1.05,
-      startPosition,
-      startTarget,
-      endPosition: view.position.clone(),
-      endTarget: view.target.clone()
-    };
-  }
-
-  function updateOrbitCamera() {
-    const radius = cameraState.radius;
-    const cosPitch = Math.cos(cameraState.pitch);
-    camera.position.set(
-      cameraState.target.x + Math.sin(cameraState.yaw) * cosPitch * radius,
-      cameraState.target.y + Math.sin(cameraState.pitch) * radius,
-      cameraState.target.z + Math.cos(cameraState.yaw) * cosPitch * radius
-    );
-    keepCameraInsideWarehouse();
-    camera.lookAt(cameraState.target);
-  }
-
-  function keepCameraInsideWarehouse() {
-    camera.position.x = THREE.MathUtils.clamp(
-      camera.position.x,
-      -warehouseHalfWidth + cameraWallPadding,
-      warehouseHalfWidth - cameraWallPadding
-    );
-    camera.position.z = THREE.MathUtils.clamp(
-      camera.position.z,
-      warehouseBackZ + cameraWallPadding,
-      warehouseFrontZ - cameraWallPadding
-    );
-  }
-
-  function syncOrbitFromCamera() {
-    const offset = camera.position.clone().sub(cameraState.target);
-    cameraState.radius = THREE.MathUtils.clamp(offset.length(), 7, 28);
-    cameraState.pitch = THREE.MathUtils.clamp(Math.asin(offset.y / cameraState.radius), -0.15, 0.48);
-    cameraState.yaw = Math.atan2(offset.x, offset.z);
-  }
-
-  function animate() {
-    const elapsed = clock.elapsedTime;
-
-    if (cameraState.tween) {
-      const t = THREE.MathUtils.clamp((elapsed - cameraState.tween.start) / cameraState.tween.duration, 0, 1);
-      const eased = t * t * (3 - 2 * t);
-      camera.position.lerpVectors(cameraState.tween.startPosition, cameraState.tween.endPosition, eased);
-      cameraState.target.lerpVectors(cameraState.tween.startTarget, cameraState.tween.endTarget, eased);
-      keepCameraInsideWarehouse();
-      camera.lookAt(cameraState.target);
-
-      if (t >= 1) {
-        cameraState.tween = null;
-        syncOrbitFromCamera();
-      }
+      ctx.ellipse(x, groundY + 8, 22, 10, 0, 0, Math.PI * 2);
+      ctx.fill();
     } else {
-      updateOrbitCamera();
+      ctx.fillStyle = "#db7337";
+      ctx.fillRect(x - 3, groundY - 36, 6, 34);
+      ctx.fillRect(x - 13, groundY - 36, 26, 5);
     }
 
-    renderer.render(scene, camera);
-  }
-
-  function resizeRenderer() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  }
-
-  let drag = null;
-
-  function handlePointerDown(event) {
-    drag = {
-      pointerId: event.pointerId,
-      startX: event.clientX,
-      startY: event.clientY,
-      lastX: event.clientX,
-      lastY: event.clientY,
-      moved: false
-    };
-    canvas.setPointerCapture(event.pointerId);
-  }
-
-  function handlePointerMove(event) {
-    if (!drag) {
-      const hit = pickHotspot(event);
-      canvas.style.cursor = hit ? "pointer" : "grab";
-      return;
-    }
-
-    const deltaX = event.clientX - drag.lastX;
-    const deltaY = event.clientY - drag.lastY;
-    const totalMove = Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY);
-
-    if (totalMove > 4) {
-      drag.moved = true;
-      cameraState.tween = null;
-      cameraState.yaw -= deltaX * 0.006;
-      cameraState.pitch = THREE.MathUtils.clamp(cameraState.pitch + deltaY * 0.0045, -0.1, 0.46);
-    }
-
-    drag.lastX = event.clientX;
-    drag.lastY = event.clientY;
-  }
-
-  function handlePointerUp(event) {
-    if (!drag) {
-      return;
-    }
-
-    const didDrag = drag.moved;
-    canvas.releasePointerCapture(drag.pointerId);
-    drag = null;
-
-    if (!didDrag) {
-      const hit = pickHotspot(event);
-      if (hit) {
-        const hotspot = hit.object.userData.hotspot;
-        window.location.href = hotspot.url;
-      }
+    if (digStage && shouldShowHazard(job, digStage)) {
+      drawHazard(digStage.hazard.type, x, groundY + 34);
     }
   }
 
-  function handlePointerCancel() {
-    drag = null;
+  if (gateDone) {
+    ctx.strokeStyle = "#20282a";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(x2 - 90, groundY - fenceH, 70, fenceH);
+    ctx.beginPath();
+    ctx.moveTo(x2 - 86, groundY - fenceH + 8);
+    ctx.lineTo(x2 - 24, groundY - 8);
+    ctx.stroke();
   }
 
-  function handleWheel(event) {
-    event.preventDefault();
-    cameraState.tween = null;
-    cameraState.radius = THREE.MathUtils.clamp(cameraState.radius + event.deltaY * 0.018, 7, 28);
+  const next = getNextStage(job);
+  if (next) {
+    ctx.fillStyle = "rgba(49, 95, 143, 0.9)";
+    ctx.font = "800 13px Helvetica, Arial, sans-serif";
+    ctx.fillText(`Next: ${next.title}`, x1, groundY - fenceH - 28);
+  }
+}
+
+function shouldShowHazard(job, stage) {
+  return Boolean(stage.hazard && (job.utilityMarked || stage.hazard.revealed || stage.hazardResolved));
+}
+
+function drawHazard(type, x, y) {
+  if (type === "sprinkler") {
+    ctx.strokeStyle = "#315f8f";
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(x - 36, y);
+    ctx.lineTo(x + 36, y - 10);
+    ctx.stroke();
+    ctx.fillStyle = "#4aa3d8";
+    ctx.beginPath();
+    ctx.arc(x + 24, y - 8, 6, 0, Math.PI * 2);
+    ctx.fill();
+    return;
   }
 
-  function pickHotspot(event) {
-    const rect = canvas.getBoundingClientRect();
-    pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    pointer.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
-    raycaster.setFromCamera(pointer, camera);
-    const intersections = raycaster.intersectObjects(hotspotMeshes, true);
-    return intersections.find((item) => item.object.userData.hotspot);
+  if (type === "rock") {
+    ctx.fillStyle = "#75736b";
+    for (let i = 0; i < 4; i += 1) {
+      ctx.beginPath();
+      ctx.ellipse(x - 28 + i * 18, y - i * 3, 13, 8, 0.2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    return;
   }
+
+  if (type === "wire") {
+    ctx.strokeStyle = "#db7337";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(x - 34, y);
+    ctx.bezierCurveTo(x - 12, y - 18, x + 12, y + 16, x + 34, y - 3);
+    ctx.stroke();
+    return;
+  }
+
+  ctx.strokeStyle = "#6f4628";
+  ctx.lineWidth = 5;
+  for (let i = 0; i < 3; i += 1) {
+    ctx.beginPath();
+    ctx.moveTo(x - 38, y - i * 6);
+    ctx.bezierCurveTo(x - 10, y - 22, x + 12, y + 15, x + 38, y - 12 + i * 5);
+    ctx.stroke();
+  }
+}
+
+function drawCrew(x, y, scale) {
+  const s = scale * 100;
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(s, s);
+
+  ctx.fillStyle = "#db7337";
+  ctx.fillRect(-0.18, -0.78, 0.36, 0.48);
+  ctx.fillStyle = "#b97942";
+  ctx.beginPath();
+  ctx.arc(0, -0.94, 0.17, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "#18211e";
+  ctx.lineWidth = 0.08;
+  ctx.beginPath();
+  ctx.moveTo(-0.18, -0.32);
+  ctx.lineTo(-0.42, 0.15);
+  ctx.moveTo(0.16, -0.32);
+  ctx.lineTo(0.42, 0.15);
+  ctx.moveTo(-0.1, -0.72);
+  ctx.lineTo(-0.48, -0.42);
+  ctx.moveTo(0.1, -0.72);
+  ctx.lineTo(0.5, -0.48);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function isVisualDone(job, visual) {
+  return job.stages.some((stage) => stage.visual === visual && stage.done);
+}
+
+function roundRect(x, y, width, height, radius) {
+  const r = Math.min(radius, width / 2, height / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + width - r, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + r);
+  ctx.lineTo(x + width, y + height - r);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+  ctx.lineTo(x + r, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
 }

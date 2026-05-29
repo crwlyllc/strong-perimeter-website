@@ -66,6 +66,19 @@ const images = {
   afa: "/images/afa-p-500.png"
 };
 
+const quoteFenceImages = {
+  wroughtIron: "/images/quote-fence-types/wrought-iron-fence.jpg",
+  wood: "/images/quote-fence-types/wood-fence.jpg",
+  pipe: "/images/quote-fence-types/pipe-fence.jpg",
+  chainLink: "/images/quote-fence-types/chain-link-fence.jpg",
+  poolSafety: "/images/quote-fence-types/pool-safety-fence.jpg",
+  temporary: "/images/quote-fence-types/temporary-fencing.jpg",
+  tPost: "/images/quote-fence-types/t-post-fence.jpg",
+  vinyl: "/images/quote-fence-types/vinyl-fence.jpg",
+  aluminum: "/images/quote-fence-types/aluminum-fence.jpg",
+  composite: "/images/quote-fence-types/composite-fence.jpg"
+};
+
 const materialLinks = [
   ["/wrought-iron-fence/", "Wrought iron fence"],
   ["/aluminum-fence/", "Aluminum fence"],
@@ -2604,7 +2617,193 @@ function renderFaqSection(page) {
     </section>`;
 }
 
+function renderQuoteOptionCards(name, options, settings = {}) {
+  const type = settings.type || "radio";
+  const dataAttribute = settings.dataAttribute || "";
+  const requireFirst = settings.requireFirst !== false && type === "radio";
+
+  return options.map((option, index) => {
+    const id = `${name}-${citySlug(option.value) || index}`;
+    const image = option.image || images.wood;
+    const mediaClass = option.media === "symbol" ? "quote-option__media--symbol" : "quote-option__media--photo";
+
+    return `
+              <label class="quote-option" for="${id}">
+                <input id="${id}" type="${type}" name="${name}" value="${escapeHtml(option.value)}" ${dataAttribute}${requireFirst && index === 0 ? " required" : ""}>
+                <figure class="quote-option__media ${mediaClass}">
+                  <img src="${withBase(image)}" alt="">
+                </figure>
+                <span class="quote-option__body">
+                  <strong>${escapeHtml(option.label)}</strong>
+                  <small>${escapeHtml(option.text)}</small>
+                </span>
+              </label>`;
+  }).join("");
+}
+
+function renderQuoteServicePanel(fenceOption, serviceOptions) {
+  const slug = citySlug(fenceOption.value);
+  const image = fenceOption.image || images.wood;
+  const mediaClass = fenceOption.media === "symbol" ? "quote-service-panel__media--symbol" : "quote-service-panel__media--photo";
+  const notesPlaceholder = fenceOption.notesPlaceholder || "Approximate length, gate issue, rust, leaning posts, staining, replacement section, photos available, etc.";
+  const styleOptions = fenceOption.styleOptions || [];
+  const styleSection = styleOptions.length ? `
+
+                <div class="quote-service-panel__section quote-service-panel__section--styles" data-style-section data-style-trigger-value="Installation/replacement" hidden>
+                  <h3>Wood install/replacement style</h3>
+                  <div class="quote-style-grid">
+${styleOptions.map((option, index) => {
+                      const id = `${slug}-style-${citySlug(option.value) || index}`;
+                      const styleClass = citySlug(option.visual || option.value);
+                      const [direction, ...patternParts] = (option.label || option.value).split(" ");
+                      const pattern = patternParts.join(" ").replace(/^\w/, (letter) => letter.toUpperCase());
+                      return `
+                    <label class="quote-style-choice quote-style-choice--${styleClass}" for="${id}">
+                      <input id="${id}" type="radio" name="${slug}_style" value="${escapeHtml(option.value)}" data-scope-style disabled>
+                      <span class="quote-style-choice__visual" aria-hidden="true">
+                        <span class="quote-style-choice__layer"></span>
+                        <span class="quote-style-choice__overlay"></span>
+                      </span>
+                      <span class="quote-style-choice__copy">
+                        <strong>${escapeHtml(direction)}</strong>
+                        <small>${escapeHtml(pattern)}</small>
+                      </span>
+                    </label>`;
+                    }).join("")}
+                  </div>
+                </div>` : "";
+
+  return `
+              <article class="quote-service-panel" data-service-panel data-fence-value="${escapeHtml(fenceOption.value)}" hidden>
+                <div class="quote-service-panel__top">
+                  <figure class="quote-service-panel__media ${mediaClass}">
+                    <img src="${withBase(image)}" alt="">
+                  </figure>
+                  <div>
+                    <h2>${escapeHtml(fenceOption.label)}</h2>
+                    <p>Choose what feels closest. We can help refine the scope.</p>
+                  </div>
+                </div>
+
+                <div class="quote-service-panel__section">
+                  <h3>Services for this fence</h3>
+                  <div class="quote-service-choices">
+${serviceOptions.map((option, index) => {
+                      const id = `${slug}-service-${citySlug(option.value) || index}`;
+                      return `
+                    <label class="quote-service-choice" for="${id}">
+                      <input id="${id}" type="checkbox" name="${slug}_services" value="${escapeHtml(option.value)}" data-service-choice disabled>
+                      <span>${escapeHtml(option.label)}</span>
+                    </label>`;
+                    }).join("")}
+                  </div>
+                </div>
+${styleSection}
+
+                <label class="quote-area-notes">
+                  <span>Notes for this fence</span>
+                  <textarea name="${slug}_notes" data-scope-notes rows="3" placeholder="${escapeHtml(notesPlaceholder)}" disabled></textarea>
+                </label>
+              </article>`;
+}
+
 function renderQuoteWizard() {
+  const serviceOptions = [
+    { value: "Repair", label: "Repair", image: images.wood, text: "Posts, panels, rails, gates, latches, chain link fabric, T-posts, composite, aluminum or vinyl sections, or storm damage." },
+    { value: "Installation/replacement", label: "Installation or replacement", image: images.wood, text: "A new fence line, replacement sections, or a full rebuild." },
+    { value: "Painting", label: "Painting", image: images.iron, text: "Wrought iron, aluminum, or pipe fence painting." },
+    { value: "Staining", label: "Staining", image: images.wood, text: "Wood fence staining." },
+    { value: "Not sure yet", label: "Not sure yet", image: images.brandMark, media: "symbol", text: "We can help decide the right repair, finish, or replacement scope." }
+  ];
+  const fenceOptions = [
+    { value: "Wrought iron", label: "Wrought iron", image: quoteFenceImages.wroughtIron, text: "Iron or decorative metal fencing." },
+    {
+      value: "Wood",
+      label: "Wood",
+      image: quoteFenceImages.wood,
+      text: "Privacy, perimeter, or backyard wood fencing.",
+      notesPlaceholder: "Approximate length, gates, height, wood style, staining, replacement section, photos available, etc.",
+      styleOptions: [
+        { value: "Vertical side by side" },
+        { value: "Vertical board on board" },
+        { value: "Vertical shadow box" },
+        { value: "Horizontal side by side" },
+        { value: "Horizontal board on board" },
+        { value: "Horizontal shadow box" }
+      ]
+    },
+    { value: "Pipe fence", label: "Pipe fence", image: quoteFenceImages.pipe, text: "Pipe rail, ranch-style, or metal perimeter fencing." },
+    { value: "Gates", label: "Gates", image: quoteFenceImages.wood, text: "Walk gates, double gates, driveway gates, gate repair, or automatic gates.", notesPlaceholder: "Gate type, opening width, hinge or latch issue, sagging/dragging, driveway access, automation needs, photos available, etc." },
+    { value: "Chain link", label: "Chain link", image: quoteFenceImages.chainLink, text: "Chain link fabric, posts, rails, or gates." },
+    { value: "Pool safety fences", label: "Pool safety fences", image: quoteFenceImages.poolSafety, text: "Pool barriers, gates, latches, panels, or safety sections.", notesPlaceholder: "Approximate length, pool access, gate or latch issue, panel spacing, replacement section, photos available, etc." },
+    { value: "Temporary fencing", label: "Temporary fencing", image: quoteFenceImages.temporary, text: "Temporary panels, stands, gates, bases, or site perimeter.", notesPlaceholder: "Approximate length, site access, panel issue, damaged stands, repositioning, install/removal timing, photos available, etc." },
+    { value: "T-post", label: "T-post", image: quoteFenceImages.tPost, text: "T-posts, wire fencing, braces, gates, or perimeter sections.", notesPlaceholder: "Approximate length, loose wire, leaning posts, braces, gate issue, replacement section, photos available, etc." },
+    { value: "Vinyl", label: "Vinyl", image: quoteFenceImages.vinyl, text: "Vinyl panels, posts, gates, or sections." },
+    { value: "Aluminum", label: "Aluminum", image: quoteFenceImages.aluminum, text: "Aluminum panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, bent pickets, loose panels, painting, replacement section, photos available, etc." },
+    { value: "Composite", label: "Composite", image: quoteFenceImages.composite, text: "Composite panels, posts, gates, or sections.", notesPlaceholder: "Approximate length, gate issue, damaged panels, loose posts, replacement section, photos available, etc." }
+  ];
+  const serviceOptionsByFence = {
+    "Wrought iron": [
+      { value: "Repair", label: "Repair" },
+      { value: "Painting", label: "Painting" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    Aluminum: [
+      { value: "Repair", label: "Repair" },
+      { value: "Painting", label: "Painting" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    Wood: [
+      { value: "Repair", label: "Repair" },
+      { value: "Staining", label: "Staining" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    "Chain link": [
+      { value: "Repair", label: "Repair" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    "T-post": [
+      { value: "Repair", label: "Repair" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    Composite: [
+      { value: "Repair", label: "Repair" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    "Temporary fencing": [
+      { value: "Repair/repositioning", label: "Repair or repositioning" },
+      { value: "Installation/removal", label: "Installation or removal" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    "Pool safety fences": [
+      { value: "Repair", label: "Repair" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    "Pipe fence": [
+      { value: "Repair", label: "Repair" },
+      { value: "Painting", label: "Painting" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    Gates: [
+      { value: "Gate repair", label: "Gate repair" },
+      { value: "Gate installation", label: "Gate installation" },
+      { value: "Automatic gate/operator", label: "Automatic gate or operator" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ],
+    Vinyl: [
+      { value: "Repair", label: "Repair" },
+      { value: "Installation/replacement", label: "Installation or replacement" },
+      { value: "Not sure yet", label: "Not sure yet" }
+    ]
+  };
   return `
     <section class="section section--quote-wizard page-section" id="quote-wizard">
       <div class="section-shell">
@@ -2616,9 +2815,9 @@ function renderQuoteWizard() {
             </div>
             <div class="quote-wizard__tools">
               <div class="quote-progress" aria-label="Quote form progress" aria-live="polite">
-                <span class="quote-progress__value" data-quote-progress-value>50%</span>
+                <span class="quote-progress__value" data-quote-progress-value>25%</span>
                 <span class="quote-progress__track">
-                  <span class="quote-progress__fill" data-quote-progress-fill style="width: 50%;"></span>
+                  <span class="quote-progress__fill" data-quote-progress-fill style="width: 25%;"></span>
                 </span>
               </div>
               <div class="quote-top-actions" aria-label="Quote navigation">
@@ -2628,7 +2827,35 @@ function renderQuoteWizard() {
             </div>
           </div>
 
-          <fieldset class="quote-step is-active" data-quote-step>
+          <fieldset class="quote-step is-active" data-quote-step data-fence-type-step>
+            <legend>What kind of fence needs help?</legend>
+            <p class="quote-step__lead">Select all that apply. You can choose one fence type or several, even if you are not completely sure yet.</p>
+            <div class="quote-options quote-options--fence-types">
+              ${renderQuoteOptionCards("fence_types", fenceOptions, {
+                type: "checkbox",
+                dataAttribute: "data-fence-type-select ",
+                requireFirst: false
+              })}
+            </div>
+            <p class="quote-validation-message" data-fence-type-error hidden>Choose at least one fence type to continue.</p>
+            <div class="quote-step__actions">
+              <button class="button button--solid" type="button" data-quote-next>Next</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="quote-step" data-quote-step hidden>
+            <legend>What should we help with?</legend>
+            <div class="quote-service-panels" data-fence-service-panels>
+              ${fenceOptions.map((fenceOption) => renderQuoteServicePanel(fenceOption, serviceOptionsByFence[fenceOption.value] || serviceOptions)).join("")}
+            </div>
+            <p class="quote-validation-message" data-service-choice-error hidden>Choose at least one service for each selected fence type.</p>
+            <div class="quote-step__actions">
+              <button class="button button--ghost" type="button" data-quote-prev>Back</button>
+              <button class="button button--solid" type="button" data-quote-next>Next</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="quote-step" data-quote-step hidden>
             <legend>Project address and timing</legend>
             <p class="quote-step__lead">Start typing the full address, then confirm the individual address fields before continuing.</p>
             <div class="quote-fields quote-fields--address">
@@ -2670,6 +2897,7 @@ function renderQuoteWizard() {
               </label>
             </div>
             <div class="quote-step__actions">
+              <button class="button button--ghost" type="button" data-quote-prev>Back</button>
               <button class="button button--solid" type="button" data-quote-next>Next</button>
             </div>
           </fieldset>

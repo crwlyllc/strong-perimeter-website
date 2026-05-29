@@ -120,10 +120,10 @@ if (renderer) {
   };
 
   const cameraState = {
-    target: new THREE.Vector3(0, 2.35, -8.0),
+    target: new THREE.Vector3(0, 2.05, -7.7),
     yaw: 0,
-    pitch: 0.2,
-    radius: 16.5,
+    pitch: 0.03,
+    radius: 17.1,
     tween: null
   };
 
@@ -213,6 +213,8 @@ if (renderer) {
       }
     });
 
+    addOpenFrontBayDoors(trimMaterial, accentTrimMaterial);
+
     [-12.9, 12.9].forEach((x) => addWarehouseColumn(x, -22.7));
     [-18, -10, -2, 6].forEach((z) => {
       addWarehouseColumn(-13.15, z);
@@ -264,8 +266,8 @@ if (renderer) {
     addPalletStack(9.9, 4.4, 0.12);
     addPalletStack(-10.6, 7.1, -0.08);
 
-    const overviewPosition = new THREE.Vector3(0, 5.9, 8.8);
-    const overviewTarget = new THREE.Vector3(0, 2.6, -8.1);
+    const overviewPosition = new THREE.Vector3(0, 2.7, 9.6);
+    const overviewTarget = new THREE.Vector3(0, 2.15, -8.2);
     focusTargets.set("overview", { position: overviewPosition, target: overviewTarget, label: "Warehouse overview" });
   }
 
@@ -273,37 +275,30 @@ if (renderer) {
     const sign = createCanvasPanel({
       width: 2048,
       height: 1024,
-      background: "#fffaf1",
+      background: "#f2efe7",
       accent: "#db7337",
-      title: "FENCE REPAIR INSTALL RESTORE",
-      kicker: "STRONG PERIMETER",
+      title: "STRONG PERIMETER",
+      kicker: "DFW FENCE COMPANY",
       primaryLine: "(214) 247-6369",
       lines: [
+        "FENCE REPAIR | INSTALL | RESTORE",
         "DFW RESIDENTIAL + COMMERCIAL",
-        "FREE QUOTES",
-        "WOOD | IRON | CHAIN LINK | GATES"
+        "FREE QUOTES"
       ],
       dark: true
     });
 
     const signMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(12.8, 6.4),
+      new THREE.PlaneGeometry(12.9, 6.45),
       new THREE.MeshBasicMaterial({ map: sign, toneMapped: false })
     );
-    signMesh.position.set(-4.7, 6.35, -23.78);
-    signMesh.castShadow = true;
+    signMesh.position.set(-4.75, 6.38, -23.69);
     scene.add(signMesh);
-
-    const signFrame = new THREE.Mesh(new THREE.BoxGeometry(13.15, 6.75, 0.22), mats.darkSteel);
-    signFrame.position.set(-4.7, 6.35, -23.92);
-    signFrame.receiveShadow = true;
-    scene.add(signFrame);
-    signFrame.renderOrder = -1;
 
     const quoteBoardTexture = createCanvasPanel({
       width: 1024,
       height: 1024,
-      background: "#004b3d",
+      background: "#f2efe7",
       accent: "#d2aa54",
       title: "GET A FREE QUOTE",
       kicker: "START HERE",
@@ -316,7 +311,7 @@ if (renderer) {
       new THREE.PlaneGeometry(4.8, 4.8),
       new THREE.MeshBasicMaterial({ map: quoteBoardTexture, toneMapped: false })
     );
-    quoteBoard.position.set(5.6, 5.45, -23.76);
+    quoteBoard.position.set(5.6, 5.45, -23.68);
     scene.add(quoteBoard);
 
     const hit = new THREE.Mesh(new THREE.BoxGeometry(5.1, 5.1, 0.6), mats.hit);
@@ -705,6 +700,58 @@ if (renderer) {
     group.add(box(0.78, 0.16, 0.38, 1.45, 0.1, 0.35, mats.concrete));
   }
 
+  function addOpenFrontBayDoors(trimMaterial, accentTrimMaterial) {
+    const frontZ = 11.92;
+    const wallY = 3.4;
+    const doorWidth = 5.9;
+    const doorHeight = 6.7;
+    const doorCenters = [-3.65, 3.65];
+    const frontWallMaterial = mats.wall;
+    const daylightMaterial = new THREE.MeshBasicMaterial({
+      color: 0xfff3d6,
+      transparent: true,
+      opacity: 0.58,
+      depthWrite: false
+    });
+    const daylightFloorMaterial = new THREE.MeshBasicMaterial({
+      color: 0xfff0c6,
+      transparent: true,
+      opacity: 0.26,
+      depthWrite: false
+    });
+    const doorTrackMaterial = new THREE.MeshStandardMaterial({ color: 0x38413f, roughness: 0.38, metalness: 0.54 });
+    const doorPanelMaterial = new THREE.MeshStandardMaterial({ color: 0xf4f1ea, roughness: 0.46, metalness: 0.08 });
+
+    scene.add(box(3.3, doorHeight, 0.24, -12.35, wallY, frontZ, frontWallMaterial));
+    scene.add(box(1.1, doorHeight, 0.24, 0, wallY, frontZ, frontWallMaterial));
+    scene.add(box(3.3, doorHeight, 0.24, 12.35, wallY, frontZ, frontWallMaterial));
+    scene.add(box(28, warehouseHeight - doorHeight, 0.24, 0, doorHeight + (warehouseHeight - doorHeight) / 2, frontZ, frontWallMaterial));
+    scene.add(box(27.7, 0.34, 0.14, 0, 0.36, frontZ - 0.02, trimMaterial));
+    scene.add(box(27.7, 0.12, 0.12, 0, 3.08, frontZ - 0.03, accentTrimMaterial));
+
+    doorCenters.forEach((doorX) => {
+      const glow = new THREE.Mesh(new THREE.PlaneGeometry(doorWidth, doorHeight), daylightMaterial);
+      glow.position.set(doorX, doorHeight / 2, frontZ + 0.04);
+      glow.rotation.y = Math.PI;
+      scene.add(glow);
+
+      const lightPatch = new THREE.Mesh(new THREE.PlaneGeometry(doorWidth * 0.9, 11.5), daylightFloorMaterial);
+      lightPatch.rotation.x = -Math.PI / 2;
+      lightPatch.position.set(doorX, 0.052, 5.2);
+      scene.add(lightPatch);
+
+      scene.add(box(0.15, doorHeight + 0.35, 0.16, doorX - doorWidth / 2, doorHeight / 2, frontZ - 0.12, doorTrackMaterial));
+      scene.add(box(0.15, doorHeight + 0.35, 0.16, doorX + doorWidth / 2, doorHeight / 2, frontZ - 0.12, doorTrackMaterial));
+      scene.add(box(doorWidth + 0.38, 0.18, 0.18, doorX, doorHeight + 0.15, frontZ - 0.12, doorTrackMaterial));
+
+      for (let i = 0; i < 5; i += 1) {
+        const openPanel = box(doorWidth - 0.42, 0.22, 0.62, doorX, warehouseHeight - 0.75 - i * 0.28, 9.9 - i * 0.55, doorPanelMaterial);
+        openPanel.rotation.x = -0.08;
+        scene.add(openPanel);
+      }
+    });
+  }
+
   function addWarehouseColumn(x, z) {
     const column = new THREE.Group();
     const height = warehouseHeight - 0.7;
@@ -828,8 +875,9 @@ if (renderer) {
     const hemisphere = new THREE.HemisphereLight(0xfff7e8, 0x1a2421, 0.9);
     scene.add(hemisphere);
 
-    const sun = new THREE.DirectionalLight(0xffdfad, 0.65);
-    sun.position.set(8, 7, 11);
+    const sun = new THREE.DirectionalLight(0xffdfad, 1.8);
+    sun.position.set(0, 8.5, 18);
+    sun.target.position.set(0, 2.2, -9);
     sun.castShadow = true;
     sun.shadow.mapSize.width = 2048;
     sun.shadow.mapSize.height = 2048;
@@ -840,6 +888,21 @@ if (renderer) {
     sun.shadow.camera.top = 18;
     sun.shadow.camera.bottom = -18;
     scene.add(sun);
+    scene.add(sun.target);
+
+    [-3.65, 3.65].forEach((doorX) => {
+      const bayLight = new THREE.RectAreaLight(0xfff0cf, 5.5, 5.8, 6.4);
+      bayLight.position.set(doorX, 3.5, 12.15);
+      bayLight.lookAt(doorX, 2.4, -8);
+      scene.add(bayLight);
+
+      const daylightThrow = new THREE.SpotLight(0xffefd1, 2.8, 28, Math.PI / 4.2, 0.65, 1.1);
+      daylightThrow.position.set(doorX, 6.4, 12.4);
+      daylightThrow.target.position.set(doorX * 0.45, 1.4, -8.8);
+      daylightThrow.castShadow = true;
+      scene.add(daylightThrow);
+      scene.add(daylightThrow.target);
+    });
 
     const lightBarMaterial = new THREE.MeshBasicMaterial({ color: 0xfff8e7 });
     const fixtureHousing = new THREE.MeshStandardMaterial({ color: 0xf3f0e9, roughness: 0.42, metalness: 0.12 });
@@ -858,7 +921,7 @@ if (renderer) {
       [3, lampY, -0.6],
       [9, lampY, -0.6]
     ].forEach(([x, y, z]) => {
-      const lamp = new THREE.PointLight(0xfff2d7, 2.6, 20, 1.5);
+      const lamp = new THREE.PointLight(0xfff2d7, 1.75, 18, 1.5);
       lamp.position.set(x, y, z);
       lamp.castShadow = true;
       scene.add(lamp);
@@ -878,7 +941,7 @@ if (renderer) {
       [0, lampY - 0.4, -8.2],
       [4.75, lampY - 0.4, -8.2]
     ].forEach(([x, y, z]) => {
-      const showroomLight = new THREE.SpotLight(0xfff3dc, 3.1, 18, Math.PI / 5.2, 0.45, 1.25);
+      const showroomLight = new THREE.SpotLight(0xfff3dc, 1.55, 18, Math.PI / 5.2, 0.45, 1.25);
       showroomLight.position.set(x, y, z + 4.2);
       showroomLight.target.position.set(x, 1.7, z);
       showroomLight.castShadow = true;
